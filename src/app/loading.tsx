@@ -1,7 +1,6 @@
 'use client';
 
 import { Box, CircularProgress, Typography } from '@mui/joy';
-import { motion } from 'framer-motion';
 
 export default function Loading() {
   return (
@@ -15,23 +14,16 @@ export default function Loading() {
         gap: 3,
       }}
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className="animate-fade-in">
         <CircularProgress size="lg" color="primary" />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
+      <div className="animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <Typography level="body-lg" sx={{ color: 'neutral.600' }}>
           Loading...
         </Typography>
-      </motion.div>
+      </div>
     </Box>
   );
 }
+

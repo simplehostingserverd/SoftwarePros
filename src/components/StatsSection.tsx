@@ -94,3 +94,4 @@ function StatCard({ stat, delay }: StatCardProps) {
     </div>
   );
 }
+

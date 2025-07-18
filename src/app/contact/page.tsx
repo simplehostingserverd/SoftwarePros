@@ -32,7 +32,7 @@ import {
   Textarea,
   Typography,
 } from '@mui/joy';
-import { motion } from 'framer-motion';
+import AnimatedDiv from '@/components/AnimatedDiv';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -126,11 +126,7 @@ export default function ContactPage() {
         }}
       >
         <Container maxWidth="lg">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <AnimatedDiv animation="fade">
             <Box sx={{ textAlign: 'center', mb: 6 }}>
               <Typography
                 level="h1"
@@ -159,7 +155,7 @@ export default function ContactPage() {
                 Let's discuss your needs and create a custom solution that works for you.
               </Typography>
             </Box>
-          </motion.div>
+          </AnimatedDiv>
         </Container>
       </Box>
 
@@ -169,12 +165,7 @@ export default function ContactPage() {
           <Grid container spacing={6}>
             {/* Contact Form */}
             <Grid xs={12} md={8}>
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
+              <AnimatedDiv animation="slide-left">
                 <Card variant="outlined" sx={{ p: 4 }}>
                   <CardContent>
                     <Typography level="h3" sx={{ fontWeight: 'bold', mb: 3 }}>
@@ -310,29 +301,22 @@ export default function ContactPage() {
                     </form>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </AnimatedDiv>
             </Grid>
 
             {/* Contact Information */}
             <Grid xs={12} md={4}>
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
+              <AnimatedDiv animation="slide-right">
                 <Typography level="h4" sx={{ fontWeight: 'bold', mb: 4 }}>
                   Get in Touch
                 </Typography>
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                   {contactInfo.map((info, index) => (
-                    <motion.div
+                    <AnimatedDiv
                       key={info.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      viewport={{ once: true }}
+                      animation="fade"
+                      delay={index * 100}
                     >
                       <Card
                         variant="outlined"
@@ -378,10 +362,10 @@ export default function ContactPage() {
                           ))}
                         </CardContent>
                       </Card>
-                    </motion.div>
+                    </AnimatedDiv>
                   ))}
                 </Box>
-              </motion.div>
+              </AnimatedDiv>
             </Grid>
           </Grid>
         </Container>
@@ -389,3 +373,4 @@ export default function ContactPage() {
     </>
   );
 }
+

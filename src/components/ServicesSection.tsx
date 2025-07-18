@@ -142,3 +142,4 @@ function ServiceCard({ service, index }: ServiceCardProps) {
     </div>
   );
 }
+

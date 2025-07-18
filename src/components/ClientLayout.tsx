@@ -16,3 +16,4 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
     </div>
   );
 }
+

@@ -26,6 +26,15 @@ interface PostTag {
   };
 }
 
+// Generate static params for static export
+export async function generateStaticParams() {
+  return [
+    { slug: 'building-scalable-web-applications-nextjs' },
+    { slug: 'hipaa-compliance-healthcare-software' },
+    { slug: 'future-enterprise-software-development' },
+  ];
+}
+
 async function getPost(slug: string) {
   try {
     const post = await db.post.findUnique({

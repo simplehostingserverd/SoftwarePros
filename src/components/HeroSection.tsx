@@ -143,3 +143,4 @@ function AnimatedCodeBlock({ title, code, delay }: AnimatedCodeBlockProps) {
     </div>
   );
 }
+

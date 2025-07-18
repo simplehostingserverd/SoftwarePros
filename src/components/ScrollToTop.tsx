@@ -2,7 +2,7 @@
 
 import { KeyboardArrowUp } from '@mui/icons-material';
 import { IconButton } from '@mui/joy';
-import { AnimatePresence, motion } from 'framer-motion';
+// Removed framer-motion for build compatibility
 import { useEffect, useState } from 'react';
 
 export default function ScrollToTop() {
@@ -30,13 +30,10 @@ export default function ScrollToTop() {
   };
 
   return (
-    <AnimatePresence>
+    <>
       {isVisible && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.3 }}
+        <div
+          className="animate-fade-in"
           style={{
             position: 'fixed',
             bottom: '2rem',
@@ -63,8 +60,9 @@ export default function ScrollToTop() {
           >
             <KeyboardArrowUp />
           </IconButton>
-        </motion.div>
+        </div>
       )}
-    </AnimatePresence>
+    </>
   );
 }
+

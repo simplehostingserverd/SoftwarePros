@@ -280,3 +280,4 @@ export default function MobileAppsPage(): JSX.Element {
     </div>
   );
 }
+
