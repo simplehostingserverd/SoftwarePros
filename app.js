@@ -1,8 +1,8 @@
 // CPanel Node.js App Entry Point
 // This file is required by some CPanel hosting providers
 
-const { createServer } = require('http');
-const { parse } = require('url');
+const { createServer } = require('node:http');
+const { parse } = require('node:url');
 const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';

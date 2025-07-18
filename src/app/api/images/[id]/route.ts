@@ -1,6 +1,6 @@
-import { db } from '@/lib/db';
 import { verifyToken } from '@/lib/auth';
-import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/db';
+import { type NextRequest, NextResponse } from 'next/server';
 
 async function getAuthenticatedUser(request: NextRequest) {
   const token = request.cookies.get('auth-token')?.value;
@@ -125,10 +125,10 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
     }
 
     // Delete file from filesystem
-    const fs = require('fs');
-    const path = require('path');
+    const fs = require('node:fs');
+    const path = require('node:path');
     const filePath = path.join(process.cwd(), 'public', existingImage.url);
-    
+
     try {
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);

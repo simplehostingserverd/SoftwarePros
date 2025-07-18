@@ -103,7 +103,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       {/* Background Gradient */}
       <div
         className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-2xl`}
-      ></div>
+      />
 
       {/* Service Number */}
       <div
@@ -130,7 +130,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
               }`}
               style={{ transitionDelay: `${index * 200 + featureIndex * 100}ms` }}
             >
-              <div className={`w-2 h-2 bg-gradient-to-r ${service.color} rounded-full`}></div>
+              <div className={`w-2 h-2 bg-gradient-to-r ${service.color} rounded-full`} />
               <span className="text-gray-300 text-sm">{feature}</span>
             </div>
           ))}
@@ -138,7 +138,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
       </div>
 
       {/* Hover Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/5 to-blue-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-purple-600/5 to-blue-600/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
     </div>
   );
 }

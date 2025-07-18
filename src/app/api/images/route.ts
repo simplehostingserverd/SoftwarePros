@@ -1,20 +1,16 @@
-import { db } from '@/lib/db';
 import { verifyToken } from '@/lib/auth';
-import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/lib/db';
+import { type NextRequest, NextResponse } from 'next/server';
 
 async function getAuthenticatedUser(request: NextRequest) {
   const token = request.cookies.get('auth-token')?.value;
-  console.log('Auth check: Token found:', token ? 'Yes' : 'No');
 
   if (!token) {
-    console.log('Auth check: No token found');
     return null;
   }
 
   const payload = verifyToken(token);
-  console.log('Auth check: Token valid:', payload ? 'Yes' : 'No');
   if (!payload) {
-    console.log('Auth check: Invalid token');
     return null;
   }
 
@@ -22,7 +18,6 @@ async function getAuthenticatedUser(request: NextRequest) {
     const user = await db.user.findUnique({
       where: { id: payload.userId },
     });
-    console.log('Auth check: User found in DB:', user ? 'Yes' : 'No');
     return user;
   } catch (error) {
     console.error('Database error in getAuthenticatedUser:', error);
@@ -33,17 +28,14 @@ async function getAuthenticatedUser(request: NextRequest) {
 // GET /api/images - List all images
 export async function GET(request: NextRequest) {
   try {
-    console.log('Images API: Checking authentication...');
     const user = await getAuthenticatedUser(request);
-    console.log('Images API: User found:', user ? 'Yes' : 'No');
     if (!user) {
-      console.log('Images API: Returning 401 - Unauthorized');
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '20');
+    const page = Number.parseInt(searchParams.get('page') || '1');
+    const limit = Number.parseInt(searchParams.get('limit') || '20');
     const offset = (page - 1) * limit;
 
     const images = await db.image.findMany({
@@ -116,9 +108,9 @@ export async function POST(request: NextRequest) {
 
     // In a real application, you would upload to a cloud storage service like AWS S3, Cloudinary, etc.
     // For now, we'll save to the public/uploads directory
-    const fs = require('fs');
-    const path = require('path');
-    
+    const fs = require('node:fs');
+    const path = require('node:path');
+
     const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });

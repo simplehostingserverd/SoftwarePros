@@ -44,14 +44,13 @@ export default function BlogPost(): JSX.Element {
 
         {/* Featured Image */}
         <div className="mb-8">
-          <Image
-            src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop"
-            alt="Healthcare professional using secure medical software"
-            width={800}
-            height={400}
-            className="w-full h-64 md:h-96 object-cover rounded-lg"
-            priority
-          />
+          <div className="w-full h-64 md:h-96 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+            <div className="text-center text-white">
+              <div className="text-4xl mb-4">🏥</div>
+              <h3 className="text-xl font-semibold mb-2">HIPAA Compliance</h3>
+              <p className="text-blue-100">Healthcare Software Security</p>
+            </div>
+          </div>
         </div>
 
         {/* Content */}

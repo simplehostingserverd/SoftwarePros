@@ -34,7 +34,8 @@ export async function GET(request: NextRequest) {
 
     const where = published === 'true' ? { published: true } : {};
 
-    let posts, total;
+    let posts;
+    let total;
     try {
       posts = await db.post.findMany({
         where,

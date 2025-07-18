@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface ImageData {
   id: string;
@@ -45,10 +45,15 @@ export default function AdminImagesPage(): JSX.Element {
       const response = await fetch('/api/images', {
         credentials: 'include',
       });
+
+      console.log('Images fetch response status:', response.status);
+
       if (response.ok) {
         const data: ImagesResponse = await response.json();
+        console.log('Images data received:', data);
         setImages(data.images);
       } else if (response.status === 401) {
+        console.log('Unauthorized - redirecting to login');
         router.push('/admin/login');
       } else {
         console.error('Failed to fetch images:', response.status);
@@ -123,7 +128,7 @@ export default function AdminImagesPage(): JSX.Element {
 
       if (response.ok) {
         const updatedImage = await response.json();
-        setImages(images.map(img => img.id === updatedImage.id ? updatedImage : img));
+        setImages(images.map((img) => (img.id === updatedImage.id ? updatedImage : img)));
         setEditingImage(null);
         setEditAlt('');
       } else {
@@ -146,7 +151,7 @@ export default function AdminImagesPage(): JSX.Element {
       });
 
       if (response.ok) {
-        setImages(images.filter(img => img.id !== imageId));
+        setImages(images.filter((img) => img.id !== imageId));
       } else {
         const error = await response.json();
         alert(error.error || 'Delete failed');
@@ -167,14 +172,14 @@ export default function AdminImagesPage(): JSX.Element {
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
   };
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
           <p className="mt-4 text-gray-600">Loading images...</p>
         </div>
       </div>
@@ -253,9 +258,7 @@ export default function AdminImagesPage(): JSX.Element {
                       <h3 className="font-medium text-gray-900 truncate">{image.originalName}</h3>
                       <p className="text-sm text-gray-500 mt-1">{formatFileSize(image.size)}</p>
                       <p className="text-sm text-gray-500">{image.mimeType}</p>
-                      {image.alt && (
-                        <p className="text-sm text-gray-600 mt-2">Alt: {image.alt}</p>
-                      )}
+                      {image.alt && <p className="text-sm text-gray-600 mt-2">Alt: {image.alt}</p>}
                       <div className="mt-4 flex flex-wrap gap-2">
                         <button
                           onClick={() => copyToClipboard(image.url)}
@@ -290,9 +293,7 @@ export default function AdminImagesPage(): JSX.Element {
             <div className="bg-white rounded-lg max-w-md w-full p-6">
               <h3 className="text-lg font-semibold mb-4">Edit Image</h3>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Alt Text
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Alt Text</label>
                 <input
                   type="text"
                   value={editAlt}
