@@ -2,28 +2,31 @@
 
 import React from 'react';
 
-import { motion } from 'framer-motion';
+// Force dynamic rendering to prevent framer-motion SSG issues
+export const dynamic = 'force-dynamic';
+
 import {
-  Box,
-  Typography,
-  Container,
-  Grid,
-  Card,
-  CardContent,
-  Avatar,
-  Chip,
-  Divider,
-} from '@mui/joy';
-import {
-  School,
-  Work,
-  EmojiEvents,
-  Security,
-  Code,
   Architecture,
   Business,
+  Code,
+  EmojiEvents,
   HealthAndSafety,
+  School,
+  Security,
+  Work,
 } from '@mui/icons-material';
+import {
+  Avatar,
+  Box,
+  Card,
+  CardContent,
+  Chip,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+} from '@mui/joy';
+import { motion } from 'framer-motion';
 
 const achievements = [
   {

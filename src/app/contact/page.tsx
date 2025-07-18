@@ -2,36 +2,39 @@
 
 import React, { useState } from 'react';
 
-import { motion } from 'framer-motion';
-import { useForm, Controller } from 'react-hook-form';
+// Force dynamic rendering to prevent framer-motion SSG issues
+export const dynamic = 'force-dynamic';
+
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import {
+  Business,
+  CheckCircle,
+  Email,
+  LocationOn,
+  Phone,
+  Schedule,
+  Send,
+} from '@mui/icons-material';
+import {
+  Alert,
   Box,
-  Typography,
-  Container,
-  Grid,
+  Button,
   Card,
   CardContent,
-  Button,
-  Input,
-  Textarea,
+  Container,
   FormControl,
-  FormLabel,
   FormHelperText,
-  Select,
+  FormLabel,
+  Grid,
+  Input,
   Option,
-  Alert,
+  Select,
+  Textarea,
+  Typography,
 } from '@mui/joy';
-import {
-  Email,
-  Phone,
-  LocationOn,
-  Schedule,
-  Business,
-  Send,
-  CheckCircle,
-} from '@mui/icons-material';
+import { motion } from 'framer-motion';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -59,19 +62,19 @@ const contactInfo = [
   {
     icon: LocationOn,
     title: 'Office Location',
-    details: ['Brownsville, Texas', 'United States'],
+    details: ['950 E. Van Buren St.', 'Brownsville, TX 78520'],
     color: '#0066CC',
   },
   {
     icon: Email,
     title: 'Email Address',
-    details: ['info@softwarepros.com', 'support@softwarepros.com'],
+    details: ['info@softwarepros.org', 'support@softwarepros.org'],
     color: '#00AA44',
   },
   {
     icon: Phone,
     title: 'Phone Number',
-    details: ['(956) 555-0123', 'Mon-Fri 8AM-6PM CST'],
+    details: ['(956) 357-5588', 'Mon-Fri 8AM-6PM CST'],
     color: '#CC6600',
   },
   {

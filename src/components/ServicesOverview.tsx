@@ -1,17 +1,17 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Box, Typography, Container, Grid, Card, CardContent, Button } from '@mui/joy';
 import {
+  ArrowForward,
+  Cloud,
+  Healing,
+  Hub as Integration,
   LocalHospital,
   MedicalServices,
-  Healing,
   Security,
-  Cloud,
-  Hub as Integration,
-  ArrowForward,
 } from '@mui/icons-material';
+import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/joy';
+import { motion } from 'framer-motion';
+import React from 'react';
 
 const services = [
   {

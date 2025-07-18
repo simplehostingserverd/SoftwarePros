@@ -2,7 +2,7 @@
 
 interface StructuredDataProps {
   type: 'organization' | 'website' | 'service' | 'person';
-  data: Record<string, unknown>;
+  data: Record<string, string | number | boolean | object>;
 }
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
@@ -23,15 +23,17 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             'Professional HIPAA-compliant medical software solutions for healthcare providers.',
           address: {
             '@type': 'PostalAddress',
+            streetAddress: '950 E. Van Buren St.',
             addressLocality: 'Brownsville',
             addressRegion: 'TX',
+            postalCode: '78520',
             addressCountry: 'US',
           },
           contactPoint: {
             '@type': 'ContactPoint',
-            telephone: '+1-956-555-0123',
+            telephone: '+1-956-357-5588',
             contactType: 'customer service',
-            email: 'info@softwarepros.com',
+            email: 'info@softwarepros.org',
           },
           founder: {
             '@type': 'Person',
@@ -85,8 +87,10 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           },
           address: {
             '@type': 'PostalAddress',
+            streetAddress: '950 E. Van Buren St.',
             addressLocality: 'Brownsville',
             addressRegion: 'TX',
+            postalCode: '78520',
             addressCountry: 'US',
           },
           ...data,
@@ -103,6 +107,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
       dangerouslySetInnerHTML={{
         __html: JSON.stringify(getStructuredData()),
       }}
+      suppressHydrationWarning
     />
   );
 }

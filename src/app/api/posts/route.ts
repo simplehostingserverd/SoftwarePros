@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { generateSlug, verifyToken } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { verifyToken, generateSlug } from '@/lib/auth';
+import { type NextRequest, NextResponse } from 'next/server';
 
 async function getAuthenticatedUser(request: NextRequest) {
   const token = request.cookies.get('auth-token')?.value;
@@ -14,51 +14,66 @@ async function getAuthenticatedUser(request: NextRequest) {
     return null;
   }
 
-  const user = await db.user.findUnique({
-    where: { id: payload.userId },
-  });
-
-  return user;
+  try {
+    const user = await db.user.findUnique({
+      where: { id: payload.userId },
+    });
+    return user;
+  } catch (error) {
+    console.error('Database error in getAuthenticatedUser:', error);
+    return null;
+  }
 }
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const published = searchParams.get('published');
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const offset = parseInt(searchParams.get('offset') || '0');
+    const limit = Number.parseInt(searchParams.get('limit') || '10');
+    const offset = Number.parseInt(searchParams.get('offset') || '0');
 
     const where = published === 'true' ? { published: true } : {};
 
-    const posts = await db.post.findMany({
-      where,
-      include: {
-        author: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
+    let posts, total;
+    try {
+      posts = await db.post.findMany({
+        where,
+        include: {
+          author: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+          categories: {
+            include: {
+              category: true,
+            },
+          },
+          tags: {
+            include: {
+              tag: true,
+            },
           },
         },
-        categories: {
-          include: {
-            category: true,
-          },
+        orderBy: {
+          createdAt: 'desc',
         },
-        tags: {
-          include: {
-            tag: true,
-          },
-        },
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      take: limit,
-      skip: offset,
-    });
+        take: limit,
+        skip: offset,
+      });
 
-    const total = await db.post.count({ where });
+      total = await db.post.count({ where });
+    } catch (dbError) {
+      console.error('Database error fetching posts:', dbError);
+      // Return empty result if database is not available
+      return NextResponse.json({
+        posts: [],
+        total: 0,
+        hasMore: false,
+      });
+    }
 
     return NextResponse.json({
       posts,

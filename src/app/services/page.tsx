@@ -2,36 +2,39 @@
 
 import React from 'react';
 
-import { motion } from 'framer-motion';
+// Force dynamic rendering to prevent framer-motion SSG issues
+export const dynamic = 'force-dynamic';
+
+import {
+  ArrowForward,
+  Assessment,
+  Backup,
+  CheckCircle,
+  Cloud,
+  Healing,
+  Hub as Integration,
+  LocalHospital,
+  MedicalServices,
+  PhoneAndroid as Mobile,
+  Payment,
+  Schedule,
+  Security,
+  SupportAgent as Support,
+} from '@mui/icons-material';
 import {
   Box,
-  Typography,
-  Container,
-  Grid,
+  Button,
   Card,
   CardContent,
-  Button,
+  Chip,
+  Container,
+  Grid,
   List,
   ListItem,
   ListItemDecorator,
-  Chip,
+  Typography,
 } from '@mui/joy';
-import {
-  LocalHospital,
-  MedicalServices,
-  Healing,
-  Security,
-  Cloud,
-  Hub as Integration,
-  CheckCircle,
-  ArrowForward,
-  Schedule,
-  Payment,
-  Assessment,
-  Backup,
-  SupportAgent as Support,
-  PhoneAndroid as Mobile,
-} from '@mui/icons-material';
+import { motion } from 'framer-motion';
 
 const services = [
   {

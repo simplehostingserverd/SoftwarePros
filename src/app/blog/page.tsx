@@ -1,6 +1,25 @@
+import { db } from '@/lib/db';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { db } from '@/lib/db';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  featuredImage: string | null;
+  createdAt: Date;
+  publishedAt: Date | null;
+  author: {
+    name: string | null;
+  };
+  categories: Array<{
+    category: {
+      id: string;
+      name: string;
+    };
+  }>;
+}
 
 export const metadata: Metadata = {
   title: 'Blog | SoftwarePros.org - Tech Insights & Development Tips',
@@ -16,6 +35,43 @@ export const metadata: Metadata = {
     url: 'https://softwarepros.org/blog',
   },
 };
+
+// Sample blog posts with free images from Unsplash
+const samplePosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'Building Scalable Web Applications with Next.js',
+    slug: 'building-scalable-web-applications-nextjs',
+    excerpt: 'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
+    featuredImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-01-15'),
+    publishedAt: new Date('2024-01-15'),
+    author: { name: 'Michael Trevino' },
+    categories: [{ category: { id: '1', name: 'Web Development' } }],
+  },
+  {
+    id: '2',
+    title: 'HIPAA Compliance in Healthcare Software Development',
+    slug: 'hipaa-compliance-healthcare-software',
+    excerpt: 'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
+    featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-01-10'),
+    publishedAt: new Date('2024-01-10'),
+    author: { name: 'SoftwarePros Team' },
+    categories: [{ category: { id: '2', name: 'Healthcare' } }],
+  },
+  {
+    id: '3',
+    title: 'The Future of Enterprise Software Development',
+    slug: 'future-enterprise-software-development',
+    excerpt: 'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
+    featuredImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-01-05'),
+    publishedAt: new Date('2024-01-05'),
+    author: { name: 'Michael Trevino' },
+    categories: [{ category: { id: '3', name: 'Enterprise' } }],
+  },
+];
 
 async function getPosts() {
   try {
@@ -41,7 +97,8 @@ async function getPosts() {
     return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);
-    return [];
+    // Return sample posts if database is not available
+    return samplePosts;
   }
 }
 
@@ -65,7 +122,7 @@ export default async function BlogPage() {
         {/* Blog Posts */}
         {posts.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
+            {posts.map((post: BlogPost) => (
               <article
                 key={post.id}
                 className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
@@ -130,6 +187,7 @@ export default async function BlogPage() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         strokeLinecap="round"

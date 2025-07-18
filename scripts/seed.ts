@@ -8,7 +8,7 @@ async function main() {
 
   // Create admin user
   const hashedPassword = await hashPassword('admin123');
-  
+
   const admin = await prisma.user.upsert({
     where: { email: 'admin@softwarepros.org' },
     update: {},
@@ -110,11 +110,13 @@ At SoftwarePros, we believe in sharing knowledge and helping the developer commu
 We'll be publishing new content regularly, so make sure to check back often. You can also follow us on social media for updates and additional content.
 
 Thank you for joining us on this journey!`,
-      excerpt: 'Welcome to the SoftwarePros blog! Learn about our mission to share knowledge and help the developer community grow.',
+      excerpt:
+        'Welcome to the SoftwarePros blog! Learn about our mission to share knowledge and help the developer community grow.',
       published: true,
       publishedAt: new Date(),
       metaTitle: 'Welcome to SoftwarePros Blog - Tech Insights & Development Tips',
-      metaDescription: 'Welcome to the SoftwarePros blog where we share software development insights, best practices, and industry trends.',
+      metaDescription:
+        'Welcome to the SoftwarePros blog where we share software development insights, best practices, and industry trends.',
       authorId: admin.id,
     },
   });

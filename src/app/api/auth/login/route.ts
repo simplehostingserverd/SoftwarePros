@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { generateToken, verifyPassword } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { verifyPassword, generateToken } from '@/lib/auth';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,9 +10,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
-    const user = await db.user.findUnique({
-      where: { email },
-    });
+    let user;
+    try {
+      user = await db.user.findUnique({
+        where: { email },
+      });
+    } catch (dbError) {
+      console.error('Database error during login:', dbError);
+      return NextResponse.json({ error: 'Service temporarily unavailable' }, { status: 503 });
+    }
 
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });

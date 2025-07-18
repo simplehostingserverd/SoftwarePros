@@ -43,6 +43,7 @@
     }
   },
   "files": {
-    "include": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx"]
+    "include": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx"],
+    "ignore": ["**/*.ico", "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.svg"]
   }
 }

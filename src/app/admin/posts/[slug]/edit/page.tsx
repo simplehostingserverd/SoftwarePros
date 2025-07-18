@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
 import PostEditor from '@/components/PostEditor';
 import { db } from '@/lib/db';
+import { notFound } from 'next/navigation';
 
 interface EditPostPageProps {
   params: {

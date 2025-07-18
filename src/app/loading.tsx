@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Box, CircularProgress, Typography } from '@mui/joy';
+import { motion } from 'framer-motion';
 
 export default function Loading() {
   return (

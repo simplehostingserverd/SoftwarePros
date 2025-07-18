@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface Post {
   id: string;
@@ -47,7 +47,7 @@ export default function AdminDashboard() {
       await fetch('/api/auth/logout', { method: 'POST' });
       router.push('/admin/login');
     } catch (error) {
-      console.error('Logout error:', error);
+      console.error('Logout error:', error instanceof Error ? error.message : 'Unknown error');
     }
   };
 
@@ -75,7 +75,12 @@ export default function AdminDashboard() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <div
+            className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"
+            aria-label="Loading"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
           <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
@@ -99,6 +104,7 @@ export default function AdminDashboard() {
                 New Post
               </Link>
               <button
+                type="button"
                 onClick={handleLogout}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md font-medium"
               >
@@ -192,6 +198,7 @@ export default function AdminDashboard() {
                           Edit
                         </Link>
                         <button
+                          type="button"
                           onClick={() => handleDeletePost(post.slug)}
                           className="text-red-600 hover:text-red-900"
                         >

@@ -1,14 +1,28 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeHighlight from 'rehype-highlight';
 import { db } from '@/lib/db';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 
 interface BlogPostPageProps {
   params: {
     slug: string;
+  };
+}
+
+interface PostCategory {
+  category: {
+    id: string;
+    name: string;
+  };
+}
+
+interface PostTag {
+  tag: {
+    id: string;
+    name: string;
   };
 }
 
@@ -175,7 +189,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {post.categories.length > 0 && (
               <div className="flex flex-wrap gap-2 mb-8">
-                {post.categories.map((postCategory) => (
+                {post.categories.map((postCategory: PostCategory) => (
                   <span
                     key={postCategory.category.id}
                     className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
@@ -244,7 +258,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
-                {post.tags.map((postTag) => (
+                {post.tags.map((postTag: PostTag) => (
                   <span
                     key={postTag.tag.id}
                     className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
@@ -262,7 +276,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               href="/blog"
               className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
             >
-              <svg className="mr-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="mr-2 w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

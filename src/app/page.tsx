@@ -1,8 +1,11 @@
-import type { Metadata } from 'next';
+import CTASection from '@/components/CTASection';
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
 import StatsSection from '@/components/StatsSection';
-import CTASection from '@/components/CTASection';
+import type { Metadata } from 'next';
+
+// Force dynamic rendering to prevent framer-motion SSG issues
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'SoftwarePros.org | Custom Software Solutions & Tech Consulting',

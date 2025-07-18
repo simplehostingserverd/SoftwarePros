@@ -5,10 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "node server.js",
+    "start:next": "next start",
+    "start:cpanel": "node app.js",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "postinstall": "next build",
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
