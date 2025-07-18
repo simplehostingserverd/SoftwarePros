@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 // Force dynamic rendering to prevent framer-motion SSG issues
 export const dynamic = 'force-dynamic';
 
+import AnimatedDiv from '@/components/AnimatedDiv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Business,
@@ -32,7 +33,6 @@ import {
   Textarea,
   Typography,
 } from '@mui/joy';
-import AnimatedDiv from '@/components/AnimatedDiv';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -313,11 +313,7 @@ export default function ContactPage() {
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                   {contactInfo.map((info, index) => (
-                    <AnimatedDiv
-                      key={info.title}
-                      animation="fade"
-                      delay={index * 100}
-                    >
+                    <AnimatedDiv key={info.title} animation="fade" delay={index * 100}>
                       <Card
                         variant="outlined"
                         sx={{
@@ -373,4 +369,3 @@ export default function ContactPage() {
     </>
   );
 }
-

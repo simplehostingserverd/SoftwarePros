@@ -12,6 +12,23 @@ const nextConfig = {
       transform: '@mui/icons-material/{{member}}',
     },
   },
+  // Image configuration for external domains
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/uploads/**',
+      },
+    ],
+  },
   // Configuration for deployment
   output: 'standalone',
   trailingSlash: false,
@@ -19,7 +36,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
-
 };
 
 module.exports = nextConfig;

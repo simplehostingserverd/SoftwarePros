@@ -21,6 +21,7 @@ model User {
   
   // Relations
   posts     Post[]
+  images    Image[]
   
   @@map("users")
 }
@@ -97,6 +98,22 @@ model PostTag {
   
   @@id([postId, tagId])
   @@map("post_tags")
+}
+
+model Image {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  url         String
+  alt         String?
+  size        Int
+  mimeType    String
+  uploadedBy  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
+
+  @@map("images")
 }
 
 enum Role {

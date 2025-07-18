@@ -74,7 +74,9 @@ export default function Footer() {
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="text-gray-400 text-sm">950 E. Van Buren St., Brownsville, TX 78520</span>
+                  <span className="text-gray-400 text-sm">
+                    950 E. Van Buren St., Brownsville, TX 78520
+                  </span>
                 </div>
                 <div className="flex items-center gap-3">
                   <svg
@@ -203,4 +205,3 @@ export default function Footer() {
     </footer>
   );
 }
-

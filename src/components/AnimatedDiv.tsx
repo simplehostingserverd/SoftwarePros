@@ -18,11 +18,12 @@ export default function AnimatedDiv({
   animation = 'fade',
   delay = 0,
 }: AnimatedDivProps) {
-  const animationClass = animation === 'fade' 
-    ? 'animate-on-scroll'
-    : animation === 'slide-left'
-    ? 'animate-on-scroll-left'
-    : 'animate-on-scroll-right';
+  const animationClass =
+    animation === 'fade'
+      ? 'animate-on-scroll'
+      : animation === 'slide-left'
+        ? 'animate-on-scroll-left'
+        : 'animate-on-scroll-right';
 
   const ref = useScrollAnimation({ animationClass });
 
@@ -37,4 +38,3 @@ export default function AnimatedDiv({
     </div>
   );
 }
-

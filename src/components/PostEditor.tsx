@@ -291,4 +291,3 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
     </div>
   );
 }
-

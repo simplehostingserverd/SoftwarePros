@@ -103,6 +103,12 @@ export default function AdminDashboard() {
               >
                 New Post
               </Link>
+              <Link
+                href="/admin/images"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium"
+              >
+                Manage Images
+              </Link>
               <button
                 type="button"
                 onClick={handleLogout}
@@ -216,4 +222,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-

@@ -8,7 +8,7 @@ async function main() {
 
   // Create admin user
   const hashedPassword = await bcrypt.hash('admin123', 10);
-  
+
   const adminUser = await prisma.user.upsert({
     where: { email: 'admin@softwarepros.org' },
     update: {},
@@ -126,12 +126,15 @@ Performance is critical for scalable applications. Here are key optimization tec
 ## Conclusion
 
 Building scalable web applications with Next.js requires careful planning, proper architecture, and attention to performance. By following these best practices and leveraging Next.js's built-in optimizations, you can create applications that perform well at any scale.`,
-      excerpt: 'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
-      featuredImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
+      excerpt:
+        'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
+      featuredImage:
+        'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
       published: true,
       publishedAt: new Date('2024-01-15'),
       metaTitle: 'Building Scalable Web Applications with Next.js - SoftwarePros',
-      metaDescription: 'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
+      metaDescription:
+        'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
       authorId: adminUser.id,
     },
   });
@@ -179,12 +182,15 @@ Encryption is crucial for HIPAA compliance:
 ## Conclusion
 
 HIPAA compliance in healthcare software development requires a comprehensive approach that addresses technical, administrative, and physical safeguards. By following these guidelines and implementing proper security controls, you can build applications that protect patient data and maintain regulatory compliance.`,
-      excerpt: 'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
-      featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
+      excerpt:
+        'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
+      featuredImage:
+        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
       published: true,
       publishedAt: new Date('2024-01-10'),
       metaTitle: 'HIPAA Compliance in Healthcare Software Development - SoftwarePros',
-      metaDescription: 'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
+      metaDescription:
+        'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
       authorId: adminUser.id,
     },
   });
@@ -226,12 +232,15 @@ As cyber threats evolve and privacy regulations become more stringent, security 
 ## Conclusion
 
 The future of enterprise software development is exciting and full of possibilities. By embracing these emerging trends and technologies, organizations can build more efficient, secure, and user-friendly applications that drive business success.`,
-      excerpt: 'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
-      featuredImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
+      excerpt:
+        'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
+      featuredImage:
+        'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
       published: true,
       publishedAt: new Date('2024-01-05'),
       metaTitle: 'The Future of Enterprise Software Development - SoftwarePros',
-      metaDescription: 'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
+      metaDescription:
+        'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
       authorId: adminUser.id,
     },
   });

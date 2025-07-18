@@ -42,7 +42,8 @@ const samplePosts: BlogPost[] = [
     id: '1',
     title: 'Building Scalable Web Applications with Next.js',
     slug: 'building-scalable-web-applications-nextjs',
-    excerpt: 'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
+    excerpt:
+      'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
     featuredImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
     createdAt: new Date('2024-01-15'),
     publishedAt: new Date('2024-01-15'),
@@ -53,8 +54,10 @@ const samplePosts: BlogPost[] = [
     id: '2',
     title: 'HIPAA Compliance in Healthcare Software Development',
     slug: 'hipaa-compliance-healthcare-software',
-    excerpt: 'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
-    featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
+    excerpt:
+      'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
     createdAt: new Date('2024-01-10'),
     publishedAt: new Date('2024-01-10'),
     author: { name: 'SoftwarePros Team' },
@@ -64,8 +67,10 @@ const samplePosts: BlogPost[] = [
     id: '3',
     title: 'The Future of Enterprise Software Development',
     slug: 'future-enterprise-software-development',
-    excerpt: 'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
-    featuredImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
+    excerpt:
+      'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
     createdAt: new Date('2024-01-05'),
     publishedAt: new Date('2024-01-05'),
     author: { name: 'Michael Trevino' },
@@ -211,4 +216,3 @@ export default async function BlogPage() {
     </div>
   );
 }
-
