@@ -27,12 +27,12 @@ import {
   FormLabel,
   Grid,
   Input,
-  Option,
   Select,
   Textarea,
   Typography,
   Checkbox,
 } from '@mui/joy';
+import Option from '@mui/joy/Option';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -43,10 +43,10 @@ const contactSchema = z.object({
   company: z.string().min(2, 'Company name is required'),
   serviceType: z.string().min(1, 'Please select a service type'),
   subject: z.string().optional(),
-  budget: z.string().optional(),
+  budget: z.string().min(1, 'Please select a budget'),
   timeline: z.string().optional(),
   contactMethod: z.string().optional(),
-  bestTimeToReach: z.string().optional(),
+  bestTimeToReach: z.string().min(1, 'Please select a preferred time'),
   website: z
     .string()
     .url('Please enter a valid URL')
@@ -415,7 +415,7 @@ export default function ContactPage() {
                         </Grid>
 
                         <Grid xs={12} sm={6}>
-                          <FormControl>
+                          <FormControl error={!!errors.budget}>
                             <FormLabel>Estimated Budget</FormLabel>
                             <Controller
                               name="budget"
@@ -437,6 +437,9 @@ export default function ContactPage() {
                                 </Select>
                               )}
                             />
+                            {errors.budget && (
+                              <FormHelperText>{errors.budget.message}</FormHelperText>
+                            )}
                           </FormControl>
                         </Grid>
 
@@ -493,7 +496,7 @@ export default function ContactPage() {
                         </Grid>
 
                         <Grid xs={12} sm={6}>
-                          <FormControl>
+                          <FormControl error={!!errors.bestTimeToReach}>
                             <FormLabel>Best Time to Reach</FormLabel>
                             <Controller
                               name="bestTimeToReach"
@@ -515,6 +518,9 @@ export default function ContactPage() {
                                 </Select>
                               )}
                             />
+                            {errors.bestTimeToReach && (
+                              <FormHelperText>{errors.bestTimeToReach.message}</FormHelperText>
+                            )}
                           </FormControl>
                         </Grid>
 

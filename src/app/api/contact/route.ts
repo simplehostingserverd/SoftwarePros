@@ -12,10 +12,10 @@ const contactSchema = z.object({
   serviceType: z.string().min(1),
   message: z.string().min(10),
   subject: z.string().optional(),
-  budget: z.string().optional(),
+  budget: z.string().min(1),
   timeline: z.string().optional(),
   contactMethod: z.string().optional(),
-  bestTimeToReach: z.string().optional(),
+  bestTimeToReach: z.string().min(1),
   website: z.string().url().optional().or(z.literal('').transform(() => undefined)),
   hearAboutUs: z.string().optional(),
   consent: z.boolean().refine((v) => v === true, {
