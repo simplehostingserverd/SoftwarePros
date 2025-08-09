@@ -8,7 +8,6 @@ export const dynamic = 'force-dynamic';
 import AnimatedDiv from '@/components/AnimatedDiv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
-  Business,
   CheckCircle,
   Email,
   LocationOn,
@@ -32,6 +31,7 @@ import {
   Select,
   Textarea,
   Typography,
+  Checkbox,
 } from '@mui/joy';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -39,9 +39,23 @@ import { z } from 'zod';
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
-  phone: z.string().min(10, 'Please enter a valid phone number'),
+  phone: z.string().min(7, 'Please enter a valid phone number'),
   company: z.string().min(2, 'Company name is required'),
   serviceType: z.string().min(1, 'Please select a service type'),
+  subject: z.string().optional(),
+  budget: z.string().optional(),
+  timeline: z.string().optional(),
+  contactMethod: z.string().optional(),
+  bestTimeToReach: z.string().optional(),
+  website: z
+    .string()
+    .url('Please enter a valid URL')
+    .optional()
+    .or(z.literal('').transform(() => undefined)),
+  hearAboutUs: z.string().optional(),
+  consent: z.literal(true, {
+    errorMap: () => ({ message: 'You must agree to the privacy policy' }),
+  }),
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
@@ -56,6 +70,30 @@ const serviceTypes = [
   'System Integration',
   'Custom Software Development',
   'Consultation & Assessment',
+  'Support & Maintenance',
+  'Security & Compliance',
+];
+
+const budgets = [
+  'Under $5,000',
+  '$5,000 - $10,000',
+  '$10,000 - $25,000',
+  '$25,000 - $50,000',
+  '$50,000+',
+];
+
+const timelines = ['ASAP', '1-3 months', '3-6 months', '6+ months'];
+
+const contactMethods = ['Email', 'Phone'];
+
+const bestTimes = ['Morning', 'Afternoon', 'Evening'];
+
+const hearAboutOptions = [
+  'Google Search',
+  'Referral',
+  'Social Media',
+  'Advertisement',
+  'Other',
 ];
 
 const contactInfo = [
@@ -97,21 +135,37 @@ export default function ContactPage() {
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      contactMethod: 'Email',
+    },
   });
+
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    console.log('Form submitted:', data);
-    setSubmitSuccess(true);
-    setIsSubmitting(false);
-    reset();
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err?.error || 'Failed to send message');
+      }
 
-    // Hide success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000);
+      setSubmitSuccess(true);
+      reset();
+      setTimeout(() => setSubmitSuccess(false), 5000);
+    } catch (e: any) {
+      setSubmitError(e?.message || 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -180,6 +234,12 @@ export default function ContactPage() {
                       <Alert color="success" startDecorator={<CheckCircle />} sx={{ mb: 3 }}>
                         Thank you! Your message has been sent successfully. We'll contact you within
                         24 hours.
+                      </Alert>
+                    )}
+
+                    {submitError && (
+                      <Alert color="danger" sx={{ mb: 3 }}>
+                        {submitError}
                       </Alert>
                     )}
 
@@ -267,16 +327,149 @@ export default function ContactPage() {
                         </Grid>
 
                         <Grid xs={12}>
+                          <FormControl>
+                            <FormLabel>Project Subject</FormLabel>
+                            <Input
+                              {...register('subject')}
+                              placeholder="e.g., New HIPAA-compliant portal"
+                              disabled={isSubmitting}
+                            />
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} sm={6}>
+                          <FormControl>
+                            <FormLabel>Estimated Budget</FormLabel>
+                            <Controller
+                              name="budget"
+                              control={control}
+                              render={({ field }) => (
+                                <Select {...field} placeholder="Select a range" disabled={isSubmitting}>
+                                  {budgets.map((b) => (
+                                    <Option key={b} value={b}>
+                                      {b}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              )}
+                            />
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} sm={6}>
+                          <FormControl>
+                            <FormLabel>Timeline</FormLabel>
+                            <Controller
+                              name="timeline"
+                              control={control}
+                              render={({ field }) => (
+                                <Select {...field} placeholder="Select a timeline" disabled={isSubmitting}>
+                                  {timelines.map((t) => (
+                                    <Option key={t} value={t}>
+                                      {t}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              )}
+                            />
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} sm={6}>
+                          <FormControl>
+                            <FormLabel>Preferred Contact Method</FormLabel>
+                            <Controller
+                              name="contactMethod"
+                              control={control}
+                              render={({ field }) => (
+                                <Select {...field} placeholder="Select method" disabled={isSubmitting}>
+                                  {contactMethods.map((m) => (
+                                    <Option key={m} value={m}>
+                                      {m}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              )}
+                            />
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} sm={6}>
+                          <FormControl>
+                            <FormLabel>Best Time to Reach</FormLabel>
+                            <Controller
+                              name="bestTimeToReach"
+                              control={control}
+                              render={({ field }) => (
+                                <Select {...field} placeholder="Select time" disabled={isSubmitting}>
+                                  {bestTimes.map((t) => (
+                                    <Option key={t} value={t}>
+                                      {t}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              )}
+                            />
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} sm={6}>
+                          <FormControl error={!!errors.website}>
+                            <FormLabel>Website (optional)</FormLabel>
+                            <Input
+                              {...register('website')}
+                              placeholder="https://example.com"
+                              disabled={isSubmitting}
+                            />
+                            {errors.website && (
+                              <FormHelperText>{errors.website.message}</FormHelperText>
+                            )}
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12} sm={6}>
+                          <FormControl>
+                            <FormLabel>How did you hear about us?</FormLabel>
+                            <Controller
+                              name="hearAboutUs"
+                              control={control}
+                              render={({ field }) => (
+                                <Select {...field} placeholder="Select an option" disabled={isSubmitting}>
+                                  {hearAboutOptions.map((o) => (
+                                    <Option key={o} value={o}>
+                                      {o}
+                                    </Option>
+                                  ))}
+                                </Select>
+                              )}
+                            />
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12}>
                           <FormControl error={!!errors.message}>
                             <FormLabel>Message *</FormLabel>
                             <Textarea
                               {...register('message')}
                               placeholder="Tell us about your project requirements, current challenges, and goals..."
-                              minRows={4}
+                              minRows={5}
                               disabled={isSubmitting}
                             />
                             {errors.message && (
                               <FormHelperText>{errors.message.message}</FormHelperText>
+                            )}
+                          </FormControl>
+                        </Grid>
+
+                        <Grid xs={12}>
+                          <FormControl error={!!errors.consent}>
+                            <Checkbox
+                              {...register('consent')}
+                              label="I agree to the privacy policy and terms of service"
+                              disabled={isSubmitting}
+                            />
+                            {errors.consent && (
+                              <FormHelperText>{errors.consent.message as string}</FormHelperText>
                             )}
                           </FormControl>
                         </Grid>
