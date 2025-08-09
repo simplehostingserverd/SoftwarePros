@@ -1,7 +1,7 @@
 'use client';
 
 interface StructuredDataProps {
-  type: 'organization' | 'website' | 'service' | 'person';
+  type: 'organization' | 'website' | 'service' | 'person' | 'article' | 'breadcrumb' | 'faq' | 'howto';
   data: Record<string, string | number | boolean | object>;
 }
 
@@ -16,9 +16,9 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           ...baseData,
           '@type': 'Organization',
-          name: 'Software Pros',
-          url: 'https://softwarepros.com',
-          logo: 'https://softwarepros.com/logo.png',
+          name: 'SoftwarePros',
+          url: 'https://softwarepros.org',
+          logo: 'https://softwarepros.org/web-app-manifest-512x512.png',
           description:
             'Professional HIPAA-compliant medical software solutions for healthcare providers.',
           address: {
@@ -47,13 +47,13 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
         return {
           ...baseData,
           '@type': 'WebSite',
-          name: 'Software Pros',
-          url: 'https://softwarepros.com',
+          name: 'SoftwarePros',
+          url: 'https://softwarepros.org',
           description:
             'Professional HIPAA-compliant medical software solutions for healthcare providers.',
           publisher: {
             '@type': 'Organization',
-            name: 'Software Pros',
+          name: 'SoftwarePros',
           },
           ...data,
         };
@@ -93,6 +93,59 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             postalCode: '78520',
             addressCountry: 'US',
           },
+          ...data,
+        };
+
+      case 'article':
+        return {
+          ...baseData,
+          '@type': 'Article',
+          headline: data.headline || 'Software Development Article',
+          description: data.description || 'Professional software development insights',
+          author: {
+            '@type': 'Person',
+            name: 'SoftwarePros Team',
+            url: 'https://softwarepros.org/about',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'SoftwarePros',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://softwarepros.org/web-app-manifest-512x512.png',
+            },
+          },
+          datePublished: data.datePublished || new Date().toISOString(),
+          dateModified: data.dateModified || new Date().toISOString(),
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': data.url || 'https://softwarepros.org',
+          },
+          ...data,
+        };
+
+      case 'breadcrumb':
+        return {
+          ...baseData,
+          '@type': 'BreadcrumbList',
+          itemListElement: data.itemListElement || [],
+        };
+
+      case 'faq':
+        return {
+          ...baseData,
+          '@type': 'FAQPage',
+          mainEntity: data.mainEntity || [],
+        };
+
+      case 'howto':
+        return {
+          ...baseData,
+          '@type': 'HowTo',
+          name: data.name || 'Software Development Process',
+          description: data.description || 'Step-by-step guide to software development',
+          step: data.step || [],
+          totalTime: data.totalTime || 'PT1H',
           ...data,
         };
 

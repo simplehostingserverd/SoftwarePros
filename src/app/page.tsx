@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     url: 'https://softwarepros.org',
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'SoftwarePros - Custom Software Solutions & Tech Consulting',
+        url: '/web-app-manifest-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'SoftwarePros',
       },
     ],
   },

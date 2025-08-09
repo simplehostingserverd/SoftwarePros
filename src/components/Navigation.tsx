@@ -8,8 +8,10 @@ const navigationItems = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/services' },
-  { name: 'Portfolio', href: '/portfolio' },
+  { name: 'Case Studies', href: '/case-studies' },
+  { name: 'Resources', href: '/resources' },
   { name: 'Blog', href: '/blog' },
+  { name: 'Investors', href: '/investors' },
   { name: 'Contact', href: '/contact' },
 ];
 

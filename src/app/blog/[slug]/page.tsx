@@ -1,4 +1,5 @@
 import { db } from '@/lib/db';
+export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -27,13 +28,7 @@ interface PostTag {
 }
 
 // Generate static params for static export
-export async function generateStaticParams() {
-  return [
-    { slug: 'building-scalable-web-applications-nextjs' },
-    { slug: 'hipaa-compliance-healthcare-software' },
-    { slug: 'future-enterprise-software-development' },
-  ];
-}
+// Note: We serve blog posts dynamically from the database to include newly added posts
 
 async function getPost(slug: string) {
   try {
@@ -133,7 +128,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: 'SoftwarePros',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://softwarepros.org/logo.png',
+        url: 'https://softwarepros.org/web-app-manifest-512x512.png',
       },
     },
     datePublished: post.publishedAt?.toISOString(),
@@ -144,12 +139,43 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     },
   };
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://softwarepros.org',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Blog',
+        item: 'https://softwarepros.org/blog',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: post.title,
+        item: `https://softwarepros.org/blog/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(articleSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
         }}
       />
 

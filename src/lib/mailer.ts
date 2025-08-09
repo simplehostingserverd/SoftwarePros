@@ -18,7 +18,8 @@ export type ContactEmailData = {
 
 // Send all contact emails to Proton address as requested
 const RECIPIENT_EMAIL = 'simplehostingserverd@proton.me';
-const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || 'softwarepros.org'}`;
+const FROM_EMAIL =
+  process.env.CONTACT_FROM_EMAIL || `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || 'softwarepros.org'}`;
 
 async function resolveTransport() {
   // Prefer explicit SMTP if provided
@@ -34,10 +35,31 @@ async function resolveTransport() {
       port,
       secure,
       auth,
+      // Avoid TLS issues in common dev SMTPs
+      tls: { rejectUnauthorized: false },
+      connectionTimeout: 15_000,
+      socketTimeout: 15_000,
     });
   }
 
-  // Fallback to system sendmail (common on cPanel/Exim)
+  // In development (or on Windows dev boxes) with no SMTP configured,
+  // use an Ethereal account so messages succeed and provide a preview URL.
+  if (process.env.NODE_ENV !== 'production') {
+    try {
+      const testAccount = await nodemailer.createTestAccount();
+      return nodemailer.createTransport({
+        host: 'smtp.ethereal.email',
+        port: 587,
+        secure: false,
+        auth: { user: testAccount.user, pass: testAccount.pass },
+      });
+    } catch {
+      // Fallback to JSON transport to prevent failures entirely
+      return nodemailer.createTransport({ jsonTransport: true });
+    }
+  }
+
+  // Fallback to system sendmail (common on cPanel/Exim) in production Linux
   return nodemailer.createTransport({
     sendmail: true,
     newline: 'unix',
@@ -108,6 +130,13 @@ export async function sendContactEmail(data: ContactEmailData) {
     text: buildTextEmail(data),
     html: buildHtmlEmail(data),
   });
+
+  const preview = nodemailer.getTestMessageUrl?.(info);
+  if (preview) {
+    // Helpful during development
+    // eslint-disable-next-line no-console
+    console.log('Contact email preview URL:', preview);
+  }
 
   return info;
 }
