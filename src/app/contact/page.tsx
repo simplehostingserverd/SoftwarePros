@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Force dynamic rendering to prevent framer-motion SSG issues
 export const dynamic = 'force-dynamic';
@@ -131,6 +131,7 @@ export default function ContactPage() {
     register,
     handleSubmit,
     control,
+    watch,
     formState: { errors },
     reset,
   } = useForm<ContactFormData>({
@@ -141,6 +142,68 @@ export default function ContactPage() {
   });
 
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [emailStatus, setEmailStatus] = useState<'idle' | 'checking' | 'valid' | 'invalid'>(
+    'idle'
+  );
+
+  const emailValue = watch('email');
+
+  useEffect(() => {
+    let isActive = true;
+    const controller = new AbortController();
+
+    async function validateEmailLive(email: string) {
+      if (!email) {
+        if (!isActive) return;
+        setEmailStatus('idle');
+        return;
+      }
+
+      // Basic RFC-like check first
+      const simple = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      if (!simple.test(email)) {
+        if (!isActive) return;
+        setEmailStatus('invalid');
+        return;
+      }
+
+      setEmailStatus('checking');
+
+      try {
+        const domain = email.split('@')[1];
+        // Use Cloudflare DoH to check MX for the domain
+        const res = await fetch(
+          `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`,
+          {
+            method: 'GET',
+            headers: { Accept: 'application/dns-json' },
+            signal: controller.signal,
+          }
+        );
+        if (!res.ok) throw new Error('DNS query failed');
+        const data = (await res.json()) as { Answer?: Array<{ data: string }>; Status: number };
+
+        // Status 0 is NOERROR; presence of MX indicates a receiving domain
+        const hasMx = Array.isArray(data.Answer) && data.Answer.some((a) => /\sMX\s/.test(a.data) || a.data);
+        if (!isActive) return;
+        setEmailStatus(hasMx ? 'valid' : 'invalid');
+      } catch {
+        if (!isActive) return;
+        // On network error, fall back to syntactic validation result
+        setEmailStatus('valid');
+      }
+    }
+
+    const handle = setTimeout(() => {
+      void validateEmailLive(emailValue);
+    }, 500);
+
+    return () => {
+      isActive = false;
+      controller.abort();
+      clearTimeout(handle);
+    };
+  }, [emailValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
@@ -266,9 +329,20 @@ export default function ContactPage() {
                               placeholder="Enter your email"
                               disabled={isSubmitting}
                             />
-                            {errors.email && (
-                              <FormHelperText>{errors.email.message}</FormHelperText>
-                            )}
+                            <FormHelperText>
+                              {emailStatus === 'idle' && 'We will never share your email.'}
+                              {emailStatus === 'checking' && 'Checking email domain…'}
+                              {emailStatus === 'valid' && (
+                                <span style={{ color: 'var(--joy-palette-success-500)' }}>
+                                  Email looks valid
+                                </span>
+                              )}
+                              {(emailStatus === 'invalid' || errors.email) && (
+                                <span style={{ color: 'var(--joy-palette-danger-500)' }}>
+                                  {errors.email?.message || 'Email appears invalid'}
+                                </span>
+                              )}
+                            </FormHelperText>
                           </FormControl>
                         </Grid>
 
@@ -308,7 +382,10 @@ export default function ContactPage() {
                               control={control}
                               render={({ field }) => (
                                 <Select
-                                  {...field}
+                                  value={field.value ?? null}
+                                  onChange={(_, value) => field.onChange(value ?? '')}
+                                  onBlur={field.onBlur}
+                                  name={field.name}
                                   placeholder="Select the service you're interested in"
                                   disabled={isSubmitting}
                                 >
@@ -344,7 +421,14 @@ export default function ContactPage() {
                               name="budget"
                               control={control}
                               render={({ field }) => (
-                                <Select {...field} placeholder="Select a range" disabled={isSubmitting}>
+                                <Select
+                                  value={field.value ?? null}
+                                  onChange={(_, value) => field.onChange(value ?? '')}
+                                  onBlur={field.onBlur}
+                                  name={field.name}
+                                  placeholder="Select a range"
+                                  disabled={isSubmitting}
+                                >
                                   {budgets.map((b) => (
                                     <Option key={b} value={b}>
                                       {b}
@@ -363,7 +447,14 @@ export default function ContactPage() {
                               name="timeline"
                               control={control}
                               render={({ field }) => (
-                                <Select {...field} placeholder="Select a timeline" disabled={isSubmitting}>
+                                <Select
+                                  value={field.value ?? null}
+                                  onChange={(_, value) => field.onChange(value ?? '')}
+                                  onBlur={field.onBlur}
+                                  name={field.name}
+                                  placeholder="Select a timeline"
+                                  disabled={isSubmitting}
+                                >
                                   {timelines.map((t) => (
                                     <Option key={t} value={t}>
                                       {t}
@@ -382,7 +473,14 @@ export default function ContactPage() {
                               name="contactMethod"
                               control={control}
                               render={({ field }) => (
-                                <Select {...field} placeholder="Select method" disabled={isSubmitting}>
+                                <Select
+                                  value={field.value ?? null}
+                                  onChange={(_, value) => field.onChange(value ?? '')}
+                                  onBlur={field.onBlur}
+                                  name={field.name}
+                                  placeholder="Select method"
+                                  disabled={isSubmitting}
+                                >
                                   {contactMethods.map((m) => (
                                     <Option key={m} value={m}>
                                       {m}
@@ -401,7 +499,14 @@ export default function ContactPage() {
                               name="bestTimeToReach"
                               control={control}
                               render={({ field }) => (
-                                <Select {...field} placeholder="Select time" disabled={isSubmitting}>
+                                <Select
+                                  value={field.value ?? null}
+                                  onChange={(_, value) => field.onChange(value ?? '')}
+                                  onBlur={field.onBlur}
+                                  name={field.name}
+                                  placeholder="Select time"
+                                  disabled={isSubmitting}
+                                >
                                   {bestTimes.map((t) => (
                                     <Option key={t} value={t}>
                                       {t}
@@ -434,7 +539,14 @@ export default function ContactPage() {
                               name="hearAboutUs"
                               control={control}
                               render={({ field }) => (
-                                <Select {...field} placeholder="Select an option" disabled={isSubmitting}>
+                                <Select
+                                  value={field.value ?? null}
+                                  onChange={(_, value) => field.onChange(value ?? '')}
+                                  onBlur={field.onBlur}
+                                  name={field.name}
+                                  placeholder="Select an option"
+                                  disabled={isSubmitting}
+                                >
                                   {hearAboutOptions.map((o) => (
                                     <Option key={o} value={o}>
                                       {o}
