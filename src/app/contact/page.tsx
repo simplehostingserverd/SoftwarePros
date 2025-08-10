@@ -7,14 +7,7 @@ export const dynamic = 'force-dynamic';
 
 import AnimatedDiv from '@/components/AnimatedDiv';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-  CheckCircle,
-  Email,
-  LocationOn,
-  Phone,
-  Schedule,
-  Send,
-} from '@mui/icons-material';
+import { CheckCircle, Email, LocationOn, Phone, Schedule, Send } from '@mui/icons-material';
 import {
   Alert,
   Box,
@@ -93,13 +86,7 @@ const contactMethods = ['Email', 'Phone'];
 
 const bestTimes = ['Morning', 'Afternoon', 'Evening'];
 
-const hearAboutOptions = [
-  'Google Search',
-  'Referral',
-  'Social Media',
-  'Advertisement',
-  'Other',
-];
+const hearAboutOptions = ['Google Search', 'Referral', 'Social Media', 'Advertisement', 'Other'];
 
 const contactInfo = [
   {
@@ -147,9 +134,7 @@ export default function ContactPage() {
   });
 
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [emailStatus, setEmailStatus] = useState<'idle' | 'checking' | 'valid' | 'invalid'>(
-    'idle'
-  );
+  const [emailStatus, setEmailStatus] = useState<'idle' | 'checking' | 'valid' | 'invalid'>('idle');
 
   const emailValue = watch('email');
 
@@ -189,7 +174,8 @@ export default function ContactPage() {
         const data = (await res.json()) as { Answer?: Array<{ data: string }>; Status: number };
 
         // Status 0 is NOERROR; presence of MX indicates a receiving domain
-        const hasMx = Array.isArray(data.Answer) && data.Answer.some((a) => /\sMX\s/.test(a.data) || a.data);
+        const hasMx =
+          Array.isArray(data.Answer) && data.Answer.some((a) => /\sMX\s/.test(a.data) || a.data);
         if (!isActive) return;
         setEmailStatus(hasMx ? 'valid' : 'invalid');
       } catch {

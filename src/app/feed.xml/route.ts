@@ -45,27 +45,44 @@ export async function GET() {
       const description = escapeXml(post.excerpt || '');
       const pubDate = post.publishedAt ? post.publishedAt.toUTCString() : new Date().toUTCString();
       const content = escapeXml(post.content.substring(0, 500) + '...');
-      
+
       // Extract categories from title/content for better categorization
       const categories = [];
-      if (post.title.toLowerCase().includes('healthcare') || post.content.toLowerCase().includes('healthcare')) {
+      if (
+        post.title.toLowerCase().includes('healthcare') ||
+        post.content.toLowerCase().includes('healthcare')
+      ) {
         categories.push('Healthcare Software');
       }
-      if (post.title.toLowerCase().includes('hipaa') || post.content.toLowerCase().includes('hipaa')) {
+      if (
+        post.title.toLowerCase().includes('hipaa') ||
+        post.content.toLowerCase().includes('hipaa')
+      ) {
         categories.push('HIPAA Compliance');
       }
-      if (post.title.toLowerCase().includes('enterprise') || post.content.toLowerCase().includes('enterprise')) {
+      if (
+        post.title.toLowerCase().includes('enterprise') ||
+        post.content.toLowerCase().includes('enterprise')
+      ) {
         categories.push('Enterprise Software');
       }
-      if (post.title.toLowerCase().includes('development') || post.content.toLowerCase().includes('development')) {
+      if (
+        post.title.toLowerCase().includes('development') ||
+        post.content.toLowerCase().includes('development')
+      ) {
         categories.push('Software Development');
       }
-      if (post.title.toLowerCase().includes('consulting') || post.content.toLowerCase().includes('consulting')) {
+      if (
+        post.title.toLowerCase().includes('consulting') ||
+        post.content.toLowerCase().includes('consulting')
+      ) {
         categories.push('Technology Consulting');
       }
-      
-      const categoryTags = categories.map(cat => `<category>${escapeXml(cat)}</category>`).join('');
-      
+
+      const categoryTags = categories
+        .map((cat) => `<category>${escapeXml(cat)}</category>`)
+        .join('');
+
       return `
       <item>
         <title>${title}</title>
@@ -120,5 +137,3 @@ export async function GET() {
     },
   });
 }
-
-

@@ -18,7 +18,8 @@ type Resource = {
 const guides: Resource[] = [
   {
     title: 'HIPAA Security Rule Checklist',
-    description: 'Practical checklist aligned to Administrative, Physical, and Technical safeguards.',
+    description:
+      'Practical checklist aligned to Administrative, Physical, and Technical safeguards.',
     href: '/resources#hipaa-checklist',
     badge: 'Download',
   },
@@ -61,8 +62,8 @@ export default function ResourcesPage() {
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Healthcare IT Resources</h1>
           <p className="mt-4 text-lg text-gray-600">
-            Curated guides and tools we use when building HIPAA‑compliant software. No fluff—just templates
-            and playbooks your team can use today.
+            Curated guides and tools we use when building HIPAA‑compliant software. No fluff—just
+            templates and playbooks your team can use today.
           </p>
         </div>
       </section>
@@ -79,7 +80,9 @@ export default function ResourcesPage() {
                 href={g.href}
               >
                 {g.badge ? (
-                  <span className="mr-2 rounded-md bg-indigo-50 px-2 py-0.5 text-xs text-indigo-700">{g.badge}</span>
+                  <span className="mr-2 rounded-md bg-indigo-50 px-2 py-0.5 text-xs text-indigo-700">
+                    {g.badge}
+                  </span>
                 ) : null}
                 View resource
               </Link>
@@ -101,7 +104,9 @@ export default function ResourcesPage() {
                   href={t.href}
                 >
                   {t.badge ? (
-                    <span className="mr-2 rounded-md bg-indigo-50 px-2 py-0.5 text-xs text-indigo-700">{t.badge}</span>
+                    <span className="mr-2 rounded-md bg-indigo-50 px-2 py-0.5 text-xs text-indigo-700">
+                      {t.badge}
+                    </span>
                   ) : null}
                   Use template
                 </Link>
@@ -141,9 +146,9 @@ export default function ResourcesPage() {
         <div id="integrations" className="rounded-2xl border p-6">
           <h3 className="text-xl font-semibold text-gray-900">Integrations Guide</h3>
           <p className="mt-2 text-gray-700">
-            Use message queues, retry semantics, and outbox patterns to decouple
-            partner uptime from your core workflows. Capture structured error codes
-            and provide human‑actionable dashboards for rev‑cycle teams.
+            Use message queues, retry semantics, and outbox patterns to decouple partner uptime from
+            your core workflows. Capture structured error codes and provide human‑actionable
+            dashboards for rev‑cycle teams.
           </p>
         </div>
 
@@ -166,7 +171,9 @@ export default function ResourcesPage() {
 
         <div id="vendor-dd" className="rounded-2xl border p-6">
           <h3 className="text-xl font-semibold text-gray-900">Vendor Due Diligence</h3>
-          <p className="mt-2 text-gray-700">BAA coverage, data residency, encryption, logging, and breach notification SLAs.</p>
+          <p className="mt-2 text-gray-700">
+            BAA coverage, data residency, encryption, logging, and breach notification SLAs.
+          </p>
           <a
             href="/api/resources/vendor-dd"
             className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
@@ -178,8 +185,12 @@ export default function ResourcesPage() {
 
       <section className="bg-indigo-600">
         <div className="container mx-auto px-4 py-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white">Need a custom guide or template?</h2>
-          <p className="mt-3 text-indigo-100">Tell us what you’re building—we’ll share a tailored checklist within 48 hours.</p>
+          <h2 className="text-2xl md:text-3xl font-semibold text-white">
+            Need a custom guide or template?
+          </h2>
+          <p className="mt-3 text-indigo-100">
+            Tell us what you’re building—we’ll share a tailored checklist within 48 hours.
+          </p>
           <a
             className="inline-flex mt-6 px-6 py-3 rounded-lg bg-white text-indigo-700 font-medium hover:bg-gray-100"
             href="/contact"
@@ -191,4 +202,3 @@ export default function ResourcesPage() {
     </main>
   );
 }
-

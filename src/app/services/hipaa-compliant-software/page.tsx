@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'HIPAA Compliant Software Development | SoftwarePros',
-    description: 'Expert HIPAA compliant software development with zero violations. Secure healthcare platforms.',
+    description:
+      'Expert HIPAA compliant software development with zero violations. Secure healthcare platforms.',
     url: 'https://softwarepros.org/services/hipaa-compliant-software',
   },
 };
@@ -30,8 +31,8 @@ export default function HIPAACompliantSoftwarePage() {
             HIPAA Compliant Software Development
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Build secure, scalable healthcare platforms with zero HIPAA violations. Our proven framework
-            ensures compliance from day one.
+            Build secure, scalable healthcare platforms with zero HIPAA violations. Our proven
+            framework ensures compliance from day one.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
@@ -52,7 +53,9 @@ export default function HIPAACompliantSoftwarePage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-red-600">The Risks of Non-Compliance</h3>
+              <h3 className="text-xl font-semibold mb-4 text-red-600">
+                The Risks of Non-Compliance
+              </h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Fines up to $50,000 per violation</li>
                 <li>• Criminal charges for willful neglect</li>
@@ -62,7 +65,9 @@ export default function HIPAACompliantSoftwarePage() {
               </ul>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-green-600">Our Compliance Guarantee</h3>
+              <h3 className="text-xl font-semibold mb-4 text-green-600">
+                Our Compliance Guarantee
+              </h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Zero violations across all implementations</li>
                 <li>• Comprehensive audit trails and logging</li>
@@ -80,10 +85,12 @@ export default function HIPAACompliantSoftwarePage() {
           </h2>
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">1. Administrative Safeguards</h3>
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">
+                1. Administrative Safeguards
+              </h3>
               <p className="text-gray-700 mb-4">
-                Comprehensive policies, procedures, and training programs that ensure your team understands
-                and follows HIPAA requirements.
+                Comprehensive policies, procedures, and training programs that ensure your team
+                understands and follows HIPAA requirements.
               </p>
               <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
                 <li>• Security awareness training</li>
@@ -96,8 +103,8 @@ export default function HIPAACompliantSoftwarePage() {
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-xl font-semibold mb-4 text-blue-600">2. Physical Safeguards</h3>
               <p className="text-gray-700 mb-4">
-                Physical access controls, workstation security, and device management to protect hardware
-                and physical access to data.
+                Physical access controls, workstation security, and device management to protect
+                hardware and physical access to data.
               </p>
               <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
                 <li>• Facility access controls</li>
@@ -110,8 +117,8 @@ export default function HIPAACompliantSoftwarePage() {
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-xl font-semibold mb-4 text-blue-600">3. Technical Safeguards</h3>
               <p className="text-gray-700 mb-4">
-                Advanced encryption, access controls, and audit mechanisms that protect data in transit
-                and at rest.
+                Advanced encryption, access controls, and audit mechanisms that protect data in
+                transit and at rest.
               </p>
               <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
                 <li>• AES-256 encryption</li>
@@ -130,7 +137,9 @@ export default function HIPAACompliantSoftwarePage() {
           <div className="bg-white rounded-lg shadow p-6">
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-green-600">Required Implementation</h3>
+                <h3 className="text-xl font-semibold mb-4 text-green-600">
+                  Required Implementation
+                </h3>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <span className="text-green-500 mr-2">✓</span>
@@ -155,7 +164,9 @@ export default function HIPAACompliantSoftwarePage() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-4 text-blue-600">Addressable Implementation</h3>
+                <h3 className="text-xl font-semibold mb-4 text-blue-600">
+                  Addressable Implementation
+                </h3>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <span className="text-green-500 mr-2">✓</span>
@@ -189,28 +200,36 @@ export default function HIPAACompliantSoftwarePage() {
           </h2>
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-600">Phase 1: Compliance Assessment</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-600">
+                Phase 1: Compliance Assessment
+              </h3>
               <p className="text-gray-700">
                 We begin with a comprehensive analysis of your current systems, identifying gaps and
                 creating a roadmap for HIPAA compliance.
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-600">Phase 2: Security Architecture</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-600">
+                Phase 2: Security Architecture
+              </h3>
               <p className="text-gray-700">
                 Our security experts design a robust architecture that incorporates all required
                 safeguards and best practices.
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-600">Phase 3: Development & Testing</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-600">
+                Phase 3: Development & Testing
+              </h3>
               <p className="text-gray-700">
                 We build your solution using secure coding practices, with extensive testing for
                 vulnerabilities and compliance requirements.
               </p>
             </div>
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-600">Phase 4: Deployment & Monitoring</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-600">
+                Phase 4: Deployment & Monitoring
+              </h3>
               <p className="text-gray-700">
                 Secure deployment with ongoing monitoring, regular audits, and continuous compliance
                 verification.

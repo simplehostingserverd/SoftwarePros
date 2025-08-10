@@ -2,12 +2,23 @@
 
 import dynamic from 'next/dynamic';
 
-const MarketOpportunityChart = dynamic(() => import('@/components/investors/MarketOpportunityChart'), { ssr: false });
-const TractionKPIChart = dynamic(() => import('@/components/investors/TractionKPIChart'), { ssr: false });
-const GoToMarketFunnel = dynamic(() => import('@/components/investors/GoToMarketFunnel'), { ssr: false });
-const CompetitiveRadar = dynamic(() => import('@/components/investors/CompetitiveRadar'), { ssr: false });
+const MarketOpportunityChart = dynamic(
+  () => import('@/components/investors/MarketOpportunityChart'),
+  { ssr: false }
+);
+const TractionKPIChart = dynamic(() => import('@/components/investors/TractionKPIChart'), {
+  ssr: false,
+});
+const GoToMarketFunnel = dynamic(() => import('@/components/investors/GoToMarketFunnel'), {
+  ssr: false,
+});
+const CompetitiveRadar = dynamic(() => import('@/components/investors/CompetitiveRadar'), {
+  ssr: false,
+});
 const AskUseOfFunds = dynamic(() => import('@/components/investors/AskUseOfFunds'), { ssr: false });
-const MetricsStatCards = dynamic(() => import('@/components/investors/MetricsStatCards'), { ssr: false });
+const MetricsStatCards = dynamic(() => import('@/components/investors/MetricsStatCards'), {
+  ssr: false,
+});
 
 export default function InvestorsClient() {
   return (
@@ -38,7 +49,9 @@ export default function InvestorsClient() {
               <h2 className="text-xl font-semibold text-gray-900">Market Opportunity</h2>
               <span className="text-sm text-gray-500">to 2030</span>
             </div>
-            <p className="mt-2 text-sm text-gray-600">Healthcare software TAM forecast approaching $104B.</p>
+            <p className="mt-2 text-sm text-gray-600">
+              Healthcare software TAM forecast approaching $104B.
+            </p>
             <div className="mt-4">
               <MarketOpportunityChart />
             </div>
@@ -49,7 +62,9 @@ export default function InvestorsClient() {
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-gray-900">Traction & Outcomes</h2>
-            <p className="mt-2 text-sm text-gray-600">Proven results across providers and patients.</p>
+            <p className="mt-2 text-sm text-gray-600">
+              Proven results across providers and patients.
+            </p>
             <div className="mt-4">
               <TractionKPIChart />
             </div>
@@ -79,7 +94,9 @@ export default function InvestorsClient() {
           </div>
           <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-gray-900">Go-to-Market Funnel</h2>
-            <p className="mt-2 text-sm text-gray-600">Efficient B2B motion to MSOs and group practices.</p>
+            <p className="mt-2 text-sm text-gray-600">
+              Efficient B2B motion to MSOs and group practices.
+            </p>
             <div className="mt-4">
               <GoToMarketFunnel />
             </div>
@@ -96,7 +113,9 @@ export default function InvestorsClient() {
         <div className="grid md:grid-cols-2 gap-8">
           <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-gray-900">Use of Funds</h2>
-            <p className="mt-2 text-sm text-gray-600">Balanced between product velocity and GTM scale.</p>
+            <p className="mt-2 text-sm text-gray-600">
+              Balanced between product velocity and GTM scale.
+            </p>
             <div className="mt-4">
               <AskUseOfFunds />
             </div>
@@ -125,5 +144,3 @@ export default function InvestorsClient() {
     </div>
   );
 }
-
-

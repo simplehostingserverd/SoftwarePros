@@ -58,11 +58,11 @@ export const metadata: Metadata = {
     url: 'https://softwarepros.org/blog',
     type: 'website',
     images: [
-      { 
-        url: '/web-app-manifest-512x512.png', 
-        width: 512, 
-        height: 512, 
-        alt: 'SoftwarePros Medical Software Development Blog' 
+      {
+        url: '/web-app-manifest-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'SoftwarePros Medical Software Development Blog',
       },
       {
         url: '/images/placeholder.svg',
@@ -75,7 +75,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
-    description: 'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.',
+    description:
+      'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.',
     images: ['/web-app-manifest-512x512.png'],
   },
 };
@@ -84,11 +85,13 @@ export const metadata: Metadata = {
 const medicalSoftwarePosts: BlogPost[] = [
   {
     id: '1',
-    title: 'Complete Guide to HIPAA Compliant Medical Software Development: Security, Privacy & Compliance',
+    title:
+      'Complete Guide to HIPAA Compliant Medical Software Development: Security, Privacy & Compliance',
     slug: 'hipaa-compliant-medical-software-development-guide',
     excerpt:
       'Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements for healthcare applications.',
-    featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
+    featuredImage:
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
     createdAt: new Date('2024-12-20'),
     publishedAt: new Date('2024-12-20'),
     author: { name: 'Dr. Sarah Chen' },
@@ -124,7 +127,8 @@ const medicalSoftwarePosts: BlogPost[] = [
     slug: 'telemedicine-platform-development-secure-scalable-solutions',
     excerpt:
       'Comprehensive guide to developing telemedicine platforms with real-time video, secure messaging, appointment scheduling, and integration with EHR systems for comprehensive virtual care.',
-    featuredImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop',
+    featuredImage:
+      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop',
     createdAt: new Date('2024-12-12'),
     publishedAt: new Date('2024-12-12'),
     author: { name: 'Michael Rodriguez' },
@@ -132,11 +136,13 @@ const medicalSoftwarePosts: BlogPost[] = [
   },
   {
     id: '5',
-    title: 'Medical Device Software Development: FDA Regulations, Safety Standards & Best Practices',
+    title:
+      'Medical Device Software Development: FDA Regulations, Safety Standards & Best Practices',
     slug: 'medical-device-software-development-fda-regulations-safety',
     excerpt:
       'Essential guide to medical device software development covering FDA regulations, IEC 62304 compliance, risk management, software validation, and safety-critical development practices.',
-    featuredImage: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400&fit=crop',
+    featuredImage:
+      'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400&fit=crop',
     createdAt: new Date('2024-12-10'),
     publishedAt: new Date('2024-12-10'),
     author: { name: 'Dr. Sarah Chen' },
@@ -144,7 +150,8 @@ const medicalSoftwarePosts: BlogPost[] = [
   },
   {
     id: '6',
-    title: 'Healthcare Data Analytics Platform Development: Big Data Solutions for Medical Insights',
+    title:
+      'Healthcare Data Analytics Platform Development: Big Data Solutions for Medical Insights',
     slug: 'healthcare-data-analytics-platform-development-big-data-solutions',
     excerpt:
       'Build powerful healthcare data analytics platforms that process massive datasets, provide real-time insights, and enable evidence-based decision making for healthcare providers.',
@@ -196,7 +203,8 @@ const medicalSoftwarePosts: BlogPost[] = [
     slug: 'healthcare-software-testing-validation-quality-assurance',
     excerpt:
       'Comprehensive testing and validation strategies for healthcare software including unit testing, integration testing, user acceptance testing, and compliance validation for medical applications.',
-    featuredImage: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop',
+    featuredImage:
+      'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop',
     createdAt: new Date('2024-11-28'),
     publishedAt: new Date('2024-11-28'),
     author: { name: 'Michael Rodriguez' },
@@ -208,7 +216,8 @@ const medicalSoftwarePosts: BlogPost[] = [
     slug: 'medical-software-integration-hl7-fhir-apis-interoperability',
     excerpt:
       'Master medical software integration using HL7 FHIR standards, RESTful APIs, and interoperability solutions to connect disparate healthcare systems and enable seamless data exchange.',
-    featuredImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop',
+    featuredImage:
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop',
     createdAt: new Date('2024-11-25'),
     publishedAt: new Date('2024-11-25'),
     author: { name: 'Dr. Sarah Chen' },
@@ -235,7 +244,7 @@ async function getPosts() {
       console.log('No DATABASE_URL found, using medical software posts');
       return medicalSoftwarePosts;
     }
-    
+
     const posts = await db.post.findMany({
       where: { published: true },
       include: {
@@ -255,13 +264,13 @@ async function getPosts() {
       },
       take: 12,
     });
-    
+
     // If no posts found in database, return medical software posts
     if (posts.length === 0) {
       console.log('No posts found in database, using medical software posts');
       return medicalSoftwarePosts;
     }
-    
+
     return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);
@@ -283,8 +292,9 @@ export default async function BlogPage() {
               Medical Software Development Insights
             </h1>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              Expert guidance on healthcare software development, HIPAA compliance, AI integration, 
-              and cutting-edge medical technology. Stay ahead with the latest innovations in medical software engineering.
+              Expert guidance on healthcare software development, HIPAA compliance, AI integration,
+              and cutting-edge medical technology. Stay ahead with the latest innovations in medical
+              software engineering.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <span className="px-4 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
@@ -351,7 +361,9 @@ export default async function BlogPage() {
                     </h2>
 
                     {post.excerpt && (
-                      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">{post.excerpt}</p>
+                      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                        {post.excerpt}
+                      </p>
                     )}
 
                     {post.categories.length > 0 && (
@@ -394,7 +406,9 @@ export default async function BlogPage() {
           ) : (
             <div className="text-center py-16">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">No posts yet</h2>
-              <p className="text-gray-600">Check back soon for our latest medical software development insights!</p>
+              <p className="text-gray-600">
+                Check back soon for our latest medical software development insights!
+              </p>
             </div>
           )}
 
@@ -404,7 +418,7 @@ export default async function BlogPage() {
               Ready to Build Your Medical Software Solution?
             </h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Our expert team specializes in developing HIPAA-compliant healthcare applications, 
+              Our expert team specializes in developing HIPAA-compliant healthcare applications,
               AI-powered medical software, and scalable EHR systems. Let's discuss your project.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -436,14 +450,16 @@ export default async function BlogPage() {
               Medical Software Development Insights
             </h1>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              Expert guidance on healthcare software development, HIPAA compliance, AI integration, 
+              Expert guidance on healthcare software development, HIPAA compliance, AI integration,
               and cutting-edge medical technology.
             </p>
           </div>
-          
+
           <div className="text-center py-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Loading...</h2>
-            <p className="text-gray-600">Please wait while we load our latest medical software development insights!</p>
+            <p className="text-gray-600">
+              Please wait while we load our latest medical software development insights!
+            </p>
           </div>
         </div>
       </div>

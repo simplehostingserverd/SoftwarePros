@@ -16,7 +16,11 @@ const contactSchema = z.object({
   timeline: z.string().optional(),
   contactMethod: z.string().optional(),
   bestTimeToReach: z.string().min(1),
-  website: z.string().url().optional().or(z.literal('').transform(() => undefined)),
+  website: z
+    .string()
+    .url()
+    .optional()
+    .or(z.literal('').transform(() => undefined)),
   hearAboutUs: z.string().optional(),
   consent: z.boolean().refine((v) => v === true, {
     message: 'Consent is required',
@@ -55,7 +59,7 @@ export async function POST(request: NextRequest) {
     ) {
       return NextResponse.json(
         { error: 'Validation failed', details: (error as { issues: unknown[] }).issues },
-        { status: 400 },
+        { status: 400 }
       );
     }
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });

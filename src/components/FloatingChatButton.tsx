@@ -23,7 +23,7 @@ export default function FloatingChatButton() {
   // For X (Twitter): Use https://x.com/YOUR_USERNAME
   // For Telegram: Use https://t.me/YOUR_USERNAME
   // ============================================================================
-  
+
   const socialOptions: SocialMediaOption[] = [
     {
       name: 'WhatsApp',
@@ -77,7 +77,7 @@ export default function FloatingChatButton() {
         aria-label="Chat with us"
       >
         <span className="text-2xl">💬</span>
-        
+
         {/* Live indicator */}
         <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full animate-pulse">
           <div className="w-2 h-2 bg-white rounded-full m-1"></div>
@@ -110,7 +110,7 @@ export default function FloatingChatButton() {
               <span className="text-xl">{option.icon}</span>
             </button>
           ))}
-          
+
           {/* Close button */}
           <button
             onClick={() => setIsExpanded(false)}

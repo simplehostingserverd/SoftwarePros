@@ -19,7 +19,8 @@ export type ContactEmailData = {
 // Send all contact emails to Proton address as requested
 const RECIPIENT_EMAIL = 'simplehostingserverd@proton.me';
 const FROM_EMAIL =
-  process.env.CONTACT_FROM_EMAIL || `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || 'softwarepros.org'}`;
+  process.env.CONTACT_FROM_EMAIL ||
+  `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || 'softwarepros.org'}`;
 
 async function resolveTransport() {
   // Prefer explicit SMTP if provided

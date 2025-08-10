@@ -73,7 +73,7 @@ const nextConfig = {
         },
       };
     }
-    
+
     return config;
   },
   // Headers for performance and security

@@ -10,11 +10,11 @@ interface PerformanceOptimizerProps {
   className?: string;
 }
 
-export function PerformanceOptimizer({ 
-  children, 
-  threshold = 0.1, 
+export function PerformanceOptimizer({
+  children,
+  threshold = 0.1,
   rootMargin = '50px',
-  className = '' 
+  className = '',
 }: PerformanceOptimizerProps) {
   const [ref, inView] = useInView({
     threshold,
@@ -38,13 +38,13 @@ interface LazyImageProps {
   priority?: boolean;
 }
 
-export function LazyImage({ 
-  src, 
-  alt, 
-  width, 
-  height, 
-  className = '', 
-  priority = false 
+export function LazyImage({
+  src,
+  alt,
+  width,
+  height,
+  className = '',
+  priority = false,
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -74,9 +74,7 @@ export function LazyImage({
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      {!isLoaded && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-      )}
+      {!isLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse" />}
       <img
         ref={imgRef}
         src={src}
@@ -146,7 +144,9 @@ export function PerformanceMonitor({ onMetrics }: PerformanceMonitorProps) {
     }
 
     // Monitor Time to First Byte
-    const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+    const navigationEntry = performance.getEntriesByType(
+      'navigation'
+    )[0] as PerformanceNavigationTiming;
     if (navigationEntry) {
       const ttfb = navigationEntry.responseStart - navigationEntry.requestStart;
       onMetrics?.({ ttfb } as PerformanceMetrics);
@@ -169,11 +169,11 @@ export function usePerformanceMeasure(componentName: string) {
   useEffect(() => {
     const renderTime = performance.now() - renderStart.current;
     renderCount.current++;
-    
+
     if (process.env.NODE_ENV === 'development') {
       console.log(`${componentName} render #${renderCount.current}: ${renderTime.toFixed(2)}ms`);
     }
-    
+
     renderStart.current = performance.now();
   });
 
@@ -182,7 +182,7 @@ export function usePerformanceMeasure(componentName: string) {
     measureRender: () => {
       const start = performance.now();
       return () => performance.now() - start;
-    }
+    },
   };
 }
 
@@ -209,12 +209,15 @@ export function useThrottle<T>(value: T, limit: number): T {
   const lastRan = useRef(Date.now());
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      if (Date.now() - lastRan.current >= limit) {
-        setThrottledValue(value);
-        lastRan.current = Date.now();
-      }
-    }, limit - (Date.now() - lastRan.current));
+    const handler = setTimeout(
+      () => {
+        if (Date.now() - lastRan.current >= limit) {
+          setThrottledValue(value);
+          lastRan.current = Date.now();
+        }
+      },
+      limit - (Date.now() - lastRan.current)
+    );
 
     return () => {
       clearTimeout(handler);

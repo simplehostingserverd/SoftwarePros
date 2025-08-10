@@ -8,7 +8,10 @@ export async function GET() {
   const csvPath = path.join(process.cwd(), 'public', 'resources', 'risk-register-template.csv');
   const csv = await fs.readFile(csvPath, 'utf8');
 
-  const doc = new PDFDocument({ size: 'LETTER', margins: { top: 40, bottom: 40, left: 40, right: 40 } });
+  const doc = new PDFDocument({
+    size: 'LETTER',
+    margins: { top: 40, bottom: 40, left: 40, right: 40 },
+  });
   const chunks: Buffer[] = [];
   const done = new Promise<Buffer>((resolve) => {
     doc.on('data', (c) => chunks.push(Buffer.from(c)));
@@ -22,7 +25,10 @@ export async function GET() {
   doc.fillColor('#000');
 
   // Render CSV as table-like rows
-  const rows = csv.split(/\r?\n/).filter(Boolean).map((r) => r.split(','));
+  const rows = csv
+    .split(/\r?\n/)
+    .filter(Boolean)
+    .map((r) => r.split(','));
   const colWidths = [60, 120, 150, 60, 60, 60, 140, 80, 80, 60, 100];
 
   for (let i = 0; i < rows.length; i++) {
@@ -51,5 +57,3 @@ export async function GET() {
     },
   });
 }
-
-

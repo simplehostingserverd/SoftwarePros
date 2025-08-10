@@ -33,13 +33,16 @@ AI-powered digital pathology systems can analyze tissue samples more quickly and
 ## Future Trends
 
 The future of AI in medical imaging includes real-time analysis, predictive diagnostics, and personalized treatment planning based on imaging findings.`,
-    excerpt: 'Discover how AI is revolutionizing medical imaging and improving diagnostic accuracy across healthcare.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
+    excerpt:
+      'Discover how AI is revolutionizing medical imaging and improving diagnostic accuracy across healthcare.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-03-15'),
     metaTitle: 'AI-Powered Medical Imaging: Revolutionizing Diagnostic Accuracy - SoftwarePros',
-    metaDescription: 'Discover how AI is revolutionizing medical imaging and improving diagnostic accuracy across healthcare.',
+    metaDescription:
+      'Discover how AI is revolutionizing medical imaging and improving diagnostic accuracy across healthcare.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['AI', 'Machine Learning', 'Medical Imaging', 'Radiology']
+    tags: ['AI', 'Machine Learning', 'Medical Imaging', 'Radiology'],
   },
   {
     title: 'Machine Learning in Drug Discovery: Accelerating Pharmaceutical Innovation',
@@ -73,13 +76,17 @@ Several drugs have been discovered or optimized using machine learning, demonstr
 - Regulatory acceptance of AI-generated results
 - Integration with existing drug development workflows
 - Validation and reproducibility requirements`,
-    excerpt: 'Learn how machine learning is accelerating drug discovery and transforming pharmaceutical innovation.',
-    featuredImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=630&fit=crop',
+    excerpt:
+      'Learn how machine learning is accelerating drug discovery and transforming pharmaceutical innovation.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-03-22'),
-    metaTitle: 'Machine Learning in Drug Discovery: Accelerating Pharmaceutical Innovation - SoftwarePros',
-    metaDescription: 'Learn how machine learning is accelerating drug discovery and transforming pharmaceutical innovation.',
+    metaTitle:
+      'Machine Learning in Drug Discovery: Accelerating Pharmaceutical Innovation - SoftwarePros',
+    metaDescription:
+      'Learn how machine learning is accelerating drug discovery and transforming pharmaceutical innovation.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['Machine Learning', 'Drug Discovery', 'Pharmaceuticals', 'AI']
+    tags: ['Machine Learning', 'Drug Discovery', 'Pharmaceuticals', 'AI'],
   },
   {
     title: 'Predictive Analytics in Healthcare: Forecasting Patient Outcomes',
@@ -113,13 +120,16 @@ Forecasting how diseases will progress in individual patients.
 ## Benefits and Outcomes
 
 Healthcare organizations implementing predictive analytics report improved patient outcomes, reduced costs, and more efficient resource allocation.`,
-    excerpt: 'Discover how predictive analytics is transforming healthcare by forecasting patient outcomes and improving care delivery.',
-    featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=630&fit=crop',
+    excerpt:
+      'Discover how predictive analytics is transforming healthcare by forecasting patient outcomes and improving care delivery.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-03-29'),
     metaTitle: 'Predictive Analytics in Healthcare: Forecasting Patient Outcomes - SoftwarePros',
-    metaDescription: 'Discover how predictive analytics is transforming healthcare by forecasting patient outcomes and improving care delivery.',
+    metaDescription:
+      'Discover how predictive analytics is transforming healthcare by forecasting patient outcomes and improving care delivery.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['Predictive Analytics', 'Machine Learning', 'Patient Outcomes', 'Healthcare Analytics']
+    tags: ['Predictive Analytics', 'Machine Learning', 'Patient Outcomes', 'Healthcare Analytics'],
   },
   {
     title: 'Natural Language Processing in Electronic Health Records',
@@ -153,13 +163,16 @@ Providing real-time insights and recommendations based on patient data analysis.
 ## Future Developments
 
 The future of NLP in healthcare includes real-time clinical decision support, automated coding, and enhanced patient engagement through natural language interfaces.`,
-    excerpt: 'Learn how Natural Language Processing is transforming Electronic Health Records and improving clinical documentation.',
-    featuredImage: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=630&fit=crop',
+    excerpt:
+      'Learn how Natural Language Processing is transforming Electronic Health Records and improving clinical documentation.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-04-05'),
     metaTitle: 'Natural Language Processing in Electronic Health Records - SoftwarePros',
-    metaDescription: 'Learn how Natural Language Processing is transforming Electronic Health Records and improving clinical documentation.',
+    metaDescription:
+      'Learn how Natural Language Processing is transforming Electronic Health Records and improving clinical documentation.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['NLP', 'EHR', 'Clinical Documentation', 'AI']
+    tags: ['NLP', 'EHR', 'Clinical Documentation', 'AI'],
   },
   {
     title: 'Blockchain in Healthcare: Securing Patient Data and Streamlining Operations',
@@ -193,13 +206,17 @@ Tracking pharmaceuticals and medical devices from manufacturer to patient.
 ## Success Stories
 
 Several healthcare organizations have successfully implemented blockchain solutions, demonstrating the technology's potential to transform healthcare operations.`,
-    excerpt: 'Discover how blockchain technology is securing patient data and streamlining healthcare operations.',
-    featuredImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop',
+    excerpt:
+      'Discover how blockchain technology is securing patient data and streamlining healthcare operations.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-04-12'),
-    metaTitle: 'Blockchain in Healthcare: Securing Patient Data and Streamlining Operations - SoftwarePros',
-    metaDescription: 'Discover how blockchain technology is securing patient data and streamlining healthcare operations.',
+    metaTitle:
+      'Blockchain in Healthcare: Securing Patient Data and Streamlining Operations - SoftwarePros',
+    metaDescription:
+      'Discover how blockchain technology is securing patient data and streamlining healthcare operations.',
     categories: ['Healthcare', 'Enterprise'],
-    tags: ['Blockchain', 'Data Security', 'Interoperability', 'Healthcare IT']
+    tags: ['Blockchain', 'Data Security', 'Interoperability', 'Healthcare IT'],
   },
   {
     title: 'Internet of Medical Things (IoMT): Connected Healthcare Devices',
@@ -233,13 +250,16 @@ Consumer and medical-grade wearables that track health metrics and provide early
 ## Future Trends
 
 The future of IoMT includes AI-powered analysis, predictive health insights, and seamless integration with telemedicine platforms.`,
-    excerpt: 'Explore how the Internet of Medical Things is connecting healthcare devices and transforming patient care.',
-    featuredImage: 'https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=1200&h=630&fit=crop',
+    excerpt:
+      'Explore how the Internet of Medical Things is connecting healthcare devices and transforming patient care.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-04-19'),
     metaTitle: 'Internet of Medical Things (IoMT): Connected Healthcare Devices - SoftwarePros',
-    metaDescription: 'Explore how the Internet of Medical Things is connecting healthcare devices and transforming patient care.',
+    metaDescription:
+      'Explore how the Internet of Medical Things is connecting healthcare devices and transforming patient care.',
     categories: ['Healthcare', 'AI Development'],
-    tags: ['IoMT', 'Connected Devices', 'Remote Monitoring', 'Healthcare Technology']
+    tags: ['IoMT', 'Connected Devices', 'Remote Monitoring', 'Healthcare Technology'],
   },
   {
     title: 'Telemedicine and AI: The Future of Remote Healthcare',
@@ -273,13 +293,16 @@ AI tools that assist providers in making accurate diagnoses during remote consul
 ## Future Developments
 
 The future includes AI-powered virtual health assistants, predictive health monitoring, and seamless integration with wearable devices and home monitoring systems.`,
-    excerpt: 'Discover how AI is transforming telemedicine and creating the future of remote healthcare delivery.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
+    excerpt:
+      'Discover how AI is transforming telemedicine and creating the future of remote healthcare delivery.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-04-26'),
     metaTitle: 'Telemedicine and AI: The Future of Remote Healthcare - SoftwarePros',
-    metaDescription: 'Discover how AI is transforming telemedicine and creating the future of remote healthcare delivery.',
+    metaDescription:
+      'Discover how AI is transforming telemedicine and creating the future of remote healthcare delivery.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['Telemedicine', 'AI', 'Remote Healthcare', 'Digital Health']
+    tags: ['Telemedicine', 'AI', 'Remote Healthcare', 'Digital Health'],
   },
   {
     title: 'Robotic Process Automation in Healthcare Administration',
@@ -313,13 +336,16 @@ Automated medical coding and billing processes that improve accuracy and complia
 ## Success Factors
 
 Successful RPA implementation requires careful process analysis, change management, and ongoing monitoring and optimization.`,
-    excerpt: 'Learn how Robotic Process Automation is streamlining healthcare administration and improving operational efficiency.',
-    featuredImage: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=1200&h=630&fit=crop',
+    excerpt:
+      'Learn how Robotic Process Automation is streamlining healthcare administration and improving operational efficiency.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-05-03'),
     metaTitle: 'Robotic Process Automation in Healthcare Administration - SoftwarePros',
-    metaDescription: 'Learn how Robotic Process Automation is streamlining healthcare administration and improving operational efficiency.',
+    metaDescription:
+      'Learn how Robotic Process Automation is streamlining healthcare administration and improving operational efficiency.',
     categories: ['Healthcare', 'Enterprise'],
-    tags: ['RPA', 'Healthcare Administration', 'Process Automation', 'Efficiency']
+    tags: ['RPA', 'Healthcare Administration', 'Process Automation', 'Efficiency'],
   },
   {
     title: 'Cybersecurity in Healthcare: Protecting Patient Data in the Digital Age',
@@ -353,13 +379,17 @@ Advanced threat detection systems that can identify and respond to security inci
 ## Best Practices
 
 Healthcare organizations must implement comprehensive cybersecurity programs that address both technical and human factors in data protection.`,
-    excerpt: 'Discover essential cybersecurity measures for protecting patient data in today\'s digital healthcare environment.',
-    featuredImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop',
+    excerpt:
+      "Discover essential cybersecurity measures for protecting patient data in today's digital healthcare environment.",
+    featuredImage:
+      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-05-10'),
-    metaTitle: 'Cybersecurity in Healthcare: Protecting Patient Data in the Digital Age - SoftwarePros',
-    metaDescription: 'Discover essential cybersecurity measures for protecting patient data in today\'s digital healthcare environment.',
+    metaTitle:
+      'Cybersecurity in Healthcare: Protecting Patient Data in the Digital Age - SoftwarePros',
+    metaDescription:
+      "Discover essential cybersecurity measures for protecting patient data in today's digital healthcare environment.",
     categories: ['Healthcare', 'Security'],
-    tags: ['Cybersecurity', 'Data Protection', 'HIPAA', 'Healthcare Security']
+    tags: ['Cybersecurity', 'Data Protection', 'HIPAA', 'Healthcare Security'],
   },
   {
     title: 'Digital Therapeutics: Software as Medicine',
@@ -393,13 +423,16 @@ Digital tools for smoking cessation, weight management, and other behavioral hea
 ## Future Potential
 
 Digital therapeutics have the potential to democratize access to effective treatments and provide personalized care at scale.`,
-    excerpt: 'Explore how digital therapeutics are revolutionizing treatment approaches and improving patient outcomes.',
-    featuredImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=630&fit=crop',
+    excerpt:
+      'Explore how digital therapeutics are revolutionizing treatment approaches and improving patient outcomes.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-05-17'),
     metaTitle: 'Digital Therapeutics: Software as Medicine - SoftwarePros',
-    metaDescription: 'Explore how digital therapeutics are revolutionizing treatment approaches and improving patient outcomes.',
+    metaDescription:
+      'Explore how digital therapeutics are revolutionizing treatment approaches and improving patient outcomes.',
     categories: ['Healthcare', 'AI Development'],
-    tags: ['Digital Therapeutics', 'Software Medicine', 'Treatment', 'Healthcare Innovation']
+    tags: ['Digital Therapeutics', 'Software Medicine', 'Treatment', 'Healthcare Innovation'],
   },
   {
     title: 'Federated Learning in Healthcare: Collaborative AI Without Data Sharing',
@@ -433,13 +466,17 @@ Meets strict healthcare data protection requirements while enabling AI innovatio
 ## Future Applications
 
 Federated learning has the potential to transform healthcare AI by enabling large-scale collaboration while maintaining data privacy.`,
-    excerpt: 'Learn how federated learning is enabling collaborative AI development in healthcare while preserving data privacy.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
+    excerpt:
+      'Learn how federated learning is enabling collaborative AI development in healthcare while preserving data privacy.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-05-24'),
-    metaTitle: 'Federated Learning in Healthcare: Collaborative AI Without Data Sharing - SoftwarePros',
-    metaDescription: 'Learn how federated learning is enabling collaborative AI development in healthcare while preserving data privacy.',
+    metaTitle:
+      'Federated Learning in Healthcare: Collaborative AI Without Data Sharing - SoftwarePros',
+    metaDescription:
+      'Learn how federated learning is enabling collaborative AI development in healthcare while preserving data privacy.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['Federated Learning', 'AI', 'Data Privacy', 'Healthcare AI']
+    tags: ['Federated Learning', 'AI', 'Data Privacy', 'Healthcare AI'],
   },
   {
     title: 'Quantum Computing in Healthcare: The Next Frontier of Medical Innovation',
@@ -477,12 +514,16 @@ While quantum computing in healthcare is still in early stages, significant prog
 ## The Road Ahead
 
 Quantum computing has the potential to solve previously intractable problems in healthcare, opening new possibilities for medical innovation and improved patient care.`,
-    excerpt: 'Explore how quantum computing is poised to revolutionize healthcare through advanced simulations and personalized medicine.',
-    featuredImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop',
+    excerpt:
+      'Explore how quantum computing is poised to revolutionize healthcare through advanced simulations and personalized medicine.',
+    featuredImage:
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop',
     publishedAt: new Date('2024-05-31'),
-    metaTitle: 'Quantum Computing in Healthcare: The Next Frontier of Medical Innovation - SoftwarePros',
-    metaDescription: 'Explore how quantum computing is poised to revolutionize healthcare through advanced simulations and personalized medicine.',
+    metaTitle:
+      'Quantum Computing in Healthcare: The Next Frontier of Medical Innovation - SoftwarePros',
+    metaDescription:
+      'Explore how quantum computing is poised to revolutionize healthcare through advanced simulations and personalized medicine.',
     categories: ['AI Development', 'Healthcare'],
-    tags: ['Quantum Computing', 'Healthcare Innovation', 'Drug Discovery', 'Personalized Medicine']
-  }
+    tags: ['Quantum Computing', 'Healthcare Innovation', 'Drug Discovery', 'Personalized Medicine'],
+  },
 ];

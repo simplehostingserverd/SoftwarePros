@@ -47,7 +47,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Healthcare Software Case Studies | SoftwarePros — Measurable Results',
-    description: 'See how SoftwarePros delivers measurable outcomes for healthcare providers: cost savings, uptime improvements, and HIPAA compliance.',
+    description:
+      'See how SoftwarePros delivers measurable outcomes for healthcare providers: cost savings, uptime improvements, and HIPAA compliance.',
     images: ['/web-app-manifest-512x512.png'],
   },
 };
@@ -59,8 +60,10 @@ export default function CaseStudiesPage() {
       client: 'Regional Healthcare Partners',
       type: 'Multi-Clinic Network',
       industry: 'Primary Care & Specialty Clinics',
-      challenge: 'Managing 12 clinics with disparate systems, manual processes, and inconsistent patient experiences.',
-      solution: 'Integrated EHR platform with automated scheduling, claims processing, and centralized reporting.',
+      challenge:
+        'Managing 12 clinics with disparate systems, manual processes, and inconsistent patient experiences.',
+      solution:
+        'Integrated EHR platform with automated scheduling, claims processing, and centralized reporting.',
       results: [
         '40% reduction in operational costs',
         '99.9% system uptime achieved',
@@ -72,15 +75,18 @@ export default function CaseStudiesPage() {
       duration: '10 months',
       teamSize: '15 developers',
       metrics: ['40% lower operational costs', '99.9% uptime', 'Zero HIPAA violations'],
-      summary: 'Automated scheduling, claims, and reporting across a network of clinics. Integrated EHR and billing for end-to-end efficiency.',
+      summary:
+        'Automated scheduling, claims, and reporting across a network of clinics. Integrated EHR and billing for end-to-end efficiency.',
     },
     {
       title: 'Telemedicine Platform: 10x Scale During Seasonal Surges',
       client: 'Metro Health Systems',
       type: 'Hospital Network',
       industry: 'Multi-Specialty Hospital System',
-      challenge: 'Need for scalable telemedicine solution to handle 10x patient volume during flu season.',
-      solution: 'Cloud-native telemedicine platform with auto-scaling, real-time monitoring, and enterprise security.',
+      challenge:
+        'Need for scalable telemedicine solution to handle 10x patient volume during flu season.',
+      solution:
+        'Cloud-native telemedicine platform with auto-scaling, real-time monitoring, and enterprise security.',
       results: [
         '100,000+ patients served during peak',
         'Auto-scaling from 100 to 10,000 concurrent users',
@@ -92,7 +98,8 @@ export default function CaseStudiesPage() {
       duration: '6 months',
       teamSize: '12 developers',
       metrics: ['100,000+ patients served', 'Auto-scaling', 'Sub-200ms P95 latency'],
-      summary: 'Cloud-native design with autoscaling, observability, and hardened security for high-traffic events.',
+      summary:
+        'Cloud-native design with autoscaling, observability, and hardened security for high-traffic events.',
     },
     {
       title: 'Dental Practice: 50% Revenue Increase Through Digital Transformation',
@@ -100,7 +107,8 @@ export default function CaseStudiesPage() {
       type: 'Dental Practice',
       industry: 'Multi-Location Dental Chain',
       challenge: 'Managing 15 dental locations with inconsistent systems and poor data visibility.',
-      solution: 'Unified practice management system with digital imaging, automated scheduling, and centralized reporting.',
+      solution:
+        'Unified practice management system with digital imaging, automated scheduling, and centralized reporting.',
       results: [
         '50% increase in revenue per patient',
         '30% reduction in appointment no-shows',
@@ -112,15 +120,18 @@ export default function CaseStudiesPage() {
       duration: '8 months',
       teamSize: '10 developers',
       metrics: ['50% revenue increase', '30% fewer no-shows', '95% staff adoption'],
-      summary: 'Digital transformation including imaging, scheduling, and patient management across multiple locations.',
+      summary:
+        'Digital transformation including imaging, scheduling, and patient management across multiple locations.',
     },
     {
       title: 'Specialty Clinic: 70% Faster Patient Processing',
       client: 'Advanced Cardiology Associates',
       type: 'Specialty Clinic',
       industry: 'Cardiology Practice',
-      challenge: 'Manual patient intake and scheduling causing long wait times and patient dissatisfaction.',
-      solution: 'Streamlined patient portal with automated intake forms, appointment scheduling, and result notifications.',
+      challenge:
+        'Manual patient intake and scheduling causing long wait times and patient dissatisfaction.',
+      solution:
+        'Streamlined patient portal with automated intake forms, appointment scheduling, and result notifications.',
       results: [
         '70% faster patient processing',
         '90% reduction in paperwork',
@@ -132,15 +143,18 @@ export default function CaseStudiesPage() {
       duration: '4 months',
       teamSize: '6 developers',
       metrics: ['70% faster processing', '90% less paperwork', '50% shorter waits'],
-      summary: 'Patient portal automation reducing administrative burden and improving clinical efficiency.',
+      summary:
+        'Patient portal automation reducing administrative burden and improving clinical efficiency.',
     },
     {
       title: 'Rural Hospital: 24/7 Remote Monitoring Implementation',
       client: 'Rural Health Network',
       type: 'Rural Hospital',
       industry: 'Critical Access Hospital',
-      challenge: 'Limited specialist availability and need for 24/7 patient monitoring in remote location.',
-      solution: 'Remote monitoring system with telemedicine integration and automated alert systems.',
+      challenge:
+        'Limited specialist availability and need for 24/7 patient monitoring in remote location.',
+      solution:
+        'Remote monitoring system with telemedicine integration and automated alert systems.',
       results: [
         '24/7 specialist coverage achieved',
         '40% reduction in patient transfers',
@@ -160,7 +174,8 @@ export default function CaseStudiesPage() {
       type: 'Pharmacy Chain',
       industry: 'Retail Pharmacy',
       challenge: 'Managing medication dispensing, inventory, and compliance across 25 locations.',
-      solution: 'Integrated pharmacy management system with automated compliance checks and inventory management.',
+      solution:
+        'Integrated pharmacy management system with automated compliance checks and inventory management.',
       results: [
         '99.9% medication accuracy rate',
         'Zero compliance violations',
@@ -193,10 +208,10 @@ export default function CaseStudiesPage() {
               Healthcare Software Case Studies
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              Real results from regulated healthcare environments. We focus on measurable outcomes, 
+              Real results from regulated healthcare environments. We focus on measurable outcomes,
               reliability, and compliance that drive business value.
             </p>
-            
+
             {/* Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
               {stats.map((stat) => (
@@ -222,9 +237,7 @@ export default function CaseStudiesPage() {
                 <div className="p-6 border-b border-gray-100">
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                        {study.title}
-                      </h2>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{study.title}</h2>
                       <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                         <span className="font-medium">{study.client}</span>
                         <span>•</span>
@@ -234,7 +247,7 @@ export default function CaseStudiesPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* Key Metrics */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {study.metrics.map((metric) => (
@@ -287,7 +300,7 @@ export default function CaseStudiesPage() {
                         <span className="ml-2 text-gray-900">{study.teamSize}</span>
                       </div>
                     </div>
-                    
+
                     {/* Technologies */}
                     <div className="mt-4">
                       <span className="font-medium text-gray-600 text-sm">Technologies:</span>
@@ -317,8 +330,8 @@ export default function CaseStudiesPage() {
             Ready to See Similar Results?
           </h2>
           <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-            Let's discuss how we can help your healthcare organization achieve measurable improvements 
-            in efficiency, compliance, and patient care.
+            Let's discuss how we can help your healthcare organization achieve measurable
+            improvements in efficiency, compliance, and patient care.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -339,5 +352,3 @@ export default function CaseStudiesPage() {
     </div>
   );
 }
-
-

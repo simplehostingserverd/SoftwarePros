@@ -109,7 +109,7 @@ export const metadata: Metadata = {
     'geo.region': 'US-TX',
     'geo.placename': 'Brownsville, Texas',
     'geo.position': '25.9018;-97.4975',
-    'ICBM': '25.9018, -97.4975',
+    ICBM: '25.9018, -97.4975',
   },
 };
 
@@ -236,7 +236,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/favicon.svg" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="alternate" type="application/rss+xml" title="SoftwarePros Blog RSS" href="/feed.xml" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="SoftwarePros Blog RSS"
+          href="/feed.xml"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -258,7 +263,8 @@ export default function RootLayout({
               name: 'SoftwarePros',
               alternateName: 'Software Pros',
               url: 'https://softwarepros.org',
-              description: 'Professional software development and technology consulting services in Brownsville, Texas',
+              description:
+                'Professional software development and technology consulting services in Brownsville, Texas',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: '950 E. Van Buren St.',

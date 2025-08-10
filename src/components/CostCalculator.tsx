@@ -13,19 +13,25 @@ export default function CostCalculator() {
   const [hasMobile, setHasMobile] = useState(true);
   const [supportMonths, setSupportMonths] = useState(6);
 
-  const estimate = useMemo(() => calculateEstimate({
-    numScreens,
-    numIntegrations,
-    hosting,
-    security,
-    hasMobile,
-    supportMonths,
-  }), [numScreens, numIntegrations, hosting, security, hasMobile, supportMonths]);
+  const estimate = useMemo(
+    () =>
+      calculateEstimate({
+        numScreens,
+        numIntegrations,
+        hosting,
+        security,
+        hasMobile,
+        supportMonths,
+      }),
+    [numScreens, numIntegrations, hosting, security, hasMobile, supportMonths]
+  );
 
   return (
     <div className="rounded-2xl border bg-white p-6 shadow-sm">
       <h3 className="text-xl font-semibold text-gray-900">Software Cost Calculator</h3>
-      <p className="mt-1 text-gray-600">Quick ballpark based on scope, integrations, security, and support.</p>
+      <p className="mt-1 text-gray-600">
+        Quick ballpark based on scope, integrations, security, and support.
+      </p>
 
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
         <NumberField
@@ -87,8 +93,16 @@ export default function CostCalculator() {
         </div>
 
         <div className="flex items-center gap-3">
-          <input id="hasMobile" type="checkbox" className="h-4 w-4" checked={hasMobile} onChange={(e) => setHasMobile(e.target.checked)} />
-          <label htmlFor="hasMobile" className="text-sm text-gray-700">Include mobile apps</label>
+          <input
+            id="hasMobile"
+            type="checkbox"
+            className="h-4 w-4"
+            checked={hasMobile}
+            onChange={(e) => setHasMobile(e.target.checked)}
+          />
+          <label htmlFor="hasMobile" className="text-sm text-gray-700">
+            Include mobile apps
+          </label>
         </div>
 
         <NumberField
@@ -108,12 +122,21 @@ export default function CostCalculator() {
         <Kpi label="12‑month TCO" value={formatCurrency(estimate.tco12)} />
       </div>
 
-      <p className="mt-3 text-sm text-gray-500">This is a directional estimate. Actual scope and constraints can change costs. Contact us for a detailed proposal.</p>
+      <p className="mt-3 text-sm text-gray-500">
+        This is a directional estimate. Actual scope and constraints can change costs. Contact us
+        for a detailed proposal.
+      </p>
     </div>
   );
 }
 
-function NumberField({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
+function NumberField({
+  label,
+  value,
+  min,
+  max,
+  onChange,
+}: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
   return (
     <div>
       <Label>{label}</Label>
@@ -129,7 +152,12 @@ function NumberField({ label, value, min, max, onChange }: { label: string; valu
   );
 }
 
-function RadioButton({ name, checked, onChange, label }: { name: string; checked: boolean; onChange: () => void; label: string }) {
+function RadioButton({
+  name,
+  checked,
+  onChange,
+  label,
+}: { name: string; checked: boolean; onChange: () => void; label: string }) {
   return (
     <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-700">
       <input type="radio" name={name} checked={checked} onChange={onChange} className="h-4 w-4" />
@@ -176,14 +204,17 @@ function calculateEstimate({
 
   const build = Math.round(
     (numScreens * costPerScreen + numIntegrations * costPerIntegration + hostingSetup) *
-      mobileMultiplier * securityMultiplier,
+      mobileMultiplier *
+      securityMultiplier
   );
 
   // Monthly run rates (ops, hosting, observability)
   const baseMonthly = hosting === 'cloud' ? 1800 : 3000;
   const integrationsMonthly = numIntegrations * 200;
   const securityMonthly = security === 'baseline' ? 400 : security === 'enhanced' ? 800 : 1200;
-  const monthly = Math.round((baseMonthly + integrationsMonthly + securityMonthly) * (hasMobile ? 1.2 : 1.0));
+  const monthly = Math.round(
+    (baseMonthly + integrationsMonthly + securityMonthly) * (hasMobile ? 1.2 : 1.0)
+  );
 
   const supportMonthly = Math.round(build * 0.06); // 6% of build as support retainer
   const supportTotal = supportMonths * supportMonthly;
@@ -194,7 +225,9 @@ function calculateEstimate({
 }
 
 function formatCurrency(value: number) {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(value);
 }
-
-

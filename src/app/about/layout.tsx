@@ -47,7 +47,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'About SoftwarePros | Healthcare Software Development Experts',
-    description: "Learn about Michael Trevino and SoftwarePros' expertise in healthcare software development and HIPAA compliance.",
+    description:
+      "Learn about Michael Trevino and SoftwarePros' expertise in healthcare software development and HIPAA compliance.",
     images: ['/web-app-manifest-512x512.png'],
   },
 };

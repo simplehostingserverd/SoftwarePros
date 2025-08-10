@@ -26,12 +26,12 @@ export function PerformanceLayout({ children, className = '' }: PerformanceLayou
       ...previousMetrics,
       ...newMetrics,
     }));
-    
+
     // Log Core Web Vitals in development
     if (process.env.NODE_ENV === 'development') {
       console.log('Core Web Vitals:', newMetrics);
     }
-    
+
     // Send metrics to analytics in production
     if (process.env.NODE_ENV === 'production') {
       // Example: Send to Google Analytics if present
@@ -51,15 +51,15 @@ export function PerformanceLayout({ children, className = '' }: PerformanceLayou
   return (
     <>
       <PerformanceMonitor onMetrics={handleMetrics} />
-      
-      <div 
+
+      <div
         className={`transition-opacity duration-500 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         } ${className}`}
       >
         {children}
       </div>
-      
+
       {/* Performance debugging info (development only) */}
       {process.env.NODE_ENV === 'development' && (
         <div className="fixed bottom-4 right-4 bg-black bg-opacity-75 text-white p-3 rounded text-xs font-mono z-50">
@@ -114,11 +114,11 @@ export function ResourceHints() {
       {/* DNS prefetch for external domains */}
       <link rel="dns-prefetch" href="//images.unsplash.com" />
       <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-      
+
       {/* Preconnect to external domains */}
       <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
       <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-      
+
       {/* Preload critical resources */}
       <link rel="preload" href="/globals.css" as="style" />
       <link rel="preload" href="/web-app-manifest-512x512.png" as="image" />

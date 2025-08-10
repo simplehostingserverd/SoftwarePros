@@ -25,7 +25,7 @@ async function main() {
 
   // Create NEW admin user with secure credentials
   const newAdminPassword = await bcrypt.hash('MedicalDev2024!', 12);
-  
+
   const newAdminUser = await prisma.user.upsert({
     where: { email: 'admin.medical@softwarepros.org' },
     update: {},
@@ -489,8 +489,7 @@ Consistent engineering practices reduce defects and accelerate delivery in regul
 ## Takeaway
 
 Adopt standards that are easy to follow and automated in CI to improve outcomes.`,
-      excerpt:
-        'Engineering practices that improve safety and speed for healthcare software teams.',
+      excerpt: 'Engineering practices that improve safety and speed for healthcare software teams.',
       featuredImage:
         'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=1200&h=630&fit=crop',
       published: true,
@@ -530,15 +529,13 @@ FHIR unlocks modern healthcare integrations. This guide shows common patterns an
 ## Takeaway
 
 Design APIs for resilience and map to FHIR resources at the boundaries.`,
-      excerpt:
-        'Real-world FHIR integration patterns, security, and testing strategies.',
+      excerpt: 'Real-world FHIR integration patterns, security, and testing strategies.',
       featuredImage:
         'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1200&h=630&fit=crop',
       published: true,
       publishedAt: new Date('2024-02-15'),
       metaTitle: 'HL7 FHIR Interoperability: Practical Patterns',
-      metaDescription:
-        'Integration, security, and testing strategies for HL7 FHIR in healthcare.',
+      metaDescription: 'Integration, security, and testing strategies for HL7 FHIR in healthcare.',
       authorId: adminUser.id,
     },
   });
@@ -572,15 +569,13 @@ Apply AI where it meaningfully improves outcomes while managing clinical and reg
 ## Takeaway
 
 Start with low-risk, high-ROI use cases; plan for human oversight and robust monitoring.`,
-      excerpt:
-        'Where AI fits in healthcare today and how to manage safety, governance, and ROI.',
+      excerpt: 'Where AI fits in healthcare today and how to manage safety, governance, and ROI.',
       featuredImage:
         'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=1200&h=630&fit=crop',
       published: true,
       publishedAt: new Date('2024-02-22'),
       metaTitle: 'AI in Healthcare: Risk–Benefit Framework',
-      metaDescription:
-        'Use cases, governance, and MLOps guidance for deploying AI in healthcare.',
+      metaDescription: 'Use cases, governance, and MLOps guidance for deploying AI in healthcare.',
       authorId: adminUser.id,
     },
   });
@@ -612,15 +607,13 @@ Ship models safely with clear pipelines, governance, and monitoring.
 ## Takeaway
 
 Treat models like software artifacts with versioning, tests, and staged rollouts.`,
-      excerpt:
-        'A practical blueprint for productionizing AI safely in healthcare settings.',
+      excerpt: 'A practical blueprint for productionizing AI safely in healthcare settings.',
       featuredImage:
         'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?w=1200&h=630&fit=crop',
       published: true,
       publishedAt: new Date('2024-03-01'),
       metaTitle: 'MLOps for Medical Software',
-      metaDescription:
-        'Pipelines, monitoring, and compliance for production AI in healthcare.',
+      metaDescription: 'Pipelines, monitoring, and compliance for production AI in healthcare.',
       authorId: adminUser.id,
     },
   });
@@ -652,15 +645,13 @@ DevOps in healthcare must optimize delivery while maintaining strict security.
 ## Takeaway
 
 Embed compliance and security in the pipeline without slowing teams down.`,
-      excerpt:
-        'DevOps patterns that work in regulated healthcare environments.',
+      excerpt: 'DevOps patterns that work in regulated healthcare environments.',
       featuredImage:
         'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop',
       published: true,
       publishedAt: new Date('2024-03-08'),
       metaTitle: 'DevOps for Healthcare Platforms',
-      metaDescription:
-        'CI/CD, reliability, and security for healthcare-grade platforms.',
+      metaDescription: 'CI/CD, reliability, and security for healthcare-grade platforms.',
       authorId: adminUser.id,
     },
   });
@@ -737,9 +728,9 @@ Embed compliance and security in the pipeline without slowing teams down.`,
 
   additionalPosts.forEach((postData, index) => {
     const postId = additionalPostsCreated[index].id;
-    
+
     // Connect to categories
-    postData.categories.forEach(categoryName => {
+    postData.categories.forEach((categoryName) => {
       let categoryId;
       switch (categoryName) {
         case 'AI Development':
@@ -761,7 +752,7 @@ Embed compliance and security in the pipeline without slowing teams down.`,
     });
 
     // Connect to tags
-    postData.tags.forEach(tagName => {
+    postData.tags.forEach((tagName) => {
       let tagId;
       switch (tagName) {
         case 'AI':

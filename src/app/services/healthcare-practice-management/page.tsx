@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Healthcare Practice Management Software | SoftwarePros',
-    description: 'Streamline healthcare operations with our practice management software. 40% cost reduction proven.',
+    description:
+      'Streamline healthcare operations with our practice management software. 40% cost reduction proven.',
     url: 'https://softwarepros.org/services/healthcare-practice-management',
   },
 };
@@ -30,8 +31,8 @@ export default function HealthcarePracticeManagementPage() {
             Healthcare Practice Management Software
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Transform your medical practice with intelligent software that automates workflows, reduces
-            operational costs by 40%, and enhances patient care delivery.
+            Transform your medical practice with intelligent software that automates workflows,
+            reduces operational costs by 40%, and enhances patient care delivery.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium">
@@ -82,7 +83,9 @@ export default function HealthcarePracticeManagementPage() {
           </h2>
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">1. Intelligent Appointment Management</h3>
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">
+                1. Intelligent Appointment Management
+              </h3>
               <p className="text-gray-700 mb-4">
                 Advanced scheduling system that optimizes appointment slots, reduces no-shows, and
                 maximizes practice efficiency.
@@ -98,7 +101,9 @@ export default function HealthcarePracticeManagementPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">2. Comprehensive Patient Management</h3>
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">
+                2. Comprehensive Patient Management
+              </h3>
               <p className="text-gray-700 mb-4">
                 Complete patient lifecycle management from registration to follow-up care, with
                 integrated communication tools.
@@ -114,7 +119,9 @@ export default function HealthcarePracticeManagementPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">3. Financial Management & Billing</h3>
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">
+                3. Financial Management & Billing
+              </h3>
               <p className="text-gray-700 mb-4">
                 Integrated billing system that streamlines claims processing, reduces denials, and
                 improves cash flow.
@@ -130,7 +137,9 @@ export default function HealthcarePracticeManagementPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-blue-600">4. Staff & Workflow Management</h3>
+              <h3 className="text-xl font-semibold mb-4 text-blue-600">
+                4. Staff & Workflow Management
+              </h3>
               <p className="text-gray-700 mb-4">
                 Tools to optimize staff productivity, improve communication, and streamline daily
                 operations.
@@ -153,7 +162,9 @@ export default function HealthcarePracticeManagementPage() {
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-green-600">Operational Efficiency Gains</h3>
+              <h3 className="text-xl font-semibold mb-4 text-green-600">
+                Operational Efficiency Gains
+              </h3>
               <ul className="space-y-2 text-gray-700">
                 <li>• Automated appointment scheduling reduces admin time by 60%</li>
                 <li>• Digital forms eliminate paper costs and processing delays</li>
@@ -198,7 +209,8 @@ export default function HealthcarePracticeManagementPage() {
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-xl font-semibold mb-4 text-purple-600">Security & Compliance</h3>
               <p className="text-gray-700 mb-4">
-                Enterprise-grade security with built-in compliance features for healthcare regulations.
+                Enterprise-grade security with built-in compliance features for healthcare
+                regulations.
               </p>
               <ul className="grid md:grid-cols-2 gap-2 text-sm text-gray-600">
                 <li>• HIPAA compliance built-in</li>
@@ -211,7 +223,9 @@ export default function HealthcarePracticeManagementPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-4 text-purple-600">Integration Capabilities</h3>
+              <h3 className="text-xl font-semibold mb-4 text-purple-600">
+                Integration Capabilities
+              </h3>
               <p className="text-gray-700 mb-4">
                 Seamlessly integrates with existing healthcare systems and third-party applications.
               </p>
@@ -235,8 +249,8 @@ export default function HealthcarePracticeManagementPage() {
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-xl font-semibold mb-4 text-blue-600">Phased Implementation</h3>
               <p className="text-gray-700 mb-4">
-                We implement your practice management system in phases to minimize disruption and ensure
-                success.
+                We implement your practice management system in phases to minimize disruption and
+                ensure success.
               </p>
               <ul className="space-y-2 text-gray-600">
                 <li>• Phase 1: Core system setup and data migration</li>
@@ -249,7 +263,8 @@ export default function HealthcarePracticeManagementPage() {
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-xl font-semibold mb-4 text-blue-600">Ongoing Support</h3>
               <p className="text-gray-700 mb-4">
-                Comprehensive support and maintenance to ensure your system continues to deliver value.
+                Comprehensive support and maintenance to ensure your system continues to deliver
+                value.
               </p>
               <ul className="space-y-2 text-gray-600">
                 <li>• 24/7 technical support</li>
@@ -263,9 +278,7 @@ export default function HealthcarePracticeManagementPage() {
         </section>
 
         <section className="max-w-4xl mx-auto mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Success Stories
-          </h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Success Stories</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white rounded-lg shadow p-6">
               <h3 className="text-xl font-semibold mb-4 text-green-600">Multi-Clinic Network</h3>
@@ -300,8 +313,8 @@ export default function HealthcarePracticeManagementPage() {
           </h2>
           <div className="text-center">
             <p className="text-lg text-gray-600 mb-6">
-              Ready to transform your medical practice? Let's discuss your specific needs and create a
-              customized implementation plan.
+              Ready to transform your medical practice? Let's discuss your specific needs and create
+              a customized implementation plan.
             </p>
             <a
               href="/contact"

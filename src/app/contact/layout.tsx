@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact SoftwarePros | Healthcare Software Development & Consulting',
-  description: 'Get in touch with SoftwarePros for expert healthcare software development, HIPAA compliance solutions, and technology consulting. Contact us for a free consultation on your software needs.',
+  description:
+    'Get in touch with SoftwarePros for expert healthcare software development, HIPAA compliance solutions, and technology consulting. Contact us for a free consultation on your software needs.',
   keywords: [
     'contact softwarepros',
     'healthcare software consultation',
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Contact SoftwarePros | Healthcare Software Development & Consulting',
-    description: 'Get in touch with SoftwarePros for expert healthcare software development, HIPAA compliance solutions, and technology consulting. Contact us for a free consultation.',
+    description:
+      'Get in touch with SoftwarePros for expert healthcare software development, HIPAA compliance solutions, and technology consulting. Contact us for a free consultation.',
     url: 'https://softwarepros.org/contact',
     type: 'website',
     images: [
@@ -40,7 +42,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contact SoftwarePros | Healthcare Software Development & Consulting',
-    description: 'Get in touch with SoftwarePros for expert healthcare software development, HIPAA compliance solutions, and technology consulting.',
+    description:
+      'Get in touch with SoftwarePros for expert healthcare software development, HIPAA compliance solutions, and technology consulting.',
     images: ['/web-app-manifest-512x512.png'],
   },
 };

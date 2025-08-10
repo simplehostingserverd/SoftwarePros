@@ -5,10 +5,18 @@ import fs from 'node:fs/promises';
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const mdPath = path.join(process.cwd(), 'public', 'resources', 'vendor-due-diligence-checklist.md');
+  const mdPath = path.join(
+    process.cwd(),
+    'public',
+    'resources',
+    'vendor-due-diligence-checklist.md'
+  );
   const content = await fs.readFile(mdPath, 'utf8');
 
-  const doc = new PDFDocument({ size: 'LETTER', margins: { top: 50, bottom: 50, left: 50, right: 50 } });
+  const doc = new PDFDocument({
+    size: 'LETTER',
+    margins: { top: 50, bottom: 50, left: 50, right: 50 },
+  });
   const chunks: Buffer[] = [];
   const done = new Promise<Buffer>((resolve) => {
     doc.on('data', (c) => chunks.push(Buffer.from(c)));
@@ -58,5 +66,3 @@ export async function GET() {
     },
   });
 }
-
-

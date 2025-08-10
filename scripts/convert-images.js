@@ -17,18 +17,18 @@ if (!fs.existsSync(outputDir)) {
 function getImageFiles(dir) {
   const files = fs.readdirSync(dir);
   const imageFiles = [];
-  
-  files.forEach(file => {
+
+  files.forEach((file) => {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
-    
+
     if (stat.isDirectory()) {
       imageFiles.push(...getImageFiles(filePath));
     } else if (isImageFile(file)) {
       imageFiles.push(filePath);
     }
   });
-  
+
   return imageFiles;
 }
 
@@ -41,30 +41,26 @@ function isImageFile(filename) {
 // Convert image to different formats
 async function convertImage(inputPath) {
   const filename = path.basename(inputPath, path.extname(inputPath));
-  
+
   try {
     const image = sharp(inputPath);
     const metadata = await image.metadata();
-    
+
     console.log(`Converting ${inputPath} (${metadata.width}x${metadata.height})`);
-    
+
     // Convert to WebP
-    await image
-      .webp({ quality })
-      .toFile(path.join(outputDir, `${filename}.webp`));
-    
+    await image.webp({ quality }).toFile(path.join(outputDir, `${filename}.webp`));
+
     // Convert to AVIF (if supported)
     try {
-      await image
-        .avif({ quality })
-        .toFile(path.join(outputDir, `${filename}.avif`));
+      await image.avif({ quality }).toFile(path.join(outputDir, `${filename}.avif`));
     } catch (error) {
       console.log(`AVIF conversion failed for ${filename}: ${error.message}`);
     }
-    
+
     // Create responsive sizes
     const sizes = [640, 750, 828, 1080, 1200, 1920];
-    
+
     for (const size of sizes) {
       if (metadata.width >= size) {
         // WebP responsive sizes
@@ -74,9 +70,8 @@ async function convertImage(inputPath) {
           .toFile(path.join(outputDir, `${filename}-${size}.webp`));
       }
     }
-    
+
     console.log(`✅ Converted ${filename}`);
-    
   } catch (error) {
     console.error(`❌ Error converting ${inputPath}:`, error.message);
   }
@@ -90,34 +85,34 @@ async function convertAllImages() {
   console.log(`Quality: ${quality}`);
   console.log(`Formats: ${formats.join(', ')}`);
   console.log('');
-  
+
   const imageFiles = getImageFiles(inputDir);
-  
+
   if (imageFiles.length === 0) {
     console.log('No image files found to convert.');
     return;
   }
-  
+
   console.log(`Found ${imageFiles.length} images to convert:`);
-  imageFiles.forEach(file => console.log(`  - ${file}`));
+  imageFiles.forEach((file) => console.log(`  - ${file}`));
   console.log('');
-  
+
   // Convert images in parallel (with concurrency limit)
   const concurrency = 4;
   const chunks = [];
-  
+
   for (let i = 0; i < imageFiles.length; i += concurrency) {
     chunks.push(imageFiles.slice(i, i + concurrency));
   }
-  
+
   for (let i = 0; i < chunks.length; i++) {
     console.log(`Processing batch ${i + 1}/${chunks.length}...`);
     await Promise.all(chunks[i].map(convertImage));
   }
-  
+
   console.log('');
   console.log('🎉 Image conversion completed!');
-  
+
   // Generate image manifest
   generateImageManifest();
 }
@@ -126,27 +121,27 @@ async function convertAllImages() {
 function generateImageManifest() {
   const manifest = {
     generated: new Date().toISOString(),
-    images: {}
+    images: {},
   };
-  
+
   const webpFiles = fs.readdirSync(outputDir);
-  
-  webpFiles.forEach(file => {
+
+  webpFiles.forEach((file) => {
     if (file.endsWith('.webp') || file.endsWith('.avif')) {
       const filename = path.basename(file, path.extname(file));
       const ext = path.extname(file);
-      
+
       if (!manifest.images[filename]) {
         manifest.images[filename] = {};
       }
-      
+
       manifest.images[filename][ext] = `/images/webp/${file}`;
     }
   });
-  
+
   const manifestPath = path.join(outputDir, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
-  
+
   console.log(`📋 Image manifest generated: ${manifestPath}`);
 }
 

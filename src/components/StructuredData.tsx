@@ -1,7 +1,15 @@
 'use client';
 
 interface StructuredDataProps {
-  type: 'organization' | 'website' | 'service' | 'person' | 'article' | 'breadcrumb' | 'faq' | 'howto';
+  type:
+    | 'organization'
+    | 'website'
+    | 'service'
+    | 'person'
+    | 'article'
+    | 'breadcrumb'
+    | 'faq'
+    | 'howto';
   data: Record<string, string | number | boolean | object>;
 }
 
@@ -53,7 +61,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             'Professional HIPAA-compliant medical software solutions for healthcare providers.',
           publisher: {
             '@type': 'Organization',
-          name: 'SoftwarePros',
+            name: 'SoftwarePros',
           },
           ...data,
         };

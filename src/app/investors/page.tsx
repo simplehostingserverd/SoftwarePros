@@ -12,7 +12,14 @@ export const metadata: Metadata = {
       'Market size, traction, competitive advantages, GTM funnel, and use of funds, presented as an interactive pitch deck.',
     url: 'https://softwarepros.org/investors',
     type: 'website',
-    images: [{ url: '/web-app-manifest-512x512.png', width: 512, height: 512, alt: 'SoftwarePros Investor Overview' }],
+    images: [
+      {
+        url: '/web-app-manifest-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'SoftwarePros Investor Overview',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -25,5 +32,3 @@ export const metadata: Metadata = {
 export default function InvestorsPage() {
   return <InvestorsClient />;
 }
-
-

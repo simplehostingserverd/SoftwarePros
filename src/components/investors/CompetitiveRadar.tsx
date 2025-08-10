@@ -1,6 +1,14 @@
 'use client';
 
-import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer, Tooltip } from 'recharts';
+import {
+  PolarAngleAxis,
+  PolarGrid,
+  PolarRadiusAxis,
+  Radar,
+  RadarChart,
+  ResponsiveContainer,
+  Tooltip,
+} from 'recharts';
 
 type Metric = 'Security' | 'Interoperability' | 'Scalability' | 'Speed' | 'AI/ML';
 
@@ -30,12 +38,22 @@ export default function CompetitiveRadar() {
             formatter={(value: number, name: string) => [`${value}`, name]}
             contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb' }}
           />
-          <Radar name="SoftwarePros" dataKey="SoftwarePros" stroke="#2563eb" fill="#3b82f6" fillOpacity={0.25} />
-          <Radar name="Incumbent" dataKey="Incumbent" stroke="#9ca3af" fill="#9ca3af" fillOpacity={0.15} />
+          <Radar
+            name="SoftwarePros"
+            dataKey="SoftwarePros"
+            stroke="#2563eb"
+            fill="#3b82f6"
+            fillOpacity={0.25}
+          />
+          <Radar
+            name="Incumbent"
+            dataKey="Incumbent"
+            stroke="#9ca3af"
+            fill="#9ca3af"
+            fillOpacity={0.15}
+          />
         </RadarChart>
       </ResponsiveContainer>
     </div>
   );
 }
-
-

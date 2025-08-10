@@ -26,10 +26,7 @@ async function getAuthenticatedUser(request: NextRequest) {
 }
 
 // GET /api/images/[id] - Get single image
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const user = await getAuthenticatedUser(request);
@@ -62,10 +59,7 @@ export async function GET(
 }
 
 // PUT /api/images/[id] - Update image metadata
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function PUT(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
     const user = await getAuthenticatedUser(request);
