@@ -1,6 +1,6 @@
 const sharp = require('sharp');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 // Configuration
 const inputDir = 'public/images';
@@ -18,7 +18,7 @@ function getImageFiles(dir) {
   const files = fs.readdirSync(dir);
   const imageFiles = [];
 
-  files.forEach((file) => {
+  for (const file of files) {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
 
@@ -27,7 +27,7 @@ function getImageFiles(dir) {
     } else if (isImageFile(file)) {
       imageFiles.push(filePath);
     }
-  });
+  }
 
   return imageFiles;
 }
@@ -94,7 +94,9 @@ async function convertAllImages() {
   }
 
   console.log(`Found ${imageFiles.length} images to convert:`);
-  imageFiles.forEach((file) => console.log(`  - ${file}`));
+  for (const file of imageFiles) {
+    console.log(`  - ${file}`);
+  }
   console.log('');
 
   // Convert images in parallel (with concurrency limit)
@@ -126,7 +128,7 @@ function generateImageManifest() {
 
   const webpFiles = fs.readdirSync(outputDir);
 
-  webpFiles.forEach((file) => {
+  for (const file of webpFiles) {
     if (file.endsWith('.webp') || file.endsWith('.avif')) {
       const filename = path.basename(file, path.extname(file));
       const ext = path.extname(file);
@@ -137,7 +139,7 @@ function generateImageManifest() {
 
       manifest.images[filename][ext] = `/images/webp/${file}`;
     }
-  });
+  }
 
   const manifestPath = path.join(outputDir, 'manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));

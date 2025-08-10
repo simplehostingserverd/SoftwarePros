@@ -70,7 +70,7 @@ async function resolveTransport() {
 
 function buildHtmlEmail(data: ContactEmailData) {
   const lines: string[] = [];
-  lines.push(`<h2>New Contact Form Submission</h2>`);
+  lines.push('<h2>New Contact Form Submission</h2>');
   lines.push('<table cellspacing="0" cellpadding="6" style="border-collapse:collapse">');
   const addRow = (label: string, value?: string) => {
     if (!value) return;

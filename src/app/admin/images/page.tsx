@@ -293,8 +293,11 @@ export default function AdminImagesPage(): JSX.Element {
             <div className="bg-white rounded-lg max-w-md w-full p-6">
               <h3 className="text-lg font-semibold mb-4">Edit Image</h3>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">Alt Text</label>
+                <label htmlFor="edit-alt" className="block text-sm font-medium text-gray-700 mb-2">
+                  Alt Text
+                </label>
                 <input
+                  id="edit-alt"
                   type="text"
                   value={editAlt}
                   onChange={(e) => setEditAlt(e.target.value)}
@@ -304,12 +307,14 @@ export default function AdminImagesPage(): JSX.Element {
               </div>
               <div className="flex gap-3">
                 <button
+                  type="button"
                   onClick={handleUpdate}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
                 >
                   Update
                 </button>
                 <button
+                  type="button"
                   onClick={() => setEditingImage(null)}
                   className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
                 >
