@@ -23,33 +23,38 @@ interface BlogPost {
 }
 
 export const metadata: Metadata = {
-  title: 'AI & Healthcare Software Development Blog | SoftwarePros',
+  title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
   description:
-    'Expert insights on AI-powered healthcare software, HIPAA compliance, machine learning in medicine, and cutting-edge technology trends. Stay updated with the latest innovations in medical AI and software development.',
+    'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, telemedicine platforms, and cutting-edge healthcare technology. Stay updated with the latest innovations in medical software engineering.',
   keywords: [
-    'AI healthcare software',
-    'machine learning medicine',
+    'medical software development',
+    'healthcare software engineering',
+    'HIPAA compliant software',
+    'EHR system development',
+    'telemedicine platform development',
     'healthcare AI development',
-    'HIPAA compliance AI',
-    'medical software innovation',
-    'healthcare technology trends',
-    'AI-powered medical apps',
-    'healthcare software development',
-    'medical AI integration',
-    'healthcare digital transformation',
-    'AI medical compliance',
-    'healthcare software architecture',
-    'medical machine learning',
-    'healthcare automation',
-    'AI medical diagnostics',
+    'medical device software',
+    'healthcare compliance software',
+    'medical practice management software',
+    'healthcare cybersecurity',
+    'medical imaging software',
+    'healthcare data analytics',
+    'medical software architecture',
+    'healthcare software testing',
+    'medical software validation',
+    'healthcare software deployment',
+    'medical software maintenance',
+    'healthcare software security',
+    'medical software integration',
+    'healthcare software optimization',
   ],
   alternates: {
     canonical: 'https://softwarepros.org/blog',
   },
   openGraph: {
-    title: 'AI & Healthcare Software Development Blog | SoftwarePros',
+    title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
     description:
-      'Expert insights on AI-powered healthcare software, HIPAA compliance, machine learning in medicine, and cutting-edge technology trends.',
+      'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.',
     url: 'https://softwarepros.org/blog',
     type: 'website',
     images: [
@@ -57,169 +62,169 @@ export const metadata: Metadata = {
         url: '/web-app-manifest-512x512.png', 
         width: 512, 
         height: 512, 
-        alt: 'SoftwarePros AI Healthcare Technology Blog' 
+        alt: 'SoftwarePros Medical Software Development Blog' 
       },
       {
         url: '/images/placeholder.svg',
         width: 1200,
         height: 630,
-        alt: 'SoftwarePros AI Technology Insights Blog',
+        alt: 'SoftwarePros Healthcare Technology Insights Blog',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI & Healthcare Software Development Blog | SoftwarePros',
-    description: 'Expert insights on AI-powered healthcare software, HIPAA compliance, machine learning in medicine, and cutting-edge technology trends.',
+    title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
+    description: 'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.',
     images: ['/web-app-manifest-512x512.png'],
   },
 };
 
-// Comprehensive AI & Healthcare blog posts with professional images
-const samplePosts: BlogPost[] = [
+// 12 New SEO-Optimized Medical Software Development Blog Posts
+const medicalSoftwarePosts: BlogPost[] = [
   {
     id: '1',
-    title: 'AI-Powered Medical Diagnostics: Revolutionizing Healthcare with Machine Learning',
-    slug: 'ai-powered-medical-diagnostics-revolutionizing-healthcare',
+    title: 'Complete Guide to HIPAA Compliant Medical Software Development: Security, Privacy & Compliance',
+    slug: 'hipaa-compliant-medical-software-development-guide',
     excerpt:
-      'Discover how artificial intelligence is transforming medical diagnostics, from early disease detection to personalized treatment plans. Learn about the latest AI algorithms, real-world applications, and the future of precision medicine.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-15'),
-    publishedAt: new Date('2024-12-15'),
-    author: { name: 'Michael Trevino' },
-    categories: [{ category: { id: '1', name: 'AI & Machine Learning' } }],
+      'Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements for healthcare applications.',
+    featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-20'),
+    publishedAt: new Date('2024-12-20'),
+    author: { name: 'Dr. Sarah Chen' },
+    categories: [{ category: { id: '1', name: 'Healthcare Compliance' } }],
   },
   {
     id: '2',
-    title: 'HIPAA-Compliant AI: Building Secure Healthcare Applications in the Age of Machine Learning',
-    slug: 'hipaa-compliant-ai-secure-healthcare-applications',
+    title: 'Building Scalable EHR Systems: Architecture Patterns for Modern Healthcare Platforms',
+    slug: 'building-scalable-ehr-systems-architecture-patterns',
     excerpt:
-      'Navigate the complex intersection of AI technology and healthcare privacy regulations. This comprehensive guide covers data encryption, secure AI model deployment, audit trails, and compliance best practices for healthcare AI applications.',
-    featuredImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-10'),
-    publishedAt: new Date('2024-12-10'),
-    author: { name: 'SoftwarePros Team' },
-    categories: [{ category: { id: '2', name: 'Healthcare & Compliance' } }],
+      'Discover proven architecture patterns for building scalable Electronic Health Record systems that handle millions of patients while maintaining performance, security, and compliance standards.',
+    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-18'),
+    publishedAt: new Date('2024-12-18'),
+    author: { name: 'Michael Rodriguez' },
+    categories: [{ category: { id: '2', name: 'EHR Development' } }],
   },
   {
     id: '3',
-    title: 'The Future of Telemedicine: AI-Enhanced Virtual Care Platforms',
-    slug: 'future-telemedicine-ai-enhanced-virtual-care',
+    title: 'AI-Powered Medical Diagnostics: Machine Learning Implementation in Healthcare Software',
+    slug: 'ai-powered-medical-diagnostics-machine-learning-implementation',
     excerpt:
-      'Explore the next generation of telemedicine platforms powered by artificial intelligence. From intelligent symptom analysis to automated appointment scheduling, discover how AI is making healthcare more accessible and efficient.',
-    featuredImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-05'),
-    publishedAt: new Date('2024-12-05'),
-    author: { name: 'Michael Trevino' },
-    categories: [{ category: { id: '3', name: 'Telemedicine & AI' } }],
+      'Learn how to implement AI-powered medical diagnostics in healthcare software, including model development, validation, FDA approval processes, and integration with existing medical systems.',
+    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-15'),
+    publishedAt: new Date('2024-12-15'),
+    author: { name: 'Dr. Sarah Chen' },
+    categories: [{ category: { id: '3', name: 'AI & Machine Learning' } }],
   },
   {
     id: '4',
-    title: 'Machine Learning in Drug Discovery: Accelerating Pharmaceutical Innovation',
-    slug: 'machine-learning-drug-discovery-pharmaceutical-innovation',
+    title: 'Telemedicine Platform Development: Building Secure, Scalable Virtual Care Solutions',
+    slug: 'telemedicine-platform-development-secure-scalable-solutions',
     excerpt:
-      'Learn how machine learning algorithms are revolutionizing drug discovery and development. Understand the role of AI in molecular modeling, clinical trial optimization, and personalized medicine approaches.',
-    featuredImage: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-01'),
-    publishedAt: new Date('2024-12-01'),
-    author: { name: 'SoftwarePros Team' },
-    categories: [{ category: { id: '4', name: 'Pharmaceutical AI' } }],
+      'Comprehensive guide to developing telemedicine platforms with real-time video, secure messaging, appointment scheduling, and integration with EHR systems for comprehensive virtual care.',
+    featuredImage: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-12'),
+    publishedAt: new Date('2024-12-12'),
+    author: { name: 'Michael Rodriguez' },
+    categories: [{ category: { id: '4', name: 'Telemedicine Development' } }],
   },
   {
     id: '5',
-    title: 'AI-Driven Electronic Health Records: Beyond Traditional EMR Systems',
-    slug: 'ai-driven-electronic-health-records-beyond-emr',
+    title: 'Medical Device Software Development: FDA Regulations, Safety Standards & Best Practices',
+    slug: 'medical-device-software-development-fda-regulations-safety',
     excerpt:
-      'Discover how artificial intelligence is transforming electronic health records from static databases into intelligent, predictive systems. Learn about natural language processing, automated coding, and clinical decision support.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-25'),
-    publishedAt: new Date('2024-11-25'),
-    author: { name: 'Michael Trevino' },
-    categories: [{ category: { id: '5', name: 'EHR & AI' } }],
+      'Essential guide to medical device software development covering FDA regulations, IEC 62304 compliance, risk management, software validation, and safety-critical development practices.',
+    featuredImage: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-10'),
+    publishedAt: new Date('2024-12-10'),
+    author: { name: 'Dr. Sarah Chen' },
+    categories: [{ category: { id: '5', name: 'Medical Device Software' } }],
   },
   {
     id: '6',
-    title: 'Predictive Analytics in Healthcare: Forecasting Patient Outcomes with AI',
-    slug: 'predictive-analytics-healthcare-forecasting-patient-outcomes',
+    title: 'Healthcare Data Analytics Platform Development: Big Data Solutions for Medical Insights',
+    slug: 'healthcare-data-analytics-platform-development-big-data-solutions',
     excerpt:
-      'Explore how predictive analytics and machine learning are helping healthcare providers anticipate patient needs, prevent complications, and improve treatment outcomes. Real-world case studies and implementation strategies.',
+      'Build powerful healthcare data analytics platforms that process massive datasets, provide real-time insights, and enable evidence-based decision making for healthcare providers.',
     featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-20'),
-    publishedAt: new Date('2024-11-20'),
-    author: { name: 'SoftwarePros Team' },
-    categories: [{ category: { id: '6', name: 'Predictive Analytics' } }],
+    createdAt: new Date('2024-12-08'),
+    publishedAt: new Date('2024-12-08'),
+    author: { name: 'Michael Rodriguez' },
+    categories: [{ category: { id: '6', name: 'Healthcare Analytics' } }],
   },
   {
     id: '7',
-    title: 'Natural Language Processing in Medical Documentation: Automating Clinical Notes',
-    slug: 'nlp-medical-documentation-automating-clinical-notes',
+    title: 'Medical Practice Management Software: Complete Practice Workflow Automation Solutions',
+    slug: 'medical-practice-management-software-workflow-automation',
     excerpt:
-      'Learn how NLP technology is revolutionizing medical documentation by automatically extracting insights from clinical notes, radiology reports, and patient communications. Improve efficiency while maintaining accuracy.',
+      'Develop comprehensive medical practice management software that automates scheduling, billing, patient communication, and administrative workflows for healthcare practices of all sizes.',
     featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-15'),
-    publishedAt: new Date('2024-11-15'),
-    author: { name: 'Michael Trevino' },
-    categories: [{ category: { id: '7', name: 'NLP & Healthcare' } }],
+    createdAt: new Date('2024-12-05'),
+    publishedAt: new Date('2024-12-05'),
+    author: { name: 'Dr. Sarah Chen' },
+    categories: [{ category: { id: '7', name: 'Practice Management' } }],
   },
   {
     id: '8',
-    title: 'AI-Powered Medical Imaging: Enhancing Radiology with Deep Learning',
-    slug: 'ai-powered-medical-imaging-enhancing-radiology',
+    title: 'Healthcare Cybersecurity: Advanced Threat Protection for Medical Software Systems',
+    slug: 'healthcare-cybersecurity-advanced-threat-protection-medical-systems',
     excerpt:
-      'Discover how deep learning algorithms are transforming medical imaging interpretation. From X-rays to MRIs, learn how AI is improving diagnostic accuracy, reducing interpretation time, and enhancing patient care.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-10'),
-    publishedAt: new Date('2024-11-10'),
-    author: { name: 'SoftwarePros Team' },
-    categories: [{ category: { id: '8', name: 'Medical Imaging AI' } }],
+      'Implement enterprise-grade cybersecurity measures for medical software systems including threat detection, incident response, penetration testing, and compliance with healthcare security standards.',
+    featuredImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-03'),
+    publishedAt: new Date('2024-12-03'),
+    author: { name: 'Michael Rodriguez' },
+    categories: [{ category: { id: '8', name: 'Healthcare Security' } }],
   },
   {
     id: '9',
-    title: 'Blockchain and AI in Healthcare: Secure, Transparent Medical Data Management',
-    slug: 'blockchain-ai-healthcare-secure-medical-data',
+    title: 'Medical Imaging Software Development: AI-Enhanced Radiology & Diagnostic Tools',
+    slug: 'medical-imaging-software-development-ai-enhanced-radiology',
     excerpt:
-      'Explore the convergence of blockchain technology and artificial intelligence in healthcare. Learn how this powerful combination ensures data integrity, enables secure sharing, and maintains patient privacy.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-05'),
-    publishedAt: new Date('2024-11-05'),
-    author: { name: 'Michael Trevino' },
-    categories: [{ category: { id: '9', name: 'Blockchain & AI' } }],
+      'Create advanced medical imaging software with AI-powered analysis, DICOM compliance, 3D visualization, and integration with PACS systems for comprehensive diagnostic imaging solutions.',
+    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-12-01'),
+    publishedAt: new Date('2024-12-01'),
+    author: { name: 'Dr. Sarah Chen' },
+    categories: [{ category: { id: '9', name: 'Medical Imaging' } }],
   },
   {
     id: '10',
-    title: 'AI Ethics in Healthcare: Balancing Innovation with Patient Safety',
-    slug: 'ai-ethics-healthcare-balancing-innovation-safety',
+    title: 'Healthcare Software Testing & Validation: Quality Assurance for Medical Applications',
+    slug: 'healthcare-software-testing-validation-quality-assurance',
     excerpt:
-      'Navigate the ethical considerations of implementing AI in healthcare. Understand bias mitigation, transparency requirements, and the importance of human oversight in AI-driven medical decisions.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-01'),
-    publishedAt: new Date('2024-11-01'),
-    author: { name: 'SoftwarePros Team' },
-    categories: [{ category: { id: '10', name: 'AI Ethics' } }],
+      'Comprehensive testing and validation strategies for healthcare software including unit testing, integration testing, user acceptance testing, and compliance validation for medical applications.',
+    featuredImage: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-11-28'),
+    publishedAt: new Date('2024-11-28'),
+    author: { name: 'Michael Rodriguez' },
+    categories: [{ category: { id: '10', name: 'Software Testing' } }],
   },
   {
     id: '11',
-    title: 'Edge AI in Healthcare: Bringing Intelligence to Medical Devices',
-    slug: 'edge-ai-healthcare-intelligent-medical-devices',
+    title: 'Medical Software Integration: HL7 FHIR, APIs & Interoperability Solutions',
+    slug: 'medical-software-integration-hl7-fhir-apis-interoperability',
     excerpt:
-      'Learn how edge AI is enabling intelligent medical devices that can process data locally, ensuring privacy and real-time responsiveness. Discover applications in wearables, monitoring systems, and diagnostic tools.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-10-25'),
-    publishedAt: new Date('2024-10-25'),
-    author: { name: 'Michael Trevino' },
-    categories: [{ category: { id: '11', name: 'Edge AI & IoT' } }],
+      'Master medical software integration using HL7 FHIR standards, RESTful APIs, and interoperability solutions to connect disparate healthcare systems and enable seamless data exchange.',
+    featuredImage: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-11-25'),
+    publishedAt: new Date('2024-11-25'),
+    author: { name: 'Dr. Sarah Chen' },
+    categories: [{ category: { id: '11', name: 'Healthcare Integration' } }],
   },
   {
     id: '12',
-    title: 'The Future of Healthcare Software Development: AI-First Architecture',
-    slug: 'future-healthcare-software-development-ai-first-architecture',
+    title: 'Medical Software Deployment & DevOps: Production-Ready Healthcare Applications',
+    slug: 'medical-software-deployment-devops-production-ready-healthcare',
     excerpt:
-      'Explore the architectural patterns and design principles for building AI-first healthcare applications. Learn about microservices, data pipelines, and scalable AI infrastructure for modern healthcare systems.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-10-20'),
-    publishedAt: new Date('2024-10-20'),
-    author: { name: 'SoftwarePros Team' },
-    categories: [{ category: { id: '12', name: 'Software Architecture' } }],
+      'Complete DevOps pipeline for medical software deployment including CI/CD, infrastructure as code, monitoring, logging, and production deployment strategies for healthcare applications.',
+    featuredImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop',
+    createdAt: new Date('2024-11-22'),
+    publishedAt: new Date('2024-11-22'),
+    author: { name: 'Michael Rodriguez' },
+    categories: [{ category: { id: '12', name: 'DevOps & Deployment' } }],
   },
 ];
 
@@ -227,8 +232,8 @@ async function getPosts() {
   try {
     // Check if database is available
     if (!process.env.DATABASE_URL) {
-      console.log('No DATABASE_URL found, using sample posts');
-      return samplePosts;
+      console.log('No DATABASE_URL found, using medical software posts');
+      return medicalSoftwarePosts;
     }
     
     const posts = await db.post.findMany({
@@ -248,20 +253,20 @@ async function getPosts() {
       orderBy: {
         publishedAt: 'desc',
       },
-      take: 10,
+      take: 12,
     });
     
-    // If no posts found in database, return sample posts
+    // If no posts found in database, return medical software posts
     if (posts.length === 0) {
-      console.log('No posts found in database, using sample posts');
-      return samplePosts;
+      console.log('No posts found in database, using medical software posts');
+      return medicalSoftwarePosts;
     }
     
     return posts;
   } catch (error) {
     console.error('Error fetching posts:', error);
-    // Return sample posts if database is not available
-    return samplePosts;
+    // Return medical software posts if database is not available
+    return medicalSoftwarePosts;
   }
 }
 
@@ -275,12 +280,26 @@ export default async function BlogPage() {
           {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Tech Insights & Development Tips
+              Medical Software Development Insights
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Stay updated with the latest in software development, tech trends, and industry insights
-              from our expert team.
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              Expert guidance on healthcare software development, HIPAA compliance, AI integration, 
+              and cutting-edge medical technology. Stay ahead with the latest innovations in medical software engineering.
             </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <span className="px-4 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
+                HIPAA Compliance
+              </span>
+              <span className="px-4 py-2 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                AI & Machine Learning
+              </span>
+              <span className="px-4 py-2 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">
+                EHR Systems
+              </span>
+              <span className="px-4 py-2 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">
+                Telemedicine
+              </span>
+            </div>
           </div>
 
           {/* Blog Posts */}
@@ -289,14 +308,21 @@ export default async function BlogPage() {
               {posts.map((post: BlogPost) => (
                 <article
                   key={post.id}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                 >
                   {post.featuredImage && (
-                    <img
-                      src={post.featuredImage}
-                      alt={post.title}
-                      className="w-full h-48 object-cover"
-                    />
+                    <div className="relative">
+                      <img
+                        src={post.featuredImage}
+                        alt={post.title}
+                        className="w-full h-48 object-cover"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full">
+                          Medical Software
+                        </span>
+                      </div>
+                    </div>
                   )}
                   <div className="p-6">
                     <div className="flex items-center text-sm text-gray-500 mb-3">
@@ -310,22 +336,22 @@ export default async function BlogPage() {
                       {post.author.name && (
                         <>
                           <span className="mx-2">•</span>
-                          <span>By {post.author.name}</span>
+                          <span className="font-medium text-gray-700">By {post.author.name}</span>
                         </>
                       )}
                     </div>
 
-                    <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                    <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 leading-tight">
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="hover:text-blue-600 transition-colors"
+                        className="hover:text-blue-600 transition-colors duration-200"
                       >
                         {post.title}
                       </Link>
                     </h2>
 
                     {post.excerpt && (
-                      <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+                      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">{post.excerpt}</p>
                     )}
 
                     {post.categories.length > 0 && (
@@ -333,7 +359,7 @@ export default async function BlogPage() {
                         {post.categories.map((postCategory) => (
                           <span
                             key={postCategory.category.id}
-                            className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                            className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium"
                           >
                             {postCategory.category.name}
                           </span>
@@ -343,9 +369,9 @@ export default async function BlogPage() {
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+                      className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
                     >
-                      Read More
+                      Read Full Article
                       <svg
                         className="ml-2 w-4 h-4"
                         fill="none"
@@ -368,9 +394,34 @@ export default async function BlogPage() {
           ) : (
             <div className="text-center py-16">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">No posts yet</h2>
-              <p className="text-gray-600">Check back soon for our latest insights and tips!</p>
+              <p className="text-gray-600">Check back soon for our latest medical software development insights!</p>
             </div>
           )}
+
+          {/* CTA Section */}
+          <div className="mt-16 text-center bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Ready to Build Your Medical Software Solution?
+            </h2>
+            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              Our expert team specializes in developing HIPAA-compliant healthcare applications, 
+              AI-powered medical software, and scalable EHR systems. Let's discuss your project.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              >
+                Get Started Today
+              </Link>
+              <Link
+                href="/services/healthcare-practice-management"
+                className="px-8 py-3 border border-blue-600 text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors duration-200"
+              >
+                View Our Services
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -382,17 +433,17 @@ export default async function BlogPage() {
         <div className="container mx-auto px-4 py-16">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Tech Insights & Development Tips
+              Medical Software Development Insights
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Stay updated with the latest in software development, tech trends, and industry insights
-              from our expert team.
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              Expert guidance on healthcare software development, HIPAA compliance, AI integration, 
+              and cutting-edge medical technology.
             </p>
           </div>
           
           <div className="text-center py-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Loading...</h2>
-            <p className="text-gray-600">Please wait while we load our latest insights and tips!</p>
+            <p className="text-gray-600">Please wait while we load our latest medical software development insights!</p>
           </div>
         </div>
       </div>

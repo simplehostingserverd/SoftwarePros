@@ -23,6 +23,22 @@ async function main() {
 
   console.log('✅ Created admin user:', adminUser.email);
 
+  // Create NEW admin user with secure credentials
+  const newAdminPassword = await bcrypt.hash('MedicalDev2024!', 12);
+  
+  const newAdminUser = await prisma.user.upsert({
+    where: { email: 'admin.medical@softwarepros.org' },
+    update: {},
+    create: {
+      email: 'admin.medical@softwarepros.org',
+      name: 'Medical Software Admin',
+      password: newAdminPassword,
+      role: 'ADMIN',
+    },
+  });
+
+  console.log('✅ Created new medical software admin user:', newAdminUser.email);
+
   // Create categories
   const webDevCategory = await prisma.category.upsert({
     where: { slug: 'web-development' },
@@ -801,6 +817,9 @@ Embed compliance and security in the pipeline without slowing teams down.`,
   console.log('\n📝 Admin Login Credentials:');
   console.log('Email: admin@softwarepros.org');
   console.log('Password: admin123');
+  console.log('\n🆕 NEW Medical Software Admin Credentials:');
+  console.log('Email: admin.medical@softwarepros.org');
+  console.log('Password: MedicalDev2024!');
 }
 
 main()

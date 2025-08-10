@@ -9,12 +9,12 @@ const nextConfig = {
     // See error 'Cannot find module "critters"' during post-processing
     // Remove or keep disabled unless explicitly added as a dependency
     // optimizeCss: true,
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
@@ -55,7 +55,6 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: false,
   // Performance optimizations
-  swcMinify: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
