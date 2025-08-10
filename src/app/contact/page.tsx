@@ -229,8 +229,9 @@ export default function ContactPage() {
       setSubmitSuccess(true);
       reset();
       setTimeout(() => setSubmitSuccess(false), 5000);
-    } catch (e: any) {
-      setSubmitError(e?.message || 'Something went wrong');
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : 'Something went wrong';
+      setSubmitError(message);
     } finally {
       setIsSubmitting(false);
     }

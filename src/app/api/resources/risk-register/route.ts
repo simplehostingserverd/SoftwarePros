@@ -26,7 +26,7 @@ export async function GET() {
   const colWidths = [60, 120, 150, 60, 60, 60, 140, 80, 80, 60, 100];
 
   for (let i = 0; i < rows.length; i++) {
-    const yStart = (doc as any).y;
+    const yStart = (doc as unknown as { y: number }).y;
     const row = rows[i];
     if (i === 0) doc.font('Helvetica-Bold');
     else doc.font('Helvetica');
@@ -37,7 +37,7 @@ export async function GET() {
     });
     doc.moveDown(0.5);
     // Ensure we start a new page if needed
-    if ((doc as any).y - yStart > 680) doc.addPage();
+    if ((doc as unknown as { y: number }).y - yStart > 680) doc.addPage();
   }
 
   doc.end();

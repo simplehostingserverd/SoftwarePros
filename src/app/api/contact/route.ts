@@ -47,8 +47,16 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
     console.error('Contact form error:', error);
-    if (error && typeof error === 'object' && 'issues' in error) {
-      return NextResponse.json({ error: 'Validation failed', details: (error as any).issues }, { status: 400 });
+    if (
+      error &&
+      typeof error === 'object' &&
+      'issues' in (error as Record<string, unknown>) &&
+      Array.isArray((error as Record<string, unknown>).issues)
+    ) {
+      return NextResponse.json(
+        { error: 'Validation failed', details: (error as { issues: unknown[] }).issues },
+        { status: 400 },
+      );
     }
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
   }

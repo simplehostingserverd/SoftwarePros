@@ -21,7 +21,12 @@ export default function GoToMarketFunnel() {
     <div className="w-full h-[280px]">
       <ResponsiveContainer width="100%" height="100%">
         <FunnelChart>
-          <Tooltip formatter={(v: number, _n: string, item: any) => [`${v}%`, item?.payload?.name]} />
+          <Tooltip
+            formatter={(v: number, _n: string, item: { payload?: { name?: string } }) => [
+              `${v}%`,
+              item?.payload?.name,
+            ]}
+          />
           <Funnel dataKey="value" data={data} isAnimationActive>
             {data.map((entry, index) => (
               <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
