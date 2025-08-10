@@ -197,11 +197,11 @@ export default function ConsultingPage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Consulting Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {consultingServices.map((service, index) => {
+            {consultingServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div
-                  key={index}
+                  key={service.title}
                   className="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors duration-300"
                 >
                   <div className="flex items-center mb-4">
@@ -213,9 +213,9 @@ export default function ConsultingPage(): JSX.Element {
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-gray-300 mb-2">Deliverables:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {service.deliverables.map((deliverable, deliverableIndex) => (
+                      {service.deliverables.map((deliverable) => (
                         <span
-                          key={deliverableIndex}
+                          key={deliverable}
                           className="px-2 py-1 bg-indigo-600 text-xs rounded-full"
                         >
                           {deliverable}
@@ -227,8 +227,8 @@ export default function ConsultingPage(): JSX.Element {
                   <div>
                     <h4 className="text-sm font-semibold text-gray-300 mb-2">Outcomes:</h4>
                     <ul className="space-y-1">
-                      {service.outcomes.map((outcome, outcomeIndex) => (
-                        <li key={outcomeIndex} className="flex items-center text-sm text-gray-300">
+                      {service.outcomes.map((outcome) => (
+                        <li key={outcome} className="flex items-center text-sm text-gray-300">
                           <div className="w-2 h-2 bg-indigo-400 rounded-full mr-3" />
                           {outcome}
                         </li>
@@ -247,9 +247,9 @@ export default function ConsultingPage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Consulting Areas</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {consultingAreas.map((area, index) => (
+            {consultingAreas.map((area) => (
               <div
-                key={index}
+                key={area}
                 className="bg-gray-700 rounded-lg p-4 text-center hover:bg-gray-600 transition-colors duration-300"
               >
                 <span className="text-sm font-medium">{area}</span>
@@ -292,10 +292,10 @@ export default function ConsultingPage(): JSX.Element {
                 description: 'Guiding execution with ongoing support and monitoring progress',
                 icon: Support,
               },
-            ].map((phase, index) => {
+            ].map((phase) => {
               const IconComponent = phase.icon;
               return (
-                <div key={index} className="text-center">
+                <div key={phase.title} className="text-center">
                   <div className="w-16 h-16 bg-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
@@ -316,9 +316,9 @@ export default function ConsultingPage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Industries We Serve</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {industries.map((industry, index) => (
+            {industries.map((industry) => (
               <div
-                key={index}
+                key={industry}
                 className="bg-gray-700 rounded-lg p-6 text-center hover:bg-gray-600 transition-colors duration-300"
               >
                 <span className="text-lg font-medium">{industry}</span>

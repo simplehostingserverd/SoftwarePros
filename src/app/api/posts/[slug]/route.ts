@@ -21,8 +21,8 @@ async function getAuthenticatedUser(request: NextRequest) {
   return user;
 }
 
-export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+  const { slug } = params;
   try {
     const post = await db.post.findUnique({
       where: { slug },
@@ -73,7 +73,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+export async function PUT(request: NextRequest, { params }: { params: { slug: string } }) {
   try {
     const user = await getAuthenticatedUser(request);
 
@@ -83,7 +83,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
     const { title, content, excerpt, published, metaTitle, metaDescription } = await request.json();
 
-    const { slug } = await params;
+    const { slug } = params;
     let existingPost: {
       id: string;
       title: string;
@@ -153,7 +153,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
   try {
     const user = await getAuthenticatedUser(request);
@@ -162,7 +162,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { slug } = await params;
+    const { slug } = params;
     let post: { id: string } | null;
     try {
       post = await db.post.findUnique({

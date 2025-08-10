@@ -178,11 +178,11 @@ export default function EnterprisePage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Enterprise Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {enterpriseServices.map((service, index) => {
+            {enterpriseServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div
-                  key={index}
+                  key={service.title}
                   className="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors duration-300"
                 >
                   <div className="flex items-center mb-4">
@@ -194,9 +194,9 @@ export default function EnterprisePage(): JSX.Element {
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-gray-300 mb-2">Solutions:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {service.solutions.map((solution, solutionIndex) => (
+                      {service.solutions.map((solution) => (
                         <span
-                          key={solutionIndex}
+                          key={solution}
                           className="px-2 py-1 bg-orange-600 text-xs rounded-full"
                         >
                           {solution}
@@ -208,8 +208,8 @@ export default function EnterprisePage(): JSX.Element {
                   <div>
                     <h4 className="text-sm font-semibold text-gray-300 mb-2">Benefits:</h4>
                     <ul className="space-y-1">
-                      {service.benefits.map((benefit, benefitIndex) => (
-                        <li key={benefitIndex} className="flex items-center text-sm text-gray-300">
+                      {service.benefits.map((benefit) => (
+                        <li key={benefit} className="flex items-center text-sm text-gray-300">
                           <div className="w-2 h-2 bg-orange-400 rounded-full mr-3" />
                           {benefit}
                         </li>
@@ -228,9 +228,9 @@ export default function EnterprisePage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Industries We Serve</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {industries.map((industry, index) => (
+            {industries.map((industry) => (
               <div
-                key={index}
+                key={industry}
                 className="bg-gray-700 rounded-lg p-4 text-center hover:bg-gray-600 transition-colors duration-300"
               >
                 <span className="text-sm font-medium">{industry}</span>
@@ -245,9 +245,9 @@ export default function EnterprisePage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Enterprise Technologies</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {technologies.map((tech, index) => (
+            {technologies.map((tech) => (
               <div
-                key={index}
+                key={tech}
                 className="bg-gray-800 rounded-lg p-4 text-center hover:bg-gray-750 transition-colors duration-300"
               >
                 <span className="text-sm font-medium">{tech}</span>
@@ -285,8 +285,8 @@ export default function EnterprisePage(): JSX.Element {
                 title: 'Deployment & Support',
                 description: 'Smooth deployment and ongoing maintenance and support',
               },
-            ].map((phase, index) => (
-              <div key={index} className="text-center">
+            ].map((phase) => (
+              <div key={phase.title} className="text-center">
                 <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-white font-bold">{phase.step}</span>
                 </div>

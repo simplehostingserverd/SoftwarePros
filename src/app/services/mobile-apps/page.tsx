@@ -175,11 +175,11 @@ export default function MobileAppsPage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Mobile Development Services</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mobileServices.map((service, index) => {
+            {mobileServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div
-                  key={index}
+                  key={service.title}
                   className="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors duration-300"
                 >
                   <div className="flex items-center mb-4">
@@ -191,9 +191,9 @@ export default function MobileAppsPage(): JSX.Element {
                   <div className="mb-4">
                     <h4 className="text-sm font-semibold text-gray-300 mb-2">Platforms:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {service.platforms.map((platform, platformIndex) => (
+                      {service.platforms.map((platform) => (
                         <span
-                          key={platformIndex}
+                          key={platform}
                           className="px-2 py-1 bg-green-600 text-xs rounded-full"
                         >
                           {platform}
@@ -205,8 +205,8 @@ export default function MobileAppsPage(): JSX.Element {
                   <div>
                     <h4 className="text-sm font-semibold text-gray-300 mb-2">Features:</h4>
                     <ul className="space-y-1">
-                      {service.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-center text-sm text-gray-300">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex items-center text-sm text-gray-300">
                           <div className="w-2 h-2 bg-green-400 rounded-full mr-3" />
                           {feature}
                         </li>
@@ -225,9 +225,9 @@ export default function MobileAppsPage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">Mobile Technologies</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {technologies.map((tech, index) => (
+            {technologies.map((tech) => (
               <div
-                key={index}
+                key={tech}
                 className="bg-gray-700 rounded-lg p-4 text-center hover:bg-gray-600 transition-colors duration-300"
               >
                 <span className="text-sm font-medium">{tech}</span>
@@ -242,9 +242,9 @@ export default function MobileAppsPage(): JSX.Element {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-12">App Features We Implement</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {appFeatures.map((feature, index) => (
+            {appFeatures.map((feature) => (
               <div
-                key={index}
+                key={feature}
                 className="bg-gray-800 rounded-lg p-4 text-center hover:bg-gray-750 transition-colors duration-300"
               >
                 <span className="text-sm font-medium">{feature}</span>

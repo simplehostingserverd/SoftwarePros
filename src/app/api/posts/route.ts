@@ -34,7 +34,20 @@ export async function GET(request: NextRequest) {
 
     const where = published === 'true' ? { published: true } : {};
 
-    let posts: unknown[];
+    let posts: Array<{
+      id: string;
+      title: string;
+      slug: string;
+      content: string;
+      excerpt: string | null;
+      published: boolean;
+      createdAt: Date;
+      updatedAt: Date;
+      publishedAt: Date | null;
+      author: { id: string; name: string | null; email: string };
+      categories: Array<{ category: { id: string; name: string } }>;
+      tags: Array<{ tag: { id: string; name: string } }>;
+    }>;
     let total: number;
     try {
       posts = await db.post.findMany({
