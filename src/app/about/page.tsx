@@ -33,10 +33,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/web-app-manifest-512x512.png",
-        width: 512,
-        height: 512,
-        alt: "SoftwarePros Healthcare Software Development Team",
+        url: "/images/FounderSoftwarePros.jpg",
+        width: 800,
+        height: 800,
+        alt: "Michael Trevino - Founder & CEO of SoftwarePros",
       },
     ],
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: "About SoftwarePros — Healthcare Software Development Experts",
     description:
       "Leading healthcare software development company with 15+ years building HIPAA-compliant systems.",
-    images: ["/web-app-manifest-512x512.png"],
+    images: ["/images/FounderSoftwarePros.jpg"],
   },
 };
 
@@ -453,8 +453,12 @@ export default function AboutPage() {
                   </div>
 
                   <div className="text-center">
-                    <div className="w-48 h-48 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full mx-auto mb-6 flex items-center justify-center">
-                      <span className="text-6xl text-white font-bold">MT</span>
+                    <div className="w-48 h-48 mx-auto mb-6">
+                      <img
+                        src="/images/FounderSoftwarePros.jpg"
+                        alt="Michael Trevino - Founder & CEO of SoftwarePros"
+                        className="w-full h-full object-cover rounded-full shadow-lg border-4 border-white"
+                      />
                     </div>
                     <p className="text-gray-600 text-sm">
                       Healthcare Software Development Expert
