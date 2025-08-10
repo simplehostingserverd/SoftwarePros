@@ -14,6 +14,7 @@ import {
   Button,
   Card,
   CardContent,
+  Checkbox,
   Container,
   FormControl,
   FormHelperText,
@@ -23,7 +24,6 @@ import {
   Select,
   Textarea,
   Typography,
-  Checkbox,
 } from '@mui/joy';
 import Option from '@mui/joy/Option';
 import { Controller, useForm } from 'react-hook-form';
@@ -647,7 +647,7 @@ export default function ContactPage() {
                               {info.title}
                             </Typography>
                           </Box>
-                            {info.details.map((detail) => (
+                          {info.details.map((detail, detailIndex) => (
                             <Typography
                               key={detail}
                               level="body-md"

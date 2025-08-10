@@ -34,7 +34,10 @@ export default function CTASection() {
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="Arrow right"
                 >
+                  <title>Arrow right</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

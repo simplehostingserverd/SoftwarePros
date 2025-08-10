@@ -282,10 +282,8 @@ export default function HIPAACompliantSoftwarePage() {
           </div>
         </section>
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+        <script type="application/ld+json">
+          {JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'FAQPage',
               mainEntity: [
@@ -314,9 +312,8 @@ export default function HIPAACompliantSoftwarePage() {
                   },
                 },
               ],
-            }),
-          }}
-        />
+            })}
+        </script>
       </div>
     </div>
   );
