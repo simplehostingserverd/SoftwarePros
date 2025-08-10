@@ -2,6 +2,7 @@
 
 import Footer from '@/components/Footer';
 import Navigation from '@/components/Navigation';
+import FloatingChatButton from '@/components/FloatingChatButton';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
       <Navigation />
       <main className="flex-grow pt-16">{children}</main>
       <Footer />
+      <FloatingChatButton />
     </div>
   );
 }
