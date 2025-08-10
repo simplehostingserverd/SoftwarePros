@@ -303,7 +303,8 @@ export default function HIPAAComplianceGuidePage() {
                 className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
               >
                 Get Expert Consultation
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Arrow right">
+                  <title>Arrow right</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

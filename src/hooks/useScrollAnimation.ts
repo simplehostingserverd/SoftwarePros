@@ -24,11 +24,11 @@ export function useScrollAnimation({
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
+        for (const entry of entries) {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
           }
-        });
+        }
       },
       {
         threshold,

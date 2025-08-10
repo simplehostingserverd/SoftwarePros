@@ -647,9 +647,9 @@ export default function ContactPage() {
                               {info.title}
                             </Typography>
                           </Box>
-                          {info.details.map((detail, detailIndex) => (
+                            {info.details.map((detail) => (
                             <Typography
-                              key={detailIndex}
+                              key={detail}
                               level="body-md"
                               sx={{
                                 color: detailIndex === 0 ? 'neutral.800' : 'neutral.600',

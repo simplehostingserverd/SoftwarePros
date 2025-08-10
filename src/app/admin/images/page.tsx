@@ -261,18 +261,21 @@ export default function AdminImagesPage(): JSX.Element {
                       {image.alt && <p className="text-sm text-gray-600 mt-2">Alt: {image.alt}</p>}
                       <div className="mt-4 flex flex-wrap gap-2">
                         <button
+                          type="button"
                           onClick={() => copyToClipboard(image.url)}
                           className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
                         >
                           Copy URL
                         </button>
                         <button
+                          type="button"
                           onClick={() => handleEdit(image)}
                           className="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200"
                         >
                           Edit
                         </button>
                         <button
+                          type="button"
                           onClick={() => handleDelete(image.id)}
                           className="px-3 py-1 text-xs bg-red-100 text-red-700 rounded hover:bg-red-200"
                         >

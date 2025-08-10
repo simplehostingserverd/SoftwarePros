@@ -44,7 +44,7 @@ export async function GET() {
       const title = escapeXml(post.title);
       const description = escapeXml(post.excerpt || '');
       const pubDate = post.publishedAt ? post.publishedAt.toUTCString() : new Date().toUTCString();
-      const content = escapeXml(post.content.substring(0, 500) + '...');
+      const content = escapeXml(`${post.content.substring(0, 500)}...`);
 
       // Extract categories from title/content for better categorization
       const categories = [];

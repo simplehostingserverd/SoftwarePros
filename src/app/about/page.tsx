@@ -158,11 +158,8 @@ export default function AboutPage() {
   return (
     <>
       {/* Structured Data Schema */}
-      <Script
-        id="about-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+      <Script id="about-schema" type="application/ld+json">
+        {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: 'SoftwarePros',
@@ -219,9 +216,8 @@ export default function AboutPage() {
               ratingValue: '4.9',
               reviewCount: '100',
             },
-          }),
-        }}
-      />
+          })}
+      </Script>
 
       <main className="min-h-screen bg-white">
         {/* Hero Section */}

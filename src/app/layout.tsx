@@ -242,22 +242,9 @@ export default function RootLayout({
           title="SoftwarePros Blog RSS"
           href="/feed.xml"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+        <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'LocalBusiness',
               name: 'SoftwarePros',
@@ -297,13 +284,9 @@ export default function RootLayout({
               priceRange: '$$',
               paymentAccepted: ['Cash', 'Credit Card', 'Check', 'Bank Transfer'],
               currenciesAccepted: 'USD',
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
+            })}
+        </script>
+        <script type="application/ld+json">{JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               itemListElement: [
@@ -332,9 +315,8 @@ export default function RootLayout({
                   item: 'https://softwarepros.org/contact',
                 },
               ],
-            }),
-          }}
-        />
+            })}
+        </script>
       </head>
       <body className={inter.className}>
         <ClientLayout>{children}</ClientLayout>

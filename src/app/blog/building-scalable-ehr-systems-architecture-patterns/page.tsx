@@ -492,7 +492,8 @@ export default function ScalableEHRSystemsPage() {
                 className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200"
               >
                 Start Your Architecture Design
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Arrow right">
+                  <title>Arrow right</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
