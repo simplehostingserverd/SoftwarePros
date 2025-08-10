@@ -1,139 +1,147 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+const MarketOpportunityChart = dynamic(() => import('@/components/investors/MarketOpportunityChart'), { ssr: false });
+const TractionKPIChart = dynamic(() => import('@/components/investors/TractionKPIChart'), { ssr: false });
+const GoToMarketFunnel = dynamic(() => import('@/components/investors/GoToMarketFunnel'), { ssr: false });
+const CompetitiveRadar = dynamic(() => import('@/components/investors/CompetitiveRadar'), { ssr: false });
+const AskUseOfFunds = dynamic(() => import('@/components/investors/AskUseOfFunds'), { ssr: false });
+const MetricsStatCards = dynamic(() => import('@/components/investors/MetricsStatCards'), { ssr: false });
 
 export const metadata: Metadata = {
-  title: 'Investors | SoftwarePros — Healthcare Software Market Opportunity & Growth',
+  title: 'Investors | SoftwarePros — Pitch Deck Overview',
   description:
-    'Investor overview for SoftwarePros: $104B healthcare software market opportunity, proven traction with 100,000+ patients served, technology differentiators, and growth strategy in HIPAA-compliant healthcare platforms.',
-  keywords: [
-    'softwarepros investors',
-    'healthcare software investment',
-    'medical software investment opportunity',
-    'HIPAA compliant software investment',
-    'healthcare technology investment',
-    'medical practice software investment',
-    'healthcare software market opportunity',
-    'medical software market size',
-    'healthcare IT investment',
-    'telemedicine software investment',
-    'EHR software investment',
-    'healthcare software growth',
-    'medical software traction',
-    'healthcare technology differentiators',
-    'medical software competitive advantages',
-    'healthcare software leadership',
-    'medical software growth strategy',
-    'healthcare software market forecast',
-    'medical software investment overview',
-    'healthcare software company investment',
-  ],
-  alternates: {
-    canonical: 'https://softwarepros.org/investors',
-  },
+    'Investor overview for SoftwarePros with market, traction, GTM, competitive edge, and use of funds. Pitch-deck style with interactive charts.',
+  alternates: { canonical: 'https://softwarepros.org/investors' },
   openGraph: {
-    title: 'Investors | SoftwarePros — Healthcare Software Market Opportunity & Growth',
+    title: 'Investors | SoftwarePros — Pitch Deck Overview',
     description:
-      'Market size, traction, competitive advantages, leadership, and growth plans for SoftwarePros in healthcare software. $104B market opportunity with proven results.',
+      'Market size, traction, competitive advantages, GTM funnel, and use of funds, presented as an interactive pitch deck.',
     url: 'https://softwarepros.org/investors',
     type: 'website',
-    images: [
-      { 
-        url: '/web-app-manifest-512x512.png', 
-        width: 512, 
-        height: 512, 
-        alt: 'SoftwarePros Investor Overview' 
-      },
-    ],
+    images: [{ url: '/web-app-manifest-512x512.png', width: 512, height: 512, alt: 'SoftwarePros Investor Overview' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Investors | SoftwarePros — Healthcare Software Market Opportunity & Growth',
-    description: 'Market size, traction, competitive advantages, leadership, and growth plans for SoftwarePros in healthcare software.',
+    title: 'Investors | SoftwarePros — Pitch Deck Overview',
+    description: 'Interactive charts showcasing market, traction, GTM, and more.',
     images: ['/web-app-manifest-512x512.png'],
   },
 };
 
 export default function InvestorsPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto px-4 py-16">
-        <header className="text-center max-w-3xl mx-auto mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Investor Overview</h1>
-          <p className="text-lg text-gray-600">
-            SoftwarePros builds secure, HIPAA-compliant healthcare platforms with Fortune 500-grade
-            engineering. This page highlights our market, traction, differentiators, and growth plan.
-          </p>
-        </header>
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-200 via-white to-transparent" />
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900">
+              SoftwarePros Investor Overview
+            </h1>
+            <p className="mt-4 text-lg md:text-xl text-gray-600">
+              HIPAA-grade healthcare platforms. Enterprise reliability. Efficient go-to-market.
+            </p>
+            <div className="mt-8">
+              <MetricsStatCards />
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Market Opportunity</h2>
-            <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>Healthcare software market forecast: ~$104B by 2030</li>
-              <li>Target: HIPAA-compliant clinical platforms for SMB clinics and mid-market providers</li>
-              <li>Strong tailwinds: telemedicine, AI-assisted care, interoperability mandates (FHIR)</li>
+      {/* Market + Traction */}
+      <section className="container mx-auto px-4 py-12 md:py-16">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-gray-900">Market Opportunity</h2>
+              <span className="text-sm text-gray-500">to 2030</span>
+            </div>
+            <p className="mt-2 text-sm text-gray-600">Healthcare software TAM forecast approaching $104B.</p>
+            <div className="mt-4">
+              <MarketOpportunityChart />
+            </div>
+            <ul className="mt-4 grid grid-cols-1 gap-1 text-sm text-gray-600">
+              <li>Interoperability mandates (FHIR), AI-assisted care, telemedicine growth</li>
+              <li>Focus: SMB clinics and mid-market providers</li>
             </ul>
           </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Traction & Outcomes</h2>
-            <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>100,000+ patients served across 50+ healthcare providers</li>
-              <li>Up to 40% operational cost reduction for clinics through workflow automation</li>
-              <li>99.9% uptime across mission-critical systems</li>
-              <li>Zero HIPAA violations across client implementations</li>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-900">Traction & Outcomes</h2>
+            <p className="mt-2 text-sm text-gray-600">Proven results across providers and patients.</p>
+            <div className="mt-4">
+              <TractionKPIChart />
+            </div>
+            <ul className="mt-4 grid grid-cols-1 gap-1 text-sm text-gray-600">
+              <li>100k+ patients served | 50+ providers</li>
+              <li>Up to 40% cost reduction via workflow automation</li>
+              <li>99.9% uptime | Zero HIPAA violations</li>
             </ul>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Technology Differentiators</h2>
-            <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>Security-first architecture and proprietary HIPAA compliance frameworks</li>
-              <li>Interoperability leadership: HL7 v2, FHIR R4, SMART on FHIR</li>
-              <li>Cloud-native, auto-scaling platforms with DevOps automation</li>
-              <li>AI/MLOps pipelines designed for regulated deployments</li>
+      {/* Differentiation + Competitive */}
+      <section className="container mx-auto px-4 pb-12 md:pb-16">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-900">Technology Differentiators</h2>
+            <ul className="mt-3 grid grid-cols-1 gap-2 text-sm text-gray-700">
+              <li>Security-first architecture and HIPAA frameworks</li>
+              <li>Interoperability: HL7, FHIR R4, SMART on FHIR</li>
+              <li>Cloud-native, autoscaling, IaC & DevOps automation</li>
+              <li>AI/MLOps pipelines for regulated deployments</li>
+            </ul>
+            <div className="mt-4">
+              <CompetitiveRadar />
+            </div>
+          </div>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-900">Go-to-Market Funnel</h2>
+            <p className="mt-2 text-sm text-gray-600">Efficient B2B motion to MSOs and group practices.</p>
+            <div className="mt-4">
+              <GoToMarketFunnel />
+            </div>
+            <ul className="mt-4 grid grid-cols-1 gap-1 text-sm text-gray-600">
+              <li>Inbound content + targeted outbound</li>
+              <li>Partnerships with EHR vendors and health networks</li>
             </ul>
           </div>
+        </div>
+      </section>
 
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Growth Strategy</h2>
-            <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>Expand telemedicine, practice management, and AI-assisted documentation</li>
-              <li>Geographic expansion and partnerships with EHR vendors and health networks</li>
-              <li>Content-driven inbound pipeline; targeted outbound to MSOs and group practices</li>
-              <li>Product roadmap: cost calculator, HIPAA compliance suite, integration toolkits</li>
+      {/* Use of Funds + Contact */}
+      <section className="container mx-auto px-4 pb-24">
+        <div className="grid md:grid-cols-2 gap-8">
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-900">Use of Funds</h2>
+            <p className="mt-2 text-sm text-gray-600">Balanced between product velocity and GTM scale.</p>
+            <div className="mt-4">
+              <AskUseOfFunds />
+            </div>
+            <ul className="mt-4 grid grid-cols-1 gap-1 text-sm text-gray-600">
+              <li>Engineering & Security to maintain HIPAA-grade reliability</li>
+              <li>GTM to accelerate market penetration and ARR growth</li>
             </ul>
           </div>
-        </section>
-
-        <section className="grid md:grid-cols-3 gap-8 mb-12">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Leadership</h2>
-            <p className="text-gray-700 mb-2">Michael Trevino — CEO & Founder</p>
-            <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>15+ years building mission-critical systems for Fortune 500</li>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-gray-900">Leadership & Contact</h2>
+            <p className="mt-2 text-sm text-gray-700">Michael Trevino — CEO & Founder</p>
+            <ul className="mt-3 grid grid-cols-1 gap-2 text-sm text-gray-700">
+              <li>15+ years building Fortune 500-grade systems</li>
               <li>Healthcare, security, and compliance expertise</li>
-              <li>Track record of delivering regulated software at scale</li>
+              <li>Delivered regulated software at scale</li>
             </ul>
+            <a
+              href="/contact"
+              className="mt-6 inline-flex items-center justify-center rounded-lg bg-primary-600 px-5 py-2.5 font-semibold text-white shadow hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+            >
+              Contact Us
+            </a>
           </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Social Proof</h2>
-            <ul className="list-disc pl-5 text-gray-700 space-y-2">
-              <li>Testimonials: measurable cost savings and reliability improvements</li>
-              <li>Certifications/partnerships: HIPAA, SOC 2 alignment, major cloud providers</li>
-              <li>Speaking engagements and industry recognition</li>
-            </ul>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-2xl font-semibold mb-4">Contact</h2>
-            <p className="text-gray-700">For investor inquiries, contact us via the contact form.</p>
-            <a href="/contact" className="inline-block mt-4 px-5 py-2 bg-blue-600 text-white rounded">Contact Us</a>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
