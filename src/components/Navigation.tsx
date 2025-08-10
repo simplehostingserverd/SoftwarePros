@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const navigationItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
-  { name: 'Case Studies', href: '/case-studies' },
-  { name: 'Resources', href: '/resources' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Investors', href: '/investors' },
-  { name: 'Contact', href: '/contact' },
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "Case Studies", href: "/case-studies" },
+  { name: "Resources", href: "/resources" },
+  { name: "Blog", href: "/blog" },
+  { name: "Investors", href: "/investors" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navigation() {
@@ -20,8 +20,8 @@ export default function Navigation() {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
+    if (href === "/") {
+      return pathname === "/";
     }
     return pathname.startsWith(href);
   };
@@ -48,8 +48,8 @@ export default function Navigation() {
                 href={item.href}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   isActive(item.href)
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+                    : "text-gray-300 hover:text-white hover:bg-gray-800"
                 }`}
               >
                 {item.name}
@@ -60,6 +60,7 @@ export default function Navigation() {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
@@ -71,7 +72,10 @@ export default function Navigation() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  role="img"
+                  aria-label="Open menu"
                 >
+                  <title>Open menu</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -86,7 +90,10 @@ export default function Navigation() {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+                  role="img"
+                  aria-label="Close menu"
                 >
+                  <title>Close menu</title>
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -110,8 +117,8 @@ export default function Navigation() {
                 href={item.href}
                 className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 ${
                   isActive(item.href)
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+                    : "text-gray-300 hover:text-white hover:bg-gray-800"
                 }`}
                 onClick={() => setIsOpen(false)}
               >

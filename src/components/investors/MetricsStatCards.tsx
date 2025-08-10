@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 type Stat = {
   label: string;
@@ -7,10 +7,10 @@ type Stat = {
 };
 
 const stats: Stat[] = [
-  { label: 'ARR Potential (3yr)', value: '$8–12M', sublabel: 'Mid-market focus' },
-  { label: 'Gross Margin', value: '75–85%', sublabel: 'Software + services' },
-  { label: 'Payback', value: '< 12 mo', sublabel: 'Efficient GTM' },
-  { label: 'Uptime', value: '99.9%', sublabel: 'Mission-critical' },
+  { label: "ARR Potential (3yr)", value: "$8–12M", sublabel: "Mid-market focus" },
+  { label: "Gross Margin", value: "75–85%", sublabel: "Software + services" },
+  { label: "Payback", value: "< 12 mo", sublabel: "Efficient GTM" },
+  { label: "Uptime", value: "99.9%", sublabel: "Mission-critical" },
 ];
 
 export default function MetricsStatCards() {

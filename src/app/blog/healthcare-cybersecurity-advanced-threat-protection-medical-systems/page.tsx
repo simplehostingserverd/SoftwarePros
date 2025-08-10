@@ -1,39 +1,39 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Healthcare Cybersecurity: Advanced Threat Protection for Medical Systems | SoftwarePros',
+  title: "Healthcare Cybersecurity: Advanced Threat Protection for Medical Systems | SoftwarePros",
   description:
-    'Implement enterprise-grade cybersecurity measures for medical software systems. Learn advanced threat protection, ransomware defense, and security best practices for healthcare applications.',
+    "Implement enterprise-grade cybersecurity measures for medical software systems. Learn advanced threat protection, ransomware defense, and security best practices for healthcare applications.",
   keywords: [
-    'healthcare cybersecurity',
-    'medical software security',
-    'healthcare threat protection',
-    'medical system security',
-    'healthcare ransomware protection',
-    'medical software cybersecurity',
-    'healthcare security best practices',
-    'medical data protection',
-    'healthcare security architecture',
-    'medical software threat detection',
+    "healthcare cybersecurity",
+    "medical software security",
+    "healthcare threat protection",
+    "medical system security",
+    "healthcare ransomware protection",
+    "medical software cybersecurity",
+    "healthcare security best practices",
+    "medical data protection",
+    "healthcare security architecture",
+    "medical software threat detection",
   ],
   alternates: {
     canonical:
-      'https://softwarepros.org/blog/healthcare-cybersecurity-advanced-threat-protection-medical-systems',
+      "https://softwarepros.org/blog/healthcare-cybersecurity-advanced-threat-protection-medical-systems",
   },
   openGraph: {
     title:
-      'Healthcare Cybersecurity: Advanced Threat Protection for Medical Systems | SoftwarePros',
+      "Healthcare Cybersecurity: Advanced Threat Protection for Medical Systems | SoftwarePros",
     description:
-      'Implement enterprise-grade cybersecurity measures for medical software systems with advanced threat protection and ransomware defense.',
-    url: 'https://softwarepros.org/blog/healthcare-cybersecurity-advanced-threat-protection-medical-systems',
-    type: 'article',
+      "Implement enterprise-grade cybersecurity measures for medical software systems with advanced threat protection and ransomware defense.",
+    url: "https://softwarepros.org/blog/healthcare-cybersecurity-advanced-threat-protection-medical-systems",
+    type: "article",
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop',
+        url: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=630&fit=crop",
         width: 1200,
         height: 630,
-        alt: 'Healthcare Cybersecurity Advanced Threat Protection',
+        alt: "Healthcare Cybersecurity Advanced Threat Protection",
       },
     ],
   },

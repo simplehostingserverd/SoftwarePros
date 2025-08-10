@@ -1,59 +1,33 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.1.2/schema.json",
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "suspicious": {
-        "noExplicitAny": "error"
-      },
-      "style": {
-        "noNonNullAssertion": "warn"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "warn"
-      }
-    }
-  },
   "formatter": {
     "enabled": true,
-    "formatWithErrors": false,
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 100,
     "attributePosition": "auto"
   },
-  "javascript": {
-    "formatter": {
-      "jsxQuoteStyle": "double",
-      "quoteProperties": "asNeeded",
-      "trailingCommas": "es5",
-      "semicolons": "always",
-      "arrowParentheses": "always",
-      "bracketSpacing": true,
-      "bracketSameLine": false,
-      "quoteStyle": "single",
-      "attributePosition": "auto"
-    }
+  "organizeImports": {
+    "enabled": true
   },
-  "json": {
-    "formatter": {
-      "trailingCommas": "none"
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "style": {
+        "noDefaultExport": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "error"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "warn"
+      }
     }
   },
   "files": {
-    "include": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx"],
-    "ignore": [
-      "**/*.ico",
-      "**/*.png",
-      "**/*.jpg",
-      "**/*.jpeg",
-      "**/*.gif",
-      "**/*.svg",
-      ".next/**",
-      "dist/**",
-      "dist-cpanel/**"
-    ]
+    "include": ["src/**/*"],
+    "ignore": [".next/**", "dist/**", "dist-cpanel/**", "node_modules/**", "public/**"]
   }
 }

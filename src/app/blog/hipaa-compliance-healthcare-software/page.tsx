@@ -1,17 +1,18 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import type { JSX } from "react";
 
 export const metadata: Metadata = {
-  title: 'HIPAA Compliance in Healthcare Software Development - SoftwarePros Blog',
+  title: "HIPAA Compliance in Healthcare Software Development - SoftwarePros Blog",
   description:
-    'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
+    "Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.",
   openGraph: {
-    title: 'HIPAA Compliance in Healthcare Software Development',
+    title: "HIPAA Compliance in Healthcare Software Development",
     description:
-      'Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.',
-    url: 'https://softwarepros.org/blog/hipaa-compliance-healthcare-software',
-    images: ['https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=630&fit=crop'],
+      "Essential guidelines and best practices for developing HIPAA-compliant healthcare applications.",
+    url: "https://softwarepros.org/blog/hipaa-compliance-healthcare-software",
+    images: ["https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=630&fit=crop"],
   },
 };
 

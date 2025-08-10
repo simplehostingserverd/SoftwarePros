@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Terms of Service - SoftwarePros',
+  title: "Terms of Service - SoftwarePros",
   description:
-    'Terms of Service for SoftwarePros - Learn about our terms and conditions for using our services.',
+    "Terms of Service for SoftwarePros - Learn about our terms and conditions for using our services.",
 };
 
 export default function TermsPage() {
@@ -61,7 +61,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">6. Contact Information</h2>
             <p className="text-gray-300">
-              For questions about these Terms of Service, contact us at{' '}
+              For questions about these Terms of Service, contact us at{" "}
               <a
                 href="mailto:contact@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"

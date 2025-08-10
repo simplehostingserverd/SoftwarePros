@@ -1,37 +1,37 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 const services = [
   {
-    number: '01',
-    title: 'Web Development',
+    number: "01",
+    title: "Web Development",
     description:
-      'Modern, scalable web applications built with cutting-edge technologies and best practices.',
-    features: ['React & Next.js', 'TypeScript', 'Responsive Design', 'Performance Optimized'],
-    color: 'from-purple-600 to-blue-600',
+      "Modern, scalable web applications built with cutting-edge technologies and best practices.",
+    features: ["React & Next.js", "TypeScript", "Responsive Design", "Performance Optimized"],
+    color: "from-purple-600 to-blue-600",
   },
   {
-    number: '02',
-    title: 'Mobile Apps',
-    description: 'Native and cross-platform mobile applications for iOS and Android platforms.',
-    features: ['React Native', 'Flutter', 'Native iOS/Android', 'App Store Deployment'],
-    color: 'from-blue-600 to-cyan-600',
+    number: "02",
+    title: "Mobile Apps",
+    description: "Native and cross-platform mobile applications for iOS and Android platforms.",
+    features: ["React Native", "Flutter", "Native iOS/Android", "App Store Deployment"],
+    color: "from-blue-600 to-cyan-600",
   },
   {
-    number: '03',
-    title: 'Enterprise Solutions',
-    description: 'Custom enterprise software solutions designed to streamline business operations.',
-    features: ['Scalable Architecture', 'Cloud Integration', 'Security First', 'API Development'],
-    color: 'from-cyan-600 to-teal-600',
+    number: "03",
+    title: "Enterprise Solutions",
+    description: "Custom enterprise software solutions designed to streamline business operations.",
+    features: ["Scalable Architecture", "Cloud Integration", "Security First", "API Development"],
+    color: "from-cyan-600 to-teal-600",
   },
   {
-    number: '04',
-    title: 'Tech Consulting',
+    number: "04",
+    title: "Tech Consulting",
     description:
-      'Strategic technology consulting to help businesses make informed technology decisions.',
-    features: ['Architecture Review', 'Technology Stack', 'Performance Audit', 'Best Practices'],
-    color: 'from-teal-600 to-green-600',
+      "Strategic technology consulting to help businesses make informed technology decisions.",
+    features: ["Architecture Review", "Technology Stack", "Performance Audit", "Best Practices"],
+    color: "from-teal-600 to-green-600",
   },
 ];
 
@@ -82,7 +82,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
           setIsVisible(true);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     if (ref.current) {
@@ -96,7 +96,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
     <div
       ref={ref}
       className={`group relative bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-8 hover:border-purple-500/50 transition-all duration-500 transform ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
       style={{ transitionDelay: `${index * 200}ms` }}
     >
@@ -126,7 +126,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
             <div
               key={feature}
               className={`flex items-center gap-3 transform transition-all duration-500 ${
-                isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'
+                isVisible ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"
               }`}
               style={{ transitionDelay: `${index * 200 + featureIndex * 100}ms` }}
             >

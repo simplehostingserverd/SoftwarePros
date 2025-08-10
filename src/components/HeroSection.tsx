@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -11,8 +11,8 @@ export default function HeroSection() {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
@@ -126,7 +126,7 @@ function AnimatedCodeBlock({ title, code, delay }: AnimatedCodeBlockProps) {
   return (
     <div
       className={`bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 transform transition-all duration-1000 ${
-        isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
     >
       <div className="flex items-center gap-2 mb-4">

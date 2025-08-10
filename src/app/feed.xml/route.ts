@@ -1,16 +1,16 @@
-import { db } from '@/lib/db';
+import { db } from "@/lib/db";
 
 function escapeXml(value: string): string {
   return value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
 }
 
 export async function GET() {
-  const siteUrl = 'https://softwarepros.org';
+  const siteUrl = "https://softwarepros.org";
 
   let posts: Array<{
     title: string;
@@ -30,7 +30,7 @@ export async function GET() {
         content: true,
         publishedAt: true,
       },
-      orderBy: { publishedAt: 'desc' },
+      orderBy: { publishedAt: "desc" },
       take: 50,
     });
   } catch (error) {
@@ -42,46 +42,46 @@ export async function GET() {
     .map((post) => {
       const url = `${siteUrl}/blog/${post.slug}`;
       const title = escapeXml(post.title);
-      const description = escapeXml(post.excerpt || '');
+      const description = escapeXml(post.excerpt || "");
       const pubDate = post.publishedAt ? post.publishedAt.toUTCString() : new Date().toUTCString();
       const content = escapeXml(`${post.content.substring(0, 500)}...`);
 
       // Extract categories from title/content for better categorization
       const categories = [];
       if (
-        post.title.toLowerCase().includes('healthcare') ||
-        post.content.toLowerCase().includes('healthcare')
+        post.title.toLowerCase().includes("healthcare") ||
+        post.content.toLowerCase().includes("healthcare")
       ) {
-        categories.push('Healthcare Software');
+        categories.push("Healthcare Software");
       }
       if (
-        post.title.toLowerCase().includes('hipaa') ||
-        post.content.toLowerCase().includes('hipaa')
+        post.title.toLowerCase().includes("hipaa") ||
+        post.content.toLowerCase().includes("hipaa")
       ) {
-        categories.push('HIPAA Compliance');
+        categories.push("HIPAA Compliance");
       }
       if (
-        post.title.toLowerCase().includes('enterprise') ||
-        post.content.toLowerCase().includes('enterprise')
+        post.title.toLowerCase().includes("enterprise") ||
+        post.content.toLowerCase().includes("enterprise")
       ) {
-        categories.push('Enterprise Software');
+        categories.push("Enterprise Software");
       }
       if (
-        post.title.toLowerCase().includes('development') ||
-        post.content.toLowerCase().includes('development')
+        post.title.toLowerCase().includes("development") ||
+        post.content.toLowerCase().includes("development")
       ) {
-        categories.push('Software Development');
+        categories.push("Software Development");
       }
       if (
-        post.title.toLowerCase().includes('consulting') ||
-        post.content.toLowerCase().includes('consulting')
+        post.title.toLowerCase().includes("consulting") ||
+        post.content.toLowerCase().includes("consulting")
       ) {
-        categories.push('Technology Consulting');
+        categories.push("Technology Consulting");
       }
 
       const categoryTags = categories
         .map((cat) => `<category>${escapeXml(cat)}</category>`)
-        .join('');
+        .join("");
 
       return `
       <item>
@@ -89,7 +89,7 @@ export async function GET() {
         <link>${url}</link>
         <guid isPermaLink="true">${url}</guid>
         <pubDate>${pubDate}</pubDate>
-        <description><![CDATA[${post.excerpt || ''}]]></description>
+        <description><![CDATA[${post.excerpt || ""}]]></description>
         <content:encoded><![CDATA[${content}]]></content:encoded>
         <dc:creator>SoftwarePros Team</dc:creator>
         <dc:date>${pubDate}</dc:date>
@@ -97,7 +97,7 @@ export async function GET() {
         <slash:comments>0</slash:comments>
       </item>`;
     })
-    .join('');
+    .join("");
 
   const xml = `<?xml version="1.0" encoding="UTF-8" ?>
   <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/">
@@ -132,8 +132,8 @@ export async function GET() {
 
   return new Response(xml, {
     headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 's-maxage=3600, stale-while-revalidate',
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate",
     },
   });
 }

@@ -7,18 +7,19 @@ import {
   Security,
   Shield,
   VerifiedUser,
-} from '@mui/icons-material';
-import type { Metadata } from 'next';
-import Link from 'next/link';
+} from "@mui/icons-material";
+import type { Metadata } from "next";
+import Link from "next/link";
+import type { JSX } from "react";
 
 export const metadata: Metadata = {
-  title: 'Security Services - SoftwarePros | Cybersecurity & Data Protection',
+  title: "Security Services - SoftwarePros | Cybersecurity & Data Protection",
   description:
-    'Comprehensive security services including penetration testing, security audits, HIPAA compliance, and data protection for healthcare and enterprise applications.',
+    "Comprehensive security services including penetration testing, security audits, HIPAA compliance, and data protection for healthcare and enterprise applications.",
   openGraph: {
-    title: 'Security Services - SoftwarePros',
-    description: 'Professional cybersecurity services and data protection solutions.',
-    url: 'https://softwarepros.org/services/security',
+    title: "Security Services - SoftwarePros",
+    description: "Professional cybersecurity services and data protection solutions.",
+    url: "https://softwarepros.org/services/security",
   },
 };
 
@@ -32,75 +33,75 @@ interface SecurityService {
 const securityServices: SecurityService[] = [
   {
     icon: Assessment,
-    title: 'Security Audits & Assessments',
+    title: "Security Audits & Assessments",
     description:
-      'Comprehensive security evaluations to identify vulnerabilities and compliance gaps.',
+      "Comprehensive security evaluations to identify vulnerabilities and compliance gaps.",
     features: [
-      'Vulnerability assessments',
-      'Penetration testing',
-      'Code security reviews',
-      'Infrastructure audits',
-      'Compliance assessments',
+      "Vulnerability assessments",
+      "Penetration testing",
+      "Code security reviews",
+      "Infrastructure audits",
+      "Compliance assessments",
     ],
   },
   {
     icon: Shield,
-    title: 'HIPAA Compliance',
-    description: 'Specialized healthcare security services ensuring HIPAA compliance.',
+    title: "HIPAA Compliance",
+    description: "Specialized healthcare security services ensuring HIPAA compliance.",
     features: [
-      'HIPAA risk assessments',
-      'Business Associate Agreements',
-      'Security policies & procedures',
-      'Staff training programs',
-      'Ongoing compliance monitoring',
+      "HIPAA risk assessments",
+      "Business Associate Agreements",
+      "Security policies & procedures",
+      "Staff training programs",
+      "Ongoing compliance monitoring",
     ],
   },
   {
     icon: Lock,
-    title: 'Data Protection & Encryption',
-    description: 'Advanced data protection strategies and encryption implementations.',
+    title: "Data Protection & Encryption",
+    description: "Advanced data protection strategies and encryption implementations.",
     features: [
-      'End-to-end encryption',
-      'Database security',
-      'API security',
-      'Data loss prevention',
-      'Secure data transmission',
+      "End-to-end encryption",
+      "Database security",
+      "API security",
+      "Data loss prevention",
+      "Secure data transmission",
     ],
   },
   {
     icon: VerifiedUser,
-    title: 'Identity & Access Management',
-    description: 'Robust authentication and authorization systems.',
+    title: "Identity & Access Management",
+    description: "Robust authentication and authorization systems.",
     features: [
-      'Multi-factor authentication',
-      'Single sign-on (SSO)',
-      'Role-based access control',
-      'Identity federation',
-      'Privileged access management',
+      "Multi-factor authentication",
+      "Single sign-on (SSO)",
+      "Role-based access control",
+      "Identity federation",
+      "Privileged access management",
     ],
   },
   {
     icon: Policy,
-    title: 'Security Policies & Training',
-    description: 'Comprehensive security governance and employee education.',
+    title: "Security Policies & Training",
+    description: "Comprehensive security governance and employee education.",
     features: [
-      'Security policy development',
-      'Incident response planning',
-      'Employee security training',
-      'Security awareness programs',
-      'Compliance documentation',
+      "Security policy development",
+      "Incident response planning",
+      "Employee security training",
+      "Security awareness programs",
+      "Compliance documentation",
     ],
   },
   {
     icon: MonitorHeart,
-    title: 'Security Monitoring & Response',
-    description: '24/7 security monitoring and incident response services.',
+    title: "Security Monitoring & Response",
+    description: "24/7 security monitoring and incident response services.",
     features: [
-      'Real-time threat monitoring',
-      'Incident response',
-      'Security event analysis',
-      'Threat intelligence',
-      'Forensic analysis',
+      "Real-time threat monitoring",
+      "Incident response",
+      "Security event analysis",
+      "Threat intelligence",
+      "Forensic analysis",
     ],
   },
 ];
@@ -132,11 +133,11 @@ export default function SecurityServicesPage(): JSX.Element {
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {securityServices.map((service, index) => {
+            {securityServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div
-                  key={index}
+                  key={service.title}
                   className="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors duration-300"
                 >
                   <div className="flex items-center mb-4">
@@ -145,8 +146,8 @@ export default function SecurityServicesPage(): JSX.Element {
                   </div>
                   <p className="text-gray-400 mb-4">{service.description}</p>
                   <ul className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center text-sm text-gray-300">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center text-sm text-gray-300">
                         <div className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
                         {feature}
                       </li>

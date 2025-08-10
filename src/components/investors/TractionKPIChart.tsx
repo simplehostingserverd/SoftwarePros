@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Bar,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from 'recharts';
+} from "recharts";
 
 type TractionPoint = {
   label: string;
@@ -17,10 +17,10 @@ type TractionPoint = {
 };
 
 const data: TractionPoint[] = [
-  { label: 'Patients', value: 100 },
-  { label: 'Providers', value: 50 },
-  { label: 'Uptime', value: 99.9 },
-  { label: 'Cost↓', value: 40 },
+  { label: "Patients", value: 100 },
+  { label: "Providers", value: 50 },
+  { label: "Uptime", value: 99.9 },
+  { label: "Cost↓", value: 40 },
 ];
 
 export default function TractionKPIChart() {
@@ -33,25 +33,25 @@ export default function TractionKPIChart() {
             dataKey="label"
             tickLine={false}
             axisLine={false}
-            tick={{ fill: '#6b7280', fontSize: 12 }}
+            tick={{ fill: "#6b7280", fontSize: 12 }}
           />
           <YAxis
-            tickFormatter={(v) => `${v}${v > 90 ? '%' : 'k'}`}
+            tickFormatter={(v) => `${v}${v > 90 ? "%" : "k"}`}
             width={48}
             tickLine={false}
             axisLine={false}
-            tick={{ fill: '#6b7280', fontSize: 12 }}
+            tick={{ fill: "#6b7280", fontSize: 12 }}
           />
           <Tooltip
             formatter={(value: number, name, item) => {
-              if (item && item.payload.label === 'Uptime') return [`${value}%`, 'Uptime'];
-              if (item && item.payload.label === 'Cost↓') return [`${value}%`, 'Cost Reduction'];
+              if (item && item.payload.label === "Uptime") return [`${value}%`, "Uptime"];
+              if (item && item.payload.label === "Cost↓") return [`${value}%`, "Cost Reduction"];
               return [`${value}k`, name as string];
             }}
-            contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb' }}
+            contentStyle={{ borderRadius: 8, border: "1px solid #e5e7eb" }}
           />
           <Bar dataKey="value" radius={[6, 6, 0, 0]} fill="#60a5fa">
-            <LabelList dataKey="value" position="top" style={{ fill: '#374151', fontSize: 12 }} />
+            <LabelList dataKey="value" position="top" style={{ fill: "#374151", fontSize: 12 }} />
           </Bar>
         </BarChart>
       </ResponsiveContainer>

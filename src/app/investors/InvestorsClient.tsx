@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
 const MarketOpportunityChart = dynamic(
-  () => import('@/components/investors/MarketOpportunityChart'),
-  { ssr: false }
+  () => import("@/components/investors/MarketOpportunityChart"),
+  { ssr: false },
 );
-const TractionKPIChart = dynamic(() => import('@/components/investors/TractionKPIChart'), {
+const TractionKPIChart = dynamic(() => import("@/components/investors/TractionKPIChart"), {
   ssr: false,
 });
-const GoToMarketFunnel = dynamic(() => import('@/components/investors/GoToMarketFunnel'), {
+const GoToMarketFunnel = dynamic(() => import("@/components/investors/GoToMarketFunnel"), {
   ssr: false,
 });
-const CompetitiveRadar = dynamic(() => import('@/components/investors/CompetitiveRadar'), {
+const CompetitiveRadar = dynamic(() => import("@/components/investors/CompetitiveRadar"), {
   ssr: false,
 });
-const AskUseOfFunds = dynamic(() => import('@/components/investors/AskUseOfFunds'), { ssr: false });
-const MetricsStatCards = dynamic(() => import('@/components/investors/MetricsStatCards'), {
+const AskUseOfFunds = dynamic(() => import("@/components/investors/AskUseOfFunds"), { ssr: false });
+const MetricsStatCards = dynamic(() => import("@/components/investors/MetricsStatCards"), {
   ssr: false,
 });
 

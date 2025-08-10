@@ -1,158 +1,158 @@
-import type { Metadata } from 'next';
-import Script from 'next/script';
+import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: 'About SoftwarePros — Healthcare Software Development Experts | 15+ Years Experience',
+  title: "About SoftwarePros — Healthcare Software Development Experts | 15+ Years Experience",
   description:
-    'Learn about SoftwarePros, a leading healthcare software development company with 15+ years of experience building HIPAA-compliant EHR/EMR systems, practice management software, and telemedicine platforms. Discover our mission, values, and track record of delivering secure healthcare solutions.',
+    "Learn about SoftwarePros, a leading healthcare software development company with 15+ years of experience building HIPAA-compliant EHR/EMR systems, practice management software, and telemedicine platforms. Discover our mission, values, and track record of delivering secure healthcare solutions.",
   keywords: [
-    'healthcare software development company',
-    'HIPAA compliant software developers',
-    'EHR EMR development experts',
-    'medical software company',
-    'healthcare technology consultants',
-    'practice management software developers',
-    'telemedicine platform development',
-    'healthcare software experts',
-    'medical software development team',
-    'healthcare IT consulting',
-    'healthcare software architecture',
-    'medical practice software company',
-    'healthcare compliance experts',
-    'healthcare software engineers',
-    'medical software development services',
+    "healthcare software development company",
+    "HIPAA compliant software developers",
+    "EHR EMR development experts",
+    "medical software company",
+    "healthcare technology consultants",
+    "practice management software developers",
+    "telemedicine platform development",
+    "healthcare software experts",
+    "medical software development team",
+    "healthcare IT consulting",
+    "healthcare software architecture",
+    "medical practice software company",
+    "healthcare compliance experts",
+    "healthcare software engineers",
+    "medical software development services",
   ],
   alternates: {
-    canonical: 'https://softwarepros.org/about',
+    canonical: "https://softwarepros.org/about",
   },
   openGraph: {
-    title: 'About SoftwarePros — Healthcare Software Development Experts',
+    title: "About SoftwarePros — Healthcare Software Development Experts",
     description:
-      'Leading healthcare software development company with 15+ years building HIPAA-compliant systems. Discover our mission, values, and track record.',
-    url: 'https://softwarepros.org/about',
-    type: 'website',
+      "Leading healthcare software development company with 15+ years building HIPAA-compliant systems. Discover our mission, values, and track record.",
+    url: "https://softwarepros.org/about",
+    type: "website",
     images: [
       {
-        url: '/web-app-manifest-512x512.png',
+        url: "/web-app-manifest-512x512.png",
         width: 512,
         height: 512,
-        alt: 'SoftwarePros Healthcare Software Development Team',
+        alt: "SoftwarePros Healthcare Software Development Team",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'About SoftwarePros — Healthcare Software Development Experts',
+    card: "summary_large_image",
+    title: "About SoftwarePros — Healthcare Software Development Experts",
     description:
-      'Leading healthcare software development company with 15+ years building HIPAA-compliant systems.',
-    images: ['/web-app-manifest-512x512.png'],
+      "Leading healthcare software development company with 15+ years building HIPAA-compliant systems.",
+    images: ["/web-app-manifest-512x512.png"],
   },
 };
 
 export default function AboutPage() {
   const stats = [
     {
-      label: 'Years Experience',
-      value: '15+',
-      description: 'Delivering healthcare software solutions',
+      label: "Years Experience",
+      value: "15+",
+      description: "Delivering healthcare software solutions",
     },
-    { label: 'HIPAA Projects', value: '60+', description: 'Compliant systems deployed' },
-    { label: 'Avg. Uptime', value: '99.99%', description: 'System reliability guarantee' },
-    { label: 'Clients Served', value: '100+', description: 'Healthcare organizations' },
-    { label: 'Team Members', value: '25+', description: 'Expert developers & designers' },
-    { label: 'Success Rate', value: '98%', description: 'Project delivery success' },
+    { label: "HIPAA Projects", value: "60+", description: "Compliant systems deployed" },
+    { label: "Avg. Uptime", value: "99.99%", description: "System reliability guarantee" },
+    { label: "Clients Served", value: "100+", description: "Healthcare organizations" },
+    { label: "Team Members", value: "25+", description: "Expert developers & designers" },
+    { label: "Success Rate", value: "98%", description: "Project delivery success" },
   ];
 
   const values = [
     {
-      title: 'Compliance by Design',
+      title: "Compliance by Design",
       description:
-        'Security, auditability, and PHI protection are first-class citizens in our architecture, not afterthoughts. We build HIPAA compliance into every layer of our software.',
-      icon: '🔒',
+        "Security, auditability, and PHI protection are first-class citizens in our architecture, not afterthoughts. We build HIPAA compliance into every layer of our software.",
+      icon: "🔒",
     },
     {
-      title: 'Outcome Focused',
+      title: "Outcome Focused",
       description:
-        'We ship measurable improvements to clinical workflows, billing accuracy, and patient satisfaction. Every feature is designed to solve real healthcare problems.',
-      icon: '📊',
+        "We ship measurable improvements to clinical workflows, billing accuracy, and patient satisfaction. Every feature is designed to solve real healthcare problems.",
+      icon: "📊",
     },
     {
-      title: 'Operational Excellence',
+      title: "Operational Excellence",
       description:
-        'SLAs, observability, and incident response baked into delivery so your team sleeps at night. We maintain enterprise-grade reliability standards.',
-      icon: '⚡',
+        "SLAs, observability, and incident response baked into delivery so your team sleeps at night. We maintain enterprise-grade reliability standards.",
+      icon: "⚡",
     },
     {
-      title: 'Innovation Driven',
+      title: "Innovation Driven",
       description:
-        'We stay ahead of healthcare technology trends, implementing cutting-edge solutions like AI-powered diagnostics, blockchain for data integrity, and IoT integration.',
-      icon: '🚀',
+        "We stay ahead of healthcare technology trends, implementing cutting-edge solutions like AI-powered diagnostics, blockchain for data integrity, and IoT integration.",
+      icon: "🚀",
     },
   ];
 
   const services = [
     {
-      category: 'Electronic Health Records',
+      category: "Electronic Health Records",
       items: [
-        'EHR/EMR Development',
-        'Patient Portal Systems',
-        'Clinical Decision Support',
-        'Lab Results Integration',
-        'Prescription Management',
+        "EHR/EMR Development",
+        "Patient Portal Systems",
+        "Clinical Decision Support",
+        "Lab Results Integration",
+        "Prescription Management",
       ],
     },
     {
-      category: 'Practice Management',
+      category: "Practice Management",
       items: [
-        'Appointment Scheduling',
-        'Billing & Revenue Cycle',
-        'Insurance Claims Processing',
-        'Inventory Management',
-        'Reporting & Analytics',
+        "Appointment Scheduling",
+        "Billing & Revenue Cycle",
+        "Insurance Claims Processing",
+        "Inventory Management",
+        "Reporting & Analytics",
       ],
     },
     {
-      category: 'Telemedicine & Remote Care',
+      category: "Telemedicine & Remote Care",
       items: [
-        'Video Consultation Platforms',
-        'Remote Patient Monitoring',
-        'Mobile Health Apps',
-        'Secure Messaging',
-        'Virtual Waiting Rooms',
+        "Video Consultation Platforms",
+        "Remote Patient Monitoring",
+        "Mobile Health Apps",
+        "Secure Messaging",
+        "Virtual Waiting Rooms",
       ],
     },
     {
-      category: 'Integration & Compliance',
+      category: "Integration & Compliance",
       items: [
-        'HL7 FHIR Integration',
-        'HIPAA Compliance Tools',
-        'SOC2 Preparation',
-        'Security Audits',
-        'Data Migration Services',
+        "HL7 FHIR Integration",
+        "HIPAA Compliance Tools",
+        "SOC2 Preparation",
+        "Security Audits",
+        "Data Migration Services",
       ],
     },
   ];
 
   const technologies = [
-    'React & React Native',
-    'Node.js & TypeScript',
-    'Python & Django',
-    'PostgreSQL & MongoDB',
-    'AWS & Azure Cloud',
-    'Docker & Kubernetes',
-    'HL7 FHIR',
-    'DICOM Imaging',
-    'WebRTC',
-    'Blockchain',
+    "React & React Native",
+    "Node.js & TypeScript",
+    "Python & Django",
+    "PostgreSQL & MongoDB",
+    "AWS & Azure Cloud",
+    "Docker & Kubernetes",
+    "HL7 FHIR",
+    "DICOM Imaging",
+    "WebRTC",
+    "Blockchain",
   ];
 
   const certifications = [
-    'HIPAA Compliance Expert',
-    'AWS Certified Solutions Architect',
-    'Microsoft Azure Certified',
-    'Google Cloud Professional',
-    'Certified Scrum Master',
-    'ISO 27001 Trained',
+    "HIPAA Compliance Expert",
+    "AWS Certified Solutions Architect",
+    "Microsoft Azure Certified",
+    "Google Cloud Professional",
+    "Certified Scrum Master",
+    "ISO 27001 Trained",
   ];
 
   return (
@@ -160,61 +160,61 @@ export default function AboutPage() {
       {/* Structured Data Schema */}
       <Script id="about-schema" type="application/ld+json">
         {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: 'SoftwarePros',
-          url: 'https://softwarepros.org',
-          logo: 'https://softwarepros.org/web-app-manifest-512x512.png',
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "SoftwarePros",
+          url: "https://softwarepros.org",
+          logo: "https://softwarepros.org/web-app-manifest-512x512.png",
           description:
-            'Healthcare software development company specializing in HIPAA-compliant EHR/EMR systems, practice management software, and telemedicine platforms.',
-          foundingDate: '2008',
-          numberOfEmployees: '25',
+            "Healthcare software development company specializing in HIPAA-compliant EHR/EMR systems, practice management software, and telemedicine platforms.",
+          foundingDate: "2008",
+          numberOfEmployees: "25",
           address: {
-            '@type': 'PostalAddress',
-            addressCountry: 'US',
+            "@type": "PostalAddress",
+            addressCountry: "US",
           },
           contactPoint: {
-            '@type': 'ContactPoint',
-            contactType: 'customer service',
-            email: 'info@softwarepros.org',
+            "@type": "ContactPoint",
+            contactType: "customer service",
+            email: "info@softwarepros.org",
           },
-          sameAs: ['https://softwarepros.org', 'https://linkedin.com/company/softwarepros'],
+          sameAs: ["https://softwarepros.org", "https://linkedin.com/company/softwarepros"],
           hasOfferCatalog: {
-            '@type': 'OfferCatalog',
-            name: 'Healthcare Software Services',
+            "@type": "OfferCatalog",
+            name: "Healthcare Software Services",
             itemListElement: [
               {
-                '@type': 'Offer',
+                "@type": "Offer",
                 itemOffered: {
-                  '@type': 'Service',
-                  name: 'EHR/EMR Development',
+                  "@type": "Service",
+                  name: "EHR/EMR Development",
                   description:
-                    'Custom electronic health record and electronic medical record systems',
+                    "Custom electronic health record and electronic medical record systems",
                 },
               },
               {
-                '@type': 'Offer',
+                "@type": "Offer",
                 itemOffered: {
-                  '@type': 'Service',
-                  name: 'Practice Management Software',
+                  "@type": "Service",
+                  name: "Practice Management Software",
                   description:
-                    'Comprehensive practice management solutions for healthcare providers',
+                    "Comprehensive practice management solutions for healthcare providers",
                 },
               },
               {
-                '@type': 'Offer',
+                "@type": "Offer",
                 itemOffered: {
-                  '@type': 'Service',
-                  name: 'Telemedicine Platforms',
-                  description: 'Secure video consultation and remote patient monitoring systems',
+                  "@type": "Service",
+                  name: "Telemedicine Platforms",
+                  description: "Secure video consultation and remote patient monitoring systems",
                 },
               },
             ],
           },
           aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: '4.9',
-            reviewCount: '100',
+            "@type": "AggregateRating",
+            ratingValue: "4.9",
+            reviewCount: "100",
           },
         })}
       </Script>

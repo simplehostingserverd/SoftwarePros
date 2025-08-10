@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Cell, Funnel, FunnelChart, LabelList, ResponsiveContainer, Tooltip } from 'recharts';
+import { Cell, Funnel, FunnelChart, LabelList, ResponsiveContainer, Tooltip } from "recharts";
 
 type FunnelStage = {
   name: string;
@@ -8,13 +8,13 @@ type FunnelStage = {
 };
 
 const data: FunnelStage[] = [
-  { name: 'Top of Funnel', value: 100 },
-  { name: 'SQLs', value: 45 },
-  { name: 'Pilots', value: 18 },
-  { name: 'Contracts', value: 8 },
+  { name: "Top of Funnel", value: 100 },
+  { name: "SQLs", value: 45 },
+  { name: "Pilots", value: 18 },
+  { name: "Contracts", value: 8 },
 ];
 
-const COLORS = ['#c7d2fe', '#93c5fd', '#60a5fa', '#3b82f6'];
+const COLORS = ["#c7d2fe", "#93c5fd", "#60a5fa", "#3b82f6"];
 
 export default function GoToMarketFunnel() {
   return (
@@ -31,7 +31,7 @@ export default function GoToMarketFunnel() {
             {data.map((entry, index) => (
               <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
             ))}
-            <LabelList position="right" dataKey="name" style={{ fill: '#374151', fontSize: 12 }} />
+            <LabelList position="right" dataKey="name" style={{ fill: "#374151", fontSize: 12 }} />
           </Funnel>
         </FunnelChart>
       </ResponsiveContainer>

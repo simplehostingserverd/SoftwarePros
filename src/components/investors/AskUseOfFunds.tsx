@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 type Slice = { name: string; value: number };
 
 const data: Slice[] = [
-  { name: 'Engineering & Product', value: 45 },
-  { name: 'Go-to-Market', value: 30 },
-  { name: 'Security & Compliance', value: 15 },
-  { name: 'G&A', value: 10 },
+  { name: "Engineering & Product", value: 45 },
+  { name: "Go-to-Market", value: 30 },
+  { name: "Security & Compliance", value: 15 },
+  { name: "G&A", value: 10 },
 ];
 
-const COLORS = ['#3b82f6', '#60a5fa', '#93c5fd', '#c7d2fe'];
+const COLORS = ["#3b82f6", "#60a5fa", "#93c5fd", "#c7d2fe"];
 
 export default function AskUseOfFunds() {
   return (

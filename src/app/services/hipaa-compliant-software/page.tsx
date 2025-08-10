@@ -1,24 +1,24 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'HIPAA Compliant Software Development | SoftwarePros',
+  title: "HIPAA Compliant Software Development | SoftwarePros",
   description:
-    'Expert HIPAA compliant software development for healthcare. Secure, scalable platforms with zero violations. Get compliant software that protects patient data.',
+    "Expert HIPAA compliant software development for healthcare. Secure, scalable platforms with zero violations. Get compliant software that protects patient data.",
   keywords: [
-    'HIPAA compliant software development',
-    'healthcare software solutions',
-    'HIPAA compliance software',
-    'medical software development',
-    'healthcare data security',
-    'patient data protection',
-    'HIPAA software requirements',
-    'healthcare compliance development',
+    "HIPAA compliant software development",
+    "healthcare software solutions",
+    "HIPAA compliance software",
+    "medical software development",
+    "healthcare data security",
+    "patient data protection",
+    "HIPAA software requirements",
+    "healthcare compliance development",
   ],
   openGraph: {
-    title: 'HIPAA Compliant Software Development | SoftwarePros',
+    title: "HIPAA Compliant Software Development | SoftwarePros",
     description:
-      'Expert HIPAA compliant software development with zero violations. Secure healthcare platforms.',
-    url: 'https://softwarepros.org/services/hipaa-compliant-software',
+      "Expert HIPAA compliant software development with zero violations. Secure healthcare platforms.",
+    url: "https://softwarepros.org/services/hipaa-compliant-software",
   },
 };
 
@@ -284,31 +284,31 @@ export default function HIPAACompliantSoftwarePage() {
 
         <script type="application/ld+json">
           {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
             mainEntity: [
               {
-                '@type': 'Question',
-                name: 'What is HIPAA compliance in software development?',
+                "@type": "Question",
+                name: "What is HIPAA compliance in software development?",
                 acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'HIPAA compliance in software development means building healthcare software that meets all Health Insurance Portability and Accountability Act requirements for protecting patient data, including administrative, physical, and technical safeguards.',
+                  "@type": "Answer",
+                  text: "HIPAA compliance in software development means building healthcare software that meets all Health Insurance Portability and Accountability Act requirements for protecting patient data, including administrative, physical, and technical safeguards.",
                 },
               },
               {
-                '@type': 'Question',
-                name: 'How long does it take to develop HIPAA compliant software?',
+                "@type": "Question",
+                name: "How long does it take to develop HIPAA compliant software?",
                 acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Development time varies based on complexity, but our typical HIPAA compliant software projects take 3-6 months from initial assessment to deployment, with ongoing compliance monitoring.',
+                  "@type": "Answer",
+                  text: "Development time varies based on complexity, but our typical HIPAA compliant software projects take 3-6 months from initial assessment to deployment, with ongoing compliance monitoring.",
                 },
               },
               {
-                '@type': 'Question',
-                name: 'What are the penalties for HIPAA violations?',
+                "@type": "Question",
+                name: "What are the penalties for HIPAA violations?",
                 acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'HIPAA violations can result in fines up to $50,000 per violation, criminal charges for willful neglect, loss of medical licenses, and irreparable damage to reputation.',
+                  "@type": "Answer",
+                  text: "HIPAA violations can result in fines up to $50,000 per violation, criminal charges for willful neglect, loss of medical licenses, and irreparable damage to reputation.",
                 },
               },
             ],

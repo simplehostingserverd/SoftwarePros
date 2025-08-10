@@ -1,24 +1,24 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Healthcare Practice Management Software | SoftwarePros',
+  title: "Healthcare Practice Management Software | SoftwarePros",
   description:
-    'Comprehensive healthcare practice management software that streamlines operations, reduces costs by 40%, and improves patient care. Built for clinics and medical practices.',
+    "Comprehensive healthcare practice management software that streamlines operations, reduces costs by 40%, and improves patient care. Built for clinics and medical practices.",
   keywords: [
-    'healthcare practice management software',
-    'medical practice management',
-    'clinic management software',
-    'healthcare practice software',
-    'medical office software',
-    'practice management system',
-    'healthcare operations software',
-    'medical practice automation',
+    "healthcare practice management software",
+    "medical practice management",
+    "clinic management software",
+    "healthcare practice software",
+    "medical office software",
+    "practice management system",
+    "healthcare operations software",
+    "medical practice automation",
   ],
   openGraph: {
-    title: 'Healthcare Practice Management Software | SoftwarePros',
+    title: "Healthcare Practice Management Software | SoftwarePros",
     description:
-      'Streamline healthcare operations with our practice management software. 40% cost reduction proven.',
-    url: 'https://softwarepros.org/services/healthcare-practice-management',
+      "Streamline healthcare operations with our practice management software. 40% cost reduction proven.",
+    url: "https://softwarepros.org/services/healthcare-practice-management",
   },
 };
 
@@ -327,31 +327,31 @@ export default function HealthcarePracticeManagementPage() {
 
         <script type="application/ld+json">
           {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
             mainEntity: [
               {
-                '@type': 'Question',
-                name: 'How much can I save with practice management software?',
+                "@type": "Question",
+                name: "How much can I save with practice management software?",
                 acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Our clients typically achieve 40% operational cost reduction through automated workflows, reduced administrative overhead, and improved billing accuracy.',
+                  "@type": "Answer",
+                  text: "Our clients typically achieve 40% operational cost reduction through automated workflows, reduced administrative overhead, and improved billing accuracy.",
                 },
               },
               {
-                '@type': 'Question',
-                name: 'How long does implementation take?',
+                "@type": "Question",
+                name: "How long does implementation take?",
                 acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Implementation typically takes 4-8 weeks depending on practice size and complexity. We use a phased approach to minimize disruption.',
+                  "@type": "Answer",
+                  text: "Implementation typically takes 4-8 weeks depending on practice size and complexity. We use a phased approach to minimize disruption.",
                 },
               },
               {
-                '@type': 'Question',
-                name: 'Can it integrate with my existing systems?',
+                "@type": "Question",
+                name: "Can it integrate with my existing systems?",
                 acceptedAnswer: {
-                  '@type': 'Answer',
-                  text: 'Yes, our platform integrates with most EHR systems, insurance providers, and third-party applications through standard APIs and custom integrations.',
+                  "@type": "Answer",
+                  text: "Yes, our platform integrates with most EHR systems, insurance providers, and third-party applications through standard APIs and custom integrations.",
                 },
               },
             ],

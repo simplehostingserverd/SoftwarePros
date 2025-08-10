@@ -1,7 +1,7 @@
-import { db } from '@/lib/db';
-import type { Metadata } from 'next';
-import Link from 'next/link';
-export const dynamic = 'force-dynamic';
+import { db } from "@/lib/db";
+import type { Metadata } from "next";
+import Link from "next/link";
+export const dynamic = "force-dynamic";
 
 interface BlogPost {
   id: string;
@@ -23,217 +23,217 @@ interface BlogPost {
 }
 
 export const metadata: Metadata = {
-  title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
+  title: "Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros",
   description:
-    'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, telemedicine platforms, and cutting-edge healthcare technology. Stay updated with the latest innovations in medical software engineering.',
+    "Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, telemedicine platforms, and cutting-edge healthcare technology. Stay updated with the latest innovations in medical software engineering.",
   keywords: [
-    'medical software development',
-    'healthcare software engineering',
-    'HIPAA compliant software',
-    'EHR system development',
-    'telemedicine platform development',
-    'healthcare AI development',
-    'medical device software',
-    'healthcare compliance software',
-    'medical practice management software',
-    'healthcare cybersecurity',
-    'medical imaging software',
-    'healthcare data analytics',
-    'medical software architecture',
-    'healthcare software testing',
-    'medical software validation',
-    'healthcare software deployment',
-    'medical software maintenance',
-    'healthcare software security',
-    'medical software integration',
-    'healthcare software optimization',
+    "medical software development",
+    "healthcare software engineering",
+    "HIPAA compliant software",
+    "EHR system development",
+    "telemedicine platform development",
+    "healthcare AI development",
+    "medical device software",
+    "healthcare compliance software",
+    "medical practice management software",
+    "healthcare cybersecurity",
+    "medical imaging software",
+    "healthcare data analytics",
+    "medical software architecture",
+    "healthcare software testing",
+    "medical software validation",
+    "healthcare software deployment",
+    "medical software maintenance",
+    "healthcare software security",
+    "medical software integration",
+    "healthcare software optimization",
   ],
   alternates: {
-    canonical: 'https://softwarepros.org/blog',
+    canonical: "https://softwarepros.org/blog",
   },
   openGraph: {
-    title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
+    title: "Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros",
     description:
-      'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.',
-    url: 'https://softwarepros.org/blog',
-    type: 'website',
+      "Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.",
+    url: "https://softwarepros.org/blog",
+    type: "website",
     images: [
       {
-        url: '/web-app-manifest-512x512.png',
+        url: "/web-app-manifest-512x512.png",
         width: 512,
         height: 512,
-        alt: 'SoftwarePros Medical Software Development Blog',
+        alt: "SoftwarePros Medical Software Development Blog",
       },
       {
-        url: '/images/placeholder.svg',
+        url: "/images/placeholder.svg",
         width: 1200,
         height: 630,
-        alt: 'SoftwarePros Healthcare Technology Insights Blog',
+        alt: "SoftwarePros Healthcare Technology Insights Blog",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros',
+    card: "summary_large_image",
+    title: "Medical Software Development Blog | Healthcare AI & HIPAA Compliance | SoftwarePros",
     description:
-      'Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.',
-    images: ['/web-app-manifest-512x512.png'],
+      "Expert insights on medical software development, healthcare AI, HIPAA compliance, EHR systems, and cutting-edge healthcare technology.",
+    images: ["/web-app-manifest-512x512.png"],
   },
 };
 
 // 12 New SEO-Optimized Medical Software Development Blog Posts
 const medicalSoftwarePosts: BlogPost[] = [
   {
-    id: '1',
+    id: "1",
     title:
-      'Complete Guide to HIPAA Compliant Medical Software Development: Security, Privacy & Compliance',
-    slug: 'hipaa-compliant-medical-software-development-guide',
+      "Complete Guide to HIPAA Compliant Medical Software Development: Security, Privacy & Compliance",
+    slug: "hipaa-compliant-medical-software-development-guide",
     excerpt:
-      'Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements for healthcare applications.',
+      "Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements for healthcare applications.",
     featuredImage:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-20'),
-    publishedAt: new Date('2024-12-20'),
-    author: { name: 'Dr. Sarah Chen' },
-    categories: [{ category: { id: '1', name: 'Healthcare Compliance' } }],
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-20"),
+    publishedAt: new Date("2024-12-20"),
+    author: { name: "Dr. Sarah Chen" },
+    categories: [{ category: { id: "1", name: "Healthcare Compliance" } }],
   },
   {
-    id: '2',
-    title: 'Building Scalable EHR Systems: Architecture Patterns for Modern Healthcare Platforms',
-    slug: 'building-scalable-ehr-systems-architecture-patterns',
+    id: "2",
+    title: "Building Scalable EHR Systems: Architecture Patterns for Modern Healthcare Platforms",
+    slug: "building-scalable-ehr-systems-architecture-patterns",
     excerpt:
-      'Discover proven architecture patterns for building scalable Electronic Health Record systems that handle millions of patients while maintaining performance, security, and compliance standards.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-18'),
-    publishedAt: new Date('2024-12-18'),
-    author: { name: 'Michael Rodriguez' },
-    categories: [{ category: { id: '2', name: 'EHR Development' } }],
+      "Discover proven architecture patterns for building scalable Electronic Health Record systems that handle millions of patients while maintaining performance, security, and compliance standards.",
+    featuredImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-18"),
+    publishedAt: new Date("2024-12-18"),
+    author: { name: "Michael Rodriguez" },
+    categories: [{ category: { id: "2", name: "EHR Development" } }],
   },
   {
-    id: '3',
-    title: 'AI-Powered Medical Diagnostics: Machine Learning Implementation in Healthcare Software',
-    slug: 'ai-powered-medical-diagnostics-machine-learning-implementation',
+    id: "3",
+    title: "AI-Powered Medical Diagnostics: Machine Learning Implementation in Healthcare Software",
+    slug: "ai-powered-medical-diagnostics-machine-learning-implementation",
     excerpt:
-      'Learn how to implement AI-powered medical diagnostics in healthcare software, including model development, validation, FDA approval processes, and integration with existing medical systems.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-15'),
-    publishedAt: new Date('2024-12-15'),
-    author: { name: 'Dr. Sarah Chen' },
-    categories: [{ category: { id: '3', name: 'AI & Machine Learning' } }],
+      "Learn how to implement AI-powered medical diagnostics in healthcare software, including model development, validation, FDA approval processes, and integration with existing medical systems.",
+    featuredImage: "https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-15"),
+    publishedAt: new Date("2024-12-15"),
+    author: { name: "Dr. Sarah Chen" },
+    categories: [{ category: { id: "3", name: "AI & Machine Learning" } }],
   },
   {
-    id: '4',
-    title: 'Telemedicine Platform Development: Building Secure, Scalable Virtual Care Solutions',
-    slug: 'telemedicine-platform-development-secure-scalable-solutions',
+    id: "4",
+    title: "Telemedicine Platform Development: Building Secure, Scalable Virtual Care Solutions",
+    slug: "telemedicine-platform-development-secure-scalable-solutions",
     excerpt:
-      'Comprehensive guide to developing telemedicine platforms with real-time video, secure messaging, appointment scheduling, and integration with EHR systems for comprehensive virtual care.',
+      "Comprehensive guide to developing telemedicine platforms with real-time video, secure messaging, appointment scheduling, and integration with EHR systems for comprehensive virtual care.",
     featuredImage:
-      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-12'),
-    publishedAt: new Date('2024-12-12'),
-    author: { name: 'Michael Rodriguez' },
-    categories: [{ category: { id: '4', name: 'Telemedicine Development' } }],
+      "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-12"),
+    publishedAt: new Date("2024-12-12"),
+    author: { name: "Michael Rodriguez" },
+    categories: [{ category: { id: "4", name: "Telemedicine Development" } }],
   },
   {
-    id: '5',
+    id: "5",
     title:
-      'Medical Device Software Development: FDA Regulations, Safety Standards & Best Practices',
-    slug: 'medical-device-software-development-fda-regulations-safety',
+      "Medical Device Software Development: FDA Regulations, Safety Standards & Best Practices",
+    slug: "medical-device-software-development-fda-regulations-safety",
     excerpt:
-      'Essential guide to medical device software development covering FDA regulations, IEC 62304 compliance, risk management, software validation, and safety-critical development practices.',
+      "Essential guide to medical device software development covering FDA regulations, IEC 62304 compliance, risk management, software validation, and safety-critical development practices.",
     featuredImage:
-      'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-10'),
-    publishedAt: new Date('2024-12-10'),
-    author: { name: 'Dr. Sarah Chen' },
-    categories: [{ category: { id: '5', name: 'Medical Device Software' } }],
+      "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-10"),
+    publishedAt: new Date("2024-12-10"),
+    author: { name: "Dr. Sarah Chen" },
+    categories: [{ category: { id: "5", name: "Medical Device Software" } }],
   },
   {
-    id: '6',
+    id: "6",
     title:
-      'Healthcare Data Analytics Platform Development: Big Data Solutions for Medical Insights',
-    slug: 'healthcare-data-analytics-platform-development-big-data-solutions',
+      "Healthcare Data Analytics Platform Development: Big Data Solutions for Medical Insights",
+    slug: "healthcare-data-analytics-platform-development-big-data-solutions",
     excerpt:
-      'Build powerful healthcare data analytics platforms that process massive datasets, provide real-time insights, and enable evidence-based decision making for healthcare providers.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-08'),
-    publishedAt: new Date('2024-12-08'),
-    author: { name: 'Michael Rodriguez' },
-    categories: [{ category: { id: '6', name: 'Healthcare Analytics' } }],
+      "Build powerful healthcare data analytics platforms that process massive datasets, provide real-time insights, and enable evidence-based decision making for healthcare providers.",
+    featuredImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-08"),
+    publishedAt: new Date("2024-12-08"),
+    author: { name: "Michael Rodriguez" },
+    categories: [{ category: { id: "6", name: "Healthcare Analytics" } }],
   },
   {
-    id: '7',
-    title: 'Medical Practice Management Software: Complete Practice Workflow Automation Solutions',
-    slug: 'medical-practice-management-software-workflow-automation',
+    id: "7",
+    title: "Medical Practice Management Software: Complete Practice Workflow Automation Solutions",
+    slug: "medical-practice-management-software-workflow-automation",
     excerpt:
-      'Develop comprehensive medical practice management software that automates scheduling, billing, patient communication, and administrative workflows for healthcare practices of all sizes.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-05'),
-    publishedAt: new Date('2024-12-05'),
-    author: { name: 'Dr. Sarah Chen' },
-    categories: [{ category: { id: '7', name: 'Practice Management' } }],
+      "Develop comprehensive medical practice management software that automates scheduling, billing, patient communication, and administrative workflows for healthcare practices of all sizes.",
+    featuredImage: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-05"),
+    publishedAt: new Date("2024-12-05"),
+    author: { name: "Dr. Sarah Chen" },
+    categories: [{ category: { id: "7", name: "Practice Management" } }],
   },
   {
-    id: '8',
-    title: 'Healthcare Cybersecurity: Advanced Threat Protection for Medical Software Systems',
-    slug: 'healthcare-cybersecurity-advanced-threat-protection-medical-systems',
+    id: "8",
+    title: "Healthcare Cybersecurity: Advanced Threat Protection for Medical Software Systems",
+    slug: "healthcare-cybersecurity-advanced-threat-protection-medical-systems",
     excerpt:
-      'Implement enterprise-grade cybersecurity measures for medical software systems including threat detection, incident response, penetration testing, and compliance with healthcare security standards.',
-    featuredImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-03'),
-    publishedAt: new Date('2024-12-03'),
-    author: { name: 'Michael Rodriguez' },
-    categories: [{ category: { id: '8', name: 'Healthcare Security' } }],
+      "Implement enterprise-grade cybersecurity measures for medical software systems including threat detection, incident response, penetration testing, and compliance with healthcare security standards.",
+    featuredImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-03"),
+    publishedAt: new Date("2024-12-03"),
+    author: { name: "Michael Rodriguez" },
+    categories: [{ category: { id: "8", name: "Healthcare Security" } }],
   },
   {
-    id: '9',
-    title: 'Medical Imaging Software Development: AI-Enhanced Radiology & Diagnostic Tools',
-    slug: 'medical-imaging-software-development-ai-enhanced-radiology',
+    id: "9",
+    title: "Medical Imaging Software Development: AI-Enhanced Radiology & Diagnostic Tools",
+    slug: "medical-imaging-software-development-ai-enhanced-radiology",
     excerpt:
-      'Create advanced medical imaging software with AI-powered analysis, DICOM compliance, 3D visualization, and integration with PACS systems for comprehensive diagnostic imaging solutions.',
-    featuredImage: 'https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-12-01'),
-    publishedAt: new Date('2024-12-01'),
-    author: { name: 'Dr. Sarah Chen' },
-    categories: [{ category: { id: '9', name: 'Medical Imaging' } }],
+      "Create advanced medical imaging software with AI-powered analysis, DICOM compliance, 3D visualization, and integration with PACS systems for comprehensive diagnostic imaging solutions.",
+    featuredImage: "https://images.unsplash.com/photo-1559757175-08c4e7d01a53?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-12-01"),
+    publishedAt: new Date("2024-12-01"),
+    author: { name: "Dr. Sarah Chen" },
+    categories: [{ category: { id: "9", name: "Medical Imaging" } }],
   },
   {
-    id: '10',
-    title: 'Healthcare Software Testing & Validation: Quality Assurance for Medical Applications',
-    slug: 'healthcare-software-testing-validation-quality-assurance',
+    id: "10",
+    title: "Healthcare Software Testing & Validation: Quality Assurance for Medical Applications",
+    slug: "healthcare-software-testing-validation-quality-assurance",
     excerpt:
-      'Comprehensive testing and validation strategies for healthcare software including unit testing, integration testing, user acceptance testing, and compliance validation for medical applications.',
+      "Comprehensive testing and validation strategies for healthcare software including unit testing, integration testing, user acceptance testing, and compliance validation for medical applications.",
     featuredImage:
-      'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-28'),
-    publishedAt: new Date('2024-11-28'),
-    author: { name: 'Michael Rodriguez' },
-    categories: [{ category: { id: '10', name: 'Software Testing' } }],
+      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-11-28"),
+    publishedAt: new Date("2024-11-28"),
+    author: { name: "Michael Rodriguez" },
+    categories: [{ category: { id: "10", name: "Software Testing" } }],
   },
   {
-    id: '11',
-    title: 'Medical Software Integration: HL7 FHIR, APIs & Interoperability Solutions',
-    slug: 'medical-software-integration-hl7-fhir-apis-interoperability',
+    id: "11",
+    title: "Medical Software Integration: HL7 FHIR, APIs & Interoperability Solutions",
+    slug: "medical-software-integration-hl7-fhir-apis-interoperability",
     excerpt:
-      'Master medical software integration using HL7 FHIR standards, RESTful APIs, and interoperability solutions to connect disparate healthcare systems and enable seamless data exchange.',
+      "Master medical software integration using HL7 FHIR standards, RESTful APIs, and interoperability solutions to connect disparate healthcare systems and enable seamless data exchange.",
     featuredImage:
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-25'),
-    publishedAt: new Date('2024-11-25'),
-    author: { name: 'Dr. Sarah Chen' },
-    categories: [{ category: { id: '11', name: 'Healthcare Integration' } }],
+      "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-11-25"),
+    publishedAt: new Date("2024-11-25"),
+    author: { name: "Dr. Sarah Chen" },
+    categories: [{ category: { id: "11", name: "Healthcare Integration" } }],
   },
   {
-    id: '12',
-    title: 'Medical Software Deployment & DevOps: Production-Ready Healthcare Applications',
-    slug: 'medical-software-deployment-devops-production-ready-healthcare',
+    id: "12",
+    title: "Medical Software Deployment & DevOps: Production-Ready Healthcare Applications",
+    slug: "medical-software-deployment-devops-production-ready-healthcare",
     excerpt:
-      'Complete DevOps pipeline for medical software deployment including CI/CD, infrastructure as code, monitoring, logging, and production deployment strategies for healthcare applications.',
-    featuredImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop',
-    createdAt: new Date('2024-11-22'),
-    publishedAt: new Date('2024-11-22'),
-    author: { name: 'Michael Rodriguez' },
-    categories: [{ category: { id: '12', name: 'DevOps & Deployment' } }],
+      "Complete DevOps pipeline for medical software deployment including CI/CD, infrastructure as code, monitoring, logging, and production deployment strategies for healthcare applications.",
+    featuredImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
+    createdAt: new Date("2024-11-22"),
+    publishedAt: new Date("2024-11-22"),
+    author: { name: "Michael Rodriguez" },
+    categories: [{ category: { id: "12", name: "DevOps & Deployment" } }],
   },
 ];
 
@@ -241,7 +241,7 @@ async function getPosts() {
   try {
     // Check if database is available
     if (!process.env.DATABASE_URL) {
-      console.log('No DATABASE_URL found, using medical software posts');
+      console.log("No DATABASE_URL found, using medical software posts");
       return medicalSoftwarePosts;
     }
 
@@ -260,20 +260,20 @@ async function getPosts() {
         },
       },
       orderBy: {
-        publishedAt: 'desc',
+        publishedAt: "desc",
       },
       take: 12,
     });
 
     // If no posts found in database, return medical software posts
     if (posts.length === 0) {
-      console.log('No posts found in database, using medical software posts');
+      console.log("No posts found in database, using medical software posts");
       return medicalSoftwarePosts;
     }
 
     return posts;
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error("Error fetching posts:", error);
     // Return medical software posts if database is not available
     return medicalSoftwarePosts;
   }
@@ -337,10 +337,10 @@ export default async function BlogPage() {
                   <div className="p-6">
                     <div className="flex items-center text-sm text-gray-500 mb-3">
                       <time dateTime={post.publishedAt?.toISOString()}>
-                        {post.publishedAt?.toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
+                        {post.publishedAt?.toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
                         })}
                       </time>
                       {post.author.name && (
@@ -440,7 +440,7 @@ export default async function BlogPage() {
       </div>
     );
   } catch (error) {
-    console.error('Error rendering blog page:', error);
+    console.error("Error rendering blog page:", error);
     // Fallback UI if something goes wrong
     return (
       <div className="min-h-screen bg-gray-50">

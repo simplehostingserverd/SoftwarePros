@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface PostEditorProps {
   post?: {
@@ -18,14 +18,14 @@ interface PostEditorProps {
 }
 
 export default function PostEditor({ post, isEditing = false }: PostEditorProps) {
-  const [title, setTitle] = useState(post?.title || '');
-  const [content, setContent] = useState(post?.content || '');
-  const [excerpt, setExcerpt] = useState(post?.excerpt || '');
+  const [title, setTitle] = useState(post?.title || "");
+  const [content, setContent] = useState(post?.content || "");
+  const [excerpt, setExcerpt] = useState(post?.excerpt || "");
   const [published, setPublished] = useState(post?.published || false);
-  const [metaTitle, setMetaTitle] = useState(post?.metaTitle || '');
-  const [metaDescription, setMetaDescription] = useState(post?.metaDescription || '');
+  const [metaTitle, setMetaTitle] = useState(post?.metaTitle || "");
+  const [metaDescription, setMetaDescription] = useState(post?.metaDescription || "");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showPreview, setShowPreview] = useState(false);
 
   const router = useRouter();
@@ -33,16 +33,16 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const url = isEditing ? `/api/posts/${post?.slug}` : '/api/posts';
-      const method = isEditing ? 'PUT' : 'POST';
+      const url = isEditing ? `/api/posts/${post?.slug}` : "/api/posts";
+      const method = isEditing ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title,
@@ -56,13 +56,13 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
 
       if (response.ok) {
         const data = await response.json();
-        router.push('/admin/dashboard');
+        router.push("/admin/dashboard");
       } else {
         const data = await response.json();
-        setError(data.error || 'Failed to save post');
+        setError(data.error || "Failed to save post");
       }
     } catch (error) {
-      setError('An error occurred while saving the post');
+      setError("An error occurred while saving the post");
     } finally {
       setIsLoading(false);
     }
@@ -70,16 +70,16 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
 
   const handleSaveDraft = async () => {
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const url = isEditing ? `/api/posts/${post?.slug}` : '/api/posts';
-      const method = isEditing ? 'PUT' : 'POST';
+      const url = isEditing ? `/api/posts/${post?.slug}` : "/api/posts";
+      const method = isEditing ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title,
@@ -92,13 +92,13 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
       });
 
       if (response.ok) {
-        router.push('/admin/dashboard');
+        router.push("/admin/dashboard");
       } else {
         const data = await response.json();
-        setError(data.error || 'Failed to save draft');
+        setError(data.error || "Failed to save draft");
       }
     } catch (error) {
-      setError('An error occurred while saving the draft');
+      setError("An error occurred while saving the draft");
     } finally {
       setIsLoading(false);
     }
@@ -111,7 +111,7 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
           <div className="flex justify-between items-center py-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-900">
-                {isEditing ? 'Edit Post' : 'Create New Post'}
+                {isEditing ? "Edit Post" : "Create New Post"}
               </h1>
             </div>
             <div className="flex space-x-4">
@@ -120,11 +120,11 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
                 onClick={() => setShowPreview(!showPreview)}
                 className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md font-medium"
               >
-                {showPreview ? 'Edit' : 'Preview'}
+                {showPreview ? "Edit" : "Preview"}
               </button>
               <button
                 type="button"
-                onClick={() => router.push('/admin/dashboard')}
+                onClick={() => router.push("/admin/dashboard")}
                 className="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-md font-medium"
               >
                 Cancel
@@ -143,7 +143,7 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
 
         {showPreview ? (
           <div className="bg-white shadow rounded-lg p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{title || 'Untitled Post'}</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">{title || "Untitled Post"}</h1>
             {excerpt && <p className="text-lg text-gray-600 mb-6 italic">{excerpt}</p>}
             <div className="prose max-w-none">
               <pre className="whitespace-pre-wrap font-sans">{content}</pre>
@@ -282,7 +282,7 @@ export default function PostEditor({ post, isEditing = false }: PostEditorProps)
                 disabled={isLoading}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium disabled:opacity-50"
               >
-                {isLoading ? 'Saving...' : published ? 'Publish' : 'Save'}
+                {isLoading ? "Saving..." : published ? "Publish" : "Save"}
               </button>
             </div>
           </form>

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 interface UseScrollAnimationOptions {
   threshold?: number;
@@ -10,8 +10,8 @@ interface UseScrollAnimationOptions {
 
 export function useScrollAnimation({
   threshold = 0.1,
-  rootMargin = '0px',
-  animationClass = 'animate-on-scroll',
+  rootMargin = "0px",
+  animationClass = "animate-on-scroll",
 }: UseScrollAnimationOptions = {}) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -26,14 +26,14 @@ export function useScrollAnimation({
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            entry.target.classList.add("visible");
           }
         }
       },
       {
         threshold,
         rootMargin,
-      }
+      },
     );
 
     observer.observe(element);

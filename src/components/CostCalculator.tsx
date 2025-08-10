@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState } from "react";
+import type { JSX } from "react";
 
-type HostingModel = 'cloud' | 'onprem';
-type SecurityTier = 'baseline' | 'enhanced' | 'regulated';
+type HostingModel = "cloud" | "onprem";
+type SecurityTier = "baseline" | "enhanced" | "regulated";
 
-export default function CostCalculator() {
+export default function CostCalculator(): JSX.Element {
   const [numScreens, setNumScreens] = useState(12);
   const [numIntegrations, setNumIntegrations] = useState(2);
-  const [hosting, setHosting] = useState<HostingModel>('cloud');
-  const [security, setSecurity] = useState<SecurityTier>('regulated');
+  const [hosting, setHosting] = useState<HostingModel>("cloud");
+  const [security, setSecurity] = useState<SecurityTier>("regulated");
   const [hasMobile, setHasMobile] = useState(true);
   const [supportMonths, setSupportMonths] = useState(6);
 
@@ -23,7 +24,7 @@ export default function CostCalculator() {
         hasMobile,
         supportMonths,
       }),
-    [numScreens, numIntegrations, hosting, security, hasMobile, supportMonths]
+    [numScreens, numIntegrations, hosting, security, hasMobile, supportMonths],
   );
 
   return (
@@ -55,14 +56,14 @@ export default function CostCalculator() {
           <div className="mt-2 flex gap-3">
             <RadioButton
               name="hosting"
-              checked={hosting === 'cloud'}
-              onChange={() => setHosting('cloud')}
+              checked={hosting === "cloud"}
+              onChange={() => setHosting("cloud")}
               label="Cloud (AWS/Azure/GCP)"
             />
             <RadioButton
               name="hosting"
-              checked={hosting === 'onprem'}
-              onChange={() => setHosting('onprem')}
+              checked={hosting === "onprem"}
+              onChange={() => setHosting("onprem")}
               label="On‑premises"
             />
           </div>
@@ -73,20 +74,20 @@ export default function CostCalculator() {
           <div className="mt-2 flex flex-wrap gap-3">
             <RadioButton
               name="security"
-              checked={security === 'baseline'}
-              onChange={() => setSecurity('baseline')}
+              checked={security === "baseline"}
+              onChange={() => setSecurity("baseline")}
               label="Baseline"
             />
             <RadioButton
               name="security"
-              checked={security === 'enhanced'}
-              onChange={() => setSecurity('enhanced')}
+              checked={security === "enhanced"}
+              onChange={() => setSecurity("enhanced")}
               label="Enhanced"
             />
             <RadioButton
               name="security"
-              checked={security === 'regulated'}
-              onChange={() => setSecurity('regulated')}
+              checked={security === "regulated"}
+              onChange={() => setSecurity("regulated")}
               label="Regulated (HIPAA/GxP)"
             />
           </div>
@@ -136,16 +137,42 @@ function NumberField({
   min,
   max,
   onChange,
-}: { label: string; value: number; min: number; max: number; onChange: (v: number) => void }) {
+  id,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (v: number) => void;
+  id?: string;
+}): JSX.Element {
+  const inputId =
+    id ??
+    `number-${label
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")}`;
   return (
     <div>
-      <Label>{label}</Label>
+      <label htmlFor={inputId} className="text-sm font-medium text-gray-800">
+        {label}
+      </label>
       <input
+        id={inputId}
         type="number"
         min={min}
         max={max}
+        step={1}
         value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
+        onChange={(e) => {
+          const next = Number.parseInt(e.target.value, 10);
+          if (Number.isNaN(next)) {
+            onChange(min);
+            return;
+          }
+          const clamped = Math.max(min, Math.min(max, next));
+          onChange(clamped);
+        }}
         className="mt-2 w-full rounded-md border px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
       />
     </div>
@@ -157,7 +184,7 @@ function RadioButton({
   checked,
   onChange,
   label,
-}: { name: string; checked: boolean; onChange: () => void; label: string }) {
+}: { name: string; checked: boolean; onChange: () => void; label: string }): JSX.Element {
   return (
     <label className="inline-flex cursor-pointer items-center gap-2 text-sm text-gray-700">
       <input type="radio" name={name} checked={checked} onChange={onChange} className="h-4 w-4" />
@@ -166,11 +193,11 @@ function RadioButton({
   );
 }
 
-function Label({ children }: { children: React.ReactNode }) {
+function Label({ children }: { children: React.ReactNode }): JSX.Element {
   return <div className="text-sm font-medium text-gray-800">{children}</div>;
 }
 
-function Kpi({ label, value }: { label: string; value: string }) {
+function Kpi({ label, value }: { label: string; value: string }): JSX.Element {
   return (
     <div className="rounded-lg border bg-gray-50 p-4">
       <div className="text-xs font-medium text-gray-600">{label}</div>
@@ -193,27 +220,27 @@ function calculateEstimate({
   security: SecurityTier;
   hasMobile: boolean;
   supportMonths: number;
-}) {
+}): { build: number; monthly: number; tco12: number } {
   // Base multipliers (tunable assumptions)
   const costPerScreen = 1800; // design + FE + QA per screen
   const costPerIntegration = 12000; // average per 3rd‑party integration
   const mobileMultiplier = hasMobile ? 1.6 : 1.0; // mobile effort multiplier
 
-  const securityMultiplier = security === 'baseline' ? 1.0 : security === 'enhanced' ? 1.25 : 1.5;
-  const hostingSetup = hosting === 'cloud' ? 8000 : 15000; // infra setup
+  const securityMultiplier = security === "baseline" ? 1.0 : security === "enhanced" ? 1.25 : 1.5;
+  const hostingSetup = hosting === "cloud" ? 8000 : 15000; // infra setup
 
   const build = Math.round(
     (numScreens * costPerScreen + numIntegrations * costPerIntegration + hostingSetup) *
       mobileMultiplier *
-      securityMultiplier
+      securityMultiplier,
   );
 
   // Monthly run rates (ops, hosting, observability)
-  const baseMonthly = hosting === 'cloud' ? 1800 : 3000;
+  const baseMonthly = hosting === "cloud" ? 1800 : 3000;
   const integrationsMonthly = numIntegrations * 200;
-  const securityMonthly = security === 'baseline' ? 400 : security === 'enhanced' ? 800 : 1200;
+  const securityMonthly = security === "baseline" ? 400 : security === "enhanced" ? 800 : 1200;
   const monthly = Math.round(
-    (baseMonthly + integrationsMonthly + securityMonthly) * (hasMobile ? 1.2 : 1.0)
+    (baseMonthly + integrationsMonthly + securityMonthly) * (hasMobile ? 1.2 : 1.0),
   );
 
   const supportMonthly = Math.round(build * 0.06); // 6% of build as support retainer
@@ -225,9 +252,9 @@ function calculateEstimate({
 }
 
 function formatCurrency(value: number) {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
 }

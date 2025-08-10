@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy - SoftwarePros',
+  title: "Privacy Policy - SoftwarePros",
   description:
-    'Privacy Policy for SoftwarePros - Learn how we collect, use, and protect your personal information.',
+    "Privacy Policy for SoftwarePros - Learn how we collect, use, and protect your personal information.",
 };
 
 export default function PrivacyPage() {
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">5. Contact Us</h2>
             <p className="text-gray-300">
-              If you have any questions about this Privacy Policy, please contact us at{' '}
+              If you have any questions about this Privacy Policy, please contact us at{" "}
               <a
                 href="mailto:contact@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"

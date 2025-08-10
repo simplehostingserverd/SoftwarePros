@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   Area,
@@ -8,7 +8,7 @@ import {
   Tooltip,
   XAxis,
   YAxis,
-} from 'recharts';
+} from "recharts";
 
 type MarketPoint = {
   year: number;
@@ -41,20 +41,20 @@ export default function MarketOpportunityChart() {
             dataKey="year"
             tickLine={false}
             axisLine={false}
-            tick={{ fill: '#6b7280', fontSize: 12 }}
+            tick={{ fill: "#6b7280", fontSize: 12 }}
           />
           <YAxis
             tickFormatter={(v) => `$${v}B`}
             width={56}
             tickLine={false}
             axisLine={false}
-            tick={{ fill: '#6b7280', fontSize: 12 }}
+            tick={{ fill: "#6b7280", fontSize: 12 }}
             domain={[0, 110]}
           />
           <Tooltip
-            formatter={(value: number) => [`$${value.toFixed(0)}B`, 'Market Size']}
+            formatter={(value: number) => [`$${value.toFixed(0)}B`, "Market Size"]}
             labelFormatter={(label) => `Year ${label}`}
-            contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb' }}
+            contentStyle={{ borderRadius: 8, border: "1px solid #e5e7eb" }}
           />
           <Area
             type="monotone"

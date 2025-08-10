@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Footer from '@/components/Footer';
-import Navigation from '@/components/Navigation';
-import FloatingChatButton from '@/components/FloatingChatButton';
+import FloatingChatButton from "@/components/FloatingChatButton";
+import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 
 interface ClientLayoutProps {
   children: React.ReactNode;

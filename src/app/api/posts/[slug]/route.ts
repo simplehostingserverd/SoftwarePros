@@ -1,9 +1,9 @@
-import { generateSlug, verifyToken } from '@/lib/auth';
-import { db } from '@/lib/db';
-import { type NextRequest, NextResponse } from 'next/server';
+import { generateSlug, verifyToken } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { type NextRequest, NextResponse } from "next/server";
 
 async function getAuthenticatedUser(request: NextRequest) {
-  const token = request.cookies.get('auth-token')?.value;
+  const token = request.cookies.get("auth-token")?.value;
 
   if (!token) {
     return null;
@@ -21,8 +21,11 @@ async function getAuthenticatedUser(request: NextRequest) {
   return user;
 }
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
-  const { slug } = params;
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> },
+) {
+  const { slug } = await params;
   try {
     const post = await db.post.findUnique({
       where: { slug },
@@ -48,24 +51,24 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
     });
 
     if (!post) {
-      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
     return NextResponse.json(post);
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error("Error fetching post:", error);
     // Return a sample post if database is not available
     const samplePost = {
-      id: '1',
-      title: 'Sample Blog Post',
+      id: "1",
+      title: "Sample Blog Post",
       slug,
-      content: 'This is a sample blog post.',
-      excerpt: 'Sample excerpt',
+      content: "This is a sample blog post.",
+      excerpt: "Sample excerpt",
       published: true,
       createdAt: new Date(),
       updatedAt: new Date(),
       publishedAt: new Date(),
-      author: { id: '1', name: 'Sample Author', email: 'author@example.com' },
+      author: { id: "1", name: "Sample Author", email: "author@example.com" },
       categories: [],
       tags: [],
     };
@@ -73,17 +76,20 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> },
+) {
   try {
     const user = await getAuthenticatedUser(request);
 
-    if (!user || user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!user || user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { title, content, excerpt, published, metaTitle, metaDescription } = await request.json();
 
-    const { slug } = params;
+    const { slug } = await params;
     let existingPost: {
       id: string;
       title: string;
@@ -96,12 +102,12 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
         where: { slug },
       });
     } catch (dbError) {
-      console.error('Database error:', dbError);
-      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+      console.error("Database error:", dbError);
+      return NextResponse.json({ error: "Database not available" }, { status: 503 });
     }
 
     if (!existingPost) {
-      return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+      return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
     let newSlug = slug;
@@ -115,8 +121,8 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
 
       if (slugExists && slugExists.id !== existingPost.id) {
         return NextResponse.json(
-          { error: 'A post with this title already exists' },
-          { status: 400 }
+          { error: "A post with this title already exists" },
+          { status: 400 },
         );
       }
     }
@@ -146,20 +152,23 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
 
     return NextResponse.json(post);
   } catch (error) {
-    console.error('Error updating post:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("Error updating post:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> },
+) {
   try {
     const user = await getAuthenticatedUser(request);
 
-    if (!user || user.role !== 'ADMIN') {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    if (!user || user.role !== "ADMIN") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { slug } = params;
+    const { slug } = await params;
     let post: { id: string } | null;
     try {
       post = await db.post.findUnique({
@@ -167,20 +176,20 @@ export async function DELETE(request: NextRequest, { params }: { params: { slug:
       });
 
       if (!post) {
-        return NextResponse.json({ error: 'Post not found' }, { status: 404 });
+        return NextResponse.json({ error: "Post not found" }, { status: 404 });
       }
 
       await db.post.delete({
         where: { slug },
       });
     } catch (dbError) {
-      console.error('Database error:', dbError);
-      return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+      console.error("Database error:", dbError);
+      return NextResponse.json({ error: "Database not available" }, { status: 503 });
     }
 
-    return NextResponse.json({ message: 'Post deleted successfully' });
+    return NextResponse.json({ message: "Post deleted successfully" });
   } catch (error) {
-    console.error('Error deleting post:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("Error deleting post:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

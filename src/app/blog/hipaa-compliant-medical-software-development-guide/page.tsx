@@ -1,37 +1,37 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Complete Guide to HIPAA Compliant Medical Software Development | SoftwarePros',
+  title: "Complete Guide to HIPAA Compliant Medical Software Development | SoftwarePros",
   description:
-    'Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements for healthcare applications.',
+    "Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements for healthcare applications.",
   keywords: [
-    'HIPAA compliant software development',
-    'medical software HIPAA compliance',
-    'healthcare data security',
-    'PHI protection software',
-    'medical software encryption',
-    'healthcare software audit trails',
-    'HIPAA software requirements',
-    'medical software access controls',
-    'healthcare data privacy',
-    'medical software compliance guide',
+    "HIPAA compliant software development",
+    "medical software HIPAA compliance",
+    "healthcare data security",
+    "PHI protection software",
+    "medical software encryption",
+    "healthcare software audit trails",
+    "HIPAA software requirements",
+    "medical software access controls",
+    "healthcare data privacy",
+    "medical software compliance guide",
   ],
   alternates: {
-    canonical: 'https://softwarepros.org/blog/hipaa-compliant-medical-software-development-guide',
+    canonical: "https://softwarepros.org/blog/hipaa-compliant-medical-software-development-guide",
   },
   openGraph: {
-    title: 'Complete Guide to HIPAA Compliant Medical Software Development | SoftwarePros',
+    title: "Complete Guide to HIPAA Compliant Medical Software Development | SoftwarePros",
     description:
-      'Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements.',
-    url: 'https://softwarepros.org/blog/hipaa-compliant-medical-software-development-guide',
-    type: 'article',
+      "Master HIPAA compliance in medical software development with our comprehensive guide covering data encryption, access controls, audit trails, and regulatory requirements.",
+    url: "https://softwarepros.org/blog/hipaa-compliant-medical-software-development-guide",
+    type: "article",
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=630&fit=crop',
+        url: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=630&fit=crop",
         width: 1200,
         height: 630,
-        alt: 'HIPAA Compliant Medical Software Development Guide',
+        alt: "HIPAA Compliant Medical Software Development Guide",
       },
     ],
   },

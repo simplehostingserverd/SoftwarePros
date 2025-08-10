@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - SoftwarePros',
+  title: "Cookie Policy - SoftwarePros",
   description:
-    'Cookie Policy for SoftwarePros - Learn how we use cookies and similar technologies.',
+    "Cookie Policy for SoftwarePros - Learn how we use cookies and similar technologies.",
 };
 
 export default function CookiesPage() {
@@ -73,7 +73,7 @@ export default function CookiesPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
             <p className="text-gray-300">
-              If you have questions about our use of cookies, please contact us at{' '}
+              If you have questions about our use of cookies, please contact us at{" "}
               <a
                 href="mailto:contact@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"

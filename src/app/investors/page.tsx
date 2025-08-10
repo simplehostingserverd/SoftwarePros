@@ -1,31 +1,31 @@
-import type { Metadata } from 'next';
-import InvestorsClient from './InvestorsClient';
+import type { Metadata } from "next";
+import InvestorsClient from "./InvestorsClient";
 
 export const metadata: Metadata = {
-  title: 'Investors | SoftwarePros — Pitch Deck Overview',
+  title: "Investors | SoftwarePros — Pitch Deck Overview",
   description:
-    'Investor overview for SoftwarePros with market, traction, GTM, competitive edge, and use of funds. Pitch-deck style with interactive charts.',
-  alternates: { canonical: 'https://softwarepros.org/investors' },
+    "Investor overview for SoftwarePros with market, traction, GTM, competitive edge, and use of funds. Pitch-deck style with interactive charts.",
+  alternates: { canonical: "https://softwarepros.org/investors" },
   openGraph: {
-    title: 'Investors | SoftwarePros — Pitch Deck Overview',
+    title: "Investors | SoftwarePros — Pitch Deck Overview",
     description:
-      'Market size, traction, competitive advantages, GTM funnel, and use of funds, presented as an interactive pitch deck.',
-    url: 'https://softwarepros.org/investors',
-    type: 'website',
+      "Market size, traction, competitive advantages, GTM funnel, and use of funds, presented as an interactive pitch deck.",
+    url: "https://softwarepros.org/investors",
+    type: "website",
     images: [
       {
-        url: '/web-app-manifest-512x512.png',
+        url: "/web-app-manifest-512x512.png",
         width: 512,
         height: 512,
-        alt: 'SoftwarePros Investor Overview',
+        alt: "SoftwarePros Investor Overview",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Investors | SoftwarePros — Pitch Deck Overview',
-    description: 'Interactive charts showcasing market, traction, GTM, and more.',
-    images: ['/web-app-manifest-512x512.png'],
+    card: "summary_large_image",
+    title: "Investors | SoftwarePros — Pitch Deck Overview",
+    description: "Interactive charts showcasing market, traction, GTM, and more.",
+    images: ["/web-app-manifest-512x512.png"],
   },
 };
 

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   ArrowForward,
@@ -8,90 +8,90 @@ import {
   LocalHospital,
   MedicalServices,
   Security,
-} from '@mui/icons-material';
-import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@mui/joy';
-import { motion } from 'framer-motion';
-import React from 'react';
+} from "@mui/icons-material";
+import { Box, Button, Card, CardContent, Container, Grid, Typography } from "@mui/joy";
+import { motion } from "framer-motion";
+import React from "react";
 
 const services = [
   {
     icon: LocalHospital,
-    title: 'Medical Clinic Software',
+    title: "Medical Clinic Software",
     description:
-      'Comprehensive practice management systems for medical clinics of all sizes. Electronic health records, appointment scheduling, billing, and patient portal integration.',
+      "Comprehensive practice management systems for medical clinics of all sizes. Electronic health records, appointment scheduling, billing, and patient portal integration.",
     features: [
-      'EHR/EMR Systems',
-      'Patient Management',
-      'Billing & Claims',
-      'Appointment Scheduling',
+      "EHR/EMR Systems",
+      "Patient Management",
+      "Billing & Claims",
+      "Appointment Scheduling",
     ],
-    color: '#0066CC',
+    color: "#0066CC",
   },
   {
     icon: Healing,
-    title: 'Dental Practice Management',
+    title: "Dental Practice Management",
     description:
-      'Specialized software solutions for dental practices. Digital imaging integration, treatment planning, insurance management, and patient communication tools.',
+      "Specialized software solutions for dental practices. Digital imaging integration, treatment planning, insurance management, and patient communication tools.",
     features: [
-      'Digital Imaging',
-      'Treatment Planning',
-      'Insurance Processing',
-      'Patient Communication',
+      "Digital Imaging",
+      "Treatment Planning",
+      "Insurance Processing",
+      "Patient Communication",
     ],
-    color: '#00AA44',
+    color: "#00AA44",
   },
   {
     icon: MedicalServices,
-    title: 'Hospital Systems',
+    title: "Hospital Systems",
     description:
-      'Enterprise-level hospital management systems. Patient flow optimization, resource management, clinical decision support, and multi-department integration.',
+      "Enterprise-level hospital management systems. Patient flow optimization, resource management, clinical decision support, and multi-department integration.",
     features: [
-      'Patient Flow Management',
-      'Resource Optimization',
-      'Clinical Decision Support',
-      'Department Integration',
+      "Patient Flow Management",
+      "Resource Optimization",
+      "Clinical Decision Support",
+      "Department Integration",
     ],
-    color: '#CC6600',
+    color: "#CC6600",
   },
   {
     icon: Security,
-    title: 'HIPAA Compliance',
+    title: "HIPAA Compliance",
     description:
-      'Comprehensive HIPAA compliance solutions ensuring your healthcare data is protected. Security audits, risk assessments, and compliance monitoring.',
-    features: ['Security Audits', 'Risk Assessment', 'Compliance Monitoring', 'Staff Training'],
-    color: '#AA0066',
+      "Comprehensive HIPAA compliance solutions ensuring your healthcare data is protected. Security audits, risk assessments, and compliance monitoring.",
+    features: ["Security Audits", "Risk Assessment", "Compliance Monitoring", "Staff Training"],
+    color: "#AA0066",
   },
   {
     icon: Cloud,
-    title: 'Cloud Solutions',
+    title: "Cloud Solutions",
     description:
-      'Secure cloud-based healthcare solutions with 99.9% uptime guarantee. Scalable infrastructure, automatic backups, and disaster recovery.',
+      "Secure cloud-based healthcare solutions with 99.9% uptime guarantee. Scalable infrastructure, automatic backups, and disaster recovery.",
     features: [
-      'Cloud Migration',
-      'Scalable Infrastructure',
-      'Automatic Backups',
-      'Disaster Recovery',
+      "Cloud Migration",
+      "Scalable Infrastructure",
+      "Automatic Backups",
+      "Disaster Recovery",
     ],
-    color: '#6600CC',
+    color: "#6600CC",
   },
   {
     icon: Integration,
-    title: 'System Integration',
+    title: "System Integration",
     description:
-      'Seamless integration of existing healthcare systems. API development, data migration, and workflow optimization for improved efficiency.',
+      "Seamless integration of existing healthcare systems. API development, data migration, and workflow optimization for improved efficiency.",
     features: [
-      'API Development',
-      'Data Migration',
-      'Workflow Optimization',
-      'Legacy System Integration',
+      "API Development",
+      "Data Migration",
+      "Workflow Optimization",
+      "Legacy System Integration",
     ],
-    color: '#CC0066',
+    color: "#CC0066",
   },
 ];
 
 export default function ServicesOverview() {
   return (
-    <Box sx={{ py: 8, backgroundColor: 'background.body' }}>
+    <Box sx={{ py: 8, backgroundColor: "background.body" }}>
       <Container maxWidth="lg">
         {/* Section Header */}
         <motion.div
@@ -100,14 +100,14 @@ export default function ServicesOverview() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: "center", mb: 6 }}>
             <Typography
               level="h2"
               sx={{
-                fontSize: { xs: '2rem', md: '2.5rem' },
-                fontWeight: 'bold',
+                fontSize: { xs: "2rem", md: "2.5rem" },
+                fontWeight: "bold",
                 mb: 2,
-                color: 'neutral.800',
+                color: "neutral.800",
               }}
             >
               Comprehensive Healthcare Software Solutions
@@ -115,9 +115,9 @@ export default function ServicesOverview() {
             <Typography
               level="title-lg"
               sx={{
-                color: 'neutral.600',
-                maxWidth: '800px',
-                mx: 'auto',
+                color: "neutral.600",
+                maxWidth: "800px",
+                mx: "auto",
                 lineHeight: 1.6,
               }}
             >
@@ -142,28 +142,28 @@ export default function ServicesOverview() {
                 <Card
                   variant="outlined"
                   sx={{
-                    height: '100%',
+                    height: "100%",
                     p: 3,
-                    '&:hover': {
-                      boxShadow: 'lg',
+                    "&:hover": {
+                      boxShadow: "lg",
                       borderColor: service.color,
                     },
-                    transition: 'all 0.3s ease',
-                    cursor: 'pointer',
+                    transition: "all 0.3s ease",
+                    cursor: "pointer",
                   }}
                 >
-                  <CardContent sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <CardContent sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
                     {/* Icon and Title */}
                     <Box sx={{ mb: 3 }}>
                       <Box
                         sx={{
                           width: 60,
                           height: 60,
-                          borderRadius: '12px',
+                          borderRadius: "12px",
                           backgroundColor: `${service.color}15`,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                           mb: 2,
                         }}
                       >
@@ -171,7 +171,7 @@ export default function ServicesOverview() {
                       </Box>
                       <Typography
                         level="title-md"
-                        sx={{ fontWeight: 'bold', mb: 1, color: 'neutral.800' }}
+                        sx={{ fontWeight: "bold", mb: 1, color: "neutral.800" }}
                       >
                         {service.title}
                       </Typography>
@@ -180,7 +180,7 @@ export default function ServicesOverview() {
                     {/* Description */}
                     <Typography
                       level="body-md"
-                      sx={{ color: 'neutral.600', mb: 3, lineHeight: 1.6, flexGrow: 1 }}
+                      sx={{ color: "neutral.600", mb: 3, lineHeight: 1.6, flexGrow: 1 }}
                     >
                       {service.description}
                     </Typography>
@@ -191,8 +191,8 @@ export default function ServicesOverview() {
                         <Box
                           key={feature}
                           sx={{
-                            display: 'flex',
-                            alignItems: 'center',
+                            display: "flex",
+                            alignItems: "center",
                             gap: 1,
                             mb: 1,
                           }}
@@ -201,11 +201,11 @@ export default function ServicesOverview() {
                             sx={{
                               width: 6,
                               height: 6,
-                              borderRadius: '50%',
+                              borderRadius: "50%",
                               backgroundColor: service.color,
                             }}
                           />
-                          <Typography level="body-sm" sx={{ color: 'neutral.700' }}>
+                          <Typography level="body-sm" sx={{ color: "neutral.700" }}>
                             {feature}
                           </Typography>
                         </Box>
@@ -217,9 +217,9 @@ export default function ServicesOverview() {
                       variant="plain"
                       endDecorator={<ArrowForward />}
                       sx={{
-                        alignSelf: 'flex-start',
+                        alignSelf: "flex-start",
                         color: service.color,
-                        '&:hover': {
+                        "&:hover": {
                           backgroundColor: `${service.color}10`,
                         },
                       }}
@@ -244,31 +244,31 @@ export default function ServicesOverview() {
             sx={{
               mt: 8,
               p: 6,
-              borderRadius: '16px',
-              background: 'linear-gradient(135deg, #0066CC, #004499)',
-              color: 'white',
-              textAlign: 'center',
+              borderRadius: "16px",
+              background: "linear-gradient(135deg, #0066CC, #004499)",
+              color: "white",
+              textAlign: "center",
             }}
           >
-            <Typography level="h3" sx={{ fontWeight: 'bold', mb: 2, color: 'white' }}>
+            <Typography level="h3" sx={{ fontWeight: "bold", mb: 2, color: "white" }}>
               Ready to Transform Your Healthcare Practice?
             </Typography>
             <Typography
               level="title-lg"
-              sx={{ mb: 4, opacity: 0.9, maxWidth: '600px', mx: 'auto' }}
+              sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}
             >
               Let our experienced team help you implement a custom software solution that meets your
               specific needs and ensures HIPAA compliance.
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Box sx={{ display: "flex", gap: 2, justifyContent: "center", flexWrap: "wrap" }}>
               <Button
                 size="lg"
                 variant="solid"
                 sx={{
-                  backgroundColor: 'white',
-                  color: 'primary.600',
-                  '&:hover': {
-                    backgroundColor: 'neutral.100',
+                  backgroundColor: "white",
+                  color: "primary.600",
+                  "&:hover": {
+                    backgroundColor: "neutral.100",
                   },
                 }}
                 endDecorator={<ArrowForward />}
@@ -279,10 +279,10 @@ export default function ServicesOverview() {
                 size="lg"
                 variant="outlined"
                 sx={{
-                  borderColor: 'white',
-                  color: 'white',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  borderColor: "white",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
                   },
                 }}
               >

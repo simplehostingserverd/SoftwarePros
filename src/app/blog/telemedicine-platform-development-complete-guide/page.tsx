@@ -1,39 +1,39 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title:
-    'Telemedicine Platform Development: Complete Guide to Building Healthcare Video Solutions | SoftwarePros',
+    "Telemedicine Platform Development: Complete Guide to Building Healthcare Video Solutions | SoftwarePros",
   description:
-    'Learn how to build robust telemedicine platforms with video conferencing, patient management, and healthcare integration. Discover best practices for HIPAA-compliant telehealth applications.',
+    "Learn how to build robust telemedicine platforms with video conferencing, patient management, and healthcare integration. Discover best practices for HIPAA-compliant telehealth applications.",
   keywords: [
-    'telemedicine platform development',
-    'healthcare video conferencing',
-    'telehealth software development',
-    'medical video platform',
-    'healthcare app development',
-    'telemedicine software',
-    'healthcare video solutions',
-    'telehealth platform architecture',
-    'medical software development',
-    'healthcare technology solutions',
+    "telemedicine platform development",
+    "healthcare video conferencing",
+    "telehealth software development",
+    "medical video platform",
+    "healthcare app development",
+    "telemedicine software",
+    "healthcare video solutions",
+    "telehealth platform architecture",
+    "medical software development",
+    "healthcare technology solutions",
   ],
   alternates: {
-    canonical: 'https://softwarepros.org/blog/telemedicine-platform-development-complete-guide',
+    canonical: "https://softwarepros.org/blog/telemedicine-platform-development-complete-guide",
   },
   openGraph: {
     title:
-      'Telemedicine Platform Development: Complete Guide to Building Healthcare Video Solutions | SoftwarePros',
+      "Telemedicine Platform Development: Complete Guide to Building Healthcare Video Solutions | SoftwarePros",
     description:
-      'Learn how to build robust telemedicine platforms with video conferencing, patient management, and healthcare integration.',
-    url: 'https://softwarepros.org/blog/telemedicine-platform-development-complete-guide',
-    type: 'article',
+      "Learn how to build robust telemedicine platforms with video conferencing, patient management, and healthcare integration.",
+    url: "https://softwarepros.org/blog/telemedicine-platform-development-complete-guide",
+    type: "article",
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=630&fit=crop',
+        url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=630&fit=crop",
         width: 1200,
         height: 630,
-        alt: 'Telemedicine Platform Development Guide',
+        alt: "Telemedicine Platform Development Guide",
       },
     ],
   },

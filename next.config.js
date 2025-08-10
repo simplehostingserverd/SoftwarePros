@@ -4,10 +4,8 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   experimental: {
-    optimizePackageImports: ['@mui/joy', '@mui/icons-material'],
-    // Disable experimental CSS optimization that requires 'critters'
-    // See error 'Cannot find module "critters"' during post-processing
-    // Remove or keep disabled unless explicitly added as a dependency
+    // Turn off to rule out module graph issues
+    optimizePackageImports: undefined,
     // optimizeCss: true,
   },
   turbopack: {

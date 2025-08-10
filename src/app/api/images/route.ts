@@ -1,9 +1,9 @@
-import { verifyToken } from '@/lib/auth';
-import { db } from '@/lib/db';
-import { type NextRequest, NextResponse } from 'next/server';
+import { verifyToken } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { type NextRequest, NextResponse } from "next/server";
 
 async function getAuthenticatedUser(request: NextRequest) {
-  const token = request.cookies.get('auth-token')?.value;
+  const token = request.cookies.get("auth-token")?.value;
 
   if (!token) {
     return null;
@@ -20,7 +20,7 @@ async function getAuthenticatedUser(request: NextRequest) {
     });
     return user;
   } catch (error) {
-    console.error('Database error in getAuthenticatedUser:', error);
+    console.error("Database error in getAuthenticatedUser:", error);
     return null;
   }
 }
@@ -30,12 +30,12 @@ export async function GET(request: NextRequest) {
   try {
     const user = await getAuthenticatedUser(request);
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
-    const page = Number.parseInt(searchParams.get('page') || '1');
-    const limit = Number.parseInt(searchParams.get('limit') || '20');
+    const page = Number.parseInt(searchParams.get("page") || "1");
+    const limit = Number.parseInt(searchParams.get("limit") || "20");
     const offset = (page - 1) * limit;
 
     const images = await db.image.findMany({
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
         },
       },
       orderBy: {
-        createdAt: 'desc',
+        createdAt: "desc",
       },
       take: limit,
       skip: offset,
@@ -63,8 +63,8 @@ export async function GET(request: NextRequest) {
       hasMore: offset + limit < total,
     });
   } catch (error) {
-    console.error('Error fetching images:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("Error fetching images:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
 
@@ -73,33 +73,33 @@ export async function POST(request: NextRequest) {
   try {
     const user = await getAuthenticatedUser(request);
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const formData = await request.formData();
-    const file = formData.get('file') as File;
-    const alt = formData.get('alt') as string;
+    const file = formData.get("file") as File;
+    const alt = formData.get("alt") as string;
 
     if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
     // Validate file type
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json({ error: 'Invalid file type' }, { status: 400 });
+      return NextResponse.json({ error: "Invalid file type" }, { status: 400 });
     }
 
     // Validate file size (max 5MB)
     const maxSize = 5 * 1024 * 1024; // 5MB
     if (file.size > maxSize) {
-      return NextResponse.json({ error: 'File too large' }, { status: 400 });
+      return NextResponse.json({ error: "File too large" }, { status: 400 });
     }
 
     // Generate unique filename
     const timestamp = Date.now();
     const randomString = Math.random().toString(36).substring(2, 15);
-    const extension = file.name.split('.').pop();
+    const extension = file.name.split(".").pop();
     const filename = `${timestamp}-${randomString}.${extension}`;
 
     // Convert file to buffer
@@ -108,10 +108,10 @@ export async function POST(request: NextRequest) {
 
     // In a real application, you would upload to a cloud storage service like AWS S3, Cloudinary, etc.
     // For now, we'll save to the public/uploads directory
-    const fs = require('node:fs');
-    const path = require('node:path');
+    const fs = require("node:fs");
+    const path = require("node:path");
 
-    const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
+    const uploadsDir = path.join(process.cwd(), "public", "uploads");
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true });
     }
@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
         filename,
         originalName: file.name,
         url: `/uploads/${filename}`,
-        alt: alt || '',
+        alt: alt || "",
         size: file.size,
         mimeType: file.type,
         uploadedBy: user.id,
@@ -143,7 +143,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(image, { status: 201 });
   } catch (error) {
-    console.error('Error uploading image:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error("Error uploading image:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

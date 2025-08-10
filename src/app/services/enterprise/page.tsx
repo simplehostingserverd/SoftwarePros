@@ -7,23 +7,24 @@ import {
   Inventory,
   People,
   Security,
-} from '@mui/icons-material';
-import type { Metadata } from 'next';
-import Link from 'next/link';
+} from "@mui/icons-material";
+import type { Metadata } from "next";
+import Link from "next/link";
+import type { JSX } from "react";
 
 export const metadata: Metadata = {
-  title: 'Enterprise Solutions - SoftwarePros | Custom Business Software',
+  title: "Enterprise Solutions - SoftwarePros | Custom Business Software",
   description:
-    'Enterprise software development services including ERP systems, CRM solutions, business intelligence, and custom enterprise applications for large organizations.',
+    "Enterprise software development services including ERP systems, CRM solutions, business intelligence, and custom enterprise applications for large organizations.",
   openGraph: {
-    title: 'Enterprise Solutions - SoftwarePros',
-    description: 'Scalable enterprise software solutions for large organizations.',
-    url: 'https://softwarepros.org/services/enterprise',
+    title: "Enterprise Solutions - SoftwarePros",
+    description: "Scalable enterprise software solutions for large organizations.",
+    url: "https://softwarepros.org/services/enterprise",
   },
 };
 
 interface EnterpriseService {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ElementType;
   title: string;
   description: string;
   solutions: string[];
@@ -33,121 +34,121 @@ interface EnterpriseService {
 const enterpriseServices: EnterpriseService[] = [
   {
     icon: Business,
-    title: 'ERP Systems',
+    title: "ERP Systems",
     description:
-      'Comprehensive Enterprise Resource Planning solutions to streamline business operations.',
-    solutions: ['Financial Management', 'Supply Chain', 'Human Resources', 'Manufacturing'],
+      "Comprehensive Enterprise Resource Planning solutions to streamline business operations.",
+    solutions: ["Financial Management", "Supply Chain", "Human Resources", "Manufacturing"],
     benefits: [
-      'Unified business processes',
-      'Real-time reporting',
-      'Improved efficiency',
-      'Cost reduction',
-      'Better decision making',
+      "Unified business processes",
+      "Real-time reporting",
+      "Improved efficiency",
+      "Cost reduction",
+      "Better decision making",
     ],
   },
   {
     icon: People,
-    title: 'CRM Solutions',
+    title: "CRM Solutions",
     description:
-      'Customer Relationship Management systems to enhance customer interactions and sales.',
-    solutions: ['Sales Automation', 'Customer Service', 'Marketing Automation', 'Analytics'],
+      "Customer Relationship Management systems to enhance customer interactions and sales.",
+    solutions: ["Sales Automation", "Customer Service", "Marketing Automation", "Analytics"],
     benefits: [
-      'Improved customer satisfaction',
-      'Increased sales',
-      'Better lead management',
-      'Enhanced communication',
-      'Data-driven insights',
+      "Improved customer satisfaction",
+      "Increased sales",
+      "Better lead management",
+      "Enhanced communication",
+      "Data-driven insights",
     ],
   },
   {
     icon: Analytics,
-    title: 'Business Intelligence',
-    description: 'Advanced analytics and reporting solutions for data-driven decision making.',
-    solutions: ['Data Warehousing', 'Reporting Dashboards', 'Predictive Analytics', 'KPI Tracking'],
+    title: "Business Intelligence",
+    description: "Advanced analytics and reporting solutions for data-driven decision making.",
+    solutions: ["Data Warehousing", "Reporting Dashboards", "Predictive Analytics", "KPI Tracking"],
     benefits: [
-      'Real-time insights',
-      'Performance monitoring',
-      'Trend analysis',
-      'Automated reporting',
-      'Strategic planning',
+      "Real-time insights",
+      "Performance monitoring",
+      "Trend analysis",
+      "Automated reporting",
+      "Strategic planning",
     ],
   },
   {
     icon: Integration,
-    title: 'System Integration',
-    description: 'Seamless integration of existing systems and third-party applications.',
-    solutions: ['API Development', 'Data Migration', 'Legacy Modernization', 'Middleware'],
+    title: "System Integration",
+    description: "Seamless integration of existing systems and third-party applications.",
+    solutions: ["API Development", "Data Migration", "Legacy Modernization", "Middleware"],
     benefits: [
-      'Unified data flow',
-      'Reduced silos',
-      'Improved productivity',
-      'Cost savings',
-      'Enhanced security',
+      "Unified data flow",
+      "Reduced silos",
+      "Improved productivity",
+      "Cost savings",
+      "Enhanced security",
     ],
   },
   {
     icon: CloudQueue,
-    title: 'Cloud Migration',
+    title: "Cloud Migration",
     description:
-      'Strategic cloud adoption and migration services for scalability and cost optimization.',
-    solutions: ['AWS Migration', 'Azure Migration', 'Hybrid Cloud', 'Multi-Cloud'],
+      "Strategic cloud adoption and migration services for scalability and cost optimization.",
+    solutions: ["AWS Migration", "Azure Migration", "Hybrid Cloud", "Multi-Cloud"],
     benefits: [
-      'Scalability',
-      'Cost optimization',
-      'Improved reliability',
-      'Enhanced security',
-      'Global accessibility',
+      "Scalability",
+      "Cost optimization",
+      "Improved reliability",
+      "Enhanced security",
+      "Global accessibility",
     ],
   },
   {
     icon: Inventory,
-    title: 'Supply Chain Management',
-    description: 'End-to-end supply chain optimization and management solutions.',
-    solutions: ['Inventory Management', 'Procurement', 'Logistics', 'Vendor Management'],
+    title: "Supply Chain Management",
+    description: "End-to-end supply chain optimization and management solutions.",
+    solutions: ["Inventory Management", "Procurement", "Logistics", "Vendor Management"],
     benefits: [
-      'Reduced costs',
-      'Improved visibility',
-      'Better planning',
-      'Risk mitigation',
-      'Faster delivery',
+      "Reduced costs",
+      "Improved visibility",
+      "Better planning",
+      "Risk mitigation",
+      "Faster delivery",
     ],
   },
 ];
 
 const industries: string[] = [
-  'Healthcare',
-  'Manufacturing',
-  'Financial Services',
-  'Retail & E-commerce',
-  'Education',
-  'Government',
-  'Energy & Utilities',
-  'Transportation',
-  'Real Estate',
-  'Non-Profit',
-  'Technology',
-  'Hospitality',
+  "Healthcare",
+  "Manufacturing",
+  "Financial Services",
+  "Retail & E-commerce",
+  "Education",
+  "Government",
+  "Energy & Utilities",
+  "Transportation",
+  "Real Estate",
+  "Non-Profit",
+  "Technology",
+  "Hospitality",
 ];
 
 const technologies: string[] = [
-  'Microsoft .NET',
-  'Java Enterprise',
-  'Python Django',
-  'Node.js',
-  'React',
-  'Angular',
-  'Vue.js',
-  'PostgreSQL',
-  'SQL Server',
-  'Oracle',
-  'MongoDB',
-  'Redis',
-  'AWS',
-  'Azure',
-  'Google Cloud',
-  'Docker',
-  'Kubernetes',
-  'Microservices',
+  "Microsoft .NET",
+  "Java Enterprise",
+  "Python Django",
+  "Node.js",
+  "React",
+  "Angular",
+  "Vue.js",
+  "PostgreSQL",
+  "SQL Server",
+  "Oracle",
+  "MongoDB",
+  "Redis",
+  "AWS",
+  "Azure",
+  "Google Cloud",
+  "Docker",
+  "Kubernetes",
+  "Microservices",
 ];
 
 export default function EnterprisePage(): JSX.Element {
@@ -266,24 +267,24 @@ export default function EnterprisePage(): JSX.Element {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                step: '1',
-                title: 'Discovery & Analysis',
-                description: 'Understanding your business requirements and current systems',
+                step: "1",
+                title: "Discovery & Analysis",
+                description: "Understanding your business requirements and current systems",
               },
               {
-                step: '2',
-                title: 'Architecture Design',
-                description: 'Designing scalable and secure system architecture',
+                step: "2",
+                title: "Architecture Design",
+                description: "Designing scalable and secure system architecture",
               },
               {
-                step: '3',
-                title: 'Development & Testing',
-                description: 'Agile development with continuous testing and quality assurance',
+                step: "3",
+                title: "Development & Testing",
+                description: "Agile development with continuous testing and quality assurance",
               },
               {
-                step: '4',
-                title: 'Deployment & Support',
-                description: 'Smooth deployment and ongoing maintenance and support',
+                step: "4",
+                title: "Deployment & Support",
+                description: "Smooth deployment and ongoing maintenance and support",
               },
             ].map((phase) => (
               <div key={phase.title} className="text-center">

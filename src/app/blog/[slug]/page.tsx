@@ -1,11 +1,11 @@
-import { db } from '@/lib/db';
-export const dynamic = 'force-dynamic';
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import ReactMarkdown from 'react-markdown';
-import rehypeHighlight from 'rehype-highlight';
-import remarkGfm from 'remark-gfm';
+import { db } from "@/lib/db";
+export const dynamic = "force-dynamic";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 // Using Next 15's PageProps for async params
 
@@ -53,7 +53,7 @@ async function getPost(slug: string) {
     });
     return post;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error("Error fetching post:", error);
     return null;
   }
 }
@@ -61,14 +61,14 @@ async function getPost(slug: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPost(slug);
 
   if (!post) {
     return {
-      title: 'Post Not Found | SoftwarePros.org',
+      title: "Post Not Found | SoftwarePros.org",
     };
   }
 
@@ -81,9 +81,9 @@ export async function generateMetadata({
     },
     openGraph: {
       title: post.metaTitle || post.title,
-      description: post.metaDescription || post.excerpt || '',
+      description: post.metaDescription || post.excerpt || "",
       url: `https://softwarepros.org/blog/${post.slug}`,
-      type: 'article',
+      type: "article",
       publishedTime: post.publishedAt?.toISOString(),
       modifiedTime: post.updatedAt.toISOString(),
       authors: post.author.name ? [post.author.name] : undefined,
@@ -99,9 +99,9 @@ export async function generateMetadata({
         : undefined,
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.metaTitle || post.title,
-      description: post.metaDescription || post.excerpt || '',
+      description: post.metaDescription || post.excerpt || "",
       images: post.featuredImage ? [post.featuredImage] : undefined,
     },
   };
@@ -110,9 +110,9 @@ export async function generateMetadata({
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPost(slug);
 
   if (!post) {
@@ -120,49 +120,49 @@ export default async function BlogPostPage({
   }
 
   const articleSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
     headline: post.title,
-    description: post.excerpt || '',
-    image: post.featuredImage || '',
+    description: post.excerpt || "",
+    image: post.featuredImage || "",
     author: {
-      '@type': 'Person',
-      name: post.author.name || 'SoftwarePros Team',
+      "@type": "Person",
+      name: post.author.name || "SoftwarePros Team",
     },
     publisher: {
-      '@type': 'Organization',
-      name: 'SoftwarePros',
+      "@type": "Organization",
+      name: "SoftwarePros",
       logo: {
-        '@type': 'ImageObject',
-        url: 'https://softwarepros.org/web-app-manifest-512x512.png',
+        "@type": "ImageObject",
+        url: "https://softwarepros.org/web-app-manifest-512x512.png",
       },
     },
     datePublished: post.publishedAt?.toISOString(),
     dateModified: post.updatedAt.toISOString(),
     mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://softwarepros.org/blog/${post.slug}`,
+      "@type": "WebPage",
+      "@id": `https://softwarepros.org/blog/${post.slug}`,
     },
   };
 
   const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: [
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 1,
-        name: 'Home',
-        item: 'https://softwarepros.org',
+        name: "Home",
+        item: "https://softwarepros.org",
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 2,
-        name: 'Blog',
-        item: 'https://softwarepros.org/blog',
+        name: "Blog",
+        item: "https://softwarepros.org/blog",
       },
       {
-        '@type': 'ListItem',
+        "@type": "ListItem",
         position: 3,
         name: post.title,
         item: `https://softwarepros.org/blog/${post.slug}`,
@@ -204,10 +204,10 @@ export default async function BlogPostPage({
 
             <div className="flex items-center text-gray-600 mb-6">
               <time dateTime={post.publishedAt?.toISOString()}>
-                {post.publishedAt?.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
+                {post.publishedAt?.toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </time>
               {post.author.name && (

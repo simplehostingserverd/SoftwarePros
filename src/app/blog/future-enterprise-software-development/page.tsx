@@ -1,17 +1,18 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import type { JSX } from "react";
 
 export const metadata: Metadata = {
-  title: 'The Future of Enterprise Software Development - SoftwarePros Blog',
+  title: "The Future of Enterprise Software Development - SoftwarePros Blog",
   description:
-    'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
+    "Exploring emerging trends and technologies shaping the future of enterprise software solutions.",
   openGraph: {
-    title: 'The Future of Enterprise Software Development',
+    title: "The Future of Enterprise Software Development",
     description:
-      'Exploring emerging trends and technologies shaping the future of enterprise software solutions.',
-    url: 'https://softwarepros.org/blog/future-enterprise-software-development',
-    images: ['https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop'],
+      "Exploring emerging trends and technologies shaping the future of enterprise software solutions.",
+    url: "https://softwarepros.org/blog/future-enterprise-software-development",
+    images: ["https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=630&fit=crop"],
   },
 };
 

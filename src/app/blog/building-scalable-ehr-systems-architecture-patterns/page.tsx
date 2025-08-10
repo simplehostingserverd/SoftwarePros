@@ -1,37 +1,37 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Building Scalable EHR Systems: Architecture Patterns & Best Practices | SoftwarePros',
+  title: "Building Scalable EHR Systems: Architecture Patterns & Best Practices | SoftwarePros",
   description:
-    'Learn proven architecture patterns for building scalable Electronic Health Record systems. Discover microservices, cloud-native approaches, and performance optimization strategies for healthcare applications.',
+    "Learn proven architecture patterns for building scalable Electronic Health Record systems. Discover microservices, cloud-native approaches, and performance optimization strategies for healthcare applications.",
   keywords: [
-    'EHR system architecture',
-    'scalable healthcare software',
-    'electronic health records development',
-    'healthcare microservices',
-    'EHR system scalability',
-    'healthcare software architecture',
-    'medical database design',
-    'healthcare cloud architecture',
-    'EHR performance optimization',
-    'healthcare system design patterns',
+    "EHR system architecture",
+    "scalable healthcare software",
+    "electronic health records development",
+    "healthcare microservices",
+    "EHR system scalability",
+    "healthcare software architecture",
+    "medical database design",
+    "healthcare cloud architecture",
+    "EHR performance optimization",
+    "healthcare system design patterns",
   ],
   alternates: {
-    canonical: 'https://softwarepros.org/blog/building-scalable-ehr-systems-architecture-patterns',
+    canonical: "https://softwarepros.org/blog/building-scalable-ehr-systems-architecture-patterns",
   },
   openGraph: {
-    title: 'Building Scalable EHR Systems: Architecture Patterns & Best Practices | SoftwarePros',
+    title: "Building Scalable EHR Systems: Architecture Patterns & Best Practices | SoftwarePros",
     description:
-      'Learn proven architecture patterns for building scalable Electronic Health Record systems with microservices and cloud-native approaches.',
-    url: 'https://softwarepros.org/blog/building-scalable-ehr-systems-architecture-patterns',
-    type: 'article',
+      "Learn proven architecture patterns for building scalable Electronic Health Record systems with microservices and cloud-native approaches.",
+    url: "https://softwarepros.org/blog/building-scalable-ehr-systems-architecture-patterns",
+    type: "article",
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop',
+        url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop",
         width: 1200,
         height: 630,
-        alt: 'Building Scalable EHR Systems Architecture',
+        alt: "Building Scalable EHR Systems Architecture",
       },
     ],
   },

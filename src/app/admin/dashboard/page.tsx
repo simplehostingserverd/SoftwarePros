@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface Post {
   id: string;
@@ -19,7 +19,7 @@ interface Post {
 export default function AdminDashboard() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -28,15 +28,15 @@ export default function AdminDashboard() {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('/api/posts');
+      const response = await fetch("/api/posts");
       if (response.ok) {
         const data = await response.json();
         setPosts(data.posts);
       } else {
-        setError('Failed to fetch posts');
+        setError("Failed to fetch posts");
       }
     } catch (error) {
-      setError('An error occurred while fetching posts');
+      setError("An error occurred while fetching posts");
     } finally {
       setIsLoading(false);
     }
@@ -44,30 +44,30 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/admin/login');
+      await fetch("/api/auth/logout", { method: "POST" });
+      router.push("/admin/login");
     } catch (error) {
-      console.error('Logout error:', error instanceof Error ? error.message : 'Unknown error');
+      console.error("Logout error:", error instanceof Error ? error.message : "Unknown error");
     }
   };
 
   const handleDeletePost = async (slug: string) => {
-    if (!confirm('Are you sure you want to delete this post?')) {
+    if (!confirm("Are you sure you want to delete this post?")) {
       return;
     }
 
     try {
       const response = await fetch(`/api/posts/${slug}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (response.ok) {
         setPosts(posts.filter((post) => post.slug !== slug));
       } else {
-        setError('Failed to delete post');
+        setError("Failed to delete post");
       }
     } catch (error) {
-      setError('An error occurred while deleting the post');
+      setError("An error occurred while deleting the post");
     }
   };
 
@@ -176,11 +176,11 @@ export default function AdminDashboard() {
                         <span
                           className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                             post.published
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-yellow-100 text-yellow-800'
+                              ? "bg-green-100 text-green-800"
+                              : "bg-yellow-100 text-yellow-800"
                           }`}
                         >
-                          {post.published ? 'Published' : 'Draft'}
+                          {post.published ? "Published" : "Draft"}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">

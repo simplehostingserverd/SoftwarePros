@@ -1,6 +1,6 @@
-import PostEditor from '@/components/PostEditor';
-import { db } from '@/lib/db';
-import { notFound } from 'next/navigation';
+import PostEditor from "@/components/PostEditor";
+import { db } from "@/lib/db";
+import { notFound } from "next/navigation";
 
 async function getPost(slug: string) {
   try {
@@ -19,7 +19,7 @@ async function getPost(slug: string) {
     });
     return post;
   } catch (error) {
-    console.error('Error fetching post:', error);
+    console.error("Error fetching post:", error);
     return null;
   }
 }
@@ -27,9 +27,9 @@ async function getPost(slug: string) {
 export default async function EditPostPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPost(slug);
 
   if (!post) {

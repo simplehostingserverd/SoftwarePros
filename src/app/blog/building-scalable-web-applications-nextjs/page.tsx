@@ -1,17 +1,18 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import type { JSX } from "react";
 
 export const metadata: Metadata = {
-  title: 'Building Scalable Web Applications with Next.js - SoftwarePros Blog',
+  title: "Building Scalable Web Applications with Next.js - SoftwarePros Blog",
   description:
-    'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
+    "Learn how to create high-performance, scalable web applications using Next.js and modern development practices.",
   openGraph: {
-    title: 'Building Scalable Web Applications with Next.js',
+    title: "Building Scalable Web Applications with Next.js",
     description:
-      'Learn how to create high-performance, scalable web applications using Next.js and modern development practices.',
-    url: 'https://softwarepros.org/blog/building-scalable-web-applications-nextjs',
-    images: ['https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop'],
+      "Learn how to create high-performance, scalable web applications using Next.js and modern development practices.",
+    url: "https://softwarepros.org/blog/building-scalable-web-applications-nextjs",
+    images: ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop"],
   },
 };
 

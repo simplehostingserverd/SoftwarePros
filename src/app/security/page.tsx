@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Security - SoftwarePros',
+  title: "Security - SoftwarePros",
   description:
-    'Security practices and measures at SoftwarePros - Learn how we protect your data and ensure secure development.',
+    "Security practices and measures at SoftwarePros - Learn how we protect your data and ensure secure development.",
 };
 
 export default function SecurityPage() {
@@ -77,7 +77,7 @@ export default function SecurityPage() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Report a Security Issue</h2>
             <p className="text-gray-300">
-              If you discover a security vulnerability, please report it immediately to{' '}
+              If you discover a security vulnerability, please report it immediately to{" "}
               <a
                 href="mailto:security@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"

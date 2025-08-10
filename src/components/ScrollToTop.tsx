@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { KeyboardArrowUp } from '@mui/icons-material';
-import { IconButton } from '@mui/joy';
+import { KeyboardArrowUp } from "@mui/icons-material";
+import { IconButton } from "@mui/joy";
 // Removed framer-motion for build compatibility
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,15 +17,15 @@ export default function ScrollToTop() {
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
 
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
@@ -35,9 +35,9 @@ export default function ScrollToTop() {
         <div
           className="animate-fade-in"
           style={{
-            position: 'fixed',
-            bottom: '2rem',
-            right: '2rem',
+            position: "fixed",
+            bottom: "2rem",
+            right: "2rem",
             zIndex: 1000,
           }}
         >
@@ -47,15 +47,15 @@ export default function ScrollToTop() {
             variant="solid"
             color="primary"
             sx={{
-              borderRadius: '50%',
+              borderRadius: "50%",
               width: 56,
               height: 56,
-              boxShadow: 'lg',
-              '&:hover': {
-                transform: 'translateY(-2px)',
-                boxShadow: 'xl',
+              boxShadow: "lg",
+              "&:hover": {
+                transform: "translateY(-2px)",
+                boxShadow: "xl",
               },
-              transition: 'all 0.3s ease',
+              transition: "all 0.3s ease",
             }}
           >
             <KeyboardArrowUp />

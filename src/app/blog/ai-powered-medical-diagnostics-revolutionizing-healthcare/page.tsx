@@ -1,32 +1,32 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
+import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: 'AI-Powered Medical Diagnostics: Revolutionizing Healthcare with Machine Learning',
+  title: "AI-Powered Medical Diagnostics: Revolutionizing Healthcare with Machine Learning",
   description:
-    'Discover how artificial intelligence is transforming medical diagnostics, from early disease detection to personalized treatment plans. Learn about the latest AI algorithms, real-world applications, and the future of precision medicine.',
+    "Discover how artificial intelligence is transforming medical diagnostics, from early disease detection to personalized treatment plans. Learn about the latest AI algorithms, real-world applications, and the future of precision medicine.",
   keywords: [
-    'AI medical diagnostics',
-    'machine learning healthcare',
-    'artificial intelligence medicine',
-    'AI disease detection',
-    'precision medicine AI',
-    'healthcare machine learning',
-    'medical AI algorithms',
-    'AI diagnostic tools',
-    'healthcare innovation',
-    'medical technology trends',
+    "AI medical diagnostics",
+    "machine learning healthcare",
+    "artificial intelligence medicine",
+    "AI disease detection",
+    "precision medicine AI",
+    "healthcare machine learning",
+    "medical AI algorithms",
+    "AI diagnostic tools",
+    "healthcare innovation",
+    "medical technology trends",
   ],
   openGraph: {
-    title: 'AI-Powered Medical Diagnostics: Revolutionizing Healthcare with Machine Learning',
+    title: "AI-Powered Medical Diagnostics: Revolutionizing Healthcare with Machine Learning",
     description:
-      'Discover how artificial intelligence is transforming medical diagnostics, from early disease detection to personalized treatment plans.',
+      "Discover how artificial intelligence is transforming medical diagnostics, from early disease detection to personalized treatment plans.",
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop',
+        url: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&h=630&fit=crop",
         width: 1200,
         height: 630,
-        alt: 'AI-Powered Medical Diagnostics',
+        alt: "AI-Powered Medical Diagnostics",
       },
     ],
   },

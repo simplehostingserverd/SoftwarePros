@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Healthcare Software Resources | SoftwarePros — Guides, Checklists & Tools',
+  title: "Healthcare Software Resources | SoftwarePros — Guides, Checklists & Tools",
   description:
-    'Actionable resources for healthcare IT: HIPAA checklists, EHR best practices, integration guides, and calculators to plan budgets and roadmaps.',
-  alternates: { canonical: 'https://softwarepros.org/resources' },
+    "Actionable resources for healthcare IT: HIPAA checklists, EHR best practices, integration guides, and calculators to plan budgets and roadmaps.",
+  alternates: { canonical: "https://softwarepros.org/resources" },
 };
 
 type Resource = {
@@ -17,43 +17,43 @@ type Resource = {
 
 const guides: Resource[] = [
   {
-    title: 'HIPAA Security Rule Checklist',
+    title: "HIPAA Security Rule Checklist",
     description:
-      'Practical checklist aligned to Administrative, Physical, and Technical safeguards.',
-    href: '/resources#hipaa-checklist',
-    badge: 'Download',
+      "Practical checklist aligned to Administrative, Physical, and Technical safeguards.",
+    href: "/resources#hipaa-checklist",
+    badge: "Download",
   },
   {
-    title: 'EHR Implementation Playbook',
-    description: 'A phased approach covering discovery, migration, go‑live, and training.',
-    href: '/resources#ehr-playbook',
+    title: "EHR Implementation Playbook",
+    description: "A phased approach covering discovery, migration, go‑live, and training.",
+    href: "/resources#ehr-playbook",
   },
   {
-    title: 'Healthcare Integrations Guide (HL7, FHIR, X12)',
-    description: 'Patterns for robust eligibility, claims, and lab interfaces with observability.',
-    href: '/resources#integrations',
+    title: "Healthcare Integrations Guide (HL7, FHIR, X12)",
+    description: "Patterns for robust eligibility, claims, and lab interfaces with observability.",
+    href: "/resources#integrations",
   },
 ];
 
 const tools: Resource[] = [
   {
-    title: 'Software Cost Calculator',
-    description: 'Estimate budget by scope, team composition, security, and hosting model.',
-    href: '/resources#cost-calculator',
-    badge: 'Live',
+    title: "Software Cost Calculator",
+    description: "Estimate budget by scope, team composition, security, and hosting model.",
+    href: "/resources#cost-calculator",
+    badge: "Live",
   },
   {
-    title: 'Risk Register Template',
-    description: 'Track threats, likelihood, impact, and mitigations for HIPAA compliance.',
-    href: '/resources#risk-register',
+    title: "Risk Register Template",
+    description: "Track threats, likelihood, impact, and mitigations for HIPAA compliance.",
+    href: "/resources#risk-register",
   },
   {
-    title: 'Vendor Due Diligence Checklist',
-    description: 'Questions to evaluate third‑party systems handling PHI, including BAAs.',
-    href: '/resources#vendor-dd',
+    title: "Vendor Due Diligence Checklist",
+    description: "Questions to evaluate third‑party systems handling PHI, including BAAs.",
+    href: "/resources#vendor-dd",
   },
 ];
-import CostCalculator from '@/components/CostCalculator';
+import CostCalculator from "@/components/CostCalculator";
 
 export default function ResourcesPage() {
   return (

@@ -1,8 +1,8 @@
-import { sendContactEmail } from '@/lib/mailer';
-import { type NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
+import { sendContactEmail } from "@/lib/mailer";
+import { type NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -20,10 +20,10 @@ const contactSchema = z.object({
     .string()
     .url()
     .optional()
-    .or(z.literal('').transform(() => undefined)),
+    .or(z.literal("").transform(() => undefined)),
   hearAboutUs: z.string().optional(),
   consent: z.boolean().refine((v) => v === true, {
-    message: 'Consent is required',
+    message: "Consent is required",
   }),
 });
 
@@ -50,18 +50,18 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
-    console.error('Contact form error:', error);
+    console.error("Contact form error:", error);
     if (
       error &&
-      typeof error === 'object' &&
-      'issues' in (error as Record<string, unknown>) &&
+      typeof error === "object" &&
+      "issues" in (error as Record<string, unknown>) &&
       Array.isArray((error as Record<string, unknown>).issues)
     ) {
       return NextResponse.json(
-        { error: 'Validation failed', details: (error as { issues: unknown[] }).issues },
-        { status: 400 }
+        { error: "Validation failed", details: (error as { issues: unknown[] }).issues },
+        { status: 400 },
       );
     }
-    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
+    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
   }
 }

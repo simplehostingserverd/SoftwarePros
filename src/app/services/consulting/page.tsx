@@ -7,23 +7,24 @@ import {
   Support,
   Timeline,
   TrendingUp,
-} from '@mui/icons-material';
-import type { Metadata } from 'next';
-import Link from 'next/link';
+} from "@mui/icons-material";
+import type { Metadata } from "next";
+import Link from "next/link";
+import type { JSX } from "react";
 
 export const metadata: Metadata = {
-  title: 'Tech Consulting Services - SoftwarePros | Strategic Technology Guidance',
+  title: "Tech Consulting Services - SoftwarePros | Strategic Technology Guidance",
   description:
-    'Expert technology consulting services including digital transformation, architecture design, technology strategy, and technical leadership for businesses of all sizes.',
+    "Expert technology consulting services including digital transformation, architecture design, technology strategy, and technical leadership for businesses of all sizes.",
   openGraph: {
-    title: 'Tech Consulting Services - SoftwarePros',
-    description: 'Strategic technology consulting and digital transformation services.',
-    url: 'https://softwarepros.org/services/consulting',
+    title: "Tech Consulting Services - SoftwarePros",
+    description: "Strategic technology consulting and digital transformation services.",
+    url: "https://softwarepros.org/services/consulting",
   },
 };
 
 interface ConsultingService {
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ElementType;
   title: string;
   description: string;
   deliverables: string[];
@@ -33,140 +34,140 @@ interface ConsultingService {
 const consultingServices: ConsultingService[] = [
   {
     icon: TrendingUp,
-    title: 'Digital Transformation Strategy',
+    title: "Digital Transformation Strategy",
     description:
-      'Comprehensive digital transformation roadmaps to modernize your business operations.',
+      "Comprehensive digital transformation roadmaps to modernize your business operations.",
     deliverables: [
-      'Current State Assessment',
-      'Future State Vision',
-      'Transformation Roadmap',
-      'ROI Analysis',
+      "Current State Assessment",
+      "Future State Vision",
+      "Transformation Roadmap",
+      "ROI Analysis",
     ],
     outcomes: [
-      'Improved operational efficiency',
-      'Enhanced customer experience',
-      'Competitive advantage',
-      'Cost optimization',
-      'Future-ready technology stack',
+      "Improved operational efficiency",
+      "Enhanced customer experience",
+      "Competitive advantage",
+      "Cost optimization",
+      "Future-ready technology stack",
     ],
   },
   {
     icon: Architecture,
-    title: 'Technology Architecture',
-    description: 'Scalable and secure technology architecture design for enterprise applications.',
+    title: "Technology Architecture",
+    description: "Scalable and secure technology architecture design for enterprise applications.",
     deliverables: [
-      'Architecture Blueprint',
-      'Technology Stack Recommendations',
-      'Security Framework',
-      'Scalability Plan',
+      "Architecture Blueprint",
+      "Technology Stack Recommendations",
+      "Security Framework",
+      "Scalability Plan",
     ],
     outcomes: [
-      'Robust system architecture',
-      'Improved performance',
-      'Enhanced security',
-      'Better maintainability',
-      'Reduced technical debt',
+      "Robust system architecture",
+      "Improved performance",
+      "Enhanced security",
+      "Better maintainability",
+      "Reduced technical debt",
     ],
   },
   {
     icon: Assessment,
-    title: 'Technology Assessment',
-    description: 'Comprehensive evaluation of existing technology infrastructure and applications.',
+    title: "Technology Assessment",
+    description: "Comprehensive evaluation of existing technology infrastructure and applications.",
     deliverables: [
-      'Technical Audit Report',
-      'Gap Analysis',
-      'Risk Assessment',
-      'Improvement Recommendations',
+      "Technical Audit Report",
+      "Gap Analysis",
+      "Risk Assessment",
+      "Improvement Recommendations",
     ],
     outcomes: [
-      'Clear understanding of current state',
-      'Identified improvement areas',
-      'Risk mitigation strategies',
-      'Optimized technology investments',
-      'Enhanced system reliability',
+      "Clear understanding of current state",
+      "Identified improvement areas",
+      "Risk mitigation strategies",
+      "Optimized technology investments",
+      "Enhanced system reliability",
     ],
   },
   {
     icon: Psychology,
-    title: 'CTO Advisory Services',
-    description: 'Strategic technology leadership and guidance for growing businesses.',
+    title: "CTO Advisory Services",
+    description: "Strategic technology leadership and guidance for growing businesses.",
     deliverables: [
-      'Technology Strategy',
-      'Team Structure Recommendations',
-      'Process Optimization',
-      'Vendor Evaluation',
+      "Technology Strategy",
+      "Team Structure Recommendations",
+      "Process Optimization",
+      "Vendor Evaluation",
     ],
     outcomes: [
-      'Strategic technology direction',
-      'Improved team productivity',
-      'Better technology decisions',
-      'Reduced development costs',
-      'Faster time to market',
+      "Strategic technology direction",
+      "Improved team productivity",
+      "Better technology decisions",
+      "Reduced development costs",
+      "Faster time to market",
     ],
   },
   {
     icon: Timeline,
-    title: 'Project Management',
+    title: "Project Management",
     description:
-      'Expert project management for complex technology initiatives and transformations.',
+      "Expert project management for complex technology initiatives and transformations.",
     deliverables: [
-      'Project Plans',
-      'Risk Management',
-      'Progress Reporting',
-      'Stakeholder Communication',
+      "Project Plans",
+      "Risk Management",
+      "Progress Reporting",
+      "Stakeholder Communication",
     ],
     outcomes: [
-      'On-time project delivery',
-      'Budget adherence',
-      'Quality deliverables',
-      'Stakeholder satisfaction',
-      'Reduced project risks',
+      "On-time project delivery",
+      "Budget adherence",
+      "Quality deliverables",
+      "Stakeholder satisfaction",
+      "Reduced project risks",
     ],
   },
   {
     icon: School,
-    title: 'Team Training & Development',
-    description: 'Technical training and skill development programs for your development teams.',
+    title: "Team Training & Development",
+    description: "Technical training and skill development programs for your development teams.",
     deliverables: [
-      'Training Curriculum',
-      'Hands-on Workshops',
-      'Best Practices Guide',
-      'Mentoring Programs',
+      "Training Curriculum",
+      "Hands-on Workshops",
+      "Best Practices Guide",
+      "Mentoring Programs",
     ],
     outcomes: [
-      'Enhanced team skills',
-      'Improved code quality',
-      'Better development practices',
-      'Increased productivity',
-      'Reduced knowledge gaps',
+      "Enhanced team skills",
+      "Improved code quality",
+      "Better development practices",
+      "Increased productivity",
+      "Reduced knowledge gaps",
     ],
   },
 ];
 
 const consultingAreas: string[] = [
-  'Cloud Strategy',
-  'DevOps Implementation',
-  'Agile Transformation',
-  'Security Strategy',
-  'Data Strategy',
-  'API Strategy',
-  'Microservices Architecture',
-  'Legacy Modernization',
-  'Technology Due Diligence',
-  'Vendor Selection',
-  'Team Scaling',
-  'Process Optimization',
+  "Cloud Strategy",
+  "DevOps Implementation",
+  "Agile Transformation",
+  "Security Strategy",
+  "Data Strategy",
+  "API Strategy",
+  "Microservices Architecture",
+  "Legacy Modernization",
+  "Technology Due Diligence",
+  "Vendor Selection",
+  "Team Scaling",
+  "Process Optimization",
 ];
 
 const industries: string[] = [
-  'Healthcare',
-  'Financial Services',
-  'Manufacturing',
-  'Retail',
-  'Education',
-  'Government',
-  'Startups',
-  'Enterprise',
+  "Healthcare",
+  "Financial Services",
+  "Manufacturing",
+  "Retail",
+  "Education",
+  "Government",
+  "Startups",
+  "Enterprise",
 ];
 
 export default function ConsultingPage(): JSX.Element {
@@ -266,30 +267,30 @@ export default function ConsultingPage(): JSX.Element {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                step: '1',
-                title: 'Discovery',
+                step: "1",
+                title: "Discovery",
                 description:
-                  'Understanding your business goals, challenges, and current technology landscape',
+                  "Understanding your business goals, challenges, and current technology landscape",
                 icon: Assessment,
               },
               {
-                step: '2',
-                title: 'Analysis',
+                step: "2",
+                title: "Analysis",
                 description:
-                  'Deep dive analysis of systems, processes, and identifying improvement opportunities',
+                  "Deep dive analysis of systems, processes, and identifying improvement opportunities",
                 icon: Lightbulb,
               },
               {
-                step: '3',
-                title: 'Strategy',
+                step: "3",
+                title: "Strategy",
                 description:
-                  'Developing comprehensive strategies and roadmaps aligned with business objectives',
+                  "Developing comprehensive strategies and roadmaps aligned with business objectives",
                 icon: Timeline,
               },
               {
-                step: '4',
-                title: 'Implementation',
-                description: 'Guiding execution with ongoing support and monitoring progress',
+                step: "4",
+                title: "Implementation",
+                description: "Guiding execution with ongoing support and monitoring progress",
                 icon: Support,
               },
             ].map((phase) => {

@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import type { JSX } from "react";
 
 interface ImageData {
   id: string;
@@ -31,9 +32,9 @@ export default function AdminImagesPage(): JSX.Element {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [altText, setAltText] = useState('');
+  const [altText, setAltText] = useState("");
   const [editingImage, setEditingImage] = useState<ImageData | null>(null);
-  const [editAlt, setEditAlt] = useState('');
+  const [editAlt, setEditAlt] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -42,24 +43,24 @@ export default function AdminImagesPage(): JSX.Element {
 
   const fetchImages = async () => {
     try {
-      const response = await fetch('/api/images', {
-        credentials: 'include',
+      const response = await fetch("/api/images", {
+        credentials: "include",
       });
 
-      console.log('Images fetch response status:', response.status);
+      console.log("Images fetch response status:", response.status);
 
       if (response.ok) {
         const data: ImagesResponse = await response.json();
-        console.log('Images data received:', data);
+        console.log("Images data received:", data);
         setImages(data.images);
       } else if (response.status === 401) {
-        console.log('Unauthorized - redirecting to login');
-        router.push('/admin/login');
+        console.log("Unauthorized - redirecting to login");
+        router.push("/admin/login");
       } else {
-        console.error('Failed to fetch images:', response.status);
+        console.error("Failed to fetch images:", response.status);
       }
     } catch (error) {
-      console.error('Error fetching images:', error);
+      console.error("Error fetching images:", error);
     } finally {
       setLoading(false);
     }
@@ -78,31 +79,31 @@ export default function AdminImagesPage(): JSX.Element {
 
     setUploading(true);
     const formData = new FormData();
-    formData.append('file', selectedFile);
-    formData.append('alt', altText);
+    formData.append("file", selectedFile);
+    formData.append("alt", altText);
 
     try {
-      const response = await fetch('/api/images', {
-        method: 'POST',
+      const response = await fetch("/api/images", {
+        method: "POST",
         body: formData,
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (response.ok) {
         const newImage = await response.json();
         setImages([newImage, ...images]);
         setSelectedFile(null);
-        setAltText('');
+        setAltText("");
         // Reset file input
-        const fileInput = document.getElementById('file-input') as HTMLInputElement;
-        if (fileInput) fileInput.value = '';
+        const fileInput = document.getElementById("file-input") as HTMLInputElement;
+        if (fileInput) fileInput.value = "";
       } else {
         const error = await response.json();
-        alert(error.error || 'Upload failed');
+        alert(error.error || "Upload failed");
       }
     } catch (error) {
-      console.error('Error uploading image:', error);
-      alert('Upload failed');
+      console.error("Error uploading image:", error);
+      alert("Upload failed");
     } finally {
       setUploading(false);
     }
@@ -118,59 +119,59 @@ export default function AdminImagesPage(): JSX.Element {
 
     try {
       const response = await fetch(`/api/images/${editingImage.id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ alt: editAlt }),
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (response.ok) {
         const updatedImage = await response.json();
         setImages(images.map((img) => (img.id === updatedImage.id ? updatedImage : img)));
         setEditingImage(null);
-        setEditAlt('');
+        setEditAlt("");
       } else {
         const error = await response.json();
-        alert(error.error || 'Update failed');
+        alert(error.error || "Update failed");
       }
     } catch (error) {
-      console.error('Error updating image:', error);
-      alert('Update failed');
+      console.error("Error updating image:", error);
+      alert("Update failed");
     }
   };
 
   const handleDelete = async (imageId: string) => {
-    if (!confirm('Are you sure you want to delete this image?')) return;
+    if (!confirm("Are you sure you want to delete this image?")) return;
 
     try {
       const response = await fetch(`/api/images/${imageId}`, {
-        method: 'DELETE',
-        credentials: 'include',
+        method: "DELETE",
+        credentials: "include",
       });
 
       if (response.ok) {
         setImages(images.filter((img) => img.id !== imageId));
       } else {
         const error = await response.json();
-        alert(error.error || 'Delete failed');
+        alert(error.error || "Delete failed");
       }
     } catch (error) {
-      console.error('Error deleting image:', error);
-      alert('Delete failed');
+      console.error("Error deleting image:", error);
+      alert("Delete failed");
     }
   };
 
   const copyToClipboard = (url: string) => {
     navigator.clipboard.writeText(url);
-    alert('URL copied to clipboard!');
+    alert("URL copied to clipboard!");
   };
 
   const formatFileSize = (bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
+    if (bytes === 0) return "0 Bytes";
     const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = ["Bytes", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return `${Number.parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
   };
@@ -229,7 +230,7 @@ export default function AdminImagesPage(): JSX.Element {
               disabled={!selectedFile || uploading}
               className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {uploading ? 'Uploading...' : 'Upload Image'}
+              {uploading ? "Uploading..." : "Upload Image"}
             </button>
           </form>
         </div>

@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import type { ReactNode } from 'react';
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import type { ReactNode } from "react";
 
 interface AnimatedDivProps {
   children: ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  animation?: 'fade' | 'slide-left' | 'slide-right';
+  animation?: "fade" | "slide-left" | "slide-right";
   delay?: number;
 }
 
 export default function AnimatedDiv({
   children,
-  className = '',
+  className = "",
   style,
-  animation = 'fade',
+  animation = "fade",
   delay = 0,
 }: AnimatedDivProps) {
   const animationClass =
-    animation === 'fade'
-      ? 'animate-on-scroll'
-      : animation === 'slide-left'
-        ? 'animate-on-scroll-left'
-        : 'animate-on-scroll-right';
+    animation === "fade"
+      ? "animate-on-scroll"
+      : animation === "slide-left"
+        ? "animate-on-scroll-left"
+        : "animate-on-scroll-right";
 
   const ref = useScrollAnimation({ animationClass });
 
