@@ -1,6 +1,6 @@
-import PDFDocument from 'pdfkit';
-import path from 'node:path';
 import fs from 'node:fs/promises';
+import path from 'node:path';
+import PDFDocument from 'pdfkit';
 
 export const runtime = 'nodejs';
 
@@ -46,7 +46,7 @@ export async function GET() {
       continue;
     }
     if (line.startsWith('- ')) {
-      const text = '• ' + line.replace(/^-\s+/, '');
+      const text = `• ${line.replace(/^-\s+/, '')}`;
       doc.fontSize(12).text(text, { indent: 12 });
       continue;
     }

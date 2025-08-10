@@ -84,7 +84,13 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     const { title, content, excerpt, published, metaTitle, metaDescription } = await request.json();
 
     const { slug } = await params;
-    let existingPost;
+    let existingPost: {
+      id: string;
+      title: string;
+      content: string;
+      published: boolean;
+      publishedAt: Date | null;
+    } | null;
     try {
       existingPost = await db.post.findUnique({
         where: { slug },
@@ -157,7 +163,7 @@ export async function DELETE(
     }
 
     const { slug } = await params;
-    let post;
+    let post: { id: string } | null;
     try {
       post = await db.post.findUnique({
         where: { slug },

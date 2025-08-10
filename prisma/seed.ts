@@ -726,12 +726,13 @@ Embed compliance and security in the pipeline without slowing teams down.`,
   const additionalPostCategories: Array<{ postId: string; categoryId: string }> = [];
   const additionalPostTags: Array<{ postId: string; tagId: string }> = [];
 
-  additionalPosts.forEach((postData, index) => {
+  for (let index = 0; index < additionalPosts.length; index++) {
+    const postData = additionalPosts[index];
     const postId = additionalPostsCreated[index].id;
 
     // Connect to categories
-    postData.categories.forEach((categoryName) => {
-      let categoryId;
+    for (const categoryName of postData.categories) {
+      let categoryId: string;
       switch (categoryName) {
         case 'AI Development':
           categoryId = aiDevCategory.id;
@@ -749,11 +750,11 @@ Embed compliance and security in the pipeline without slowing teams down.`,
           categoryId = healthcareCategory.id;
       }
       additionalPostCategories.push({ postId, categoryId });
-    });
+    }
 
     // Connect to tags
-    postData.tags.forEach((tagName) => {
-      let tagId;
+    for (const tagName of postData.tags) {
+      let tagId: string;
       switch (tagName) {
         case 'AI':
           tagId = aiTag.id;
@@ -789,8 +790,8 @@ Embed compliance and security in the pipeline without slowing teams down.`,
           tagId = aiTag.id;
       }
       additionalPostTags.push({ postId, tagId });
-    });
-  });
+    }
+  }
 
   await prisma.postCategory.createMany({
     data: additionalPostCategories,

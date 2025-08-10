@@ -1,6 +1,6 @@
-import PDFDocument from 'pdfkit';
-import path from 'node:path';
 import fs from 'node:fs/promises';
+import path from 'node:path';
+import PDFDocument from 'pdfkit';
 
 export const runtime = 'nodejs';
 
