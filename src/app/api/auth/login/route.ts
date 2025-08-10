@@ -1,6 +1,5 @@
 import { generateToken, verifyPassword } from "@/lib/auth";
 import { db } from "@/lib/db";
-import type { User } from "@prisma/client";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -11,7 +10,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email and password are required" }, { status: 400 });
     }
 
-    let user: User | null;
+    interface LoginUser {
+      id: string;
+      email: string;
+      name: string | null;
+      password: string;
+      role: "USER" | "ADMIN";
+    }
+    let user: LoginUser | null;
     try {
       user = await db.user.findUnique({
         where: { email },
