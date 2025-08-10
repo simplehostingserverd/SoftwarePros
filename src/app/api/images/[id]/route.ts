@@ -26,15 +26,19 @@ async function getAuthenticatedUser(request: NextRequest) {
 }
 
 // GET /api/images/[id] - Get single image
-export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const user = await getAuthenticatedUser(request);
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const image = await db.image.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         user: {
           select: {
@@ -58,8 +62,12 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 }
 
 // PUT /api/images/[id] - Update image metadata
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const user = await getAuthenticatedUser(request);
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -68,7 +76,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     const { alt } = await request.json();
 
     const existingImage = await db.image.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingImage) {
@@ -81,7 +89,7 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
     }
 
     const updatedImage = await db.image.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         alt: alt || existingImage.alt,
       },
@@ -104,15 +112,19 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
 }
 
 // DELETE /api/images/[id] - Delete image
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
+    const { id } = await params;
     const user = await getAuthenticatedUser(request);
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const existingImage = await db.image.findUnique({
-      where: { id: params.id },
+      where: { id },
     });
 
     if (!existingImage) {
@@ -140,7 +152,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { id: s
 
     // Delete from database
     await db.image.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({ message: 'Image deleted successfully' });

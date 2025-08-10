@@ -2,12 +2,6 @@ import PostEditor from '@/components/PostEditor';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 
-interface EditPostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
 async function getPost(slug: string) {
   try {
     const post = await db.post.findUnique({
@@ -30,8 +24,13 @@ async function getPost(slug: string) {
   }
 }
 
-export default async function EditPostPage({ params }: EditPostPageProps) {
-  const post = await getPost(params.slug);
+export default async function EditPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();

@@ -21,10 +21,14 @@ async function getAuthenticatedUser(request: NextRequest) {
   return user;
 }
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
   try {
     const post = await db.post.findUnique({
-      where: { slug: params.slug },
+      where: { slug },
       include: {
         author: {
           select: {
@@ -57,7 +61,7 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
     const samplePost = {
       id: '1',
       title: 'Sample Blog Post',
-      slug: params.slug,
+      slug,
       content: 'This is a sample blog post.',
       excerpt: 'Sample excerpt',
       published: true,
@@ -72,7 +76,10 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
   }
 }
 
-export async function PUT(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
   try {
     const user = await getAuthenticatedUser(request);
 
@@ -82,10 +89,11 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
 
     const { title, content, excerpt, published, metaTitle, metaDescription } = await request.json();
 
+    const { slug } = await params;
     let existingPost;
     try {
       existingPost = await db.post.findUnique({
-        where: { slug: params.slug },
+        where: { slug },
       });
     } catch (dbError) {
       console.error('Database error:', dbError);
@@ -96,7 +104,7 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
       return NextResponse.json({ error: 'Post not found' }, { status: 404 });
     }
 
-    let newSlug = params.slug;
+    let newSlug = slug;
     if (title && title !== existingPost.title) {
       newSlug = generateSlug(title);
 
@@ -114,7 +122,7 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
     }
 
     const post = await db.post.update({
-      where: { slug: params.slug },
+      where: { slug },
       data: {
         title: title || existingPost.title,
         slug: newSlug,
@@ -143,7 +151,10 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: { params: { slug: string } }) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
   try {
     const user = await getAuthenticatedUser(request);
 
@@ -151,10 +162,11 @@ export async function DELETE(request: NextRequest, { params }: { params: { slug:
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { slug } = await params;
     let post;
     try {
       post = await db.post.findUnique({
-        where: { slug: params.slug },
+        where: { slug },
       });
 
       if (!post) {
@@ -162,7 +174,7 @@ export async function DELETE(request: NextRequest, { params }: { params: { slug:
       }
 
       await db.post.delete({
-        where: { slug: params.slug },
+        where: { slug },
       });
     } catch (dbError) {
       console.error('Database error:', dbError);
