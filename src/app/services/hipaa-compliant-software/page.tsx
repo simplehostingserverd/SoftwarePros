@@ -284,35 +284,35 @@ export default function HIPAACompliantSoftwarePage() {
 
         <script type="application/ld+json">
           {JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: [
-                {
-                  '@type': 'Question',
-                  name: 'What is HIPAA compliance in software development?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'HIPAA compliance in software development means building healthcare software that meets all Health Insurance Portability and Accountability Act requirements for protecting patient data, including administrative, physical, and technical safeguards.',
-                  },
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'What is HIPAA compliance in software development?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'HIPAA compliance in software development means building healthcare software that meets all Health Insurance Portability and Accountability Act requirements for protecting patient data, including administrative, physical, and technical safeguards.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'How long does it take to develop HIPAA compliant software?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Development time varies based on complexity, but our typical HIPAA compliant software projects take 3-6 months from initial assessment to deployment, with ongoing compliance monitoring.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'How long does it take to develop HIPAA compliant software?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Development time varies based on complexity, but our typical HIPAA compliant software projects take 3-6 months from initial assessment to deployment, with ongoing compliance monitoring.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'What are the penalties for HIPAA violations?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'HIPAA violations can result in fines up to $50,000 per violation, criminal charges for willful neglect, loss of medical licenses, and irreparable damage to reputation.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'What are the penalties for HIPAA violations?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'HIPAA violations can result in fines up to $50,000 per violation, criminal charges for willful neglect, loss of medical licenses, and irreparable damage to reputation.',
                 },
-              ],
-            })}
+              },
+            ],
+          })}
         </script>
       </div>
     </div>

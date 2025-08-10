@@ -604,7 +604,14 @@ export default function HealthcareCybersecurityPage() {
                 className="inline-flex items-center px-6 py-3 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition-colors duration-200"
               >
                 Get Security Assessment
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" role="img" aria-label="Arrow right">
+                <svg
+                  className="ml-2 w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  role="img"
+                  aria-label="Arrow right"
+                >
                   <title>Arrow right</title>
                   <path
                     strokeLinecap="round"

@@ -325,41 +325,38 @@ export default function HealthcarePracticeManagementPage() {
           </div>
         </section>
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: [
-                {
-                  '@type': 'Question',
-                  name: 'How much can I save with practice management software?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Our clients typically achieve 40% operational cost reduction through automated workflows, reduced administrative overhead, and improved billing accuracy.',
-                  },
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'How much can I save with practice management software?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Our clients typically achieve 40% operational cost reduction through automated workflows, reduced administrative overhead, and improved billing accuracy.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'How long does implementation take?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Implementation typically takes 4-8 weeks depending on practice size and complexity. We use a phased approach to minimize disruption.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'How long does implementation take?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Implementation typically takes 4-8 weeks depending on practice size and complexity. We use a phased approach to minimize disruption.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'Can it integrate with my existing systems?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Yes, our platform integrates with most EHR systems, insurance providers, and third-party applications through standard APIs and custom integrations.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'Can it integrate with my existing systems?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Yes, our platform integrates with most EHR systems, insurance providers, and third-party applications through standard APIs and custom integrations.',
                 },
-              ],
-            }),
-          }}
-        />
+              },
+            ],
+          })}
+        </script>
       </div>
     </div>
   );

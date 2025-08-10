@@ -244,78 +244,80 @@ export default function RootLayout({
         />
         <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'LocalBusiness',
-              name: 'SoftwarePros',
-              alternateName: 'Software Pros',
-              url: 'https://softwarepros.org',
-              description:
-                'Professional software development and technology consulting services in Brownsville, Texas',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: '950 E. Van Buren St.',
-                addressLocality: 'Brownsville',
-                addressRegion: 'TX',
-                postalCode: '78520',
-                addressCountry: 'US',
-              },
-              telephone: '+1-956-357-5588',
-              email: 'contact@softwarepros.org',
-              geo: {
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'SoftwarePros',
+            alternateName: 'Software Pros',
+            url: 'https://softwarepros.org',
+            description:
+              'Professional software development and technology consulting services in Brownsville, Texas',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '950 E. Van Buren St.',
+              addressLocality: 'Brownsville',
+              addressRegion: 'TX',
+              postalCode: '78520',
+              addressCountry: 'US',
+            },
+            telephone: '+1-956-357-5588',
+            email: 'contact@softwarepros.org',
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 25.9018,
+              longitude: -97.4975,
+            },
+            areaServed: {
+              '@type': 'Country',
+              name: 'United States',
+            },
+            serviceArea: {
+              '@type': 'GeoCircle',
+              geoMidpoint: {
                 '@type': 'GeoCoordinates',
                 latitude: 25.9018,
                 longitude: -97.4975,
               },
-              areaServed: {
-                '@type': 'Country',
-                name: 'United States',
-              },
-              serviceArea: {
-                '@type': 'GeoCircle',
-                geoMidpoint: {
-                  '@type': 'GeoCoordinates',
-                  latitude: 25.9018,
-                  longitude: -97.4975,
-                },
-                geoRadius: '50000',
-              },
-              openingHours: 'Mo-Fr 09:00-17:00',
-              priceRange: '$$',
-              paymentAccepted: ['Cash', 'Credit Card', 'Check', 'Bank Transfer'],
-              currenciesAccepted: 'USD',
-            })}
+              geoRadius: '50000',
+            },
+            openingHours: 'Mo-Fr 09:00-17:00',
+            priceRange: '$$',
+            paymentAccepted: ['Cash', 'Credit Card', 'Check', 'Bank Transfer'],
+            currenciesAccepted: 'USD',
+          })}
         </script>
-        <script type="application/ld+json">{JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'BreadcrumbList',
-              itemListElement: [
-                {
-                  '@type': 'ListItem',
-                  position: 1,
-                  name: 'Home',
-                  item: 'https://softwarepros.org',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 2,
-                  name: 'Services',
-                  item: 'https://softwarepros.org/services',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 3,
-                  name: 'About',
-                  item: 'https://softwarepros.org/about',
-                },
-                {
-                  '@type': 'ListItem',
-                  position: 4,
-                  name: 'Contact',
-                  item: 'https://softwarepros.org/contact',
-                },
-              ],
-            })}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://softwarepros.org',
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Services',
+                item: 'https://softwarepros.org/services',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'About',
+                item: 'https://softwarepros.org/about',
+              },
+              {
+                '@type': 'ListItem',
+                position: 4,
+                name: 'Contact',
+                item: 'https://softwarepros.org/contact',
+              },
+            ],
+          })}
         </script>
       </head>
       <body className={inter.className}>

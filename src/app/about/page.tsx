@@ -160,63 +160,63 @@ export default function AboutPage() {
       {/* Structured Data Schema */}
       <Script id="about-schema" type="application/ld+json">
         {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Organization',
-            name: 'SoftwarePros',
-            url: 'https://softwarepros.org',
-            logo: 'https://softwarepros.org/web-app-manifest-512x512.png',
-            description:
-              'Healthcare software development company specializing in HIPAA-compliant EHR/EMR systems, practice management software, and telemedicine platforms.',
-            foundingDate: '2008',
-            numberOfEmployees: '25',
-            address: {
-              '@type': 'PostalAddress',
-              addressCountry: 'US',
-            },
-            contactPoint: {
-              '@type': 'ContactPoint',
-              contactType: 'customer service',
-              email: 'info@softwarepros.org',
-            },
-            sameAs: ['https://softwarepros.org', 'https://linkedin.com/company/softwarepros'],
-            hasOfferCatalog: {
-              '@type': 'OfferCatalog',
-              name: 'Healthcare Software Services',
-              itemListElement: [
-                {
-                  '@type': 'Offer',
-                  itemOffered: {
-                    '@type': 'Service',
-                    name: 'EHR/EMR Development',
-                    description:
-                      'Custom electronic health record and electronic medical record systems',
-                  },
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'SoftwarePros',
+          url: 'https://softwarepros.org',
+          logo: 'https://softwarepros.org/web-app-manifest-512x512.png',
+          description:
+            'Healthcare software development company specializing in HIPAA-compliant EHR/EMR systems, practice management software, and telemedicine platforms.',
+          foundingDate: '2008',
+          numberOfEmployees: '25',
+          address: {
+            '@type': 'PostalAddress',
+            addressCountry: 'US',
+          },
+          contactPoint: {
+            '@type': 'ContactPoint',
+            contactType: 'customer service',
+            email: 'info@softwarepros.org',
+          },
+          sameAs: ['https://softwarepros.org', 'https://linkedin.com/company/softwarepros'],
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Healthcare Software Services',
+            itemListElement: [
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'EHR/EMR Development',
+                  description:
+                    'Custom electronic health record and electronic medical record systems',
                 },
-                {
-                  '@type': 'Offer',
-                  itemOffered: {
-                    '@type': 'Service',
-                    name: 'Practice Management Software',
-                    description:
-                      'Comprehensive practice management solutions for healthcare providers',
-                  },
+              },
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Practice Management Software',
+                  description:
+                    'Comprehensive practice management solutions for healthcare providers',
                 },
-                {
-                  '@type': 'Offer',
-                  itemOffered: {
-                    '@type': 'Service',
-                    name: 'Telemedicine Platforms',
-                    description: 'Secure video consultation and remote patient monitoring systems',
-                  },
+              },
+              {
+                '@type': 'Offer',
+                itemOffered: {
+                  '@type': 'Service',
+                  name: 'Telemedicine Platforms',
+                  description: 'Secure video consultation and remote patient monitoring systems',
                 },
-              ],
-            },
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.9',
-              reviewCount: '100',
-            },
-          })}
+              },
+            ],
+          },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.9',
+            reviewCount: '100',
+          },
+        })}
       </Script>
 
       <main className="min-h-screen bg-white">

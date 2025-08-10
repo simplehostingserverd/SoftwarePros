@@ -80,7 +80,7 @@ export default function FloatingChatButton() {
 
         {/* Live indicator */}
         <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full animate-pulse">
-          <div className="w-2 h-2 bg-white rounded-full m-1"></div>
+          <div className="w-2 h-2 bg-white rounded-full m-1" />
         </div>
       </button>
 

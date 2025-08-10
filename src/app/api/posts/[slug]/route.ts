@@ -151,10 +151,7 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+export async function DELETE(request: NextRequest, { params }: { params: { slug: string } }) {
   try {
     const user = await getAuthenticatedUser(request);
 
