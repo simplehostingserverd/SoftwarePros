@@ -37,16 +37,7 @@ export default function TractionKPIChart() {
             contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb' }}
           />
           <Bar dataKey="value" radius={[6, 6, 0, 0]} fill="#60a5fa">
-            <LabelList
-              dataKey="value"
-              position="top"
-              formatter={(v: number, _name: unknown, item: any) => {
-                if (item && item.payload.label === 'Uptime') return `${v}%`;
-                if (item && item.payload.label === 'Cost↓') return `${v}%`;
-                return `${v}k`;
-              }}
-              className="fill-gray-700 text-[12px]"
-            />
+            <LabelList dataKey="value" position="top" style={{ fill: '#374151', fontSize: 12 }} />
           </Bar>
         </BarChart>
       </ResponsiveContainer>

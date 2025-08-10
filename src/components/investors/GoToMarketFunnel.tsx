@@ -26,11 +26,7 @@ export default function GoToMarketFunnel() {
             {data.map((entry, index) => (
               <Cell key={entry.name} fill={COLORS[index % COLORS.length]} />
             ))}
-            <LabelList
-              position="right"
-              formatter={(v: number, name: string) => `${name}: ${v}%`}
-              style={{ fill: '#374151', fontSize: 12 }}
-            />
+            <LabelList position="right" dataKey="name" style={{ fill: '#374151', fontSize: 12 }} />
           </Funnel>
         </FunnelChart>
       </ResponsiveContainer>
