@@ -121,11 +121,10 @@ export default function ResourcesPage() {
             <li>BAAs with vendors handling PHI and defined breach procedures</li>
           </ul>
           <a
-            href="/resources/hipaa-security-checklist.md"
-            download
+            href="/api/resources/hipaa-checklist"
             className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
           >
-            Download Markdown
+            Download PDF
           </a>
         </div>
 
@@ -158,11 +157,10 @@ export default function ResourcesPage() {
             CSV/Notion template mapping threat → likelihood → impact → mitigation → owner.
           </p>
           <a
-            href="/resources/risk-register-template.csv"
-            download
+            href="/api/resources/risk-register"
             className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
           >
-            Download CSV
+            Download PDF
           </a>
         </div>
 
@@ -170,11 +168,10 @@ export default function ResourcesPage() {
           <h3 className="text-xl font-semibold text-gray-900">Vendor Due Diligence</h3>
           <p className="mt-2 text-gray-700">BAA coverage, data residency, encryption, logging, and breach notification SLAs.</p>
           <a
-            href="/resources/vendor-due-diligence-checklist.md"
-            download
+            href="/api/resources/vendor-dd"
             className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
           >
-            Download Markdown
+            Download PDF
           </a>
         </div>
       </section>
