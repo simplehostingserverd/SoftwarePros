@@ -1,42 +1,40 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface Post {
+interface Image {
   id: string;
-  title: string;
-  slug: string;
-  published: boolean;
+  filename: string;
+  originalName: string;
+  url: string;
+  alt?: string;
+  size: number;
+  mimeType: string;
   createdAt: string;
-  updatedAt: string;
-  author: {
-    name: string;
-  };
 }
 
 export default function AdminDashboard() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [images, setImages] = useState<Image[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const router = useRouter();
 
   useEffect(() => {
-    fetchPosts();
+    fetchImages();
   }, []);
 
-  const fetchPosts = async () => {
+  const fetchImages = async () => {
     try {
-      const response = await fetch("/api/posts");
+      const response = await fetch("/api/images");
       if (response.ok) {
         const data = await response.json();
-        setPosts(data.posts);
+        setImages(data.images || []);
       } else {
-        setError("Failed to fetch posts");
+        setError("Failed to fetch images");
       }
     } catch (error) {
-      setError("An error occurred while fetching posts");
+      setError("An error occurred while fetching images");
     } finally {
       setIsLoading(false);
     }
@@ -51,23 +49,23 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDeletePost = async (slug: string) => {
-    if (!confirm("Are you sure you want to delete this post?")) {
+  const handleDeleteImage = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this image?")) {
       return;
     }
 
     try {
-      const response = await fetch(`/api/posts/${slug}`, {
+      const response = await fetch(`/api/images/${id}`, {
         method: "DELETE",
       });
 
       if (response.ok) {
-        setPosts(posts.filter((post) => post.slug !== slug));
+        setImages(images.filter((image) => image.id !== id));
       } else {
-        setError("Failed to delete post");
+        setError("Failed to delete image");
       }
     } catch (error) {
-      setError("An error occurred while deleting the post");
+      setError("An error occurred while deleting the image");
     }
   };
 
@@ -93,26 +91,21 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Blog Admin Dashboard</h1>
-              <p className="text-gray-600">Manage your blog posts and content</p>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+              <p className="text-gray-600">Manage your website content and media</p>
             </div>
             <div className="flex space-x-4">
-              <Link
-                href="/admin/posts/new"
+              <button
+                type="button"
+                onClick={() => router.push("/admin/images")}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium"
               >
-                New Post
-              </Link>
-              <Link
-                href="/admin/images"
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium"
-              >
                 Manage Images
-              </Link>
+              </button>
               <button
                 type="button"
                 onClick={handleLogout}
-                className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-md font-medium"
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium"
               >
                 Logout
               </button>
@@ -123,89 +116,138 @@ export default function AdminDashboard() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-6">
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             {error}
           </div>
         )}
 
-        <div className="bg-white shadow rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-medium text-gray-900">All Posts</h2>
+        {/* Dashboard Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">Total Images</dt>
+                    <dd className="text-lg font-medium text-gray-900">{images.length}</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {posts.length === 0 ? (
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">Website Status</dt>
+                    <dd className="text-lg font-medium text-green-600">Online</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white overflow-hidden shadow rounded-lg">
+            <div className="p-5">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-500 truncate">Admin Users</dt>
+                    <dd className="text-lg font-medium text-gray-900">2</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Images */}
+        <div className="bg-white shadow overflow-hidden sm:rounded-md">
+          <div className="px-4 py-5 sm:px-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Recent Images</h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Most recently uploaded images
+            </p>
+          </div>
+          {images.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500 mb-4">No posts yet</p>
-              <Link
-                href="/admin/posts/new"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium"
-              >
-                Create your first post
-              </Link>
+              <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <h3 className="mt-2 text-sm font-medium text-gray-900">No images</h3>
+              <p className="mt-1 text-sm text-gray-500">Get started by uploading an image.</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
+            <div className="bg-white">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Title
+                      Image
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
+                      Name
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Author
+                      Size
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Created
+                      Uploaded
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
+                    <th className="relative px-6 py-3">
+                      <span className="sr-only">Actions</span>
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {posts.map((post) => (
-                    <tr key={post.id}>
+                  {images.slice(0, 5).map((image) => (
+                    <tr key={image.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">{post.title}</div>
-                        <div className="text-sm text-gray-500">/{post.slug}</div>
+                        <img 
+                          src={image.url} 
+                          alt={image.alt || image.originalName}
+                          className="h-10 w-10 object-cover rounded"
+                        />
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span
-                          className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            post.published
-                              ? "bg-green-100 text-green-800"
-                              : "bg-yellow-100 text-yellow-800"
-                          }`}
-                        >
-                          {post.published ? "Published" : "Draft"}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {post.author.name}
+                        <div className="text-sm font-medium text-gray-900">{image.originalName}</div>
+                        <div className="text-sm text-gray-500">{image.mimeType}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(post.createdAt).toLocaleDateString()}
+                        {(image.size / 1024).toFixed(1)} KB
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {new Date(image.createdAt).toLocaleDateString()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                        <Link
-                          href={`/blog/${post.slug}`}
-                          className="text-blue-600 hover:text-blue-900"
+                        <a
+                          href={image.url}
                           target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-900"
                         >
                           View
-                        </Link>
-                        <Link
-                          href={`/admin/posts/${post.slug}/edit`}
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          Edit
-                        </Link>
+                        </a>
                         <button
                           type="button"
-                          onClick={() => handleDeletePost(post.slug)}
+                          onClick={() => handleDeleteImage(image.id)}
                           className="text-red-600 hover:text-red-900"
                         >
                           Delete
