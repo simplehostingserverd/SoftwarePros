@@ -44,6 +44,16 @@
   },
   "files": {
     "include": ["src/**/*", "*.ts", "*.tsx", "*.js", "*.jsx"],
-    "ignore": ["**/*.ico", "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.svg"]
+    "ignore": [
+      "**/*.ico",
+      "**/*.png",
+      "**/*.jpg",
+      "**/*.jpeg",
+      "**/*.gif",
+      "**/*.svg",
+      ".next/**",
+      "dist/**",
+      "dist-cpanel/**"
+    ]
   }
 }
