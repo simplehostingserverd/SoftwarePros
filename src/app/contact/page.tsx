@@ -98,14 +98,16 @@ const contactInfo = [
   {
     icon: Email,
     title: "Email Address",
-    details: ["info@softwarepros.org", "support@softwarepros.org"],
+    details: ["contact@softwarepros.org"],
     color: "#00AA44",
+    isEmail: true,
   },
   {
     icon: Phone,
     title: "Phone Number",
     details: ["(956) 357-5588", "Mon-Fri 8AM-6PM CST"],
     color: "#CC6600",
+    isPhone: true,
   },
   {
     icon: Schedule,
@@ -647,18 +649,51 @@ export default function ContactPage() {
                               {info.title}
                             </Typography>
                           </Box>
-                          {info.details.map((detail, detailIndex) => (
-                            <Typography
-                              key={detail}
-                              level="body-md"
-                              sx={{
-                                color: detailIndex === 0 ? "neutral.800" : "neutral.600",
-                                fontWeight: detailIndex === 0 ? "medium" : "normal",
-                              }}
-                            >
-                              {detail}
-                            </Typography>
-                          ))}
+                          {info.details.map((detail, detailIndex) => {
+                            const isClickable = (info.isEmail && detailIndex === 0) || (info.isPhone && detailIndex === 0);
+                            
+                            if (isClickable) {
+                              return (
+                                <Typography
+                                  key={detail}
+                                  level="body-md"
+                                  sx={{
+                                    color: detailIndex === 0 ? "neutral.800" : "neutral.600",
+                                    fontWeight: detailIndex === 0 ? "medium" : "normal",
+                                  }}
+                                >
+                                  <a
+                                    href={info.isEmail ? `mailto:${detail}` : `tel:${detail.replace(/[^0-9]/g, '')}`}
+                                    style={{
+                                      color: info.color,
+                                      textDecoration: "none",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                      e.currentTarget.style.textDecoration = "underline";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                      e.currentTarget.style.textDecoration = "none";
+                                    }}
+                                  >
+                                    {detail}
+                                  </a>
+                                </Typography>
+                              );
+                            }
+                            
+                            return (
+                              <Typography
+                                key={detail}
+                                level="body-md"
+                                sx={{
+                                  color: detailIndex === 0 ? "neutral.800" : "neutral.600",
+                                  fontWeight: detailIndex === 0 ? "medium" : "normal",
+                                }}
+                              >
+                                {detail}
+                              </Typography>
+                            );
+                          })}
                         </CardContent>
                       </Card>
                     </AnimatedDiv>

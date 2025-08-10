@@ -10,7 +10,6 @@ const navigationItems = [
   { name: "Services", href: "/services" },
   { name: "Case Studies", href: "/case-studies" },
   { name: "Resources", href: "/resources" },
-  { name: "Blog", href: "/blog" },
   { name: "Investors", href: "/investors" },
   { name: "Contact", href: "/contact" },
 ];

@@ -60,12 +60,27 @@ async function resolveTransport() {
     }
   }
 
-  // Fallback to system sendmail (common on cPanel/Exim) in production Linux
-  return nodemailer.createTransport({
-    sendmail: true,
-    newline: "unix",
-    path: process.env.SENDMAIL_PATH || "/usr/sbin/sendmail",
-  });
+  // For cPanel environments, try localhost SMTP first, then fall back to sendmail
+  // Most cPanel servers have Exim running on port 25
+  try {
+    return nodemailer.createTransport({
+      host: "localhost",
+      port: 25,
+      secure: false,
+      tls: {
+        rejectUnauthorized: false
+      },
+      connectionTimeout: 10_000,
+      socketTimeout: 10_000,
+    });
+  } catch {
+    // Fallback to sendmail if localhost SMTP fails
+    return nodemailer.createTransport({
+      sendmail: true,
+      newline: "unix",
+      path: process.env.SENDMAIL_PATH || "/usr/sbin/sendmail",
+    });
+  }
 }
 
 function buildHtmlEmail(data: ContactEmailData) {

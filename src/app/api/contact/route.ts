@@ -51,6 +51,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
     console.error("Contact form error:", error);
+    
+    // Handle Zod validation errors
     if (
       error &&
       typeof error === "object" &&
@@ -62,6 +64,31 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
-    return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
+    
+    // Handle email sending errors with more detail
+    if (error instanceof Error) {
+      console.error("Email error details:", {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      });
+      
+      // Provide helpful error messages for common email issues
+      if (error.message.includes("ECONNREFUSED") || error.message.includes("ENOTFOUND")) {
+        return NextResponse.json(
+          { error: "Email service temporarily unavailable. Please try again later." },
+          { status: 503 }
+        );
+      }
+      
+      if (error.message.includes("Authentication failed") || error.message.includes("Invalid login")) {
+        return NextResponse.json(
+          { error: "Email configuration error. Please contact support." },
+          { status: 500 }
+        );
+      }
+    }
+    
+    return NextResponse.json({ error: "Failed to send message. Please try again." }, { status: 500 });
   }
 }

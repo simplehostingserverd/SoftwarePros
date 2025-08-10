@@ -12,7 +12,6 @@ const footerLinks = {
   company: [
     { name: "About Us", href: "/about" },
     { name: "Portfolio", href: "/portfolio" },
-    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ],
   legal: [
@@ -24,8 +23,8 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { name: "LinkedIn", href: "https://linkedin.com/company/softwarepros" },
-  { name: "Twitter", href: "https://twitter.com/softwarepros" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/michael-trevino-538480375/" },
+  { name: "Twitter", href: "https://x.com/softwareprosdev" },
   { name: "GitHub", href: "https://github.com/softwarepros" },
 ];
 
@@ -98,7 +97,12 @@ export default function Footer() {
                       d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <span className="text-gray-400 text-sm">info@softwarepros.org</span>
+                  <a 
+                    href="mailto:contact@softwarepros.org"
+                    className="text-gray-400 text-sm hover:text-purple-400 transition-colors duration-300"
+                  >
+                    contact@softwarepros.org
+                  </a>
                 </div>
                 <div className="flex items-center gap-3">
                   <svg

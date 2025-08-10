@@ -41,7 +41,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
             "@type": "ContactPoint",
             telephone: "+1-956-357-5588",
             contactType: "customer service",
-            email: "info@softwarepros.org",
+            email: "contact@softwarepros.org",
           },
           founder: {
             "@type": "Person",

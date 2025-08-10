@@ -61,7 +61,12 @@ export default function CTASection() {
           <div className="pt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="space-y-2">
               <div className="text-purple-400 font-semibold">Email</div>
-              <div className="text-gray-300">contact@softwarepros.org</div>
+              <a 
+                href="mailto:contact@softwarepros.org"
+                className="text-gray-300 hover:text-purple-400 transition-colors duration-300"
+              >
+                contact@softwarepros.org
+              </a>
             </div>
             <div className="space-y-2">
               <div className="text-purple-400 font-semibold">Response Time</div>

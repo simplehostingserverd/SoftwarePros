@@ -81,8 +81,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@softwarepros",
-    creator: "@softwarepros",
+    site: "@softwareprosdev",
+    creator: "@softwareprosdev",
     title: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
     description:
       "Professional software development, consulting, and digital solutions for startups and enterprises. Specializing in healthcare software and HIPAA compliance.",
@@ -155,7 +155,7 @@ export default function RootLayout({
         "@type": "ContactPoint",
         telephone: "+1-956-357-5588",
         contactType: "technical support",
-        email: "support@softwarepros.org",
+        email: "contact@softwarepros.org",
         availableLanguage: "English",
       },
     ],
@@ -196,10 +196,10 @@ export default function RootLayout({
       ],
     },
     sameAs: [
-      "https://www.linkedin.com/company/softwarepros",
-      "https://twitter.com/softwarepros",
+      "https://www.linkedin.com/in/michael-trevino-538480375/",
+      "https://x.com/softwareprosdev",
       "https://github.com/softwarepros",
-      "https://www.facebook.com/softwarepros",
+      "https://instagram.com/softwareprosdev",
     ],
   };
 

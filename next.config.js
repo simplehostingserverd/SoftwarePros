@@ -8,6 +8,9 @@ const nextConfig = {
     optimizePackageImports: undefined,
     // optimizeCss: true,
   },
+  // Fix for cPanel deployment - ensure assets load correctly
+  assetPrefix: process.env.NODE_ENV === 'production' ? '' : undefined,
+  basePath: process.env.NODE_ENV === 'production' ? '' : undefined,
   turbopack: {
     rules: {
       '*.svg': {
@@ -52,6 +55,21 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
+  // Better asset handling for cPanel
+  distDir: '.next',
+  // Ensure static assets are served correctly
+  async rewrites() {
+    return [
+      {
+        source: '/_next/static/:path*',
+        destination: '/_next/static/:path*',
+      },
+      {
+        source: '/_next/image/:path*',
+        destination: '/_next/image/:path*',
+      },
+    ];
+  },
   // Performance optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
