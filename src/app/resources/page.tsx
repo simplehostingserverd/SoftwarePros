@@ -39,7 +39,7 @@ const tools: Resource[] = [
     title: 'Software Cost Calculator',
     description: 'Estimate budget by scope, team composition, security, and hosting model.',
     href: '/resources#cost-calculator',
-    badge: 'Beta',
+    badge: 'Live',
   },
   {
     title: 'Risk Register Template',
@@ -52,6 +52,7 @@ const tools: Resource[] = [
     href: '/resources#vendor-dd',
   },
 ];
+import CostCalculator from '@/components/CostCalculator';
 
 export default function ResourcesPage() {
   return (
@@ -119,6 +120,13 @@ export default function ResourcesPage() {
             <li>Technical: access control, audit logs, integrity, encryption, SSO/MFA</li>
             <li>BAAs with vendors handling PHI and defined breach procedures</li>
           </ul>
+          <a
+            href="/resources/hipaa-security-checklist.md"
+            download
+            className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
+          >
+            Download Markdown
+          </a>
         </div>
 
         <div id="ehr-playbook" className="rounded-2xl border p-6">
@@ -141,11 +149,7 @@ export default function ResourcesPage() {
         </div>
 
         <div id="cost-calculator" className="rounded-2xl border p-6">
-          <h3 className="text-xl font-semibold text-gray-900">Software Cost Calculator</h3>
-          <p className="mt-2 text-gray-700">
-            Coming soon — a transparent model to plan budgets, including hosting,
-            compliance, disaster recovery, and support.
-          </p>
+          <CostCalculator />
         </div>
 
         <div id="risk-register" className="rounded-2xl border p-6">
@@ -153,11 +157,25 @@ export default function ResourcesPage() {
           <p className="mt-2 text-gray-700">
             CSV/Notion template mapping threat → likelihood → impact → mitigation → owner.
           </p>
+          <a
+            href="/resources/risk-register-template.csv"
+            download
+            className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
+          >
+            Download CSV
+          </a>
         </div>
 
         <div id="vendor-dd" className="rounded-2xl border p-6">
           <h3 className="text-xl font-semibold text-gray-900">Vendor Due Diligence</h3>
           <p className="mt-2 text-gray-700">BAA coverage, data residency, encryption, logging, and breach notification SLAs.</p>
+          <a
+            href="/resources/vendor-due-diligence-checklist.md"
+            download
+            className="mt-4 inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium text-indigo-700 hover:bg-indigo-50"
+          >
+            Download Markdown
+          </a>
         </div>
       </section>
 

@@ -1,0 +1,6 @@
+Risk ID,Threat,Description,Likelihood (1-5),Impact (1-5),Risk Score (LxI),Mitigation,Owner,Target Date,Status,Notes
+R-001,PHI exfiltration via compromised credentials,Stolen or guessed credentials used to access PHI,3,5,15,Enforce MFA and SSO; anomaly detection; least privilege,Security Team,2025-09-30,Planned,
+R-002,Ransomware attack,Malware encrypts production systems and backups,2,5,10,Immutable backups; EDR; phishing training; tabletop exercises,IT Ops,2025-10-31,Planned,
+R-003,Data loss due to cloud misconfiguration,Public S3 bucket exposes PHI,2,4,8,Automated cloud config scanning and guardrails,Cloud Eng,2025-08-31,In Progress,
+R-004,Third-party vendor breach,Vendor handling PHI is breached,2,5,10,BAA; vendor assessments; data minimization; logging,Compliance,2025-11-30,Planned,
+R-005,Incomplete audit logs,Insufficient logs impede incident response,3,4,12,Centralized logging; retention policy; access reviews,Platform Eng,2025-08-15,In Progress,
