@@ -23,47 +23,103 @@ const FROM_EMAIL =
   `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || "softwarepros.org"}`;
 
 async function resolveTransport() {
-  // Prefer explicit SMTP if provided
-  if (process.env.SMTP_HOST) {
+  // Try multiple SMTP configurations in order of preference
+  
+  // 1. Explicit SMTP configuration (highest priority)
+  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
     const port = process.env.SMTP_PORT ? Number.parseInt(process.env.SMTP_PORT, 10) : 587;
     const secure = process.env.SMTP_SECURE === "true" ? true : port === 465;
-    const auth = process.env.SMTP_USER
-      ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS || "" }
-      : undefined;
 
-    return nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port,
-      secure,
-      auth,
-      // Avoid TLS issues in common dev SMTPs
-      tls: { rejectUnauthorized: false },
-      connectionTimeout: 15_000,
-      socketTimeout: 15_000,
-    });
-  }
-
-  // In development (or on Windows dev boxes) with no SMTP configured,
-  // use an Ethereal account so messages succeed and provide a preview URL.
-  if (process.env.NODE_ENV !== "production") {
+    console.log(`Attempting SMTP connection to ${process.env.SMTP_HOST}:${port}`);
+    
     try {
-      const testAccount = await nodemailer.createTestAccount();
-      return nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
-        auth: { user: testAccount.user, pass: testAccount.pass },
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port,
+        secure,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+        tls: { 
+          rejectUnauthorized: false,
+          ciphers: 'SSLv3'
+        },
+        connectionTimeout: 30_000,
+        socketTimeout: 30_000,
+        logger: process.env.NODE_ENV === "development",
+        debug: process.env.NODE_ENV === "development",
       });
-    } catch {
-      // Fallback to JSON transport to prevent failures entirely
-      return nodemailer.createTransport({ jsonTransport: true });
+
+      // Test the connection
+      await transporter.verify();
+      console.log("SMTP connection verified successfully");
+      return transporter;
+    } catch (error) {
+      console.error("SMTP connection failed:", error);
+      throw new Error(`SMTP configuration error: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
-  // For cPanel environments, try localhost SMTP first, then fall back to sendmail
-  // Most cPanel servers have Exim running on port 25
+  // 2. Gmail SMTP (if Gmail credentials are provided)
+  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
+    console.log("Attempting Gmail SMTP connection");
+    
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_APP_PASSWORD,
+        },
+        tls: { rejectUnauthorized: false },
+      });
+
+      await transporter.verify();
+      console.log("Gmail SMTP connection verified successfully");
+      return transporter;
+    } catch (error) {
+      console.error("Gmail SMTP connection failed:", error);
+      throw new Error(`Gmail configuration error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  // 3. Development mode - use Ethereal for testing
+  if (process.env.NODE_ENV === "development") {
+    console.log("Development mode: Creating Ethereal test account");
+    
+    try {
+      const testAccount = await nodemailer.createTestAccount();
+      const transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false,
+        auth: { 
+          user: testAccount.user, 
+          pass: testAccount.pass 
+        },
+      });
+      
+      console.log("Ethereal test account created successfully");
+      return transporter;
+    } catch (error) {
+      console.error("Ethereal test account creation failed:", error);
+      
+      // Final fallback for development - JSON transport
+      console.log("Using JSON transport as final fallback");
+      return nodemailer.createTransport({
+        streamTransport: true,
+        newline: 'unix',
+        buffer: true,
+      });
+    }
+  }
+
+  // 4. Production fallback - try cPanel localhost SMTP
+  console.log("Production mode: Attempting localhost SMTP connection");
+  
   try {
-    return nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       host: "localhost",
       port: 25,
       secure: false,
@@ -73,13 +129,29 @@ async function resolveTransport() {
       connectionTimeout: 10_000,
       socketTimeout: 10_000,
     });
-  } catch {
-    // Fallback to sendmail if localhost SMTP fails
-    return nodemailer.createTransport({
-      sendmail: true,
-      newline: "unix",
-      path: process.env.SENDMAIL_PATH || "/usr/sbin/sendmail",
-    });
+
+    await transporter.verify();
+    console.log("Localhost SMTP connection verified successfully");
+    return transporter;
+  } catch (error) {
+    console.error("Localhost SMTP failed:", error);
+    
+    // Final production fallback - sendmail
+    console.log("Attempting sendmail fallback");
+    
+    try {
+      const transporter = nodemailer.createTransport({
+        sendmail: true,
+        newline: "unix",
+        path: process.env.SENDMAIL_PATH || "/usr/sbin/sendmail",
+      });
+      
+      console.log("Sendmail transporter created successfully");
+      return transporter;
+    } catch (sendmailError) {
+      console.error("Sendmail fallback failed:", sendmailError);
+      throw new Error("No working email transport found. Please configure SMTP settings.");
+    }
   }
 }
 
@@ -133,26 +205,32 @@ function buildTextEmail(data: ContactEmailData) {
 }
 
 export async function sendContactEmail(data: ContactEmailData) {
-  const transporter = await resolveTransport();
+  try {
+    console.log("Attempting to send contact email...");
+    const transporter = await resolveTransport();
 
-  const subjectBase = data.subject?.trim() || "New Contact Message";
-  const subject = `${subjectBase} - ${data.name} (${data.serviceType || "General"})`;
+    const subjectBase = data.subject?.trim() || "New Contact Message";
+    const subject = `${subjectBase} - ${data.name} (${data.serviceType || "General"})`;
 
-  const info = await transporter.sendMail({
-    from: FROM_EMAIL,
-    to: RECIPIENT_EMAIL,
-    replyTo: data.email,
-    subject,
-    text: buildTextEmail(data),
-    html: buildHtmlEmail(data),
-  });
+    const info = await transporter.sendMail({
+      from: FROM_EMAIL,
+      to: RECIPIENT_EMAIL,
+      replyTo: data.email,
+      subject,
+      text: buildTextEmail(data),
+      html: buildHtmlEmail(data),
+    });
 
-  const preview = nodemailer.getTestMessageUrl?.(info);
-  if (preview) {
-    // Helpful during development
-    // eslint-disable-next-line no-console
-    console.log("Contact email preview URL:", preview);
+    const preview = nodemailer.getTestMessageUrl?.(info);
+    if (preview) {
+      // Helpful during development
+      console.log("Contact email preview URL:", preview);
+    }
+
+    console.log("Email sent successfully:", info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Error sending contact email:", error);
+    throw error;
   }
-
-  return info;
 }

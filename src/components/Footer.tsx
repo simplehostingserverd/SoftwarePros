@@ -4,10 +4,10 @@ import Link from "next/link";
 
 const footerLinks = {
   services: [
-    { name: "Web Development", href: "/services#web" },
-    { name: "Mobile Apps", href: "/services#mobile" },
-    { name: "Enterprise Solutions", href: "/services#enterprise" },
-    { name: "Tech Consulting", href: "/services#consulting" },
+    { name: "Web Development", href: "/services/web" },
+    { name: "Mobile Apps", href: "/services/mobile" },
+    { name: "Enterprise Solutions", href: "/services/enterprise" },
+    { name: "Tech Consulting", href: "/services/consulting" },
   ],
   company: [
     { name: "About Us", href: "/about" },
