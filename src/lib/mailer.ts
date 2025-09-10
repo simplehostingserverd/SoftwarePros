@@ -207,19 +207,21 @@ function buildTextEmail(data: ContactEmailData) {
 export async function sendContactEmail(data: ContactEmailData) {
   try {
     console.log("Attempting to send contact email...");
-    const transporter = await resolveTransport();
+    const transporter = await resolveTransport() as any;
 
     const subjectBase = data.subject?.trim() || "New Contact Message";
     const subject = `${subjectBase} - ${data.name} (${data.serviceType || "General"})`;
 
-    const info = await transporter.sendMail({
+    const mailOptions = {
       from: FROM_EMAIL,
       to: RECIPIENT_EMAIL,
       replyTo: data.email,
       subject,
       text: buildTextEmail(data),
       html: buildHtmlEmail(data),
-    });
+    };
+
+    const info = await transporter.sendMail(mailOptions);
 
     const preview = nodemailer.getTestMessageUrl?.(info);
     if (preview) {
