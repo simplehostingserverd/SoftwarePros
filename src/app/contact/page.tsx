@@ -92,7 +92,7 @@ const contactInfo = [
   {
     icon: LocationOn,
     title: "Office Location",
-    details: ["950 E. Van Buren St.", "Brownsville, TX 78520"],
+    details: ["222 E. Van Buren St.", "Harlingen, TX 78550"],
     color: "#0066CC",
   },
   {
@@ -650,8 +650,10 @@ export default function ContactPage() {
                             </Typography>
                           </Box>
                           {info.details.map((detail, detailIndex) => {
-                            const isClickable = (info.isEmail && detailIndex === 0) || (info.isPhone && detailIndex === 0);
-                            
+                            const isClickable =
+                              (info.isEmail && detailIndex === 0) ||
+                              (info.isPhone && detailIndex === 0);
+
                             if (isClickable) {
                               return (
                                 <Typography
@@ -663,7 +665,11 @@ export default function ContactPage() {
                                   }}
                                 >
                                   <a
-                                    href={info.isEmail ? `mailto:${detail}` : `tel:${detail.replace(/[^0-9]/g, '')}`}
+                                    href={
+                                      info.isEmail
+                                        ? `mailto:${detail}`
+                                        : `tel:${detail.replace(/[^0-9]/g, "")}`
+                                    }
                                     style={{
                                       color: info.color,
                                       textDecoration: "none",
@@ -680,7 +686,7 @@ export default function ContactPage() {
                                 </Typography>
                               );
                             }
-                            
+
                             return (
                               <Typography
                                 key={detail}

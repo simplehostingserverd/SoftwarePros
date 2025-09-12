@@ -1,17 +1,41 @@
 "use client";
 
-import React from "react";
-import { ArrowForward, CheckCircle, Code, DesignServices, Language, PhoneAndroid, Search, Security, Speed, Storage } from "@mui/icons-material";
-import { Box, Button, Card, CardContent, Chip, Container, Grid, List, ListItem, ListItemDecorator, Typography } from "@mui/joy";
+import {
+  ArrowForward,
+  CheckCircle,
+  Code,
+  DesignServices,
+  Language,
+  PhoneAndroid,
+  Search,
+  Security,
+  Speed,
+  Storage,
+} from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemDecorator,
+  Typography,
+} from "@mui/joy";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import React from "react";
 
 const webServices = [
   {
     id: "custom-web",
     icon: Code,
     title: "Custom Web Applications",
-    description: "Tailored web applications built from the ground up to meet your specific business requirements.",
+    description:
+      "Tailored web applications built from the ground up to meet your specific business requirements.",
     features: [
       "Full-stack development",
       "Custom business logic",
@@ -26,7 +50,8 @@ const webServices = [
     id: "responsive",
     icon: PhoneAndroid,
     title: "Responsive Web Design",
-    description: "Mobile-first designs that look and perform flawlessly across all devices and screen sizes.",
+    description:
+      "Mobile-first designs that look and perform flawlessly across all devices and screen sizes.",
     features: [
       "Mobile-first approach",
       "Cross-browser compatibility",
@@ -41,7 +66,8 @@ const webServices = [
     id: "ecommerce",
     icon: Storage,
     title: "E-commerce Solutions",
-    description: "Complete online stores with payment processing, inventory management, and customer analytics.",
+    description:
+      "Complete online stores with payment processing, inventory management, and customer analytics.",
     features: [
       "Shopping cart & checkout",
       "Payment gateway integration",
@@ -56,7 +82,8 @@ const webServices = [
     id: "cms",
     icon: DesignServices,
     title: "Content Management Systems",
-    description: "Easy-to-use content management systems that empower you to update your website independently.",
+    description:
+      "Easy-to-use content management systems that empower you to update your website independently.",
     features: [
       "User-friendly admin panels",
       "WYSIWYG editors",
@@ -71,7 +98,8 @@ const webServices = [
     id: "performance",
     icon: Speed,
     title: "Performance Optimization",
-    description: "Speed up your existing websites with modern optimization techniques and best practices.",
+    description:
+      "Speed up your existing websites with modern optimization techniques and best practices.",
     features: [
       "Core Web Vitals optimization",
       "Image optimization",
@@ -86,7 +114,8 @@ const webServices = [
     id: "seo",
     icon: Search,
     title: "SEO & Digital Marketing",
-    description: "Improve your online visibility with technical SEO, content optimization, and digital marketing.",
+    description:
+      "Improve your online visibility with technical SEO, content optimization, and digital marketing.",
     features: [
       "Technical SEO audits",
       "On-page optimization",
@@ -111,8 +140,18 @@ const industries = [
 ];
 
 const technologies = [
-  "React", "Next.js", "TypeScript", "Node.js", "Python", "PHP",
-  "PostgreSQL", "MongoDB", "AWS", "Azure", "Docker", "Kubernetes"
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "Python",
+  "PHP",
+  "PostgreSQL",
+  "MongoDB",
+  "AWS",
+  "Azure",
+  "Docker",
+  "Kubernetes",
 ];
 
 export default function WebDevelopmentPage() {
@@ -158,7 +197,9 @@ export default function WebDevelopmentPage() {
                   mb: 4,
                 }}
               >
-                Professional web development solutions that drive business growth. From custom applications to e-commerce platforms, we build modern, scalable, and secure web experiences.
+                Professional web development solutions that drive business growth. From custom
+                applications to e-commerce platforms, we build modern, scalable, and secure web
+                experiences.
               </Typography>
               <Box sx={{ display: "flex", gap: 2, justifyContent: "center", flexWrap: "wrap" }}>
                 <Button
@@ -293,7 +334,8 @@ export default function WebDevelopmentPage() {
               mb: 6,
             }}
           >
-            We have experience building web solutions across various industries, understanding unique requirements and compliance needs.
+            We have experience building web solutions across various industries, understanding
+            unique requirements and compliance needs.
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
             {industries.map((industry) => (
@@ -334,7 +376,8 @@ export default function WebDevelopmentPage() {
               mb: 6,
             }}
           >
-            We stay current with the latest technologies to deliver modern, efficient, and scalable web solutions.
+            We stay current with the latest technologies to deliver modern, efficient, and scalable
+            web solutions.
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
             {technologies.map((tech) => (
@@ -361,17 +404,12 @@ export default function WebDevelopmentPage() {
       >
         <Container maxWidth="lg">
           <Box sx={{ textAlign: "center" }}>
-            <Typography
-              level="h2"
-              sx={{ fontWeight: "bold", mb: 3, color: "white" }}
-            >
+            <Typography level="h2" sx={{ fontWeight: "bold", mb: 3, color: "white" }}>
               Ready to Build Your Web Solution?
             </Typography>
-            <Typography
-              level="body-lg"
-              sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}
-            >
-              Let's discuss your project requirements and create a web solution that drives your business forward.
+            <Typography level="body-lg" sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}>
+              Let's discuss your project requirements and create a web solution that drives your
+              business forward.
             </Typography>
             <Button
               component={Link}

@@ -211,17 +211,31 @@ const industries = [
   {
     id: "healthcare",
     title: "Healthcare & Medical",
-    description: "HIPAA-compliant software solutions for medical practices, hospitals, and healthcare providers.",
+    description:
+      "HIPAA-compliant software solutions for medical practices, hospitals, and healthcare providers.",
     icon: LocalHospital,
-    features: ["EHR/EMR Systems", "Patient Portals", "Telemedicine", "Medical Billing", "Compliance Tools"],
+    features: [
+      "EHR/EMR Systems",
+      "Patient Portals",
+      "Telemedicine",
+      "Medical Billing",
+      "Compliance Tools",
+    ],
     color: "#0066CC",
   },
   {
-    id: "real-estate", 
+    id: "real-estate",
     title: "Real Estate",
-    description: "Comprehensive property management and real estate CRM solutions for agents and brokers.",
+    description:
+      "Comprehensive property management and real estate CRM solutions for agents and brokers.",
     icon: MedicalServices,
-    features: ["Property Management", "CRM Systems", "MLS Integration", "Transaction Management", "Lead Generation"],
+    features: [
+      "Property Management",
+      "CRM Systems",
+      "MLS Integration",
+      "Transaction Management",
+      "Lead Generation",
+    ],
     color: "#00AA44",
   },
   {
@@ -229,7 +243,13 @@ const industries = [
     title: "Government Contracting",
     description: "Secure, compliant software solutions for government agencies and contractors.",
     icon: Security,
-    features: ["Compliance Management", "Secure Communications", "Document Management", "Audit Trails", "Access Control"],
+    features: [
+      "Compliance Management",
+      "Secure Communications",
+      "Document Management",
+      "Audit Trails",
+      "Access Control",
+    ],
     color: "#CC6600",
   },
   {
@@ -237,7 +257,13 @@ const industries = [
     title: "Schools & Municipalities",
     description: "Educational technology and municipal management systems for public institutions.",
     icon: Assessment,
-    features: ["Student Information Systems", "Learning Management", "Municipal Services", "Public Portals", "Resource Management"],
+    features: [
+      "Student Information Systems",
+      "Learning Management",
+      "Municipal Services",
+      "Public Portals",
+      "Resource Management",
+    ],
     color: "#AA0066",
   },
   {
@@ -245,7 +271,13 @@ const industries = [
     title: "AI Hardware & Software Development",
     description: "Cutting-edge AI solutions and hardware integration for intelligent systems.",
     icon: Cloud,
-    features: ["Machine Learning Models", "AI Integration", "Hardware Controls", "IoT Connectivity", "Predictive Analytics"],
+    features: [
+      "Machine Learning Models",
+      "AI Integration",
+      "Hardware Controls",
+      "IoT Connectivity",
+      "Predictive Analytics",
+    ],
     color: "#6600CC",
   },
   {
@@ -253,39 +285,73 @@ const industries = [
     title: "IoT & Industrial",
     description: "Internet of Things and industrial automation solutions for smart manufacturing.",
     icon: Integration,
-    features: ["Sensor Integration", "Real-time Monitoring", "Predictive Maintenance", "Industrial Controls", "Data Analytics"],
+    features: [
+      "Sensor Integration",
+      "Real-time Monitoring",
+      "Predictive Maintenance",
+      "Industrial Controls",
+      "Data Analytics",
+    ],
     color: "#CC0066",
   },
   {
     id: "financial",
     title: "Financial Services & Banking",
-    description: "Secure financial technology solutions with regulatory compliance and fraud protection.",
+    description:
+      "Secure financial technology solutions with regulatory compliance and fraud protection.",
     icon: Payment,
-    features: ["Payment Processing", "Risk Management", "Regulatory Compliance", "Mobile Banking", "Fraud Detection"],
+    features: [
+      "Payment Processing",
+      "Risk Management",
+      "Regulatory Compliance",
+      "Mobile Banking",
+      "Fraud Detection",
+    ],
     color: "#0066AA",
   },
   {
     id: "retail",
     title: "Retail & E-commerce",
-    description: "Complete e-commerce platforms and retail management systems for online and brick-and-mortar stores.",
+    description:
+      "Complete e-commerce platforms and retail management systems for online and brick-and-mortar stores.",
     icon: Assessment,
-    features: ["E-commerce Platforms", "Inventory Management", "Point of Sale", "Customer Analytics", "Supply Chain"],
+    features: [
+      "E-commerce Platforms",
+      "Inventory Management",
+      "Point of Sale",
+      "Customer Analytics",
+      "Supply Chain",
+    ],
     color: "#CC9900",
   },
   {
     id: "manufacturing",
     title: "Manufacturing",
-    description: "Manufacturing execution systems and quality control solutions for production environments.",
+    description:
+      "Manufacturing execution systems and quality control solutions for production environments.",
     icon: Backup,
-    features: ["Production Planning", "Quality Control", "Supply Chain Management", "Equipment Monitoring", "Compliance Tracking"],
+    features: [
+      "Production Planning",
+      "Quality Control",
+      "Supply Chain Management",
+      "Equipment Monitoring",
+      "Compliance Tracking",
+    ],
     color: "#009966",
   },
   {
     id: "logistics",
     title: "Logistics & Transportation",
-    description: "Transportation management and logistics optimization systems for efficient operations.",
+    description:
+      "Transportation management and logistics optimization systems for efficient operations.",
     icon: Schedule,
-    features: ["Fleet Management", "Route Optimization", "Tracking Systems", "Warehouse Management", "Delivery Analytics"],
+    features: [
+      "Fleet Management",
+      "Route Optimization",
+      "Tracking Systems",
+      "Warehouse Management",
+      "Delivery Analytics",
+    ],
     color: "#9900CC",
   },
 ];
@@ -503,7 +569,8 @@ export default function ServicesPage() {
                   lineHeight: 1.6,
                 }}
               >
-                Specialized software solutions tailored to meet the unique requirements and compliance needs of various industries.
+                Specialized software solutions tailored to meet the unique requirements and
+                compliance needs of various industries.
               </Typography>
             </Box>
           </motion.div>
@@ -603,17 +670,12 @@ export default function ServicesPage() {
       >
         <Container maxWidth="lg">
           <Box sx={{ textAlign: "center" }}>
-            <Typography
-              level="h2"
-              sx={{ fontWeight: "bold", mb: 3, color: "white" }}
-            >
+            <Typography level="h2" sx={{ fontWeight: "bold", mb: 3, color: "white" }}>
               Ready to Transform Your Business?
             </Typography>
-            <Typography
-              level="body-lg"
-              sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}
-            >
-              Whether you need healthcare software, enterprise solutions, or industry-specific applications, we're here to help you succeed.
+            <Typography level="body-lg" sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}>
+              Whether you need healthcare software, enterprise solutions, or industry-specific
+              applications, we're here to help you succeed.
             </Typography>
             <Button
               component="a"

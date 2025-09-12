@@ -4,9 +4,13 @@ import Link from "next/link";
 
 const footerLinks = {
   services: [
-    { name: "Web Development", href: "/services/web" },
-    { name: "Mobile Apps", href: "/services/mobile" },
+    { name: "Web Development", href: "/services/web-development" },
+    { name: "Mobile Apps", href: "/services/mobile-apps" },
     { name: "Enterprise Solutions", href: "/services/enterprise" },
+    { name: "HIPAA Compliant Software", href: "/services/hipaa-compliant-software" },
+    { name: "Healthcare Practice Management", href: "/services/healthcare-practice-management" },
+    { name: "Security Solutions", href: "/services/security" },
+    { name: "AI & Machine Learning", href: "/services/ai-machine-learning" },
     { name: "Tech Consulting", href: "/services/consulting" },
   ],
   company: [
@@ -97,7 +101,7 @@ export default function Footer() {
                       d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <a 
+                  <a
                     href="mailto:contact@softwarepros.org"
                     className="text-gray-400 text-sm hover:text-purple-400 transition-colors duration-300"
                   >

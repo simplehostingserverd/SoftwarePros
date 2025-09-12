@@ -1,0 +1,15 @@
+{
+  "generated": "2025-09-12T10:20:09.268Z",
+  "images": {
+    "FounderSoftwarePros-640": {
+      ".webp": "/images/webp/FounderSoftwarePros-640.webp"
+    },
+    "FounderSoftwarePros-750": {
+      ".webp": "/images/webp/FounderSoftwarePros-750.webp"
+    },
+    "FounderSoftwarePros": {
+      ".avif": "/images/webp/FounderSoftwarePros.avif",
+      ".webp": "/images/webp/FounderSoftwarePros.webp"
+    }
+  }
+}

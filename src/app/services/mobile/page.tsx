@@ -1,17 +1,40 @@
 "use client";
 
-import React from "react";
-import { ArrowForward, CheckCircle, PhoneAndroid, Apple, Android, Cloud, Security, Speed, Sync } from "@mui/icons-material";
-import { Box, Button, Card, CardContent, Chip, Container, Grid, List, ListItem, ListItemDecorator, Typography } from "@mui/joy";
+import {
+  Android,
+  Apple,
+  ArrowForward,
+  CheckCircle,
+  Cloud,
+  PhoneAndroid,
+  Security,
+  Speed,
+  Sync,
+} from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemDecorator,
+  Typography,
+} from "@mui/joy";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import React from "react";
 
 const mobileServices = [
   {
     id: "native-ios",
     icon: Apple,
     title: "Native iOS Development",
-    description: "High-performance iOS applications built with Swift and SwiftUI for optimal user experience.",
+    description:
+      "High-performance iOS applications built with Swift and SwiftUI for optimal user experience.",
     features: [
       "Swift & SwiftUI development",
       "App Store optimization",
@@ -26,7 +49,8 @@ const mobileServices = [
     id: "native-android",
     icon: Android,
     title: "Native Android Development",
-    description: "Robust Android applications using Kotlin and modern Android development practices.",
+    description:
+      "Robust Android applications using Kotlin and modern Android development practices.",
     features: [
       "Kotlin & Jetpack Compose",
       "Google Play Store optimization",
@@ -41,7 +65,8 @@ const mobileServices = [
     id: "cross-platform",
     icon: PhoneAndroid,
     title: "Cross-Platform Development",
-    description: "Build once, deploy everywhere with React Native and Flutter for maximum efficiency.",
+    description:
+      "Build once, deploy everywhere with React Native and Flutter for maximum efficiency.",
     features: [
       "React Native & Flutter",
       "Shared codebase",
@@ -56,7 +81,8 @@ const mobileServices = [
     id: "pwa",
     icon: Cloud,
     title: "Progressive Web Apps",
-    description: "App-like experiences that work on any device with offline capabilities and push notifications.",
+    description:
+      "App-like experiences that work on any device with offline capabilities and push notifications.",
     features: [
       "Offline functionality",
       "Push notifications",
@@ -71,7 +97,8 @@ const mobileServices = [
     id: "backend",
     icon: Sync,
     title: "Mobile Backend Services",
-    description: "Scalable backend infrastructure with APIs, databases, and cloud services for your mobile apps.",
+    description:
+      "Scalable backend infrastructure with APIs, databases, and cloud services for your mobile apps.",
     features: [
       "RESTful & GraphQL APIs",
       "Real-time synchronization",
@@ -86,7 +113,8 @@ const mobileServices = [
     id: "maintenance",
     icon: Security,
     title: "App Maintenance & Support",
-    description: "Ongoing maintenance, updates, and support to keep your mobile applications running smoothly.",
+    description:
+      "Ongoing maintenance, updates, and support to keep your mobile applications running smoothly.",
     features: [
       "Regular security updates",
       "Performance monitoring",
@@ -111,8 +139,18 @@ const appTypes = [
 ];
 
 const technologies = [
-  "React Native", "Flutter", "Swift", "Kotlin", "Firebase", "AWS Amplify",
-  "MongoDB", "PostgreSQL", "Node.js", "GraphQL", "WebRTC", "Socket.io"
+  "React Native",
+  "Flutter",
+  "Swift",
+  "Kotlin",
+  "Firebase",
+  "AWS Amplify",
+  "MongoDB",
+  "PostgreSQL",
+  "Node.js",
+  "GraphQL",
+  "WebRTC",
+  "Socket.io",
 ];
 
 export default function MobileDevelopmentPage() {
@@ -158,7 +196,8 @@ export default function MobileDevelopmentPage() {
                   mb: 4,
                 }}
               >
-                Transform your business with custom mobile applications. We build native iOS, Android, and cross-platform apps that engage users and drive results.
+                Transform your business with custom mobile applications. We build native iOS,
+                Android, and cross-platform apps that engage users and drive results.
               </Typography>
               <Box sx={{ display: "flex", gap: 2, justifyContent: "center", flexWrap: "wrap" }}>
                 <Button
@@ -288,32 +327,38 @@ export default function MobileDevelopmentPage() {
               {
                 step: "01",
                 title: "Discovery & Planning",
-                description: "We analyze your requirements, target audience, and business goals to create a comprehensive development strategy.",
+                description:
+                  "We analyze your requirements, target audience, and business goals to create a comprehensive development strategy.",
               },
               {
                 step: "02",
                 title: "UI/UX Design",
-                description: "Create intuitive, engaging designs that follow platform guidelines and provide exceptional user experiences.",
+                description:
+                  "Create intuitive, engaging designs that follow platform guidelines and provide exceptional user experiences.",
               },
               {
                 step: "03",
                 title: "Development",
-                description: "Build your app using modern frameworks and best practices, with regular updates and testing throughout.",
+                description:
+                  "Build your app using modern frameworks and best practices, with regular updates and testing throughout.",
               },
               {
                 step: "04",
                 title: "Testing & QA",
-                description: "Comprehensive testing across devices and platforms to ensure optimal performance and reliability.",
+                description:
+                  "Comprehensive testing across devices and platforms to ensure optimal performance and reliability.",
               },
               {
                 step: "05",
                 title: "App Store Launch",
-                description: "Handle the entire app store submission process and optimize for maximum visibility and downloads.",
+                description:
+                  "Handle the entire app store submission process and optimize for maximum visibility and downloads.",
               },
               {
                 step: "06",
                 title: "Support & Updates",
-                description: "Ongoing maintenance, updates, and feature enhancements to keep your app competitive and secure.",
+                description:
+                  "Ongoing maintenance, updates, and feature enhancements to keep your app competitive and secure.",
               },
             ].map((process, index) => (
               <Grid key={process.step} xs={12} md={4}>
@@ -342,16 +387,10 @@ export default function MobileDevelopmentPage() {
                     >
                       {process.step}
                     </Box>
-                    <Typography
-                      level="h4"
-                      sx={{ fontWeight: "bold", mb: 2, color: "neutral.800" }}
-                    >
+                    <Typography level="h4" sx={{ fontWeight: "bold", mb: 2, color: "neutral.800" }}>
                       {process.title}
                     </Typography>
-                    <Typography
-                      level="body-lg"
-                      sx={{ color: "neutral.600", lineHeight: 1.6 }}
-                    >
+                    <Typography level="body-lg" sx={{ color: "neutral.600", lineHeight: 1.6 }}>
                       {process.description}
                     </Typography>
                   </Box>
@@ -386,7 +425,8 @@ export default function MobileDevelopmentPage() {
               mb: 6,
             }}
           >
-            From simple utility apps to complex enterprise solutions, we have experience across all industries and app categories.
+            From simple utility apps to complex enterprise solutions, we have experience across all
+            industries and app categories.
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
             {appTypes.map((type) => (
@@ -427,7 +467,8 @@ export default function MobileDevelopmentPage() {
               mb: 6,
             }}
           >
-            We use cutting-edge technologies and frameworks to build fast, scalable, and maintainable mobile applications.
+            We use cutting-edge technologies and frameworks to build fast, scalable, and
+            maintainable mobile applications.
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
             {technologies.map((tech) => (
@@ -454,17 +495,12 @@ export default function MobileDevelopmentPage() {
       >
         <Container maxWidth="lg">
           <Box sx={{ textAlign: "center" }}>
-            <Typography
-              level="h2"
-              sx={{ fontWeight: "bold", mb: 3, color: "white" }}
-            >
+            <Typography level="h2" sx={{ fontWeight: "bold", mb: 3, color: "white" }}>
               Ready to Build Your Mobile App?
             </Typography>
-            <Typography
-              level="body-lg"
-              sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}
-            >
-              Let's turn your mobile app idea into reality. Contact us to discuss your project and get a free consultation.
+            <Typography level="body-lg" sx={{ mb: 4, opacity: 0.9, maxWidth: "600px", mx: "auto" }}>
+              Let's turn your mobile app idea into reality. Contact us to discuss your project and
+              get a free consultation.
             </Typography>
             <Button
               component={Link}

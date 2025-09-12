@@ -178,7 +178,10 @@ export default function AboutPage() {
             contactType: "customer service",
             email: "contact@softwarepros.org",
           },
-          sameAs: ["https://softwarepros.org", "https://www.linkedin.com/in/michael-trevino-538480375/"],
+          sameAs: [
+            "https://softwarepros.org",
+            "https://www.linkedin.com/in/michael-trevino-538480375/",
+          ],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Healthcare Software Services",

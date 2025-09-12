@@ -25,38 +25,19 @@ const nextConfig = {
       transform: '@mui/icons-material/{{member}}',
     },
   },
-  // Image configuration for external domains and optimization
+  // Image configuration for static export (simplified)
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
-        pathname: '/uploads/**',
-      },
-    ],
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: true,
   },
   // Configuration for deployment
   output: 'standalone',
   trailingSlash: false,
+  distDir: '.next',
   // Optimize for production deployment and Core Web Vitals
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
-  // Better asset handling for cPanel
-  distDir: '.next',
+  // Static export configuration
   // Ensure static assets are served correctly
   async rewrites() {
     return [

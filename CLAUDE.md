@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Core Development
 - `npm run dev` - Start development server (Next.js dev)
-- `npm run build` - Build for production (includes Prisma generate)
+- `npm run build` - Build for production
 - `npm start` - Start production server using custom server.js
 - `npm run start:next` - Start using Next.js built-in server
 - `npm run start:cpanel` - Start using cPanel-compatible app.js
@@ -16,41 +16,41 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint:fix` - Auto-fix linting issues with Biome
 - `npm run format` - Format code with Biome
 
-### Database
-- `npm run db:seed` - Seed the database using Prisma
-- Database uses PostgreSQL with Prisma ORM
-
 ### Deployment
 - `npm run optimize` - Convert images and build for production
 - `npm run convert-images` - Optimize images for web
+- `npm run postinstall` - Automatically runs build after install
 
 ## Architecture Overview
 
 ### Tech Stack
 - **Framework**: Next.js 15 with App Router and TypeScript
 - **UI**: MUI Joy Components + Tailwind CSS
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: NextAuth.js with Prisma adapter
+- **Forms**: React Hook Form with Zod validation
 - **Animations**: Framer Motion
 - **Code Quality**: Biome (replaces ESLint/Prettier)
+- **Email**: Nodemailer with SMTP configuration
+- **PDF Generation**: PDFKit for resources
 - **Deployment**: Custom Node.js servers for production/cPanel
 
 ### Project Structure
 ```
 src/
 ├── app/              # Next.js App Router pages
-│   ├── about/
-│   ├── contact/
-│   ├── portfolio/
-│   ├── services/
+│   ├── about/        # About page with layout
+│   ├── api/          # API routes (contact, resources)
+│   ├── contact/      # Contact page with form
+│   ├── portfolio/    # Portfolio/case studies
+│   ├── services/     # Service pages (web, mobile, healthcare, etc.)
+│   ├── investors/    # Investor-focused content
 │   └── layout.tsx    # Root layout with MUI Joy theme
 ├── components/       # Reusable React components
-├── hooks/           # Custom React hooks
-└── lib/             # Utility functions and configurations
+│   └── investors/    # Investor-specific components
+├── hooks/           # Custom React hooks (scroll animations)
+└── lib/             # Utility functions (mailer)
 
-prisma/
-├── schema.prisma    # Database schema (PostgreSQL)
-└── seed.ts          # Database seeding script
+scripts/
+└── convert-images.js # Image optimization script
 ```
 
 ### Key Configuration Files
@@ -67,10 +67,11 @@ The project has three server configurations:
 2. **Production**: `npm start` (uses server.js)
 3. **cPanel**: `npm run start:cpanel` (uses app.js with cPanel optimizations)
 
-### Database Schema
-- **User model**: Authentication with roles (USER/ADMIN)
-- **Image model**: File upload management with user relations
-- Uses Prisma migrations and seeding
+### Key Features
+- **Contact Form**: Email integration with multiple SMTP options
+- **Resource Downloads**: PDF generation for HIPAA checklists, vendor due diligence
+- **Investor Section**: Business metrics, charts, and competitive analysis
+- **SEO Optimization**: Structured data, sitemaps, and meta tags
 
 ### Code Style
 - **Formatter**: Biome (configured for 2-space indentation, 100-char lines)
@@ -83,23 +84,27 @@ The project has three server configurations:
 - Multiple entry points for different hosting environments
 - Image optimization and compression built-in
 - Security headers and performance optimizations included
-- Prisma generate runs automatically before build
 
 ### Email Configuration
-The contact form requires email configuration. See `EMAIL_SETUP.md` for detailed instructions.
+The contact form requires email configuration with multiple fallback options:
 
-**Quick Setup for cPanel:**
-1. Create email account in cPanel
-2. Set environment variables:
+**Configuration Options (in priority order):**
+1. **Custom SMTP** (recommended for cPanel):
    ```
    SMTP_HOST=mail.yourdomain.com
    SMTP_PORT=587
    SMTP_USER=contact@yourdomain.com
    SMTP_PASS=your-password
    ```
-3. Emails are automatically sent to `simplehostingserverd@proton.me`
+2. **Gmail SMTP** (alternative):
+   ```
+   GMAIL_USER=your-gmail@gmail.com
+   GMAIL_APP_PASSWORD=your-16-char-app-password
+   ```
+3. **cPanel Localhost SMTP** (automatic fallback)
 
 **Environment Variables:**
 - Copy `.env.example` to `.env.local` for development
 - Set production variables in cPanel environment or hosting settings
-- The system automatically falls back to localhost SMTP if no configuration is provided
+- Contact emails are sent to `simplehostingserverd@proton.me`
+- System automatically falls back through configuration options

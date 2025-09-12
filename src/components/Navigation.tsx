@@ -2,12 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navigationItems = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
-  { name: "Services", href: "/services" },
+  {
+    name: "Services",
+    href: "/services",
+    dropdown: [
+      { name: "Web Development", href: "/services/web-development" },
+      { name: "Mobile Apps", href: "/services/mobile-apps" },
+      { name: "Enterprise Solutions", href: "/services/enterprise" },
+      { name: "HIPAA Compliant Software", href: "/services/hipaa-compliant-software" },
+      { name: "Healthcare Practice Management", href: "/services/healthcare-practice-management" },
+      { name: "Security Solutions", href: "/services/security" },
+      { name: "AI & Machine Learning", href: "/services/ai-machine-learning" },
+      { name: "Tech Consulting", href: "/services/consulting" },
+    ],
+  },
   { name: "Case Studies", href: "/case-studies" },
   { name: "Resources", href: "/resources" },
   { name: "Investors", href: "/investors" },
@@ -16,7 +29,10 @@ const navigationItems = [
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [clickDropdown, setClickDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -24,6 +40,36 @@ export default function Navigation() {
     }
     return pathname.startsWith(href);
   };
+
+  const handleMouseEnter = (itemName: string) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setActiveDropdown(itemName);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 300);
+  };
+
+  const handleClick = (itemName: string) => {
+    if (clickDropdown === itemName) {
+      setClickDropdown(null);
+    } else {
+      setClickDropdown(itemName);
+    }
+    setActiveDropdown(itemName);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
@@ -42,17 +88,76 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navigationItems.map((item) => (
-              <Link
+              <div
                 key={item.name}
-                href={item.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  isActive(item.href)
-                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
-                    : "text-gray-300 hover:text-white hover:bg-gray-800"
-                }`}
+                className="relative group"
+                onMouseEnter={() => item.dropdown && handleMouseEnter(item.name)}
+                onMouseLeave={handleMouseLeave}
               >
-                {item.name}
-              </Link>
+                <Link
+                  href={item.href}
+                  className={`flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                    isActive(item.href)
+                      ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800"
+                  }`}
+                  onClick={(e) => {
+                    if (item.dropdown) {
+                      e.preventDefault();
+                      handleClick(item.name);
+                    }
+                  }}
+                >
+                  {item.name}
+                  {item.dropdown && (
+                    <svg
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        activeDropdown === item.name || clickDropdown === item.name
+                          ? "rotate-180"
+                          : ""
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-label="Dropdown arrow"
+                    >
+                      <title>Dropdown arrow</title>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  )}
+                </Link>
+
+                {/* Dropdown Menu */}
+                {item.dropdown && (activeDropdown === item.name || clickDropdown === item.name) && (
+                  <div
+                    className={`absolute top-full left-0 mt-1 w-64 bg-gray-800/95 backdrop-blur-sm border border-gray-700 rounded-lg shadow-2xl z-[9999] transition-all duration-200 ${
+                      activeDropdown === item.name || clickDropdown === item.name
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 -translate-y-2 pointer-events-none"
+                    }`}
+                    onMouseEnter={() => handleMouseEnter(item.name)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="py-2">
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.name}
+                          href={dropdownItem.href}
+                          className="block px-4 py-3 text-sm text-gray-300 hover:text-white hover:bg-gray-700/50 transition-all duration-200"
+                          onClick={() => setActiveDropdown(null)}
+                        >
+                          {dropdownItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -111,18 +216,33 @@ export default function Navigation() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 bg-gray-900 border-t border-gray-800">
             {navigationItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 ${
-                  isActive(item.href)
-                    ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
-                    : "text-gray-300 hover:text-white hover:bg-gray-800"
-                }`}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name}>
+                <Link
+                  href={item.href}
+                  className={`block px-3 py-2 rounded-lg text-base font-medium transition-all duration-300 ${
+                    isActive(item.href)
+                      ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+                      : "text-gray-300 hover:text-white hover:bg-gray-800"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+                {item.dropdown && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    {item.dropdown.map((dropdownItem) => (
+                      <Link
+                        key={dropdownItem.name}
+                        href={dropdownItem.href}
+                        className="block px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors duration-200"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {dropdownItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>
