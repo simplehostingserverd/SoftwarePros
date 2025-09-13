@@ -1,10 +1,8 @@
-import crypto from "crypto";
-
 interface RealtimeKitConfig {
-  appId: string;
-  appSecret: string;
+  orgId: string;
+  apiKey: string;
   apiUrl: string;
-  orgId?: string;
+  authHeader?: string;
 }
 
 interface CreateMeetingRequest {
@@ -46,14 +44,14 @@ class RealtimeKitClient {
   }
 
   private generateAuthHeader(): string {
-    const timestamp = Math.floor(Date.now() / 1000);
-    const payload = `${this.config.appId}:${timestamp}`;
-    const signature = crypto
-      .createHmac("sha256", this.config.appSecret)
-      .update(payload)
-      .digest("hex");
+    // If we have a pre-generated auth header, use it directly
+    if (this.config.authHeader) {
+      return this.config.authHeader;
+    }
 
-    return `Bearer ${Buffer.from(`${payload}:${signature}`).toString("base64")}`;
+    // Otherwise, use Basic Auth with Organization ID and API Key
+    const credentials = Buffer.from(`${this.config.orgId}:${this.config.apiKey}`).toString("base64");
+    return `Basic ${credentials}`;
   }
 
   private async makeRequest<T>(
@@ -66,11 +64,8 @@ class RealtimeKitClient {
       "Authorization": this.generateAuthHeader(),
       "Content-Type": "application/json",
       "User-Agent": "SoftwarePros-RealtimeKit/1.0",
+      "X-Organization-ID": this.config.orgId,
     };
-
-    if (this.config.orgId) {
-      headers["X-Organization-ID"] = this.config.orgId;
-    }
 
     const response = await fetch(url, {
       method,
@@ -135,22 +130,33 @@ class RealtimeKitClient {
 
 // Factory function to create client with environment variables
 export function createRealtimeKitClient(): RealtimeKitClient {
-  const appId = process.env.CLOUDFLARE_REALTIME_APP_ID;
-  const appSecret = process.env.CLOUDFLARE_REALTIME_APP_SECRET;
-  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://rtc.live.cloudflare.com/v1";
   const orgId = process.env.CLOUDFLARE_REALTIME_ORG_ID;
+  const apiKey = process.env.CLOUDFLARE_REALTIME_API_KEY;
+  const authHeader = process.env.CLOUDFLARE_REALTIME_AUTH_HEADER;
+  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://rtc.live.cloudflare.com/v1";
 
-  if (!appId || !appSecret) {
+  // Check if we have either the auth header OR both orgId and apiKey
+  if (authHeader) {
+    return new RealtimeKitClient({
+      orgId: orgId || "default", // orgId still needed for X-Organization-ID header
+      apiKey: "not-needed-with-auth-header",
+      apiUrl,
+      authHeader,
+    });
+  }
+
+  if (!orgId || !apiKey) {
     throw new Error(
-      "Missing required Cloudflare RealtimeKit environment variables: CLOUDFLARE_REALTIME_APP_ID and CLOUDFLARE_REALTIME_APP_SECRET"
+      "Missing required Cloudflare RealtimeKit environment variables. Need either:\n" +
+      "1. CLOUDFLARE_REALTIME_AUTH_HEADER (pre-generated token), OR\n" +
+      "2. Both CLOUDFLARE_REALTIME_ORG_ID and CLOUDFLARE_REALTIME_API_KEY"
     );
   }
 
   return new RealtimeKitClient({
-    appId,
-    appSecret,
-    apiUrl,
     orgId,
+    apiKey,
+    apiUrl,
   });
 }
 
