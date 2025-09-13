@@ -10,7 +10,10 @@
       "Bash(zip:*)",
       "Bash(powershell:*)",
       "Bash(npm uninstall:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "ask": []
