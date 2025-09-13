@@ -67,20 +67,31 @@ class RealtimeKitClient {
       "X-Organization-ID": this.config.orgId,
     };
 
+    console.log(`RealtimeKit API Request: ${method} ${url}`);
+    console.log(`Headers:`, { ...headers, Authorization: '[REDACTED]' });
+    if (body) {
+      console.log(`Body:`, body);
+    }
+
     const response = await fetch(url, {
       method,
       headers,
       body: body ? JSON.stringify(body) : undefined,
     });
 
+    console.log(`Response: ${response.status} ${response.statusText}`);
+
     if (!response.ok) {
       const errorText = await response.text();
+      console.log(`Error response:`, errorText);
       throw new Error(
         `RealtimeKit API error: ${response.status} ${response.statusText} - ${errorText}`
       );
     }
 
-    return response.json();
+    const responseData = await response.json();
+    console.log(`Success response:`, responseData);
+    return responseData;
   }
 
   async createMeeting(request: CreateMeetingRequest = {}): Promise<MeetingResponse> {
@@ -93,7 +104,22 @@ class RealtimeKitClient {
       metadata: request.metadata || {},
     };
 
-    return this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
+    // Try different endpoint patterns that RealtimeKit might use
+    try {
+      return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
+    } catch (error) {
+      // If /meetings fails, try alternative endpoints
+      try {
+        return await this.makeRequest<MeetingResponse>("/rooms", "POST", meetingData);
+      } catch (roomsError) {
+        try {
+          return await this.makeRequest<MeetingResponse>("/sessions", "POST", meetingData);
+        } catch (sessionsError) {
+          // If all fail, throw the original error
+          throw error;
+        }
+      }
+    }
   }
 
   async getMeeting(meetingId: string): Promise<MeetingResponse> {
@@ -133,7 +159,7 @@ export function createRealtimeKitClient(): RealtimeKitClient {
   const orgId = process.env.CLOUDFLARE_REALTIME_ORG_ID;
   const apiKey = process.env.CLOUDFLARE_REALTIME_API_KEY;
   const authHeader = process.env.CLOUDFLARE_REALTIME_AUTH_HEADER;
-  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://rtc.live.cloudflare.com/v1";
+  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v1";
 
   // Check if we have either the auth header OR both orgId and apiKey
   if (authHeader) {
