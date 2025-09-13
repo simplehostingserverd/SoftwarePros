@@ -14,7 +14,14 @@
       "Bash(git commit:*)",
       "Bash(mkdir:*)",
       "Bash(cp:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm install)",
+      "Bash(npm ci:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git reset:*)",
+      "WebSearch",
+      "WebFetch(domain:developers.cloudflare.com)",
+      "WebFetch(domain:docs.realtime.cloudflare.com)"
     ],
     "deny": [],
     "ask": []

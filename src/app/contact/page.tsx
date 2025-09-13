@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 export const dynamic = "force-dynamic";
 
 import AnimatedDiv from "@/components/AnimatedDiv";
+import VideoMeetingWidget from "@/components/VideoMeetingWidget";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle, Email, LocationOn, Phone, Schedule, Send } from "@mui/icons-material";
 import {
@@ -82,7 +83,7 @@ const budgets = [
 
 const timelines = ["ASAP", "1-3 months", "3-6 months", "6+ months"];
 
-const contactMethods = ["Email", "Phone"];
+const contactMethods = ["Email", "Phone", "Video Consultation"];
 
 const bestTimes = ["Morning", "Afternoon", "Evening"];
 
@@ -705,6 +706,20 @@ export default function ContactPage() {
                     </AnimatedDiv>
                   ))}
                 </Box>
+
+                {/* Video Meeting Widget */}
+                <AnimatedDiv animation="fade" delay={400}>
+                  <Box sx={{ mt: 4 }}>
+                    <VideoMeetingWidget
+                      participantName={watch("name") || ""}
+                      onMeetingCreated={(meeting) => {
+                        console.log("Meeting created:", meeting);
+                        // Optionally show a success message or update form state
+                      }}
+                      disabled={!watch("name") || watch("name").length < 2}
+                    />
+                  </Box>
+                </AnimatedDiv>
               </AnimatedDiv>
             </Grid>
           </Grid>
