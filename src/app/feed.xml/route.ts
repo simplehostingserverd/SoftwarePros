@@ -12,8 +12,8 @@ export async function GET() {
       <sy:updatePeriod>weekly</sy:updatePeriod>
       <sy:updateFrequency>1</sy:updateFrequency>
       <generator>SoftwarePros Website</generator>
-      <managingEditor>contact@softwarepros.org (SoftwarePros Team)</managingEditor>
-      <webMaster>contact@softwarepros.org (SoftwarePros Team)</webMaster>
+      <managingEditor>info@softwarepros.org (SoftwarePros Team)</managingEditor>
+      <webMaster>info@softwarepros.org (SoftwarePros Team)</webMaster>
       <category>Technology</category>
       <category>Healthcare Software</category>
       <category>Software Development</category>

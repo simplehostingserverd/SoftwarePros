@@ -93,13 +93,13 @@ const contactInfo = [
   {
     icon: LocationOn,
     title: "Office Location",
-    details: ["222 E. Van Buren St.", "Harlingen, TX 78550"],
+    details: ["222 E. Van Buren Ave.", "Harlingen, TX 78550"],
     color: "#0066CC",
   },
   {
     icon: Email,
     title: "Email Address",
-    details: ["contact@softwarepros.org"],
+    details: ["info@softwarepros.org"],
     color: "#00AA44",
     isEmail: true,
   },

@@ -81,7 +81,7 @@ export default function Footer() {
                     />
                   </svg>
                   <span className="text-gray-400 text-sm">
-                    950 E. Van Buren St., Brownsville, TX 78520
+                    222 E. Van Buren Ave., Harlingen, TX 78550
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -102,10 +102,10 @@ export default function Footer() {
                     />
                   </svg>
                   <a
-                    href="mailto:contact@softwarepros.org"
+                    href="mailto:info@softwarepros.org"
                     className="text-gray-400 text-sm hover:text-purple-400 transition-colors duration-300"
                   >
-                    contact@softwarepros.org
+                    info@softwarepros.org
                   </a>
                 </div>
                 <div className="flex items-center gap-3">

@@ -75,10 +75,10 @@ export default function CookiesPage() {
             <p className="text-gray-300">
               If you have questions about our use of cookies, please contact us at{" "}
               <a
-                href="mailto:contact@softwarepros.org"
+                href="mailto:info@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"
               >
-                contact@softwarepros.org
+                info@softwarepros.org
               </a>
             </p>
           </section>

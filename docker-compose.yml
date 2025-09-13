@@ -15,7 +15,7 @@ services:
       # Email configuration - set these in Coolify environment variables
       - SMTP_HOST=${SMTP_HOST:-mail.softwarepros.org}
       - SMTP_PORT=${SMTP_PORT:-587}
-      - SMTP_USER=${SMTP_USER:-contact@softwarepros.org}
+      - SMTP_USER=${SMTP_USER:-info@softwarepros.org}
       - SMTP_PASS=${SMTP_PASS}
       # Alternative Gmail configuration
       - GMAIL_USER=${GMAIL_USER}

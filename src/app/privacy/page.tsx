@@ -62,10 +62,10 @@ export default function PrivacyPage() {
             <p className="text-gray-300">
               If you have any questions about this Privacy Policy, please contact us at{" "}
               <a
-                href="mailto:contact@softwarepros.org"
+                href="mailto:info@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"
               >
-                contact@softwarepros.org
+                info@softwarepros.org
               </a>
             </p>
           </section>

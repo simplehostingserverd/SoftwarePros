@@ -62,10 +62,10 @@ export default function CTASection() {
             <div className="space-y-2">
               <div className="text-purple-400 font-semibold">Email</div>
               <a
-                href="mailto:contact@softwarepros.org"
+                href="mailto:info@softwarepros.org"
                 className="text-gray-300 hover:text-purple-400 transition-colors duration-300"
               >
-                contact@softwarepros.org
+                info@softwarepros.org
               </a>
             </div>
             <div className="space-y-2">
