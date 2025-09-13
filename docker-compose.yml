@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  softwarepros-web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      # Email configuration - set these in Coolify environment variables
+      - SMTP_HOST=${SMTP_HOST:-mail.softwarepros.org}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-contact@softwarepros.org}
+      - SMTP_PASS=${SMTP_PASS}
+      # Alternative Gmail configuration
+      - GMAIL_USER=${GMAIL_USER}
+      - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD}
+      # Application settings
+      - CONTACT_EMAIL=${CONTACT_EMAIL:-simplehostingserverd@proton.me}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      # Coolify labels for automatic discovery
+      - "coolify.managed=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.softwarepros.rule=Host(`softwarepros.org`) || Host(`www.softwarepros.org`)"
+      - "traefik.http.routers.softwarepros.entrypoints=websecure"
+      - "traefik.http.routers.softwarepros.tls.certresolver=letsencrypt"
+      - "traefik.http.services.softwarepros.loadbalancer.server.port=3000"
+      # Redirect www to non-www
+      - "traefik.http.middlewares.redirect-www.redirectregex.regex=^https://www\\.softwarepros\\.org/(.*)"
+      - "traefik.http.middlewares.redirect-www.redirectregex.replacement=https://softwarepros.org/$${1}"
+      - "traefik.http.routers.softwarepros.middlewares=redirect-www"
+
+networks:
+  default:
+    name: coolify
