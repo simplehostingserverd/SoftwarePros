@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
       hasApiKey: !!process.env.CLOUDFLARE_REALTIME_API_KEY,
       hasAuthHeader: !!process.env.CLOUDFLARE_REALTIME_AUTH_HEADER,
       hasApiUrl: !!process.env.CLOUDFLARE_REALTIME_API_URL,
-      apiUrl: process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v1",
+      apiUrl: process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v2",
       nodeEnv: process.env.NODE_ENV,
     };
 
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
           envVars: [
             "CLOUDFLARE_REALTIME_ORG_ID=your-organization-id",
             "CLOUDFLARE_REALTIME_API_KEY=your-api-key",
-            "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v1"
+            "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2"
           ]
         },
         method2: {
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
           envVars: [
             "CLOUDFLARE_REALTIME_AUTH_HEADER=Bearer your-pre-generated-token",
             "CLOUDFLARE_REALTIME_ORG_ID=your-organization-id",
-            "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v1"
+            "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2"
           ]
         }
       } : null

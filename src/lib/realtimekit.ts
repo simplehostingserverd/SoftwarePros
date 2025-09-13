@@ -106,15 +106,16 @@ class RealtimeKitClient {
 
     // Try different endpoint patterns that RealtimeKit might use
     try {
-      return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
+      // Try /meeting (singular) first as mentioned in the docs
+      return await this.makeRequest<MeetingResponse>("/meeting", "POST", meetingData);
     } catch (error) {
-      // If /meetings fails, try alternative endpoints
+      // If /meeting fails, try alternative endpoints
       try {
-        return await this.makeRequest<MeetingResponse>("/rooms", "POST", meetingData);
-      } catch (roomsError) {
+        return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
+      } catch (meetingsError) {
         try {
-          return await this.makeRequest<MeetingResponse>("/sessions", "POST", meetingData);
-        } catch (sessionsError) {
+          return await this.makeRequest<MeetingResponse>("/rooms", "POST", meetingData);
+        } catch (roomsError) {
           // If all fail, throw the original error
           throw error;
         }
@@ -123,11 +124,21 @@ class RealtimeKitClient {
   }
 
   async getMeeting(meetingId: string): Promise<MeetingResponse> {
-    return this.makeRequest<MeetingResponse>(`/meetings/${meetingId}`);
+    // Try singular form first, then plural as fallback
+    try {
+      return await this.makeRequest<MeetingResponse>(`/meeting/${meetingId}`);
+    } catch (error) {
+      return this.makeRequest<MeetingResponse>(`/meetings/${meetingId}`);
+    }
   }
 
   async deleteMeeting(meetingId: string): Promise<void> {
-    await this.makeRequest(`/meetings/${meetingId}`, "DELETE");
+    // Try singular form first, then plural as fallback
+    try {
+      await this.makeRequest(`/meeting/${meetingId}`, "DELETE");
+    } catch (error) {
+      await this.makeRequest(`/meetings/${meetingId}`, "DELETE");
+    }
   }
 
   async createParticipantToken(
@@ -142,15 +153,29 @@ class RealtimeKitClient {
       expiresIn: 3600, // 1 hour
     };
 
-    return this.makeRequest<ParticipantToken>(
-      `/meetings/${meetingId}/tokens`,
-      "POST",
-      tokenData
-    );
+    // Try singular form first, then plural as fallback
+    try {
+      return await this.makeRequest<ParticipantToken>(
+        `/meeting/${meetingId}/tokens`,
+        "POST",
+        tokenData
+      );
+    } catch (error) {
+      return this.makeRequest<ParticipantToken>(
+        `/meetings/${meetingId}/tokens`,
+        "POST",
+        tokenData
+      );
+    }
   }
 
   async listMeetings(): Promise<{ meetings: MeetingResponse[] }> {
-    return this.makeRequest<{ meetings: MeetingResponse[] }>("/meetings");
+    // Try singular form first, then plural as fallback
+    try {
+      return await this.makeRequest<{ meetings: MeetingResponse[] }>("/meeting");
+    } catch (error) {
+      return this.makeRequest<{ meetings: MeetingResponse[] }>("/meetings");
+    }
   }
 }
 
@@ -159,7 +184,7 @@ export function createRealtimeKitClient(): RealtimeKitClient {
   const orgId = process.env.CLOUDFLARE_REALTIME_ORG_ID;
   const apiKey = process.env.CLOUDFLARE_REALTIME_API_KEY;
   const authHeader = process.env.CLOUDFLARE_REALTIME_AUTH_HEADER;
-  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v1";
+  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v2";
 
   // Check if we have either the auth header OR both orgId and apiKey
   if (authHeader) {
