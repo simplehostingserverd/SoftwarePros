@@ -17,41 +17,38 @@ export async function POST(request: NextRequest) {
     const client = createRealtimeKitClient();
 
     // Create a new meeting
-    const meeting = await client.createMeeting({
-      name: name || `Consultation with ${participantName}`,
-      description: description || "Video consultation meeting",
-      maxParticipants: 2, // Consultant + client
-      autoJoin: true,
-      recording: false, // Disable recording for privacy by default
-      metadata: {
-        participantName,
-        createdBy: "contact-form",
-        timestamp: new Date().toISOString(),
-      },
+    const meetingResponse = await client.createMeeting({
+      title: name || `Consultation with ${participantName}`,
+      preferred_region: "us-east-1",
+      record_on_start: false, // Disable recording for privacy by default
+      live_stream_on_start: false,
+      persist_chat: false,
+      summarize_on_end: false,
     });
 
-    // Create participant token
-    const participantToken = await client.createParticipantToken(
-      meeting.id,
-      participantName,
-      isHost
-    );
+    if (!meetingResponse.success) {
+      throw new Error("Failed to create meeting");
+    }
 
-    // Return meeting details and participant token
+    const meeting = meetingResponse.data;
+
+    // Return meeting details - participant tokens would need to be created separately
+    // via the RealtimeKit client-side SDK
     return NextResponse.json({
       success: true,
       meeting: {
         id: meeting.id,
-        name: meeting.name,
-        description: meeting.description,
-        joinUrl: meeting.joinUrl,
-        hostUrl: meeting.hostUrl,
-        createdAt: meeting.createdAt,
+        title: meeting.title,
+        status: meeting.status,
+        createdAt: meeting.created_at,
+        preferredRegion: meeting.preferred_region,
+        // Note: Join URLs are typically generated client-side with the RealtimeKit SDK
+        // using the meeting ID and participant authentication
+        meetingId: meeting.id,
       },
-      participant: {
-        token: participantToken.token,
-        participantId: participantToken.participantId,
-        expiresAt: participantToken.expiresAt,
+      instructions: {
+        message: "Meeting created successfully. Use RealtimeKit SDK to join.",
+        sdkInfo: "Initialize RealtimeKit with this meeting ID to join the call.",
       },
     });
   } catch (error) {

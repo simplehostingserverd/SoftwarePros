@@ -6,28 +6,30 @@ interface RealtimeKitConfig {
 }
 
 interface CreateMeetingRequest {
-  name?: string;
-  description?: string;
-  maxParticipants?: number;
-  autoJoin?: boolean;
-  recording?: boolean;
-  metadata?: Record<string, any>;
+  title?: string;
+  preferred_region?: "ap-south-1" | "ap-southeast-1" | "us-east-1" | "eu-central-1" | null;
+  record_on_start?: boolean;
+  live_stream_on_start?: boolean;
+  persist_chat?: boolean;
+  summarize_on_end?: boolean;
+}
+
+interface MeetingData {
+  id: string;
+  title: string;
+  preferred_region: string | null;
+  created_at: string;
+  record_on_start: boolean;
+  updated_at: string;
+  live_stream_on_start: boolean;
+  persist_chat: boolean;
+  summarize_on_end: boolean;
+  status: "ACTIVE" | "INACTIVE";
 }
 
 interface MeetingResponse {
-  id: string;
-  name: string;
-  description?: string;
-  createdAt: string;
-  status: string;
-  joinUrl: string;
-  hostUrl: string;
-  participants: Array<{
-    id: string;
-    name: string;
-    joinedAt: string;
-    status: string;
-  }>;
+  success: boolean;
+  data: MeetingData;
 }
 
 interface ParticipantToken {
@@ -46,12 +48,17 @@ class RealtimeKitClient {
   private generateAuthHeader(): string {
     // If we have a pre-generated auth header, use it directly
     if (this.config.authHeader) {
+      console.log("Using pre-generated auth header");
       return this.config.authHeader;
     }
 
     // Otherwise, use Basic Auth with Organization ID and API Key
+    // Format: Basic base64(orgId:apiKey)
     const credentials = Buffer.from(`${this.config.orgId}:${this.config.apiKey}`).toString("base64");
-    return `Basic ${credentials}`;
+    const authHeader = `Basic ${credentials}`;
+    console.log(`Generated Basic Auth for org: ${this.config.orgId}`);
+    console.log(`Auth header format: Basic [base64(${this.config.orgId}:***)]`);
+    return authHeader;
   }
 
   private async makeRequest<T>(
@@ -60,17 +67,17 @@ class RealtimeKitClient {
     body?: any
   ): Promise<T> {
     const url = `${this.config.apiUrl}${endpoint}`;
+    const authHeader = this.generateAuthHeader();
     const headers: HeadersInit = {
-      "Authorization": this.generateAuthHeader(),
+      "Authorization": authHeader,
       "Content-Type": "application/json",
-      "User-Agent": "SoftwarePros-RealtimeKit/1.0",
-      "X-Organization-ID": this.config.orgId,
     };
 
     console.log(`RealtimeKit API Request: ${method} ${url}`);
     console.log(`Headers:`, { ...headers, Authorization: '[REDACTED]' });
+    console.log(`Full auth header (first 20 chars): ${authHeader.substring(0, 20)}...`);
     if (body) {
-      console.log(`Body:`, body);
+      console.log(`Request body:`, JSON.stringify(body, null, 2));
     }
 
     const response = await fetch(url, {
@@ -96,49 +103,23 @@ class RealtimeKitClient {
 
   async createMeeting(request: CreateMeetingRequest = {}): Promise<MeetingResponse> {
     const meetingData = {
-      name: request.name || `Meeting ${new Date().toISOString()}`,
-      description: request.description || "Video consultation meeting",
-      maxParticipants: request.maxParticipants || 10,
-      autoJoin: request.autoJoin !== false,
-      recording: request.recording || false,
-      metadata: request.metadata || {},
+      title: request.title || `Consultation ${new Date().toISOString()}`,
+      preferred_region: request.preferred_region || "us-east-1",
+      record_on_start: request.record_on_start || false,
+      live_stream_on_start: request.live_stream_on_start || false,
+      persist_chat: request.persist_chat || false,
+      summarize_on_end: request.summarize_on_end || false,
     };
 
-    // Try different endpoint patterns that RealtimeKit might use
-    try {
-      // Try /meeting (singular) first as mentioned in the docs
-      return await this.makeRequest<MeetingResponse>("/meeting", "POST", meetingData);
-    } catch (error) {
-      // If /meeting fails, try alternative endpoints
-      try {
-        return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
-      } catch (meetingsError) {
-        try {
-          return await this.makeRequest<MeetingResponse>("/rooms", "POST", meetingData);
-        } catch (roomsError) {
-          // If all fail, throw the original error
-          throw error;
-        }
-      }
-    }
+    return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
   }
 
   async getMeeting(meetingId: string): Promise<MeetingResponse> {
-    // Try singular form first, then plural as fallback
-    try {
-      return await this.makeRequest<MeetingResponse>(`/meeting/${meetingId}`);
-    } catch (error) {
-      return this.makeRequest<MeetingResponse>(`/meetings/${meetingId}`);
-    }
+    return await this.makeRequest<MeetingResponse>(`/meetings/${meetingId}`);
   }
 
   async deleteMeeting(meetingId: string): Promise<void> {
-    // Try singular form first, then plural as fallback
-    try {
-      await this.makeRequest(`/meeting/${meetingId}`, "DELETE");
-    } catch (error) {
-      await this.makeRequest(`/meetings/${meetingId}`, "DELETE");
-    }
+    await this.makeRequest(`/meetings/${meetingId}`, "DELETE");
   }
 
   async createParticipantToken(
@@ -186,29 +167,34 @@ export function createRealtimeKitClient(): RealtimeKitClient {
   const authHeader = process.env.CLOUDFLARE_REALTIME_AUTH_HEADER;
   const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v2";
 
-  // Check if we have either the auth header OR both orgId and apiKey
-  if (authHeader) {
+  console.log(`RealtimeKit Config: orgId=${!!orgId}, apiKey=${!!apiKey}, authHeader=${!!authHeader}`);
+  console.log(`API URL: ${apiUrl}`);
+
+  // Prefer orgId + apiKey over authHeader for better debugging
+  if (orgId && apiKey) {
+    console.log("Using Organization ID + API Key authentication");
     return new RealtimeKitClient({
-      orgId: orgId || "default", // orgId still needed for X-Organization-ID header
+      orgId,
+      apiKey,
+      apiUrl,
+    });
+  }
+
+  // Fallback to auth header if provided
+  if (authHeader && orgId) {
+    console.log("Using pre-generated auth header");
+    return new RealtimeKitClient({
+      orgId,
       apiKey: "not-needed-with-auth-header",
       apiUrl,
       authHeader,
     });
   }
 
-  if (!orgId || !apiKey) {
-    throw new Error(
-      "Missing required Cloudflare RealtimeKit environment variables. Need either:\n" +
-      "1. CLOUDFLARE_REALTIME_AUTH_HEADER (pre-generated token), OR\n" +
-      "2. Both CLOUDFLARE_REALTIME_ORG_ID and CLOUDFLARE_REALTIME_API_KEY"
-    );
-  }
-
-  return new RealtimeKitClient({
-    orgId,
-    apiKey,
-    apiUrl,
-  });
+  throw new Error(
+    "Missing required Cloudflare RealtimeKit environment variables. Need:\n" +
+    "CLOUDFLARE_REALTIME_ORG_ID and CLOUDFLARE_REALTIME_API_KEY"
+  );
 }
 
 export type { CreateMeetingRequest, MeetingResponse, ParticipantToken, RealtimeKitConfig };
