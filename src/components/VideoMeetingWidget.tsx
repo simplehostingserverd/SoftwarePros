@@ -62,7 +62,11 @@ export default function VideoMeetingWidget({
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to create meeting");
+        const errorMessage = data.details
+          ? `${data.error}: ${data.details}`
+          : data.error || "Failed to create meeting";
+
+        throw new Error(errorMessage);
       }
 
       setMeeting(data);

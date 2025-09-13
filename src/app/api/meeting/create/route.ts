@@ -59,23 +59,58 @@ export async function POST(request: NextRequest) {
 
     // Handle specific RealtimeKit errors
     if (error instanceof Error) {
-      if (error.message.includes("API error")) {
+      // Configuration errors
+      if (error.message.includes("Missing required")) {
         return NextResponse.json(
-          { error: "Failed to create meeting with Cloudflare RealtimeKit" },
+          {
+            error: "RealtimeKit is not configured",
+            details: "Missing Cloudflare RealtimeKit environment variables",
+            instructions: "Visit /api/meeting/debug for setup instructions"
+          },
           { status: 500 }
         );
       }
 
-      if (error.message.includes("Missing required")) {
+      // API errors
+      if (error.message.includes("API error")) {
         return NextResponse.json(
-          { error: "RealtimeKit is not properly configured" },
+          {
+            error: "Failed to create meeting with Cloudflare RealtimeKit",
+            details: error.message,
+            instructions: "Check your API credentials and try again"
+          },
           { status: 500 }
         );
       }
+
+      // Network/connection errors
+      if (error.message.includes("fetch")) {
+        return NextResponse.json(
+          {
+            error: "Network error connecting to RealtimeKit",
+            details: "Unable to reach Cloudflare RealtimeKit API",
+            instructions: "Check your internet connection and API URL"
+          },
+          { status: 500 }
+        );
+      }
+
+      // Return the actual error message for debugging
+      return NextResponse.json(
+        {
+          error: "RealtimeKit integration error",
+          details: error.message,
+          instructions: "Check server logs for more details"
+        },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json(
-      { error: "An unexpected error occurred" },
+      {
+        error: "An unexpected error occurred",
+        instructions: "Visit /api/meeting/debug to check configuration"
+      },
       { status: 500 }
     );
   }
