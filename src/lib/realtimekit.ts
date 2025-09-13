@@ -127,26 +127,41 @@ class RealtimeKitClient {
     participantName: string,
     isHost = false
   ): Promise<ParticipantToken> {
-    const tokenData = {
-      meetingId,
-      participantName,
+    const participantData = {
+      name: participantName,
       role: isHost ? "host" : "participant",
-      expiresIn: 3600, // 1 hour
     };
 
-    // Try singular form first, then plural as fallback
+    console.log(`Creating participant for meeting ${meetingId}:`, participantData);
+
+    // Try the most likely endpoint patterns
     try {
       return await this.makeRequest<ParticipantToken>(
-        `/meeting/${meetingId}/tokens`,
+        `/meetings/${meetingId}/participants`,
         "POST",
-        tokenData
+        participantData
       );
     } catch (error) {
-      return this.makeRequest<ParticipantToken>(
-        `/meetings/${meetingId}/tokens`,
-        "POST",
-        tokenData
-      );
+      console.log("Failed with /participants, trying /tokens");
+      try {
+        return await this.makeRequest<ParticipantToken>(
+          `/meetings/${meetingId}/tokens`,
+          "POST",
+          participantData
+        );
+      } catch (error2) {
+        console.log("Failed with /tokens, trying legacy format");
+        return this.makeRequest<ParticipantToken>(
+          `/meeting/${meetingId}/tokens`,
+          "POST",
+          {
+            meetingId,
+            participantName,
+            role: isHost ? "host" : "participant",
+            expiresIn: 3600,
+          }
+        );
+      }
     }
   }
 

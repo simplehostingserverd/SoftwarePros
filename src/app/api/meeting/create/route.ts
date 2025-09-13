@@ -32,23 +32,34 @@ export async function POST(request: NextRequest) {
 
     const meeting = meetingResponse.data;
 
-    // Return meeting details - participant tokens would need to be created separately
-    // via the RealtimeKit client-side SDK
+    // Create participant token for joining the meeting
+    const participantToken = await client.createParticipantToken(
+      meeting.id,
+      participantName,
+      isHost
+    );
+
+    // For Cloudflare RealtimeKit, joins are typically done via SDK with tokens
+    // We'll create a custom join page that initializes the SDK with the token
+    const joinUrl = `/join/${meeting.id}?participant=${participantToken.participantId}&token=${encodeURIComponent(participantToken.token)}`;
+    const hostUrl = isHost ? `/join/${meeting.id}?host=true&participant=${participantToken.participantId}&token=${encodeURIComponent(participantToken.token)}` : joinUrl;
+
     return NextResponse.json({
       success: true,
       meeting: {
         id: meeting.id,
-        title: meeting.title,
-        status: meeting.status,
+        name: meeting.title, // Widget expects 'name', not 'title'
+        description: `Video consultation with ${participantName}`,
+        joinUrl: joinUrl,
+        hostUrl: hostUrl,
         createdAt: meeting.created_at,
+        status: meeting.status,
         preferredRegion: meeting.preferred_region,
-        // Note: Join URLs are typically generated client-side with the RealtimeKit SDK
-        // using the meeting ID and participant authentication
-        meetingId: meeting.id,
       },
-      instructions: {
-        message: "Meeting created successfully. Use RealtimeKit SDK to join.",
-        sdkInfo: "Initialize RealtimeKit with this meeting ID to join the call.",
+      participant: {
+        token: participantToken.token,
+        participantId: participantToken.participantId,
+        expiresAt: participantToken.expiresAt,
       },
     });
   } catch (error) {
