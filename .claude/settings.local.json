@@ -21,7 +21,8 @@
       "Bash(git reset:*)",
       "WebSearch",
       "WebFetch(domain:developers.cloudflare.com)",
-      "WebFetch(domain:docs.realtime.cloudflare.com)"
+      "WebFetch(domain:docs.realtime.cloudflare.com)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

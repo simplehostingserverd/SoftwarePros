@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 export type ContactEmailData = {
   name: string;
@@ -208,9 +209,69 @@ function buildTextEmail(data: ContactEmailData) {
     .join("\n");
 }
 
-export async function sendContactEmail(data: ContactEmailData) {
+async function sendContactEmailViaMailerSend(data: ContactEmailData) {
   try {
-    console.log("Attempting to send contact email...");
+    console.log("Attempting to send contact email via MailerSend...");
+
+    const apiKey = process.env.MAILERSEND_API_KEY;
+    if (!apiKey) {
+      throw new Error("MAILERSEND_API_KEY environment variable is not set");
+    }
+
+    const mailerSend = new MailerSend({
+      apiKey,
+    });
+
+    // Use the MailerSend domain email as sender
+    const sentFrom = new Sender(
+      process.env.CONTACT_FROM_EMAIL || "noreply@test-eqvygm0kpqjl0p7w.mlsender.net",
+      "SoftwarePros Contact Form"
+    );
+
+    const recipients = [
+      new Recipient(RECIPIENT_EMAIL, "SoftwarePros Team")
+    ];
+
+    const subjectBase = data.subject?.trim() || "New Contact Message";
+    const subject = `${subjectBase} - ${data.name} (${data.serviceType || "General"})`;
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(sentFrom)
+      .setSubject(subject)
+      .setHtml(buildHtmlEmail(data))
+      .setText(buildTextEmail(data));
+
+    const result = await mailerSend.email.send(emailParams);
+
+    console.log("MailerSend email sent successfully:", result);
+    return {
+      messageId: result.body?.message_id || 'mailersend-' + Date.now(),
+      previewUrl: null // MailerSend doesn't provide preview URLs like Ethereal
+    };
+
+  } catch (error) {
+    console.error("MailerSend error:", error);
+    throw error;
+  }
+}
+
+export async function sendContactEmail(data: ContactEmailData) {
+  // Try MailerSend first if API key is configured
+  if (process.env.MAILERSEND_API_KEY) {
+    try {
+      console.log("Attempting to send email via MailerSend...");
+      return await sendContactEmailViaMailerSend(data);
+    } catch (error) {
+      console.error("MailerSend failed, falling back to SMTP:", error);
+      // Continue to SMTP fallback below
+    }
+  }
+
+  // Fallback to traditional SMTP
+  try {
+    console.log("Attempting to send contact email via SMTP...");
     const transporter = await resolveTransport();
 
     const subjectBase = data.subject?.trim() || "New Contact Message";

@@ -19,6 +19,7 @@
     "@mui/material": "^5.15.1",
     "autoprefixer": "^10.4.21",
     "framer-motion": "^12.23.6",
+    "mailersend": "^2.6.0",
     "next": "^15.4.6",
     "next-seo": "^6.4.0",
     "nodemailer": "^6.9.14",
