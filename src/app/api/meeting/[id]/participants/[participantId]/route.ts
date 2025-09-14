@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createRealtimeKitClient, type CreateParticipantRequest } from "@/lib/realtimekit";
+import { type CreateParticipantRequest, createRealtimeKitClient } from "@/lib/realtimekit";
+import { type NextRequest, NextResponse } from "next/server";
 
 // GET /api/meeting/[id]/participants/[participantId] - Get participant details
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; participantId: string }> }
+  { params }: { params: Promise<{ id: string; participantId: string }> },
 ) {
   try {
     const { id: meetingId, participantId } = await params;
@@ -16,8 +16,11 @@ export async function GET(
   } catch (error) {
     console.error("Error getting participant:", error);
     return NextResponse.json(
-      { error: "Failed to get participant", details: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 }
+      {
+        error: "Failed to get participant",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
     );
   }
 }
@@ -25,11 +28,11 @@ export async function GET(
 // PUT /api/meeting/[id]/participants/[participantId] - Update participant
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; participantId: string }> }
+  { params }: { params: Promise<{ id: string; participantId: string }> },
 ) {
   try {
     const { id: meetingId, participantId } = await params;
-    const body = await request.json() as Partial<CreateParticipantRequest>;
+    const body = (await request.json()) as Partial<CreateParticipantRequest>;
     const client = createRealtimeKitClient();
 
     const response = await client.updateParticipant(meetingId, participantId, body);
@@ -38,8 +41,11 @@ export async function PUT(
   } catch (error) {
     console.error("Error updating participant:", error);
     return NextResponse.json(
-      { error: "Failed to update participant", details: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 }
+      {
+        error: "Failed to update participant",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
     );
   }
 }
@@ -47,7 +53,7 @@ export async function PUT(
 // DELETE /api/meeting/[id]/participants/[participantId] - Remove participant
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; participantId: string }> }
+  { params }: { params: Promise<{ id: string; participantId: string }> },
 ) {
   try {
     const { id: meetingId, participantId } = await params;
@@ -59,8 +65,11 @@ export async function DELETE(
   } catch (error) {
     console.error("Error removing participant:", error);
     return NextResponse.json(
-      { error: "Failed to remove participant", details: error instanceof Error ? error.message : "Unknown error" },
-      { status: 500 }
+      {
+        error: "Failed to remove participant",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
     );
   }
 }

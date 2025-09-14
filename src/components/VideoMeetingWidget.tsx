@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Close, PersonAdd, Phone, VideoCall } from "@mui/icons-material";
 import { Button } from "@mui/joy";
-import { VideoCall, Phone, PersonAdd, Close } from "@mui/icons-material";
+import { useState } from "react";
 
 interface MeetingResponse {
   success: boolean;
@@ -121,9 +121,15 @@ export default function VideoMeetingWidget({
               Meeting Details
             </div>
             <div className="mt-1 text-sm text-gray-900">
-              <div><strong>Meeting:</strong> {meeting.meeting.name}</div>
-              <div><strong>Created:</strong> {new Date(meeting.meeting.createdAt).toLocaleString()}</div>
-              <div><strong>Participant:</strong> {participantName}</div>
+              <div>
+                <strong>Meeting:</strong> {meeting.meeting.name}
+              </div>
+              <div>
+                <strong>Created:</strong> {new Date(meeting.meeting.createdAt).toLocaleString()}
+              </div>
+              <div>
+                <strong>Participant:</strong> {participantName}
+              </div>
             </div>
           </div>
 
@@ -147,8 +153,8 @@ export default function VideoMeetingWidget({
           </div>
 
           <div className="text-xs text-success-600 bg-success-100 rounded p-2">
-            <strong>Note:</strong> We'll join the meeting shortly after you connect.
-            The meeting link expires in 1 hour.
+            <strong>Note:</strong> We'll join the meeting shortly after you connect. The meeting
+            link expires in 1 hour.
           </div>
         </div>
       </div>
@@ -163,9 +169,7 @@ export default function VideoMeetingWidget({
         </div>
         <div>
           <h3 className="font-semibold text-gray-900">Schedule Video Consultation</h3>
-          <p className="text-sm text-gray-600">
-            Start an instant video call with our team
-          </p>
+          <p className="text-sm text-gray-600">Start an instant video call with our team</p>
         </div>
       </div>
 

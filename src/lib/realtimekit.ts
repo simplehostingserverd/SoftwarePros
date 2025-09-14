@@ -122,7 +122,7 @@ interface PresetData {
 
 interface CreatePresetRequest {
   name: string;
-  permissions: PresetData['permissions'];
+  permissions: PresetData["permissions"];
 }
 
 interface PresetResponse {
@@ -296,7 +296,9 @@ class RealtimeKitClient {
 
     // Otherwise, use Basic Auth with Organization ID and API Key
     // Format: Basic base64(orgId:apiKey)
-    const credentials = Buffer.from(`${this.config.orgId}:${this.config.apiKey}`).toString("base64");
+    const credentials = Buffer.from(`${this.config.orgId}:${this.config.apiKey}`).toString(
+      "base64",
+    );
     const authHeader = `Basic ${credentials}`;
     console.log(`Generated Basic Auth for org: ${this.config.orgId}`);
     console.log(`Auth header format: Basic [base64(${this.config.orgId}:***)]`);
@@ -307,11 +309,11 @@ class RealtimeKitClient {
     endpoint: string,
     method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
     body?: any,
-    queryParams?: Record<string, string | number>
+    queryParams?: Record<string, string | number>,
   ): Promise<T> {
     // Remove trailing slash from apiUrl and ensure endpoint starts with /
-    const baseUrl = this.config.apiUrl.replace(/\/$/, '');
-    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const baseUrl = this.config.apiUrl.replace(/\/$/, "");
+    const cleanEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
     let url = `${baseUrl}${cleanEndpoint}`;
 
     // Add query parameters if provided
@@ -324,12 +326,12 @@ class RealtimeKitClient {
     }
     const authHeader = this.generateAuthHeader();
     const headers: HeadersInit = {
-      "Authorization": authHeader,
+      Authorization: authHeader,
       "Content-Type": "application/json",
     };
 
     console.log(`RealtimeKit API Request: ${method} ${url}`);
-    console.log(`Headers:`, { ...headers, Authorization: '[REDACTED]' });
+    console.log(`Headers:`, { ...headers, Authorization: "[REDACTED]" });
     console.log(`Full auth header (first 20 chars): ${authHeader.substring(0, 20)}...`);
     if (body) {
       console.log(`Request body:`, JSON.stringify(body, null, 2));
@@ -347,7 +349,7 @@ class RealtimeKitClient {
       const errorText = await response.text();
       console.log(`Error response:`, errorText);
       throw new Error(
-        `RealtimeKit API error: ${response.status} ${response.statusText} - ${errorText}`
+        `RealtimeKit API error: ${response.status} ${response.statusText} - ${errorText}`,
       );
     }
 
@@ -405,7 +407,10 @@ class RealtimeKitClient {
   }
 
   async listMeetings(page = 1, limit = 50): Promise<MeetingListResponse> {
-    return await this.makeRequest<MeetingListResponse>("/meetings", "GET", undefined, { page, limit });
+    return await this.makeRequest<MeetingListResponse>("/meetings", "GET", undefined, {
+      page,
+      limit,
+    });
   }
 
   async endMeeting(meetingId: string): Promise<MeetingResponse> {
@@ -416,21 +421,25 @@ class RealtimeKitClient {
 
   async createParticipant(
     meetingId: string,
-    request: CreateParticipantRequest
+    request: CreateParticipantRequest,
   ): Promise<ParticipantResponse> {
-    return await this.makeRequest<ParticipantResponse>(`/meetings/${meetingId}/participants`, "POST", request);
+    return await this.makeRequest<ParticipantResponse>(
+      `/meetings/${meetingId}/participants`,
+      "POST",
+      request,
+    );
   }
 
   async createParticipantToken(
     meetingId: string,
     participantName: string,
-    preset: AvailablePreset = "group_call_participant"
+    preset: AvailablePreset = "group_call_participant",
   ): Promise<ParticipantToken> {
     // Use the correct presets from your dashboard
     const participantData: CreateParticipantRequest = {
       name: participantName,
       preset_name: preset,
-      custom_participant_id: `participant-${Date.now()}-${participantName.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()}`,
+      custom_participant_id: `participant-${Date.now()}-${participantName.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()}`,
     };
 
     console.log(`Creating participant for meeting ${meetingId}:`, participantData);
@@ -440,7 +449,7 @@ class RealtimeKitClient {
       const response = await this.makeRequest<ParticipantResponse>(
         `/meetings/${meetingId}/participants`,
         "POST",
-        participantData
+        participantData,
       );
 
       console.log(`Participant creation response:`, response);
@@ -453,12 +462,16 @@ class RealtimeKitClient {
       };
     } catch (error) {
       console.error("RealtimeKit participant creation failed:", error);
-      throw new Error(`Failed to create participant token: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `Failed to create participant token: ${error instanceof Error ? error.message : "Unknown error"}`,
+      );
     }
   }
 
   async getParticipant(meetingId: string, participantId: string): Promise<ParticipantResponse> {
-    return await this.makeRequest<ParticipantResponse>(`/meetings/${meetingId}/participants/${participantId}`);
+    return await this.makeRequest<ParticipantResponse>(
+      `/meetings/${meetingId}/participants/${participantId}`,
+    );
   }
 
   async listParticipants(meetingId: string): Promise<ParticipantListResponse> {
@@ -472,9 +485,13 @@ class RealtimeKitClient {
   async updateParticipant(
     meetingId: string,
     participantId: string,
-    request: Partial<CreateParticipantRequest>
+    request: Partial<CreateParticipantRequest>,
   ): Promise<ParticipantResponse> {
-    return await this.makeRequest<ParticipantResponse>(`/meetings/${meetingId}/participants/${participantId}`, "PUT", request);
+    return await this.makeRequest<ParticipantResponse>(
+      `/meetings/${meetingId}/participants/${participantId}`,
+      "PUT",
+      request,
+    );
   }
 
   // ========== PRESETS API ==========
@@ -491,7 +508,10 @@ class RealtimeKitClient {
     return await this.makeRequest<PresetListResponse>("/presets");
   }
 
-  async updatePreset(presetId: string, request: Partial<CreatePresetRequest>): Promise<PresetResponse> {
+  async updatePreset(
+    presetId: string,
+    request: Partial<CreatePresetRequest>,
+  ): Promise<PresetResponse> {
     return await this.makeRequest<PresetResponse>(`/presets/${presetId}`, "PUT", request);
   }
 
@@ -506,11 +526,16 @@ class RealtimeKitClient {
   }
 
   async stopRecording(meetingId: string, recordingId: string): Promise<RecordingResponse> {
-    return await this.makeRequest<RecordingResponse>(`/meetings/${meetingId}/recordings/${recordingId}/stop`, "POST");
+    return await this.makeRequest<RecordingResponse>(
+      `/meetings/${meetingId}/recordings/${recordingId}/stop`,
+      "POST",
+    );
   }
 
   async getRecording(meetingId: string, recordingId: string): Promise<RecordingResponse> {
-    return await this.makeRequest<RecordingResponse>(`/meetings/${meetingId}/recordings/${recordingId}`);
+    return await this.makeRequest<RecordingResponse>(
+      `/meetings/${meetingId}/recordings/${recordingId}`,
+    );
   }
 
   async listRecordings(meetingId: string): Promise<RecordingListResponse> {
@@ -523,16 +548,28 @@ class RealtimeKitClient {
 
   // ========== LIVESTREAMS API ==========
 
-  async startLivestream(meetingId: string, request: CreateLivestreamRequest): Promise<LivestreamResponse> {
-    return await this.makeRequest<LivestreamResponse>(`/meetings/${meetingId}/livestreams`, "POST", request);
+  async startLivestream(
+    meetingId: string,
+    request: CreateLivestreamRequest,
+  ): Promise<LivestreamResponse> {
+    return await this.makeRequest<LivestreamResponse>(
+      `/meetings/${meetingId}/livestreams`,
+      "POST",
+      request,
+    );
   }
 
   async stopLivestream(meetingId: string, livestreamId: string): Promise<LivestreamResponse> {
-    return await this.makeRequest<LivestreamResponse>(`/meetings/${meetingId}/livestreams/${livestreamId}/stop`, "POST");
+    return await this.makeRequest<LivestreamResponse>(
+      `/meetings/${meetingId}/livestreams/${livestreamId}/stop`,
+      "POST",
+    );
   }
 
   async getLivestream(meetingId: string, livestreamId: string): Promise<LivestreamResponse> {
-    return await this.makeRequest<LivestreamResponse>(`/meetings/${meetingId}/livestreams/${livestreamId}`);
+    return await this.makeRequest<LivestreamResponse>(
+      `/meetings/${meetingId}/livestreams/${livestreamId}`,
+    );
   }
 
   async listLivestreams(meetingId: string): Promise<LivestreamListResponse> {
@@ -555,8 +592,13 @@ class RealtimeKitClient {
     return await this.makeRequest<TranscriptResponse>(`/meetings/${meetingId}/transcripts`);
   }
 
-  async getParticipantTranscripts(meetingId: string, participantId: string): Promise<TranscriptResponse> {
-    return await this.makeRequest<TranscriptResponse>(`/meetings/${meetingId}/participants/${participantId}/transcripts`);
+  async getParticipantTranscripts(
+    meetingId: string,
+    participantId: string,
+  ): Promise<TranscriptResponse> {
+    return await this.makeRequest<TranscriptResponse>(
+      `/meetings/${meetingId}/participants/${participantId}/transcripts`,
+    );
   }
 
   // ========== WEBHOOKS API ==========
@@ -573,7 +615,10 @@ class RealtimeKitClient {
     return await this.makeRequest<WebhookListResponse>("/webhooks");
   }
 
-  async updateWebhook(webhookId: string, request: Partial<CreateWebhookRequest>): Promise<WebhookResponse> {
+  async updateWebhook(
+    webhookId: string,
+    request: Partial<CreateWebhookRequest>,
+  ): Promise<WebhookResponse> {
     return await this.makeRequest<WebhookResponse>(`/webhooks/${webhookId}`, "PUT", request);
   }
 
@@ -586,7 +631,7 @@ class RealtimeKitClient {
   async getAnalytics(
     startDate: string,
     endDate: string,
-    meetingId?: string
+    meetingId?: string,
   ): Promise<AnalyticsResponse> {
     const queryParams: Record<string, string> = {
       start_date: startDate,
@@ -610,8 +655,18 @@ class RealtimeKitClient {
     return await this.makeRequest<{ status: string; timestamp: string }>("/health");
   }
 
-  async getOrganizationInfo(): Promise<{ id: string; name: string; plan: string; limits: Record<string, number> }> {
-    return await this.makeRequest<{ id: string; name: string; plan: string; limits: Record<string, number> }>("/organization");
+  async getOrganizationInfo(): Promise<{
+    id: string;
+    name: string;
+    plan: string;
+    limits: Record<string, number>;
+  }> {
+    return await this.makeRequest<{
+      id: string;
+      name: string;
+      plan: string;
+      limits: Record<string, number>;
+    }>("/organization");
   }
 }
 
@@ -620,9 +675,12 @@ export function createRealtimeKitClient(): RealtimeKitClient {
   const orgId = process.env.CLOUDFLARE_REALTIME_ORG_ID;
   const apiKey = process.env.CLOUDFLARE_REALTIME_API_KEY;
   const authHeader = process.env.CLOUDFLARE_REALTIME_AUTH_HEADER;
-  const apiUrl = process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v2";
+  const apiUrl =
+    process.env.CLOUDFLARE_REALTIME_API_URL || "https://api.realtime.cloudflare.com/v2";
 
-  console.log(`RealtimeKit Config: orgId=${!!orgId}, apiKey=${!!apiKey}, authHeader=${!!authHeader}`);
+  console.log(
+    `RealtimeKit Config: orgId=${!!orgId}, apiKey=${!!apiKey}, authHeader=${!!authHeader}`,
+  );
   console.log(`API URL: ${apiUrl}`);
 
   // Prefer orgId + apiKey over authHeader for better debugging
@@ -648,7 +706,7 @@ export function createRealtimeKitClient(): RealtimeKitClient {
 
   throw new Error(
     "Missing required Cloudflare RealtimeKit environment variables. Need:\n" +
-    "CLOUDFLARE_REALTIME_ORG_ID and CLOUDFLARE_REALTIME_API_KEY"
+      "CLOUDFLARE_REALTIME_ORG_ID and CLOUDFLARE_REALTIME_API_KEY",
   );
 }
 

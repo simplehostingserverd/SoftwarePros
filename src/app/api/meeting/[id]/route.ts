@@ -1,18 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
 import { createRealtimeKitClient } from "@/lib/realtimekit";
+import { type NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id: meetingId } = await params;
 
     if (!meetingId) {
-      return NextResponse.json(
-        { error: "Meeting ID is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Meeting ID is required" }, { status: 400 });
     }
 
     const client = createRealtimeKitClient();
@@ -26,31 +20,22 @@ export async function GET(
     console.error("Error fetching meeting:", error);
 
     if (error instanceof Error && error.message.includes("404")) {
-      return NextResponse.json(
-        { error: "Meeting not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Meeting not found" }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { error: "Failed to fetch meeting details" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch meeting details" }, { status: 500 });
   }
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id: meetingId } = await params;
 
     if (!meetingId) {
-      return NextResponse.json(
-        { error: "Meeting ID is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Meeting ID is required" }, { status: 400 });
     }
 
     const client = createRealtimeKitClient();
@@ -64,15 +49,9 @@ export async function DELETE(
     console.error("Error deleting meeting:", error);
 
     if (error instanceof Error && error.message.includes("404")) {
-      return NextResponse.json(
-        { error: "Meeting not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Meeting not found" }, { status: 404 });
     }
 
-    return NextResponse.json(
-      { error: "Failed to delete meeting" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to delete meeting" }, { status: 500 });
   }
 }

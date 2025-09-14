@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createRealtimeKitClient, type AvailablePreset } from "@/lib/realtimekit";
+import { type AvailablePreset, createRealtimeKitClient } from "@/lib/realtimekit";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,10 +8,7 @@ export async function POST(request: NextRequest) {
 
     // Validate required fields
     if (!participantName) {
-      return NextResponse.json(
-        { error: "Participant name is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Participant name is required" }, { status: 400 });
     }
 
     const client = createRealtimeKitClient();
@@ -47,13 +44,15 @@ export async function POST(request: NextRequest) {
     const participantToken = await client.createParticipantToken(
       meeting.id,
       participantName,
-      participantPreset
+      participantPreset,
     );
 
     // For Cloudflare RealtimeKit, joins are typically done via SDK with tokens
     // We'll create a custom join page that initializes the SDK with the token
     const joinUrl = `/join/${meeting.id}?participant=${participantToken.participantId}&token=${encodeURIComponent(participantToken.token)}`;
-    const hostUrl = isHost ? `/join/${meeting.id}?host=true&participant=${participantToken.participantId}&token=${encodeURIComponent(participantToken.token)}` : joinUrl;
+    const hostUrl = isHost
+      ? `/join/${meeting.id}?host=true&participant=${participantToken.participantId}&token=${encodeURIComponent(participantToken.token)}`
+      : joinUrl;
 
     return NextResponse.json({
       success: true,
@@ -86,9 +85,9 @@ export async function POST(request: NextRequest) {
           {
             error: "RealtimeKit is not configured",
             details: "Missing Cloudflare RealtimeKit environment variables",
-            instructions: "Visit /api/meeting/debug for setup instructions"
+            instructions: "Visit /api/meeting/debug for setup instructions",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
 
@@ -98,9 +97,9 @@ export async function POST(request: NextRequest) {
           {
             error: "Failed to create meeting with Cloudflare RealtimeKit",
             details: error.message,
-            instructions: "Check your API credentials and try again"
+            instructions: "Check your API credentials and try again",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
 
@@ -110,9 +109,9 @@ export async function POST(request: NextRequest) {
           {
             error: "Network error connecting to RealtimeKit",
             details: "Unable to reach Cloudflare RealtimeKit API",
-            instructions: "Check your internet connection and API URL"
+            instructions: "Check your internet connection and API URL",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
 
@@ -121,18 +120,18 @@ export async function POST(request: NextRequest) {
         {
           error: "RealtimeKit integration error",
           details: error.message,
-          instructions: "Check server logs for more details"
+          instructions: "Check server logs for more details",
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     return NextResponse.json(
       {
         error: "An unexpected error occurred",
-        instructions: "Visit /api/meeting/debug to check configuration"
+        instructions: "Visit /api/meeting/debug to check configuration",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

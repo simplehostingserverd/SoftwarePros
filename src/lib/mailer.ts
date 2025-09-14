@@ -1,5 +1,5 @@
+import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 import nodemailer from "nodemailer";
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 export type ContactEmailData = {
   name: string;
@@ -239,7 +239,7 @@ async function sendContactEmailViaMailerSend(data: ContactEmailData) {
     // Use the MailerSend domain email as sender
     const sentFrom = new Sender(
       process.env.CONTACT_FROM_EMAIL || "noreply@test-eqvygm0kpqjl0p7w.mlsender.net",
-      "SoftwarePros Contact Form"
+      "SoftwarePros Contact Form",
     );
 
     // For MailerSend trial accounts, emails can only be sent to the administrator's email
@@ -253,9 +253,7 @@ async function sendContactEmailViaMailerSend(data: ContactEmailData) {
       recipientEmail = adminEmail;
     }
 
-    const recipients = [
-      new Recipient(recipientEmail, "SoftwarePros Team")
-    ];
+    const recipients = [new Recipient(recipientEmail, "SoftwarePros Team")];
 
     const subjectBase = data.subject?.trim() || "New Contact Message";
     const subject = `${subjectBase} - ${data.name} (${data.serviceType || "General"})`;
@@ -272,17 +270,19 @@ async function sendContactEmailViaMailerSend(data: ContactEmailData) {
 
     console.log("MailerSend email sent successfully:", result);
     return {
-      messageId: result.body?.message_id || 'mailersend-' + Date.now(),
-      previewUrl: null // MailerSend doesn't provide preview URLs like Ethereal
+      messageId: result.body?.message_id || "mailersend-" + Date.now(),
+      previewUrl: null, // MailerSend doesn't provide preview URLs like Ethereal
     };
-
   } catch (error) {
     console.error("MailerSend error:", error);
 
     // Handle trial account specific errors
-    if (error instanceof Error && error.message.includes("Trial accounts can only send emails to the administrator")) {
+    if (
+      error instanceof Error &&
+      error.message.includes("Trial accounts can only send emails to the administrator")
+    ) {
       throw new Error(
-        "MailerSend trial account restriction: Please set MAILERSEND_TRIAL_ACCOUNT=true and MAILERSEND_ADMIN_EMAIL in your environment variables"
+        "MailerSend trial account restriction: Please set MAILERSEND_TRIAL_ACCOUNT=true and MAILERSEND_ADMIN_EMAIL in your environment variables",
       );
     }
 

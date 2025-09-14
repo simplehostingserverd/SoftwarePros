@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
@@ -36,31 +36,36 @@ export async function GET(request: NextRequest) {
       configured: isConfigured,
       environment: envStatus,
       issues: issues.length > 0 ? issues : null,
-      instructions: !isConfigured ? {
-        step1: "Get your credentials from https://dash.cloudflare.com/calls",
-        step2: "Choose one of these authentication methods:",
-        method1: {
-          name: "Basic Auth (Organization ID + API Key)",
-          envVars: [
-            "CLOUDFLARE_REALTIME_ORG_ID=your-organization-id",
-            "CLOUDFLARE_REALTIME_API_KEY=your-api-key",
-            "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2"
-          ]
-        },
-        method2: {
-          name: "Pre-generated Auth Header",
-          envVars: [
-            "CLOUDFLARE_REALTIME_AUTH_HEADER=Bearer your-pre-generated-token",
-            "CLOUDFLARE_REALTIME_ORG_ID=your-organization-id",
-            "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2"
-          ]
-        }
-      } : null
+      instructions: !isConfigured
+        ? {
+            step1: "Get your credentials from https://dash.cloudflare.com/calls",
+            step2: "Choose one of these authentication methods:",
+            method1: {
+              name: "Basic Auth (Organization ID + API Key)",
+              envVars: [
+                "CLOUDFLARE_REALTIME_ORG_ID=your-organization-id",
+                "CLOUDFLARE_REALTIME_API_KEY=your-api-key",
+                "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2",
+              ],
+            },
+            method2: {
+              name: "Pre-generated Auth Header",
+              envVars: [
+                "CLOUDFLARE_REALTIME_AUTH_HEADER=Bearer your-pre-generated-token",
+                "CLOUDFLARE_REALTIME_ORG_ID=your-organization-id",
+                "CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2",
+              ],
+            },
+          }
+        : null,
     });
   } catch (error) {
-    return NextResponse.json({
-      error: "Debug endpoint error",
-      message: error instanceof Error ? error.message : "Unknown error"
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "Debug endpoint error",
+        message: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 },
+    );
   }
 }
