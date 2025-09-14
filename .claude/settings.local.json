@@ -22,7 +22,12 @@
       "WebSearch",
       "WebFetch(domain:developers.cloudflare.com)",
       "WebFetch(domain:docs.realtime.cloudflare.com)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(git pull:*)",
+      "Bash(git rebase:*)"
     ],
     "deny": [],
     "ask": []

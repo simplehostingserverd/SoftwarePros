@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createRealtimeKitClient } from "@/lib/realtimekit";
+import { createRealtimeKitClient, type AvailablePreset } from "@/lib/realtimekit";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, description, participantName, isHost = false } = body;
+    const { name, description, participantName, isHost = false, preset } = body;
 
     // Validate required fields
     if (!participantName) {
@@ -22,8 +22,9 @@ export async function POST(request: NextRequest) {
       preferred_region: "us-east-1",
       record_on_start: false, // Disable recording for privacy by default
       live_stream_on_start: false,
-      persist_chat: false,
+      persist_chat: true, // Enable chat for consultations
       summarize_on_end: false,
+      // Note: transcription_enabled and max_participants may not be supported by RealtimeKit API
     });
 
     if (!meetingResponse.success) {
@@ -32,11 +33,21 @@ export async function POST(request: NextRequest) {
 
     const meeting = meetingResponse.data;
 
+    // Determine the correct preset based on the participant role
+    let participantPreset: AvailablePreset;
+    if (preset && (preset as AvailablePreset)) {
+      participantPreset = preset as AvailablePreset;
+    } else if (isHost) {
+      participantPreset = "group_call_host"; // Use host preset from dashboard
+    } else {
+      participantPreset = "group_call_participant"; // Use participant preset from dashboard
+    }
+
     // Create participant token for joining the meeting
     const participantToken = await client.createParticipantToken(
       meeting.id,
       participantName,
-      isHost
+      participantPreset
     );
 
     // For Cloudflare RealtimeKit, joins are typically done via SDK with tokens
@@ -55,11 +66,13 @@ export async function POST(request: NextRequest) {
         createdAt: meeting.created_at,
         status: meeting.status,
         preferredRegion: meeting.preferred_region,
+        preset: participantPreset,
       },
       participant: {
         token: participantToken.token,
         participantId: participantToken.participantId,
         expiresAt: participantToken.expiresAt,
+        preset: participantPreset,
       },
     });
   } catch (error) {

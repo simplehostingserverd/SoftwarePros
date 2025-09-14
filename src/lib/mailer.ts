@@ -17,8 +17,22 @@ export type ContactEmailData = {
   hearAboutUs?: string;
 };
 
-// Send all contact emails to Proton address as requested
-const RECIPIENT_EMAIL = "simplehostingserverd@proton.me";
+// Determine recipient email based on MailerSend trial account settings
+function getRecipientEmail(): string {
+  const isTrialAccount = process.env.MAILERSEND_TRIAL_ACCOUNT === "true";
+  const adminEmail = process.env.MAILERSEND_ADMIN_EMAIL;
+
+  // If trial account and admin email is set, use admin email for both API and SMTP
+  if (isTrialAccount && adminEmail) {
+    console.log("Using MailerSend administrator email for trial account:", adminEmail);
+    return adminEmail;
+  }
+
+  // Default fallback
+  return "simplehostingserverd@proton.me";
+}
+
+const RECIPIENT_EMAIL = getRecipientEmail();
 const FROM_EMAIL =
   process.env.CONTACT_FROM_EMAIL ||
   `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || "softwarepros.org"}`;
@@ -228,8 +242,19 @@ async function sendContactEmailViaMailerSend(data: ContactEmailData) {
       "SoftwarePros Contact Form"
     );
 
+    // For MailerSend trial accounts, emails can only be sent to the administrator's email
+    // Check if we need to use a different recipient for trial accounts
+    const isTrialAccount = process.env.MAILERSEND_TRIAL_ACCOUNT === "true";
+    const adminEmail = process.env.MAILERSEND_ADMIN_EMAIL;
+
+    let recipientEmail = RECIPIENT_EMAIL;
+    if (isTrialAccount && adminEmail) {
+      console.log("Using administrator email for MailerSend trial account");
+      recipientEmail = adminEmail;
+    }
+
     const recipients = [
-      new Recipient(RECIPIENT_EMAIL, "SoftwarePros Team")
+      new Recipient(recipientEmail, "SoftwarePros Team")
     ];
 
     const subjectBase = data.subject?.trim() || "New Contact Message";
@@ -253,6 +278,14 @@ async function sendContactEmailViaMailerSend(data: ContactEmailData) {
 
   } catch (error) {
     console.error("MailerSend error:", error);
+
+    // Handle trial account specific errors
+    if (error instanceof Error && error.message.includes("Trial accounts can only send emails to the administrator")) {
+      throw new Error(
+        "MailerSend trial account restriction: Please set MAILERSEND_TRIAL_ACCOUNT=true and MAILERSEND_ADMIN_EMAIL in your environment variables"
+      );
+    }
+
     throw error;
   }
 }
