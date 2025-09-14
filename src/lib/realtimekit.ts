@@ -66,7 +66,10 @@ class RealtimeKitClient {
     method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
     body?: any
   ): Promise<T> {
-    const url = `${this.config.apiUrl}${endpoint}`;
+    // Remove trailing slash from apiUrl and ensure endpoint starts with /
+    const baseUrl = this.config.apiUrl.replace(/\/$/, '');
+    const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+    const url = `${baseUrl}${cleanEndpoint}`;
     const authHeader = this.generateAuthHeader();
     const headers: HeadersInit = {
       "Authorization": authHeader,
@@ -111,15 +114,31 @@ class RealtimeKitClient {
       summarize_on_end: request.summarize_on_end || false,
     };
 
-    return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
+    // Try plural first, then singular as fallback based on error patterns
+    try {
+      return await this.makeRequest<MeetingResponse>("/meetings", "POST", meetingData);
+    } catch (error) {
+      console.log("Failed with /meetings, trying /meeting");
+      return await this.makeRequest<MeetingResponse>("/meeting", "POST", meetingData);
+    }
   }
 
   async getMeeting(meetingId: string): Promise<MeetingResponse> {
-    return await this.makeRequest<MeetingResponse>(`/meetings/${meetingId}`);
+    try {
+      return await this.makeRequest<MeetingResponse>(`/meetings/${meetingId}`);
+    } catch (error) {
+      console.log("Failed with /meetings, trying /meeting");
+      return await this.makeRequest<MeetingResponse>(`/meeting/${meetingId}`);
+    }
   }
 
   async deleteMeeting(meetingId: string): Promise<void> {
-    await this.makeRequest(`/meetings/${meetingId}`, "DELETE");
+    try {
+      await this.makeRequest(`/meetings/${meetingId}`, "DELETE");
+    } catch (error) {
+      console.log("Failed with /meetings, trying /meeting");
+      await this.makeRequest(`/meeting/${meetingId}`, "DELETE");
+    }
   }
 
   async createParticipantToken(
@@ -151,6 +170,7 @@ class RealtimeKitClient {
         );
       } catch (error2) {
         console.log("Failed with /tokens, trying legacy format");
+        // The error shows it's trying /meeting/ not /meetings/
         return this.makeRequest<ParticipantToken>(
           `/meeting/${meetingId}/tokens`,
           "POST",
