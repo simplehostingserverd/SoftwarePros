@@ -79,10 +79,10 @@ export default function SecurityPage() {
             <p className="text-gray-300">
               If you discover a security vulnerability, please report it immediately to{" "}
               <a
-                href="mailto:contact@softwarepros.org"
+                href="mailto:info@softwarepros.org"
                 className="text-purple-400 hover:text-purple-300"
               >
-                contact@softwarepros.org
+                info@softwarepros.org
               </a>
               . We take all security reports seriously and will respond promptly.
             </p>

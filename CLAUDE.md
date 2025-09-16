@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Core Development
 - `npm run dev` - Start development server (Next.js dev)
 - `npm run build` - Build for production
-- `npm start` - Start production server (Next.js built-in)
+- `npm start` - Start production server using Next.js built-in server
 
 ### Code Quality
 - `npm run lint` - Run Biome linter and formatter check
@@ -22,7 +22,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Forms**: React Hook Form with Zod validation
 - **Animations**: Framer Motion
 - **Code Quality**: Biome (replaces ESLint/Prettier)
-- **Email**: Nodemailer with SMTP configuration
+- **Email**: MailerSend API + Nodemailer with SMTP fallback configuration
+- **Video Meetings**: Cloudflare RealtimeKit integration
 - **PDF Generation**: PDFKit for resources
 - **Deployment**: Docker with Coolify support, Next.js standalone build
 
@@ -31,7 +32,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 src/
 ├── app/              # Next.js App Router pages
 │   ├── about/        # About page with layout
-│   ├── api/          # API routes (contact, resources)
+│   ├── api/          # API routes (contact, resources, meeting, health, test-email)
 │   ├── contact/      # Contact page with form
 │   ├── portfolio/    # Portfolio/case studies
 │   ├── services/     # Service pages (web, mobile, healthcare, etc.)
@@ -62,8 +63,9 @@ public/              # Static assets and images
 - **Coolify Support**: Ready for one-click deployment with environment variable configuration
 
 ### Key Features
-- **Contact Form**: Email integration with multiple SMTP options
-- **Resource Downloads**: PDF generation for HIPAA checklists, vendor due diligence
+- **Contact Form**: MailerSend API integration with SMTP fallback options
+- **Video Meetings**: Cloudflare RealtimeKit integration for secure video calls
+- **Resource Downloads**: PDF generation for HIPAA checklists, vendor due diligence, risk registers
 - **Investor Section**: Business metrics, charts, and competitive analysis
 - **SEO Optimization**: Structured data, sitemaps, and meta tags
 
@@ -82,28 +84,46 @@ public/              # Static assets and images
 - **Environment-based configuration**: All settings configurable via environment variables
 
 ### Email Configuration
-The contact form requires email configuration with multiple fallback options:
+The contact form uses MailerSend API with SMTP fallback options:
 
-**Configuration Options (in priority order):**
-1. **Custom SMTP** (recommended for cPanel):
+**Primary Configuration (MailerSend API):**
+```
+MAILERSEND_API_TOKEN=your-mailersend-api-token
+```
+
+**Fallback SMTP Options (in priority order):**
+1. **Custom SMTP**:
    ```
    SMTP_HOST=mail.yourdomain.com
    SMTP_PORT=587
    SMTP_USER=contact@yourdomain.com
    SMTP_PASS=your-password
    ```
-2. **Gmail SMTP** (alternative):
+2. **Gmail SMTP**:
    ```
    GMAIL_USER=your-gmail@gmail.com
    GMAIL_APP_PASSWORD=your-16-char-app-password
    ```
-3. **cPanel Localhost SMTP** (automatic fallback)
 
 **Environment Variables:**
 - Copy `.env.example` to `.env.local` for development
 - Set production variables in Coolify environment or hosting platform
 - Contact emails are sent to `simplehostingserverd@proton.me`
-- System automatically falls back through configuration options
+- System automatically falls back from MailerSend to SMTP if API fails
+
+### Video Meeting Configuration
+Cloudflare RealtimeKit integration for secure video calls:
+
+```
+CLOUDFLARE_REALTIME_ORG_ID=your-organization-id
+CLOUDFLARE_REALTIME_API_KEY=your-api-key
+CLOUDFLARE_REALTIME_API_URL=https://api.realtime.cloudflare.com/v2
+```
+
+**API Routes:**
+- `POST /api/meeting/create` - Create new meeting session
+- `GET /api/meeting/[id]` - Join existing meeting
+- `GET /api/meeting/debug` - Debug meeting configuration
 
 ## Docker & Deployment
 

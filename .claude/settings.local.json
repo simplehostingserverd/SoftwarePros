@@ -17,7 +17,22 @@
       "Bash(git push:*)",
       "Bash(rm:*)",
       "Bash(npm install:*)",
-      "Bash(git pull:*)"
+      "Bash(npm install)",
+      "Bash(npm ci:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git reset:*)",
+      "WebSearch",
+      "WebFetch(domain:developers.cloudflare.com)",
+      "WebFetch(domain:docs.realtime.cloudflare.com)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(git pull:*)",
+      "Bash(git rebase:*)",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

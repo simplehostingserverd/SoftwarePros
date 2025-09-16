@@ -176,7 +176,7 @@ export default function AboutPage() {
           contactPoint: {
             "@type": "ContactPoint",
             contactType: "customer service",
-            email: "contact@softwarepros.org",
+            email: "info@softwarepros.org",
           },
           sameAs: [
             "https://softwarepros.org",

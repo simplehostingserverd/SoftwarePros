@@ -1,3 +1,4 @@
+import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 import nodemailer from "nodemailer";
 
 export type ContactEmailData = {
@@ -16,8 +17,22 @@ export type ContactEmailData = {
   hearAboutUs?: string;
 };
 
-// Send all contact emails to admin address (required for MailerSend trial accounts)
-const RECIPIENT_EMAIL = process.env.MAILERSEND_ADMIN_EMAIL || "simplehostingserverd@proton.me";
+// Determine recipient email based on MailerSend trial account settings
+function getRecipientEmail(): string {
+  const isTrialAccount = process.env.MAILERSEND_TRIAL_ACCOUNT === "true";
+  const adminEmail = process.env.MAILERSEND_ADMIN_EMAIL;
+
+  // If trial account and admin email is set, use admin email for both API and SMTP
+  if (isTrialAccount && adminEmail) {
+    console.log("Using MailerSend administrator email for trial account:", adminEmail);
+    return adminEmail;
+  }
+
+  // Default fallback
+  return "simplehostingserverd@proton.me";
+}
+
+const RECIPIENT_EMAIL = getRecipientEmail();
 const FROM_EMAIL =
   process.env.CONTACT_FROM_EMAIL ||
   `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || "softwarepros.org"}`;
@@ -208,9 +223,88 @@ function buildTextEmail(data: ContactEmailData) {
     .join("\n");
 }
 
-export async function sendContactEmail(data: ContactEmailData) {
+async function sendContactEmailViaMailerSend(data: ContactEmailData) {
   try {
-    console.log("Attempting to send contact email...");
+    console.log("Attempting to send contact email via MailerSend...");
+
+    const apiKey = process.env.MAILERSEND_API_KEY;
+    if (!apiKey) {
+      throw new Error("MAILERSEND_API_KEY environment variable is not set");
+    }
+
+    const mailerSend = new MailerSend({
+      apiKey,
+    });
+
+    // Use the MailerSend domain email as sender
+    const sentFrom = new Sender(
+      process.env.CONTACT_FROM_EMAIL || "noreply@test-eqvygm0kpqjl0p7w.mlsender.net",
+      "SoftwarePros Contact Form",
+    );
+
+    // For MailerSend trial accounts, emails can only be sent to the administrator's email
+    // Check if we need to use a different recipient for trial accounts
+    const isTrialAccount = process.env.MAILERSEND_TRIAL_ACCOUNT === "true";
+    const adminEmail = process.env.MAILERSEND_ADMIN_EMAIL;
+
+    let recipientEmail = RECIPIENT_EMAIL;
+    if (isTrialAccount && adminEmail) {
+      console.log("Using administrator email for MailerSend trial account");
+      recipientEmail = adminEmail;
+    }
+
+    const recipients = [new Recipient(recipientEmail, "SoftwarePros Team")];
+
+    const subjectBase = data.subject?.trim() || "New Contact Message";
+    const subject = `${subjectBase} - ${data.name} (${data.serviceType || "General"})`;
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients)
+      .setReplyTo(sentFrom)
+      .setSubject(subject)
+      .setHtml(buildHtmlEmail(data))
+      .setText(buildTextEmail(data));
+
+    const result = await mailerSend.email.send(emailParams);
+
+    console.log("MailerSend email sent successfully:", result);
+    return {
+      messageId: result.body?.message_id || "mailersend-" + Date.now(),
+      previewUrl: null, // MailerSend doesn't provide preview URLs like Ethereal
+    };
+  } catch (error) {
+    console.error("MailerSend error:", error);
+
+    // Handle trial account specific errors
+    if (
+      error instanceof Error &&
+      error.message.includes("Trial accounts can only send emails to the administrator")
+    ) {
+      throw new Error(
+        "MailerSend trial account restriction: Please set MAILERSEND_TRIAL_ACCOUNT=true and MAILERSEND_ADMIN_EMAIL in your environment variables",
+      );
+    }
+
+    throw error;
+  }
+}
+
+export async function sendContactEmail(data: ContactEmailData) {
+  // Try MailerSend first if API key is configured
+  if (process.env.MAILERSEND_API_KEY) {
+    try {
+      console.log("Attempting to send email via MailerSend...");
+      return await sendContactEmailViaMailerSend(data);
+    } catch (error) {
+      console.error("MailerSend failed, falling back to SMTP:", error);
+      // Continue to SMTP fallback below
+    }
+  }
+
+  // Fallback to traditional SMTP
+  try {
+    console.log("Attempting to send contact email via SMTP...");
     const transporter = await resolveTransport();
 
     const subjectBase = data.subject?.trim() || "New Contact Message";

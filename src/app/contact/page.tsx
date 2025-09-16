@@ -6,8 +6,18 @@ import React, { useEffect, useState } from "react";
 export const dynamic = "force-dynamic";
 
 import AnimatedDiv from "@/components/AnimatedDiv";
+import MeetingPopup from "@/components/MeetingPopup";
+import VideoMeetingWidget from "@/components/VideoMeetingWidget";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle, Email, LocationOn, Phone, Schedule, Send } from "@mui/icons-material";
+import {
+  CheckCircle,
+  Email,
+  LocationOn,
+  Phone,
+  Schedule,
+  Send,
+  VideoCall,
+} from "@mui/icons-material";
 import {
   Alert,
   Box,
@@ -82,7 +92,7 @@ const budgets = [
 
 const timelines = ["ASAP", "1-3 months", "3-6 months", "6+ months"];
 
-const contactMethods = ["Email", "Phone"];
+const contactMethods = ["Email", "Phone", "Video Consultation"];
 
 const bestTimes = ["Morning", "Afternoon", "Evening"];
 
@@ -92,13 +102,13 @@ const contactInfo = [
   {
     icon: LocationOn,
     title: "Office Location",
-    details: ["222 E. Van Buren St.", "Harlingen, TX 78550"],
+    details: ["222 E. Van Buren Ave.", "Harlingen, TX 78550"],
     color: "#0066CC",
   },
   {
     icon: Email,
     title: "Email Address",
-    details: ["contact@softwarepros.org"],
+    details: ["info@softwarepros.org"],
     color: "#00AA44",
     isEmail: true,
   },
@@ -120,6 +130,7 @@ const contactInfo = [
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [showMeetingPopup, setShowMeetingPopup] = useState(false);
 
   const {
     register,
@@ -587,20 +598,43 @@ export default function ContactPage() {
                         </Grid>
 
                         <Grid xs={12}>
-                          <Button
-                            type="submit"
-                            size="lg"
-                            loading={isSubmitting}
-                            endDecorator={<Send />}
-                            sx={{
-                              background: "linear-gradient(45deg, #0066CC, #004499)",
-                              "&:hover": {
-                                background: "linear-gradient(45deg, #004499, #002266)",
-                              },
-                            }}
-                          >
-                            {isSubmitting ? "Sending..." : "Send Message"}
-                          </Button>
+                          <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                            <Button
+                              type="submit"
+                              size="lg"
+                              loading={isSubmitting}
+                              endDecorator={<Send />}
+                              sx={{
+                                background: "linear-gradient(45deg, #0066CC, #004499)",
+                                "&:hover": {
+                                  background: "linear-gradient(45deg, #004499, #002266)",
+                                },
+                                flexGrow: 1,
+                                minWidth: "200px",
+                              }}
+                            >
+                              {isSubmitting ? "Sending..." : "Send Message"}
+                            </Button>
+                            <Button
+                              size="lg"
+                              variant="outlined"
+                              endDecorator={<VideoCall />}
+                              onClick={() => setShowMeetingPopup(true)}
+                              disabled={!watch("name") || watch("name").length < 2}
+                              sx={{
+                                borderColor: "#0066CC",
+                                color: "#0066CC",
+                                "&:hover": {
+                                  background: "rgba(0, 102, 204, 0.1)",
+                                  borderColor: "#004499",
+                                },
+                                flexGrow: 1,
+                                minWidth: "220px",
+                              }}
+                            >
+                              Start Video Consultation
+                            </Button>
+                          </Box>
                         </Grid>
                       </Grid>
                     </form>
@@ -705,11 +739,33 @@ export default function ContactPage() {
                     </AnimatedDiv>
                   ))}
                 </Box>
+
+                {/* Video Meeting Widget */}
+                <AnimatedDiv animation="fade" delay={400}>
+                  <Box sx={{ mt: 4 }}>
+                    <VideoMeetingWidget
+                      participantName={watch("name") || ""}
+                      onMeetingCreated={(meeting) => {
+                        console.log("Meeting created:", meeting);
+                        // Optionally show a success message or update form state
+                      }}
+                      disabled={!watch("name") || watch("name").length < 2}
+                    />
+                  </Box>
+                </AnimatedDiv>
               </AnimatedDiv>
             </Grid>
           </Grid>
         </Container>
       </Box>
+
+      {/* Meeting Popup */}
+      <MeetingPopup
+        isOpen={showMeetingPopup}
+        onClose={() => setShowMeetingPopup(false)}
+        participantName={watch("name") || ""}
+        participantEmail={watch("email") || ""}
+      />
     </>
   );
 }
