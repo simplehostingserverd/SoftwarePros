@@ -16,8 +16,8 @@ export type ContactEmailData = {
   hearAboutUs?: string;
 };
 
-// Send all contact emails to Proton address as requested
-const RECIPIENT_EMAIL = "simplehostingserverd@proton.me";
+// Send all contact emails to admin address (required for MailerSend trial accounts)
+const RECIPIENT_EMAIL = process.env.MAILERSEND_ADMIN_EMAIL || "simplehostingserverd@proton.me";
 const FROM_EMAIL =
   process.env.CONTACT_FROM_EMAIL ||
   `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || "softwarepros.org"}`;

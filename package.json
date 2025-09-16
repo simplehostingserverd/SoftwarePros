@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.15.1",
     "@mui/joy": "^5.0.0-beta.40",
     "@mui/material": "^5.15.1",
+    "dotenv": "^17.2.2",
     "framer-motion": "^12.23.6",
     "next": "^15.4.6",
     "next-seo": "^6.4.0",
