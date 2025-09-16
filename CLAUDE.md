@@ -7,19 +7,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Core Development
 - `npm run dev` - Start development server (Next.js dev)
 - `npm run build` - Build for production
-- `npm start` - Start production server using custom server.js
-- `npm run start:next` - Start using Next.js built-in server
-- `npm run start:cpanel` - Start using cPanel-compatible app.js
+- `npm start` - Start production server (Next.js built-in)
 
 ### Code Quality
 - `npm run lint` - Run Biome linter and formatter check
 - `npm run lint:fix` - Auto-fix linting issues with Biome
 - `npm run format` - Format code with Biome
-
-### Deployment
-- `npm run optimize` - Convert images and build for production
-- `npm run convert-images` - Optimize images for web
-- `npm run postinstall` - Automatically runs build after install
 
 ## Architecture Overview
 
@@ -31,7 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Code Quality**: Biome (replaces ESLint/Prettier)
 - **Email**: Nodemailer with SMTP configuration
 - **PDF Generation**: PDFKit for resources
-- **Deployment**: Custom Node.js servers for production/cPanel
+- **Deployment**: Docker with Coolify support, Next.js standalone build
 
 ### Project Structure
 ```
@@ -49,23 +42,24 @@ src/
 ├── hooks/           # Custom React hooks (scroll animations)
 └── lib/             # Utility functions (mailer)
 
-scripts/
-└── convert-images.js # Image optimization script
+scripts/             # Build and deployment scripts
+public/              # Static assets and images
 ```
 
 ### Key Configuration Files
-- `next.config.js` - Next.js configuration with cPanel optimizations
+- `next.config.js` - Next.js configuration with standalone output for Docker
 - `biome.json` - Code formatting and linting rules (2-space indentation, 100-char line width)
 - `tsconfig.json` - TypeScript configuration with strict settings
 - `tailwind.config.js` - Tailwind CSS configuration
-- `server.js` - Custom production server
-- `app.js` - cPanel-compatible server with enhanced logging
+- `Dockerfile` - Multi-stage Docker build for production deployment
+- `docker-compose.yml` - Coolify-compatible service definition
 
-### Development Server Options
-The project has three server configurations:
-1. **Development**: `npm run dev` (standard Next.js dev server)
-2. **Production**: `npm start` (uses server.js)
-3. **cPanel**: `npm run start:cpanel` (uses app.js with cPanel optimizations)
+### Development & Deployment
+- **Development**: `npm run dev` - Next.js development server with hot reloading
+- **Production Build**: `npm run build` - Creates optimized standalone build
+- **Production Start**: `npm start` - Starts the production server
+- **Docker Deployment**: Uses multi-stage Dockerfile for optimized container builds
+- **Coolify Support**: Ready for one-click deployment with environment variable configuration
 
 ### Key Features
 - **Contact Form**: Email integration with multiple SMTP options
@@ -80,10 +74,12 @@ The project has three server configurations:
 - Path aliases configured: `@/*` maps to `src/*`
 
 ### Deployment Notes
-- Configured for cPanel hosting with Node.js
-- Multiple entry points for different hosting environments
-- Image optimization and compression built-in
-- Security headers and performance optimizations included
+- **Docker-first**: Optimized for container deployment with Coolify
+- **Multi-stage builds**: Minimal production image size
+- **Health checks**: Built-in container health monitoring at `/api/health`
+- **SSL/TLS**: Automatic Let's Encrypt certificates via Traefik labels
+- **Performance**: Next.js standalone output for optimal container deployment
+- **Environment-based configuration**: All settings configurable via environment variables
 
 ### Email Configuration
 The contact form requires email configuration with multiple fallback options:
@@ -105,6 +101,20 @@ The contact form requires email configuration with multiple fallback options:
 
 **Environment Variables:**
 - Copy `.env.example` to `.env.local` for development
-- Set production variables in cPanel environment or hosting settings
+- Set production variables in Coolify environment or hosting platform
 - Contact emails are sent to `simplehostingserverd@proton.me`
 - System automatically falls back through configuration options
+
+## Docker & Deployment
+
+### Quick Deployment with Coolify
+1. Import project as "Docker Compose" type
+2. Set environment variables for email configuration
+3. Configure domain with automatic SSL
+4. Deploy with single click
+
+### Key Docker Files
+- `Dockerfile` - Multi-stage build (Node 18 Alpine base)
+- `docker-compose.yml` - Service definition with health checks
+- `COOLIFY_DEPLOYMENT.md` - Complete deployment guide
+- `.dockerignore` - Optimized build context

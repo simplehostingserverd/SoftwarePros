@@ -14,7 +14,10 @@
       "Bash(git commit:*)",
       "Bash(mkdir:*)",
       "Bash(cp:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(rm:*)",
+      "Bash(npm install:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
