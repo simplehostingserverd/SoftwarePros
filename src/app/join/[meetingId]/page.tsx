@@ -27,6 +27,28 @@ export default function MeetingJoinPage() {
   const token = searchParams.get("token");
   const isHost = searchParams.get("host") === "true";
 
+  // Apply full-screen meeting styles
+  useEffect(() => {
+    // Store original body styles
+    const originalBodyStyle = {
+      margin: document.body.style.margin,
+      padding: document.body.style.padding,
+      overflow: document.body.style.overflow,
+    };
+
+    // Apply meeting styles
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.overflow = "hidden";
+
+    // Cleanup function to restore original styles
+    return () => {
+      document.body.style.margin = originalBodyStyle.margin;
+      document.body.style.padding = originalBodyStyle.padding;
+      document.body.style.overflow = originalBodyStyle.overflow;
+    };
+  }, []);
+
   // Load Cloudflare RealtimeKit SDK with all features
   useEffect(() => {
     const loadRealtimeKit = () => {
