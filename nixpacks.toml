@@ -1,0 +1,32 @@
+# Nixpacks configuration for Next.js deployment on Coolify
+# This file configures automatic build and deployment settings
+
+[phases.setup]
+nixPkgs = ["nodejs_18", "npm-9_x"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm start"
+
+[variables]
+NODE_ENV = "production"
+NEXT_TELEMETRY_DISABLED = "1"
+PORT = "3000"
+HOSTNAME = "0.0.0.0"
+
+# Email configuration - these will be overridden by Coolify environment variables
+CONTACT_EMAIL = "simplehostingserverd@proton.me"
+
+# These environment variables should be set in Coolify:
+# MAILERSEND_API_KEY - Your MailerSend API key
+# SMTP_HOST - SMTP server host (optional fallback)
+# SMTP_PORT - SMTP server port (optional fallback)
+# SMTP_USER - SMTP username (optional fallback)
+# SMTP_PASS - SMTP password (optional fallback)
+# GMAIL_USER - Gmail address (optional fallback)
+# GMAIL_APP_PASSWORD - Gmail app password (optional fallback)
