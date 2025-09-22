@@ -64,25 +64,9 @@ export default function MeetingPopup({
 
     const { meeting, participant } = data;
 
-    // Load Cloudflare RealtimeKit SDK
+    // Create the popup interface immediately (no SDK loading needed)
     const loadSDK = () => {
-      const script = document.createElement("script");
-      script.src = "https://unpkg.com/@cloudflare/calls-ui@latest/dist/index.js";
-      script.type = "module";
-      script.onload = () => {
-        console.log("RealtimeKit SDK loaded for popup");
-        createComprehensivePopupInterface();
-      };
-      script.onerror = () => {
-        console.log("SDK fallback for popup");
-        createComprehensivePopupInterface();
-      };
-      document.head.appendChild(script);
-
-      const css = document.createElement("link");
-      css.rel = "stylesheet";
-      css.href = "https://unpkg.com/@cloudflare/calls-ui@latest/dist/style.css";
-      document.head.appendChild(css);
+      createComprehensivePopupInterface();
     };
 
     const createComprehensivePopupInterface = () => {
@@ -443,10 +427,12 @@ export default function MeetingPopup({
       };
 
       (window as any).popupExpandToFullscreen = () => {
-        // Open the meeting in a new window/tab for full experience
+        // Close the popup and redirect to the meeting page in the same tab
         const joinUrl = meeting.joinUrl;
-        window.open(joinUrl, "_blank", "width=1200,height=800");
-        popupShowNotification("Opening full meeting experience...");
+        popupShowNotification("Redirecting to full meeting experience...");
+        setTimeout(() => {
+          window.location.href = joinUrl;
+        }, 1000);
       };
 
       const popupShowNotification = (message: string) => {
