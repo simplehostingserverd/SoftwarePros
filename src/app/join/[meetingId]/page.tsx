@@ -3,12 +3,19 @@
 import { Box, Button, Card, CircularProgress, Typography } from "@mui/joy";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import Script from "next/script";
 
 export default function MeetingJoinPage() {
   const params = useParams();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [participants, setParticipants] = useState<any[]>([]);
+  const [isVideoOn, setIsVideoOn] = useState(true);
+  const [isAudioOn, setIsAudioOn] = useState(true);
+  const meetingFrameRef = useRef<HTMLDivElement>(null);
+  const rtcClientRef = useRef<any>(null);
 
   const meetingId = params.meetingId as string;
   const participantId = searchParams.get("participant");
@@ -29,19 +36,131 @@ export default function MeetingJoinPage() {
     document.body.style.padding = "0";
     document.body.style.overflow = "hidden";
 
-    // Initialize meeting
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
     // Cleanup function to restore original styles
     return () => {
-      clearTimeout(timer);
       document.body.style.margin = originalBodyStyle.margin;
       document.body.style.padding = originalBodyStyle.padding;
       document.body.style.overflow = originalBodyStyle.overflow;
+
+      // Clean up RTC client when leaving
+      if (rtcClientRef.current) {
+        rtcClientRef.current.leave();
+        rtcClientRef.current = null;
+      }
     };
   }, []);
+
+  // Initialize Cloudflare RealtimeKit when SDK is loaded
+  const initializeMeeting = async () => {
+    if (!token || !meetingId || !participantId) {
+      setError("Missing required meeting parameters");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      // Check if SDK is loaded
+      if (typeof window === "undefined" || !(window as any).CfRealtime) {
+        console.error("Cloudflare RealtimeKit SDK not loaded");
+        setError("Meeting system is initializing. Please wait...");
+        setTimeout(() => initializeMeeting(), 1000);
+        return;
+      }
+
+      console.log("Initializing Cloudflare RealtimeKit...");
+      const CfRealtime = (window as any).CfRealtime;
+
+      // Create RTC client instance
+      const rtcClient = new CfRealtime.Client({
+        token: token,
+        debug: false, // Set to false for production
+      });
+
+      rtcClientRef.current = rtcClient;
+
+      // Set up event listeners
+      rtcClient.on("connected", () => {
+        console.log("Connected to meeting");
+        setIsConnected(true);
+        setIsLoading(false);
+      });
+
+      rtcClient.on("disconnected", () => {
+        console.log("Disconnected from meeting");
+        setIsConnected(false);
+        setError("Disconnected from meeting. Please refresh to rejoin.");
+      });
+
+      rtcClient.on("error", (err: any) => {
+        console.error("Meeting error:", err);
+        setError(`Meeting error: ${err.message || "Unknown error occurred"}`);
+        setIsLoading(false);
+      });
+
+      rtcClient.on("participant-joined", (participant: any) => {
+        console.log("Participant joined:", participant);
+        setParticipants((prev) => [...prev, participant]);
+      });
+
+      rtcClient.on("participant-left", (participantId: string) => {
+        console.log("Participant left:", participantId);
+        setParticipants((prev) => prev.filter((p) => p.id !== participantId));
+      });
+
+      // Join the meeting
+      await rtcClient.join();
+
+      // Set up local media streams
+      if (meetingFrameRef.current) {
+        rtcClient.attachVideo(meetingFrameRef.current);
+      }
+
+      // Enable audio and video by default
+      await rtcClient.enableVideo(true);
+      await rtcClient.enableAudio(true);
+
+    } catch (err: any) {
+      console.error("Failed to initialize meeting:", err);
+      setError(`Failed to join meeting: ${err.message || "Please try again"}`);
+      setIsLoading(false);
+    }
+  };
+
+  // Control functions
+  const toggleVideo = async () => {
+    if (rtcClientRef.current) {
+      const newState = !isVideoOn;
+      await rtcClientRef.current.enableVideo(newState);
+      setIsVideoOn(newState);
+    }
+  };
+
+  const toggleAudio = async () => {
+    if (rtcClientRef.current) {
+      const newState = !isAudioOn;
+      await rtcClientRef.current.enableAudio(newState);
+      setIsAudioOn(newState);
+    }
+  };
+
+  const shareScreen = async () => {
+    if (rtcClientRef.current) {
+      try {
+        await rtcClientRef.current.startScreenShare();
+      } catch (err) {
+        console.error("Failed to share screen:", err);
+      }
+    }
+  };
+
+  const leaveMeeting = () => {
+    if (confirm("Are you sure you want to leave this meeting?")) {
+      if (rtcClientRef.current) {
+        rtcClientRef.current.leave();
+      }
+      window.location.href = "/?meeting-ended=true";
+    }
+  };
 
   if (!meetingId || !token || !participantId) {
     return (
@@ -100,23 +219,38 @@ export default function MeetingJoinPage() {
 
   if (isLoading) {
     return (
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          minHeight: "100vh",
-          backgroundColor: "#000",
-          color: "white",
-        }}
-      >
-        <Card sx={{ p: 4, textAlign: "center", backgroundColor: "rgba(0,0,0,0.8)" }}>
-          <CircularProgress sx={{ mb: 2 }} />
-          <Typography sx={{ color: "white" }}>
-            Loading your consultation room...
-          </Typography>
-        </Card>
-      </Box>
+      <>
+        <Script
+          src="https://unpkg.com/@cloudflare/realtime-kit@latest/dist/realtime-kit.min.js"
+          strategy="afterInteractive"
+          onLoad={() => {
+            console.log("Cloudflare RealtimeKit SDK loaded");
+            initializeMeeting();
+          }}
+          onError={() => {
+            console.error("Failed to load Cloudflare RealtimeKit SDK");
+            setError("Failed to load meeting system. Please refresh the page.");
+            setIsLoading(false);
+          }}
+        />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            backgroundColor: "#000",
+            color: "white",
+          }}
+        >
+          <Card sx={{ p: 4, textAlign: "center", backgroundColor: "rgba(0,0,0,0.8)" }}>
+            <CircularProgress sx={{ mb: 2 }} />
+            <Typography sx={{ color: "white" }}>
+              Connecting to your consultation room...
+            </Typography>
+          </Card>
+        </Box>
+      </>
     );
   }
 
@@ -194,6 +328,7 @@ export default function MeetingJoinPage() {
 
       {/* Main Video Area */}
       <Box
+        ref={meetingFrameRef}
         sx={{
           position: "absolute",
           top: "60px",
@@ -207,42 +342,24 @@ export default function MeetingJoinPage() {
           gap: 1,
         }}
       >
-        <Box
-          sx={{
-            flex: 2,
-            minWidth: "300px",
-            background: "#2a2a2a",
-            borderRadius: "12px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: 2,
-          }}
-        >
-          <Box sx={{ fontSize: "48px" }}>👤</Box>
-          <Typography level="h4">You</Typography>
-          <Typography level="body-sm" sx={{ opacity: 0.7 }}>
-            {isHost ? "Host" : "Participant"}
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            flex: 1,
-            minWidth: "200px",
-            background: "#2a2a2a",
-            borderRadius: "12px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            gap: 2,
-            opacity: 0.5,
-          }}
-        >
-          <Box sx={{ fontSize: "32px" }}>⏳</Box>
-          <Typography level="body-md">Waiting for others...</Typography>
-        </Box>
+        {/* Video container will be populated by RealtimeKit SDK */}
+        {!isConnected && (
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+              gap: 2,
+            }}
+          >
+            <CircularProgress />
+            <Typography level="body-md" sx={{ color: "white" }}>
+              Connecting to meeting...
+            </Typography>
+          </Box>
+        )}
       </Box>
 
       {/* Sidebar */}
@@ -260,7 +377,7 @@ export default function MeetingJoinPage() {
         }}
       >
         <Typography level="h4" sx={{ mb: 2 }}>
-          Participants (1)
+          Participants ({participants.length + 1})
         </Typography>
         <Box
           sx={{
@@ -290,10 +407,48 @@ export default function MeetingJoinPage() {
               You {isHost ? "(Host)" : ""}
             </Typography>
             <Typography level="body-xs" sx={{ opacity: 0.7 }}>
-              🎤 🎥 Joined
+              {isAudioOn ? "🎤" : "🔇"} {isVideoOn ? "🎥" : "📵"} {isConnected ? "Connected" : "Connecting..."}
             </Typography>
           </Box>
         </Box>
+
+        {/* Other participants */}
+        {participants.map((participant) => (
+          <Box
+            key={participant.id}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              p: 2,
+              mt: 1,
+              borderRadius: "8px",
+              background: "rgba(255,255,255,0.03)",
+            }}
+          >
+            <Box
+              sx={{
+                width: 32,
+                height: 32,
+                background: "linear-gradient(135deg, #667eea, #764ba2)",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              👤
+            </Box>
+            <Box sx={{ flex: 1 }}>
+              <Typography level="body-md" sx={{ fontWeight: 500 }}>
+                {participant.name || "Guest"}
+              </Typography>
+              <Typography level="body-xs" sx={{ opacity: 0.7 }}>
+                Connected
+              </Typography>
+            </Box>
+          </Box>
+        ))}
       </Box>
 
       {/* Control Bar */}
@@ -315,30 +470,39 @@ export default function MeetingJoinPage() {
       >
         <Button
           size="lg"
+          onClick={toggleVideo}
           sx={{
             minWidth: 50,
             height: 50,
             borderRadius: "25px",
-            background: "linear-gradient(135deg, #4CAF50, #45a049)",
+            background: isVideoOn
+              ? "linear-gradient(135deg, #4CAF50, #45a049)"
+              : "linear-gradient(135deg, #F44336, #D32F2F)",
           }}
           title="Toggle Video"
+          disabled={!isConnected}
         >
-          🎥
+          {isVideoOn ? "🎥" : "📵"}
         </Button>
         <Button
           size="lg"
+          onClick={toggleAudio}
           sx={{
             minWidth: 50,
             height: 50,
             borderRadius: "25px",
-            background: "linear-gradient(135deg, #2196F3, #1976D2)",
+            background: isAudioOn
+              ? "linear-gradient(135deg, #2196F3, #1976D2)"
+              : "linear-gradient(135deg, #F44336, #D32F2F)",
           }}
           title="Toggle Audio"
+          disabled={!isConnected}
         >
-          🎤
+          {isAudioOn ? "🎤" : "🔇"}
         </Button>
         <Button
           size="lg"
+          onClick={shareScreen}
           sx={{
             minWidth: 50,
             height: 50,
@@ -346,6 +510,7 @@ export default function MeetingJoinPage() {
             background: "linear-gradient(135deg, #9C27B0, #7B1FA2)",
           }}
           title="Share Screen"
+          disabled={!isConnected}
         >
           🖥️
         </Button>
@@ -371,38 +536,34 @@ export default function MeetingJoinPage() {
             background: "linear-gradient(135deg, #F44336, #D32F2F)",
           }}
           title="Leave Meeting"
-          onClick={() => {
-            if (confirm("Are you sure you want to leave this meeting?")) {
-              window.location.href = "/?meeting-ended=true";
-            }
-          }}
+          onClick={leaveMeeting}
         >
           📞
         </Button>
       </Box>
 
-      {/* Info Message */}
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "100px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          background: "rgba(0,0,0,0.8)",
-          backdropFilter: "blur(10px)",
-          px: 3,
-          py: 2,
-          borderRadius: "8px",
-          textAlign: "center",
-          maxWidth: "500px",
-        }}
-      >
-        <Typography level="body-sm" sx={{ opacity: 0.9 }}>
-          🎉 Welcome to your SoftwarePros consultation! This is a demonstration interface.
-          <br />
-          Our team will contact you directly to schedule your actual meeting.
-        </Typography>
-      </Box>
+      {/* Status Message - Only show if not connected */}
+      {!isConnected && !error && (
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "100px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "rgba(0,0,0,0.8)",
+            backdropFilter: "blur(10px)",
+            px: 3,
+            py: 2,
+            borderRadius: "8px",
+            textAlign: "center",
+            maxWidth: "500px",
+          }}
+        >
+          <Typography level="body-sm" sx={{ opacity: 0.9 }}>
+            Establishing secure connection...
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 }
