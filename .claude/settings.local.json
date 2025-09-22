@@ -34,7 +34,8 @@
       "Bash(findstr:*)",
       "Bash(dir:*)",
       "Bash(docker build:*)",
-      "Bash(git config:*)"
+      "Bash(git config:*)",
+      "Read(//c/Users/Shadow/Downloads/**)"
     ],
     "deny": [],
     "ask": []

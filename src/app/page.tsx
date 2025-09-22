@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://softwarepros.org",
     images: [
       {
-        url: "/web-app-manifest-512x512.png",
+        url: "/images/softwarepros-logo.png",
         width: 512,
         height: 512,
         alt: "SoftwarePros",

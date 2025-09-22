@@ -9,8 +9,8 @@ export async function GET() {
     description:
       "Professional software development, consulting, and digital solutions for startups and enterprises.",
     icons: [
-      { src: "/web-app-manifest-192x192.png", sizes: "192x192", type: "image/png" },
-      { src: "/web-app-manifest-512x512.png", sizes: "512x512", type: "image/png" },
+      { src: "/images/softwarepros-logo.png", sizes: "192x192", type: "image/png" },
+      { src: "/images/softwarepros-logo.png", sizes: "512x512", type: "image/png" },
     ],
   };
 

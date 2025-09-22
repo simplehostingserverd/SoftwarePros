@@ -66,13 +66,13 @@ export const metadata: Metadata = {
       "Professional software development, consulting, and digital solutions for startups and enterprises. Specializing in healthcare software, HIPAA compliance, and enterprise solutions.",
     images: [
       {
-        url: "/web-app-manifest-512x512.png",
+        url: "/images/softwarepros-logo.png",
         width: 512,
         height: 512,
         alt: "SoftwarePros - Custom Software Solutions",
       },
       {
-        url: "/images/placeholder.svg",
+        url: "/images/softwarepros-logo.png",
         width: 1200,
         height: 630,
         alt: "SoftwarePros Healthcare Software Solutions",
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     title: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
     description:
       "Professional software development, consulting, and digital solutions for startups and enterprises. Specializing in healthcare software and HIPAA compliance.",
-    images: ["/web-app-manifest-512x512.png"],
+    images: ["/images/softwarepros-logo.png"],
   },
   robots: {
     index: true,
