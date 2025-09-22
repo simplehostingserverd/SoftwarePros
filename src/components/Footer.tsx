@@ -43,8 +43,12 @@ export default function Footer() {
           <div className="md:col-span-1">
             <div className="mb-6">
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">SP</span>
+                <div className="w-8 h-8 rounded-lg overflow-hidden">
+                  <img
+                    src="/images/softwarepros-logo.png"
+                    alt="SoftwarePros Logo"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   SoftwarePros

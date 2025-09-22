@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/web-app-manifest-512x512.png",
+        url: "/images/softwarepros-logo.png",
         width: 512,
         height: 512,
         alt: "SoftwarePros Investor Overview",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Investors | SoftwarePros — Pitch Deck Overview",
     description: "Interactive charts showcasing market, traction, GTM, and more.",
-    images: ["/web-app-manifest-512x512.png"],
+    images: ["/images/softwarepros-logo.png"],
   },
 };
 

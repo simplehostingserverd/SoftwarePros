@@ -38,8 +38,17 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-8">
-          {/* Main Heading */}
-          <div className="space-y-4">
+          {/* Logo and Main Heading */}
+          <div className="space-y-6">
+            <div className="flex justify-center mb-8">
+              <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/30">
+                <img
+                  src="/images/softwarepros-logo.png"
+                  alt="SoftwarePros Logo"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent leading-tight">
               SoftwarePros
             </h1>

@@ -13,6 +13,15 @@ export default function CTASection() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="space-y-8">
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden shadow-xl shadow-purple-500/20">
+              <img
+                src="/images/softwarepros-logo.png"
+                alt="SoftwarePros Logo"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent leading-tight">
             Ready to Build Something Amazing?
           </h2>
