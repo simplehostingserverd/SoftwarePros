@@ -32,7 +32,9 @@
       "Bash(taskkill:*)",
       "Bash(netstat:*)",
       "Bash(findstr:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(docker build:*)",
+      "Bash(git config:*)"
     ],
     "deny": [],
     "ask": []

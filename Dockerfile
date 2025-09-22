@@ -15,7 +15,12 @@ RUN npm ci --omit=dev
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+
+# Copy package files and install ALL dependencies (including devDependencies for build)
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Copy source code
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
