@@ -119,9 +119,9 @@ export default function Navigation() {
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
-                      aria-label="Dropdown arrow"
+                      aria-label="Menu toggle"
                     >
-                      <title>Dropdown arrow</title>
+                      <title>Menu toggle</title>
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"

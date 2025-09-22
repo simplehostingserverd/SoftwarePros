@@ -8,16 +8,16 @@ import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
+  title: "SoftwarePros | Custom Software Development & Healthcare IT Solutions",
   description:
-    "Professional software development, consulting, and digital solutions for startups and enterprises. Built by experts. Trusted by businesses.",
+    "SoftwarePros - Custom software development, healthcare IT solutions, HIPAA-compliant systems, and enterprise consulting. Professional software development, tech consulting, and digital transformation for startups and enterprises.",
   alternates: {
     canonical: "https://softwarepros.org",
   },
   openGraph: {
-    title: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
+    title: "SoftwarePros | Custom Software Development & Healthcare IT Solutions",
     description:
-      "Professional software development, consulting, and digital solutions for startups and enterprises. Built by experts. Trusted by businesses.",
+      "SoftwarePros - Custom software development, healthcare IT solutions, HIPAA-compliant systems, and enterprise consulting. Professional software development for startups and enterprises.",
     url: "https://softwarepros.org",
     images: [
       {

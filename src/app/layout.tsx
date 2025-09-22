@@ -11,11 +11,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
-    template: "%s | SoftwarePros.org",
+    default: "SoftwarePros | Custom Software Development & Healthcare IT Solutions",
+    template: "%s | SoftwarePros",
   },
   description:
-    "Professional software development, consulting, and digital solutions for startups and enterprises. Specializing in healthcare software, HIPAA compliance, and enterprise solutions. Built by experts. Trusted by businesses.",
+    "SoftwarePros - Leading custom software development company specializing in healthcare IT, HIPAA-compliant systems, enterprise solutions, and digital transformation. Professional software consulting for startups and enterprises.",
   keywords: [
     "software development",
     "custom software solutions",
