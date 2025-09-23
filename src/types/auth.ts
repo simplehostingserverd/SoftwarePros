@@ -23,6 +23,25 @@ export interface LoginCredentials {
   twoFactorCode?: string;
 }
 
+// Registration data
+export interface RegisterData {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+  company?: string;
+  acceptTerms: boolean;
+  acceptPrivacy: boolean;
+}
+
+// Password reset request
+export interface PasswordReset {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 // Security event types
 export interface SecurityEvent {
   id: string;
@@ -87,4 +106,38 @@ export interface SecurityConfig {
     suspiciousActivityThreshold: number;
     notifyOnSuspiciousActivity: boolean;
   };
+}
+
+// Auth error types
+export type AuthErrorCode =
+  | "INVALID_CREDENTIALS"
+  | "EMAIL_NOT_VERIFIED"
+  | "ACCOUNT_SUSPENDED"
+  | "TOO_MANY_ATTEMPTS"
+  | "INVALID_TOKEN"
+  | "EXPIRED_TOKEN"
+  | "WEAK_PASSWORD"
+  | "EMAIL_ALREADY_EXISTS"
+  | "INVALID_EMAIL_FORMAT"
+  | "TWO_FACTOR_REQUIRED"
+  | "INVALID_TWO_FACTOR_CODE"
+  | "RATE_LIMIT_EXCEEDED"
+  | "SESSION_EXPIRED"
+  | "UNAUTHORIZED"
+  | "SERVER_ERROR";
+
+// Auth error structure
+export interface AuthError {
+  code: AuthErrorCode;
+  message: string;
+  details?: Record<string, any>;
+}
+
+// API response types
+export interface AuthResponse<T = any> {
+  success: boolean;
+  message?: string;
+  data?: T;
+  error?: string;
+  details?: any;
 }

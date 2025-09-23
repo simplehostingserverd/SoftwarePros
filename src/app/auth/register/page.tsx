@@ -117,6 +117,7 @@ export default function RegisterPage() {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
     trigger,
   } = useForm<RegistrationFormData>({
@@ -352,7 +353,8 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                 <FormLabel>Company Size *</FormLabel>
                 <Select
                   placeholder="Select company size"
-                  {...register("companySize")}
+                  value={watch("companySize") || ""}
+                  onChange={(_, value) => setValue("companySize", value as "startup" | "small" | "medium" | "enterprise")}
                 >
                   <Option value="startup">Startup (1-10 employees)</Option>
                   <Option value="small">Small (11-50 employees)</Option>
@@ -403,7 +405,8 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                 <FormLabel>Project Type *</FormLabel>
                 <Select
                   placeholder="Select project type"
-                  {...register("projectType")}
+                  value={watch("projectType") || ""}
+                  onChange={(_, value) => setValue("projectType", value as "web" | "mobile" | "healthcare" | "consulting" | "custom")}
                 >
                   {projectTypes.map((type) => (
                     <Option key={type.value} value={type.value}>
@@ -445,7 +448,8 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                 <FormLabel>Budget Range *</FormLabel>
                 <Select
                   placeholder="Select budget range"
-                  {...register("budget")}
+                  value={watch("budget") || ""}
+                  onChange={(_, value) => setValue("budget", value as string)}
                 >
                   {budgetRanges.map((range) => (
                     <Option key={range} value={range}>
@@ -466,7 +470,8 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                 <FormLabel>Timeline *</FormLabel>
                 <Select
                   placeholder="Select timeline"
-                  {...register("timeline")}
+                  value={watch("timeline") || ""}
+                  onChange={(_, value) => setValue("timeline", value as string)}
                 >
                   {timelineOptions.map((timeline) => (
                     <Option key={timeline} value={timeline}>
