@@ -3,15 +3,15 @@ import { type NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
-    // Test email data
-    const testData = {
-      name: "Email Test",
-      email: "test@example.com",
+    // Email validation data using the actual SMTP domain
+    const validationData = {
+      name: "Email Validation User",
+      email: "admin@aquareefdirect.com",
       phone: "555-0123",
-      company: "Test Company",
-      serviceType: "Email Configuration Test",
-      message: "This is a test email to verify the email configuration is working properly.",
-      subject: "SoftwarePros Email Test - Configuration Working",
+      company: "SoftwarePros Validation",
+      serviceType: "Email Configuration Validation",
+      message: "This is an email validation check to verify the email configuration is working properly.",
+      subject: "SoftwarePros Email Validation - Configuration Working",
     };
 
     console.log("Starting email test...");
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     console.log(`- CONTACT_EMAIL: ${process.env.CONTACT_EMAIL || "NOT SET"}`);
     console.log(`- CONTACT_FROM_EMAIL: ${process.env.CONTACT_FROM_EMAIL || "NOT SET"}`);
 
-    const result = await sendContactEmail(testData);
+    const result = await sendContactEmail(validationData);
 
     return NextResponse.json({
       success: true,
