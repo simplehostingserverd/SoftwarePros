@@ -13,6 +13,7 @@ export async function getRedisClient(): Promise<RedisClientType | null> {
         database: parseInt(process.env.REDIS_DB || '0'),
         socket: {
           connectTimeout: 10000,
+          tls: redisUrl.startsWith('rediss://') ? {} : undefined, // Enable TLS for rediss:// URLs
         },
       });
 
