@@ -185,7 +185,7 @@ export default function ClientPortalPage() {
         {
           id: "comm-1",
           clientId: "client-1",
-          type: "kickoff",
+          type: "milestone",
           scheduledDate: "2025-01-25T15:00:00Z",
           method: "meeting",
           status: "scheduled",

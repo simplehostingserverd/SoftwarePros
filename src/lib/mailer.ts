@@ -410,9 +410,9 @@ export async function sendContactEmail(data: ContactEmailData, clientIP?: string
     const identifier = clientIP || data.email || "unknown";
     console.log(`Checking rate limit for identifier: ${identifier}`);
 
-    if (!emailRateLimiter.canMakeRequest(identifier)) {
-      const remainingTime = emailRateLimiter.getTimeUntilNextRequest(identifier);
-      const remainingRequests = emailRateLimiter.getRemainingRequests(identifier);
+    if (!(await emailRateLimiter.canMakeRequest(identifier))) {
+      const remainingTime = await emailRateLimiter.getTimeUntilNextRequest(identifier);
+      const remainingRequests = await emailRateLimiter.getRemainingRequests(identifier);
 
       console.error(`Rate limit exceeded for ${identifier}. Remaining requests: ${remainingRequests}, Time until reset: ${Math.ceil(remainingTime / 1000)}s`);
 

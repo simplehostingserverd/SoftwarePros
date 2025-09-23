@@ -1,0 +1,549 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// NextAuth.js Models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          String    @default("user")
+  status        String    @default("active")
+  twoFactorEnabled Boolean @default(false)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts Account[]
+  sessions Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// B2B Onboarding System Models
+model Client {
+  id                  String              @id @default(cuid())
+  companyName         String
+  contactName         String
+  email               String              @unique
+  phone               String?
+  industry            String?
+  companySize         CompanySize?        @default(SMALL)
+  projectType         ProjectType?        @default(WEB)
+  status              ClientStatus        @default(LEAD)
+  kickoffDate         DateTime?
+  expectedLaunchDate  DateTime?
+  budget              Int?
+  notes               String?             @db.Text
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+
+  // Relations
+  projects            Project[]
+  onboardingSteps     OnboardingStep[]
+  communications      Communication[]
+  accessRequests      ClientAccess[]
+  feedback            ClientFeedback[]
+
+  @@map("clients")
+}
+
+model Project {
+  id               String           @id @default(cuid())
+  clientId         String
+  name             String
+  description      String           @db.Text
+  scope            String[]
+  status           ProjectStatus    @default(PLANNING)
+  budget           Int
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  // Relations
+  client           Client           @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  deliverables     Deliverable[]
+  milestones       Milestone[]
+  phases           ProjectPhase[]
+  teamMembers      ProjectTeamMember[]
+  feedback         ClientFeedback[]
+
+  @@map("projects")
+}
+
+model Deliverable {
+  id               String               @id @default(cuid())
+  projectId        String
+  name             String
+  description      String               @db.Text
+  type             DeliverableType
+  status           DeliverableStatus    @default(PENDING)
+  dueDate          DateTime
+  completedDate    DateTime?
+  assignee         String?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  // Relations
+  project          Project              @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  files            DeliverableFile[]
+  feedback         ClientFeedback[]
+
+  @@map("deliverables")
+}
+
+model Milestone {
+  id               String            @id @default(cuid())
+  projectId        String
+  name             String
+  description      String            @db.Text
+  dueDate          DateTime
+  completedDate    DateTime?
+  status           MilestoneStatus   @default(UPCOMING)
+  paymentAmount    Int?
+  paymentStatus    PaymentStatus?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  // Relations
+  project          Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("milestones")
+}
+
+model ProjectPhase {
+  id               String            @id @default(cuid())
+  projectId        String
+  name             String
+  description      String            @db.Text
+  startDate        DateTime
+  endDate          DateTime
+  status           PhaseStatus       @default(UPCOMING)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  // Relations
+  project          Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tasks            Task[]
+
+  @@map("project_phases")
+}
+
+model Task {
+  id               String            @id @default(cuid())
+  phaseId          String
+  title            String
+  description      String?           @db.Text
+  assignee         String?
+  dueDate          DateTime
+  status           TaskStatus        @default(TODO)
+  priority         TaskPriority      @default(MEDIUM)
+  estimatedHours   Int?
+  actualHours      Int?
+  dependencies     String[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  // Relations
+  phase            ProjectPhase      @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+
+  @@map("tasks")
+}
+
+model TeamMember {
+  id               String                 @id @default(cuid())
+  name             String
+  role             String
+  email            String                 @unique
+  avatar           String?
+  skills           String[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  // Relations
+  projects         ProjectTeamMember[]
+
+  @@map("team_members")
+}
+
+model ProjectTeamMember {
+  id               String                 @id @default(cuid())
+  projectId        String
+  teamMemberId     String
+  role             String
+  assignedAt       DateTime               @default(now())
+
+  // Relations
+  project          Project                @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  teamMember       TeamMember             @relation(fields: [teamMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, teamMemberId])
+  @@map("project_team_members")
+}
+
+model OnboardingStep {
+  id               String                 @id @default(cuid())
+  clientId         String
+  step             OnboardingStepType
+  title            String
+  description      String                 @db.Text
+  status           OnboardingStepStatus   @default(PENDING)
+  dueDate          DateTime?
+  completedDate    DateTime?
+  assignee         String?
+  requirements     String[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  // Relations
+  client           Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  resources        OnboardingResource[]
+
+  @@map("onboarding_steps")
+}
+
+model OnboardingResource {
+  id               String                 @id @default(cuid())
+  stepId           String
+  title            String
+  type             ResourceType
+  url              String?
+  content          String?                @db.Text
+  description      String?                @db.Text
+  required         Boolean                @default(false)
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  // Relations
+  step             OnboardingStep         @relation(fields: [stepId], references: [id], onDelete: Cascade)
+
+  @@map("onboarding_resources")
+}
+
+model ClientAccess {
+  id               String                 @id @default(cuid())
+  clientId         String
+  type             AccessType
+  serviceName      String
+  status           AccessStatus           @default(PENDING)
+  notes            String?                @db.Text
+  credentialsData  String?                @db.Text // JSON encrypted data
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  // Relations
+  client           Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("client_access")
+}
+
+model Communication {
+  id               String                 @id @default(cuid())
+  clientId         String
+  type             CommunicationType
+  scheduledDate    DateTime
+  completedDate    DateTime?
+  method           CommunicationMethod
+  status           CommunicationStatus    @default(SCHEDULED)
+  notes            String?                @db.Text
+  attendees        String[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  // Relations
+  client           Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("communications")
+}
+
+model ClientFeedback {
+  id               String                 @id @default(cuid())
+  clientId         String
+  projectId        String?
+  deliverableId    String?
+  type             FeedbackType
+  content          String                 @db.Text
+  rating           Int?                   // 1-5 scale
+  status           FeedbackStatus         @default(NEW)
+  respondedAt      DateTime?
+  response         String?                @db.Text
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  // Relations
+  client           Client                 @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  project          Project?               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  deliverable      Deliverable?           @relation(fields: [deliverableId], references: [id], onDelete: Cascade)
+
+  @@map("client_feedback")
+}
+
+model DeliverableFile {
+  id               String                 @id @default(cuid())
+  deliverableId    String
+  name             String
+  type             FileType
+  url              String
+  size             Int
+  version          Int                    @default(1)
+  uploadedAt       DateTime               @default(now())
+
+  // Relations
+  deliverable      Deliverable            @relation(fields: [deliverableId], references: [id], onDelete: Cascade)
+
+  @@map("deliverable_files")
+}
+
+model EmailTemplate {
+  id               String                 @id @default(cuid())
+  name             String
+  type             EmailTemplateType
+  subject          String
+  content          String                 @db.Text
+  variables        String[]
+  createdAt        DateTime               @default(now())
+  updatedAt        DateTime               @updatedAt
+
+  @@map("email_templates")
+}
+
+model ActivityLog {
+  id               String                 @id @default(cuid())
+  type             ActivityType
+  description      String
+  clientId         String?
+  projectId        String?
+  userId           String?
+  metadata         String?                @db.Text // JSON data
+  createdAt        DateTime               @default(now())
+
+  @@map("activity_logs")
+}
+
+// Enums
+enum CompanySize {
+  STARTUP
+  SMALL
+  MEDIUM
+  ENTERPRISE
+}
+
+enum ProjectType {
+  WEB
+  MOBILE
+  HEALTHCARE
+  CONSULTING
+  CUSTOM
+}
+
+enum ClientStatus {
+  LEAD
+  ONBOARDING
+  ACTIVE
+  COMPLETED
+  PAUSED
+}
+
+enum ProjectStatus {
+  PLANNING
+  IN_PROGRESS
+  REVIEW
+  COMPLETED
+  ON_HOLD
+}
+
+enum DeliverableType {
+  DESIGN
+  DEVELOPMENT
+  CONTENT
+  REVIEW
+  DEPLOYMENT
+}
+
+enum DeliverableStatus {
+  PENDING
+  IN_PROGRESS
+  REVIEW
+  APPROVED
+  DELIVERED
+}
+
+enum MilestoneStatus {
+  UPCOMING
+  CURRENT
+  COMPLETED
+  DELAYED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  OVERDUE
+}
+
+enum PhaseStatus {
+  UPCOMING
+  CURRENT
+  COMPLETED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum OnboardingStepType {
+  WELCOME
+  KICKOFF
+  ACCESS_SETUP
+  TRAINING
+  COMMUNICATION
+  PROJECT_START
+}
+
+enum OnboardingStepStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  SKIPPED
+}
+
+enum ResourceType {
+  DOCUMENT
+  VIDEO
+  TEMPLATE
+  LINK
+  FORM
+}
+
+enum AccessType {
+  DOMAIN
+  HOSTING
+  CMS
+  ANALYTICS
+  EMAIL
+  THIRD_PARTY
+}
+
+enum AccessStatus {
+  PENDING
+  RECEIVED
+  CONFIGURED
+}
+
+enum CommunicationType {
+  CHECK_IN
+  FEEDBACK
+  MILESTONE
+  ISSUE
+  GENERAL
+}
+
+enum CommunicationMethod {
+  EMAIL
+  CALL
+  MEETING
+  SLACK
+}
+
+enum CommunicationStatus {
+  SCHEDULED
+  COMPLETED
+  MISSED
+  RESCHEDULED
+}
+
+enum FeedbackType {
+  GENERAL
+  DELIVERABLE
+  PROCESS
+  CONCERN
+}
+
+enum FeedbackStatus {
+  NEW
+  ACKNOWLEDGED
+  ADDRESSED
+  RESOLVED
+}
+
+enum FileType {
+  IMAGE
+  DOCUMENT
+  VIDEO
+  CODE
+  OTHER
+}
+
+enum EmailTemplateType {
+  WELCOME
+  KICKOFF
+  MILESTONE
+  FEEDBACK
+  COMPLETION
+}
+
+enum ActivityType {
+  CLIENT_ADDED
+  PROJECT_STARTED
+  DELIVERABLE_COMPLETED
+  FEEDBACK_RECEIVED
+  MILESTONE_REACHED
+  COMMUNICATION_SCHEDULED
+  ACCESS_GRANTED
+}

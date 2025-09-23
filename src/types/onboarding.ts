@@ -226,7 +226,7 @@ export interface AdminDashboardData {
 
 export interface ActivityItem {
   id: string;
-  type: 'client_added' | 'project_started' | 'deliverable_completed' | 'feedback_received' | 'milestone_reached';
+  type: 'client_added' | 'project_started' | 'deliverable_completed' | 'feedback_received' | 'milestone_reached' | 'communication_scheduled' | 'access_granted';
   description: string;
   timestamp: string;
   clientId?: string;
