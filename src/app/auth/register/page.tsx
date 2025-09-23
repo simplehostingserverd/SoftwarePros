@@ -111,6 +111,7 @@ export default function RegisterPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasValidated, setHasValidated] = useState(false);
   const router = useRouter();
 
   const {
@@ -120,9 +121,10 @@ export default function RegisterPage() {
     setValue,
     formState: { errors },
     trigger,
+    reset,
   } = useForm<RegistrationFormData>({
     resolver: zodResolver(registrationSchema),
-    mode: "onChange",
+    mode: "onBlur", // Only validate on blur, not on every change
   });
 
   const steps = [
@@ -142,19 +144,34 @@ export default function RegisterPage() {
   };
 
   const handleNext = async () => {
+    setHasValidated(true);
     const isValid = await validateStep(currentStep);
     if (isValid) {
+      // Clear password fields when moving away from account step for security
+      if (currentStep === 0) {
+        setShowPassword(false);
+        setShowConfirmPassword(false);
+      }
       setCurrentStep(prev => Math.min(prev + 1, steps.length - 1));
       setError(null);
+      setHasValidated(false); // Reset validation state for next step
     }
   };
 
   const handleBack = () => {
     setCurrentStep(prev => Math.max(prev - 1, 0));
     setError(null);
+    setHasValidated(false);
   };
 
+  // Helper function to show errors only after validation
+  const showError = (fieldError: any) => fieldError && hasValidated;
+
+  // Helper function to safely get error message
+  const getErrorMessage = (fieldError: any) => fieldError?.message || "";
+
   const onSubmit = async (data: RegistrationFormData) => {
+    setHasValidated(true);
     setLoading(true);
     setError(null);
 
@@ -250,9 +267,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                   {...register("name")}
                   error={!!errors.name}
                 />
-                {errors.name && (
+                {showError(errors.name) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.name.message}
+                    {getErrorMessage(errors.name)}
                   </Typography>
                 )}
               </FormControl>
@@ -267,9 +284,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                   {...register("email")}
                   error={!!errors.email}
                 />
-                {errors.email && (
+                {showError(errors.email) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.email.message}
+                    {getErrorMessage(errors.email)}
                   </Typography>
                 )}
               </FormControl>
@@ -293,9 +310,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                     </IconButton>
                   }
                 />
-                {errors.password && (
+                {showError(errors.password) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.password.message}
+                    {getErrorMessage(errors.password)}
                   </Typography>
                 )}
               </FormControl>
@@ -319,9 +336,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                     </IconButton>
                   }
                 />
-                {errors.confirmPassword && (
+                {showError(errors.confirmPassword) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.confirmPassword.message}
+                    {getErrorMessage(errors.confirmPassword)}
                   </Typography>
                 )}
               </FormControl>
@@ -340,9 +357,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                   {...register("companyName")}
                   error={!!errors.companyName}
                 />
-                {errors.companyName && (
+                {showError(errors.companyName) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.companyName.message}
+                    {getErrorMessage(errors.companyName)}
                   </Typography>
                 )}
               </FormControl>
@@ -361,9 +378,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                   <Option value="medium">Medium (51-200 employees)</Option>
                   <Option value="enterprise">Enterprise (200+ employees)</Option>
                 </Select>
-                {errors.companySize && (
+                {showError(errors.companySize) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.companySize.message}
+                    {getErrorMessage(errors.companySize)}
                   </Typography>
                 )}
               </FormControl>
@@ -377,9 +394,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                   {...register("industry")}
                   error={!!errors.industry}
                 />
-                {errors.industry && (
+                {showError(errors.industry) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.industry.message}
+                    {getErrorMessage(errors.industry)}
                   </Typography>
                 )}
               </FormControl>
@@ -419,9 +436,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                     </Option>
                   ))}
                 </Select>
-                {errors.projectType && (
+                {showError(errors.projectType) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.projectType.message}
+                    {getErrorMessage(errors.projectType)}
                   </Typography>
                 )}
               </FormControl>
@@ -435,9 +452,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                   minRows={3}
                   {...register("projectDescription")}
                 />
-                {errors.projectDescription && (
+                {showError(errors.projectDescription) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.projectDescription.message}
+                    {getErrorMessage(errors.projectDescription)}
                   </Typography>
                 )}
               </FormControl>
@@ -457,9 +474,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                     </Option>
                   ))}
                 </Select>
-                {errors.budget && (
+                {showError(errors.budget) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.budget.message}
+                    {getErrorMessage(errors.budget)}
                   </Typography>
                 )}
               </FormControl>
@@ -479,9 +496,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                     </Option>
                   ))}
                 </Select>
-                {errors.timeline && (
+                {showError(errors.timeline) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                    {errors.timeline.message}
+                    {getErrorMessage(errors.timeline)}
                   </Typography>
                 )}
               </FormControl>
@@ -502,9 +519,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                       </Typography>
                     }
                   />
-                  {errors.termsAccepted && (
+                  {showError(errors.termsAccepted) && (
                     <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                      {errors.termsAccepted.message}
+                      {getErrorMessage(errors.termsAccepted)}
                     </Typography>
                   )}
                 </FormControl>
@@ -522,9 +539,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                       </Typography>
                     }
                   />
-                  {errors.privacyAccepted && (
+                  {showError(errors.privacyAccepted) && (
                     <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
-                      {errors.privacyAccepted.message}
+                      {getErrorMessage(errors.privacyAccepted)}
                     </Typography>
                   )}
                 </FormControl>
