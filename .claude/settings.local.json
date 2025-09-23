@@ -35,7 +35,10 @@
       "Bash(dir:*)",
       "Bash(docker build:*)",
       "Bash(git config:*)",
-      "Read(//c/Users/Shadow/Downloads/**)"
+      "Read(//c/Users/Shadow/Downloads/**)",
+      "Bash(npm search:*)",
+      "Bash(npm info:*)",
+      "Read(//c/Users/Shadow/Pictures/**)"
     ],
     "deny": [],
     "ask": []
