@@ -12,17 +12,15 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
       - PORT=3000
       - HOSTNAME=0.0.0.0
-      # Email configuration - set these in Coolify environment variables
-      - MAILERSEND_API_KEY=${MAILERSEND_API_KEY}
-      - SMTP_HOST=${SMTP_HOST:-smtp.mailersend.net}
-      - SMTP_PORT=${SMTP_PORT:-587}
-      - SMTP_USER=${SMTP_USER:-MS_vExnkE@test-eqvygm0kpqjl0p7w.mlsender.net}
+      # SMTP Email configuration - set these in Coolify environment variables
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_PORT=${SMTP_PORT:-465}
+      - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
-      # Alternative Gmail configuration
-      - GMAIL_USER=${GMAIL_USER}
-      - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD}
+      - SMTP_SECURE=${SMTP_SECURE:-true}
       # Application settings
-      - CONTACT_EMAIL=${CONTACT_EMAIL:-simplehostingserverd@proton.me}
+      - CONTACT_EMAIL=${CONTACT_EMAIL}
+      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]

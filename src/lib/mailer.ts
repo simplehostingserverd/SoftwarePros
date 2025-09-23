@@ -32,15 +32,12 @@ const SECURITY_CONFIG = {
     // Block suspicious patterns
     suspicious: /(spam|test|example|fake|invalid)/i,
   },
-  // TLS/SSL security settings
+  // TLS/SSL security settings for cPanel compatibility
   TLS_OPTIONS: {
-    // Require TLS 1.3 only for maximum security
-    minVersion: "TLSv1.3" as const,
-    maxVersion: "TLSv1.3" as const,
-    // Reject unauthorized certificates
-    rejectUnauthorized: true,
-    // TLS 1.3 secure ciphers only
-    ciphers: "TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256",
+    // Support TLS 1.2+ for cPanel compatibility
+    minVersion: "TLSv1.2" as const,
+    // Standard cipher suites
+    secureProtocol: "TLSv1_2_method" as const,
   },
   // Content security
   CONTENT_LIMITS: {
@@ -127,19 +124,9 @@ function sanitizeEmailInput(data: ContactEmailData): ContactEmailData {
   };
 }
 
-// Determine recipient email based on MailerSend trial account settings
+// Determine recipient email from environment or use default
 function getRecipientEmail(): string {
-  const isTrialAccount = process.env.MAILERSEND_TRIAL_ACCOUNT === "true";
-  const adminEmail = process.env.MAILERSEND_ADMIN_EMAIL;
-
-  // If trial account and admin email is set, use admin email for both API and SMTP
-  if (isTrialAccount && adminEmail) {
-    console.log("Using MailerSend administrator email for trial account:", adminEmail);
-    return adminEmail;
-  }
-
-  // Default fallback
-  return "simplehostingserverd@proton.me";
+  return process.env.CONTACT_EMAIL || "simplehostingserverd@proton.me";
 }
 
 const RECIPIENT_EMAIL = getRecipientEmail();
@@ -148,199 +135,79 @@ const FROM_EMAIL =
   `no-reply@${process.env.VERCEL_URL || process.env.HOSTNAME || "softwarepros.org"}`;
 
 async function resolveTransport() {
-  // Try multiple SMTP configurations in order of preference
+  // Use SMTP configuration only - no external APIs
 
-  // 1. Explicit SMTP configuration (highest priority)
-  if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS) {
-    const port = process.env.SMTP_PORT ? Number.parseInt(process.env.SMTP_PORT, 10) : 587;
-    const secure = process.env.SMTP_SECURE === "true" ? true : port === 465;
-
-    console.log(`Attempting secure SMTP connection to ${process.env.SMTP_HOST}:${port}`);
-
-    try {
-      const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port,
-        secure,
-        auth: {
-          user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
-        },
-        // Enhanced security settings
-        tls: {
-          ...SECURITY_CONFIG.TLS_OPTIONS,
-          // Additional security for production
-          servername: process.env.NODE_ENV === "production" ? process.env.SMTP_HOST : undefined,
-        },
-        // Security-focused connection settings
-        connectionTimeout: 30_000,
-        socketTimeout: 30_000,
-        greetingTimeout: 30_000,
-        // Disable less secure features
-        disableFileAccess: true,
-        disableUrlAccess: true,
-        // Enhanced logging for security monitoring
-        logger: process.env.NODE_ENV === "development",
-        debug: process.env.NODE_ENV === "development" && process.env.DEBUG_EMAIL === "true",
-        // Security headers
-        headers: {
-          'X-Mailer': 'SoftwarePros Secure Email Service',
-          'X-Application': 'SoftwarePros Contact Form',
-        },
-      });
-
-      // Test the connection with security validation
-      await transporter.verify();
-      console.log("Secure SMTP connection verified successfully");
-      return transporter;
-    } catch (error) {
-      console.error("Secure SMTP connection failed:", error);
-
-      // Enhanced error handling for security issues
-      if (error instanceof Error) {
-        if (error.message.includes("certificate")) {
-          throw new Error(
-            "SMTP SSL/TLS certificate validation failed. This could indicate a security issue."
-          );
-        }
-        if (error.message.includes("ECONNREFUSED") || error.message.includes("timeout")) {
-          throw new Error(
-            "SMTP connection failed. Please check your firewall and network security settings."
-          );
-        }
-      }
-
-      throw new Error(
-        `Secure SMTP configuration error: ${error instanceof Error ? error.message : "Unknown error"}`,
-      );
-    }
+  // Require SMTP configuration
+  if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+    throw new Error("SMTP configuration required. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
   }
 
-  // 2. Gmail SMTP (if Gmail credentials are provided)
-  if (process.env.GMAIL_USER && process.env.GMAIL_APP_PASSWORD) {
-    console.log("Attempting secure Gmail SMTP connection");
+  const port = process.env.SMTP_PORT ? Number.parseInt(process.env.SMTP_PORT, 10) : 587;
+  const secure = process.env.SMTP_SECURE === "true" ? true : port === 465;
 
-    try {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.GMAIL_APP_PASSWORD,
-        },
-        // Enhanced security settings for Gmail
-        tls: {
-          ...SECURITY_CONFIG.TLS_OPTIONS,
-          // Gmail specific security settings
-          servername: "smtp.gmail.com",
-        },
-        // Security-focused connection settings
-        connectionTimeout: 30_000,
-        socketTimeout: 30_000,
-        greetingTimeout: 30_000,
-        // Disable less secure features
-        disableFileAccess: true,
-        disableUrlAccess: true,
-        // Security headers
-        headers: {
-          'X-Mailer': 'SoftwarePros Secure Email Service',
-          'X-Application': 'SoftwarePros Contact Form',
-        },
-      });
-
-      await transporter.verify();
-      console.log("Secure Gmail SMTP connection verified successfully");
-      return transporter;
-    } catch (error) {
-      console.error("Secure Gmail SMTP connection failed:", error);
-
-      // Enhanced error handling for Gmail security issues
-      if (error instanceof Error) {
-        if (error.message.includes("certificate")) {
-          throw new Error(
-            "Gmail SSL/TLS certificate validation failed. This could indicate a security issue."
-          );
-        }
-        if (error.message.includes("authentication") || error.message.includes("Invalid login")) {
-          throw new Error(
-            "Gmail authentication failed. Please check your credentials and ensure 2FA is properly configured."
-          );
-        }
-      }
-
-      throw new Error(
-        `Secure Gmail configuration error: ${error instanceof Error ? error.message : "Unknown error"}`,
-      );
-    }
-  }
-
-  // 3. Development mode - use Ethereal for testing
-  if (process.env.NODE_ENV === "development") {
-    console.log("Development mode: Creating Ethereal test account");
-
-    try {
-      const testAccount = await nodemailer.createTestAccount();
-      const transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
-        auth: {
-          user: testAccount.user,
-          pass: testAccount.pass,
-        },
-      });
-
-      console.log("Ethereal test account created successfully");
-      return transporter;
-    } catch (error) {
-      console.error("Ethereal test account creation failed:", error);
-
-      // Final fallback for development - JSON transport
-      console.log("Using JSON transport as final fallback");
-      return nodemailer.createTransport({
-        streamTransport: true,
-        newline: "unix",
-        buffer: true,
-      });
-    }
-  }
-
-  // 4. Production fallback - try cPanel localhost SMTP
-  console.log("Production mode: Attempting localhost SMTP connection");
+  console.log(`Attempting secure SMTP connection to ${process.env.SMTP_HOST}:${port}`);
 
   try {
     const transporter = nodemailer.createTransport({
-      host: "localhost",
-      port: 25,
-      secure: false,
-      tls: {
-        rejectUnauthorized: false,
+      host: process.env.SMTP_HOST,
+      port,
+      secure,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
       },
-      connectionTimeout: 10_000,
-      socketTimeout: 10_000,
+      // TLS settings for cPanel compatibility
+      tls: {
+        // Basic TLS security that works with most cPanel setups
+        rejectUnauthorized: process.env.NODE_ENV === "production",
+        servername: process.env.SMTP_HOST,
+      },
+      // Security-focused connection settings
+      connectionTimeout: 30_000,
+      socketTimeout: 30_000,
+      greetingTimeout: 30_000,
+      // Disable less secure features
+      disableFileAccess: true,
+      disableUrlAccess: true,
+      // Enhanced logging for security monitoring
+      logger: process.env.NODE_ENV === "development",
+      debug: process.env.NODE_ENV === "development" && process.env.DEBUG_EMAIL === "true",
+      // Security headers
+      headers: {
+        'X-Mailer': 'SoftwarePros Secure Email Service',
+        'X-Application': 'SoftwarePros Contact Form',
+      },
     });
 
+    // Test the connection with security validation
     await transporter.verify();
-    console.log("Localhost SMTP connection verified successfully");
+    console.log("Secure SMTP connection verified successfully");
     return transporter;
   } catch (error) {
-    console.error("Localhost SMTP failed:", error);
+    console.error("Secure SMTP connection failed:", error);
 
-    // Final production fallback - sendmail
-    console.log("Attempting sendmail fallback");
-
-    try {
-      const transporter = nodemailer.createTransport({
-        sendmail: true,
-        newline: "unix",
-        path: process.env.SENDMAIL_PATH || "/usr/sbin/sendmail",
-      });
-
-      console.log("Sendmail transporter created successfully");
-      return transporter;
-    } catch (sendmailError) {
-      console.error("Sendmail fallback failed:", sendmailError);
-      throw new Error("No working email transport found. Please configure SMTP settings.");
+    // Enhanced error handling for security issues
+    if (error instanceof Error) {
+      if (error.message.includes("certificate")) {
+        throw new Error(
+          "SMTP SSL/TLS certificate validation failed. Check your SMTP server configuration."
+        );
+      }
+      if (error.message.includes("ECONNREFUSED") || error.message.includes("timeout")) {
+        throw new Error(
+          "SMTP connection failed. Please check your server address and port settings."
+        );
+      }
+      if (error.message.includes("Authentication failed") || error.message.includes("Invalid login")) {
+        throw new Error(
+          "SMTP authentication failed. Please check your username and password."
+        );
+      }
     }
+
+    throw new Error(
+      `SMTP configuration error: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
   }
 }
 
