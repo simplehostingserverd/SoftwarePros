@@ -100,7 +100,7 @@ export interface TeamMember {
 export interface OnboardingStep {
   id: string;
   clientId: string;
-  step: 'welcome' | 'kickoff' | 'access_setup' | 'training' | 'communication' | 'project_start';
+  step: 'welcome' | 'access_setup' | 'training' | 'communication' | 'project_start';
   title: string;
   description: string;
   status: 'pending' | 'in_progress' | 'completed' | 'skipped';
@@ -175,7 +175,7 @@ export interface DeliverableFile {
 export interface EmailTemplate {
   id: string;
   name: string;
-  type: 'welcome' | 'kickoff' | 'milestone' | 'feedback' | 'completion';
+  type: 'welcome' | 'milestone' | 'feedback' | 'completion';
   subject: string;
   content: string;
   variables: string[]; // template variables like {{clientName}}

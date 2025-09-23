@@ -137,7 +137,7 @@ export const emailTemplates: Record<string, EmailTemplate> = {
   kickoff_scheduled: {
     id: "kickoff_scheduled",
     name: "Kickoff Meeting Scheduled",
-    type: "kickoff",
+    type: "milestone",
     subject: "{{companyName}} Project Kickoff - {{kickoffDate}} 📅",
     content: `
 <!DOCTYPE html>

@@ -7,15 +7,21 @@ export async function getRedisClient(): Promise<RedisClientType | null> {
     try {
       const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379';
 
-      redis = createClient({
+      const redisConfig: any = {
         url: redisUrl,
         password: process.env.REDIS_PASSWORD || undefined,
         database: parseInt(process.env.REDIS_DB || '0'),
         socket: {
           connectTimeout: 10000,
-          tls: redisUrl.startsWith('rediss://') ? {} : undefined, // Enable TLS for rediss:// URLs
         },
-      });
+      };
+
+      // Add TLS configuration for secure Redis connections
+      if (redisUrl.startsWith('rediss://')) {
+        redisConfig.socket.tls = true;
+      }
+
+      redis = createClient(redisConfig);
 
       redis.on('error', (err) => {
         console.error('Redis connection error:', err);
