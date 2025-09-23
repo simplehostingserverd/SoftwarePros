@@ -5,6 +5,7 @@
 
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GitHubProvider from "next-auth/providers/github"
 import bcrypt from "bcryptjs"
 import { prisma } from "../prisma"
 import { AUTH_CONFIG, AUTH_ERROR_MESSAGES } from "./config"
@@ -39,6 +40,10 @@ declare module "next-auth/jwt" {
 
 export const authOptions: NextAuthOptions = {
   providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    }),
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -119,7 +124,32 @@ export const authOptions: NextAuthOptions = {
       return session
     },
     async signIn({ user, account, profile }) {
-      // Additional security checks can be added here
+      if (account?.provider === "github") {
+        try {
+          // Check if user exists
+          const existingUser = await prisma.user.findUnique({
+            where: { email: user.email! }
+          })
+
+          if (!existingUser) {
+            // Create new user from GitHub
+            await prisma.user.create({
+              data: {
+                email: user.email!,
+                name: user.name,
+                image: user.image,
+                role: "user", // Default role for GitHub users
+                status: "active",
+                emailVerified: new Date(), // GitHub accounts are considered verified
+              }
+            })
+          }
+          return true
+        } catch (error) {
+          console.error("Error during GitHub sign-in:", error)
+          return false
+        }
+      }
       return true
     },
   },

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 const navigationItems = [
   { name: "Home", href: "/" },
@@ -33,6 +34,7 @@ export default function Navigation() {
   const [clickDropdown, setClickDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const { data: session, status } = useSession();
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -163,6 +165,58 @@ export default function Navigation() {
                 )}
               </div>
             ))}
+
+            {/* Auth Section */}
+            <div className="ml-4 border-l border-gray-700 pl-4">
+              {status === "loading" ? (
+                <div className="w-8 h-8 rounded-full bg-gray-700 animate-pulse" />
+              ) : session ? (
+                <div className="flex items-center space-x-3">
+                  {session.user?.role === "admin" && (
+                    <Link
+                      href="/admin/dashboard"
+                      className="px-3 py-1.5 text-sm font-medium text-purple-400 hover:text-purple-300 transition-colors duration-200"
+                    >
+                      Admin
+                    </Link>
+                  )}
+                  {(session.user?.role === "client" || session.user?.role === "user") && (
+                    <Link
+                      href="/portal"
+                      className="px-3 py-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                  <div className="flex items-center space-x-2">
+                    <div className="text-sm text-gray-300">
+                      {session.user?.name || session.user?.email}
+                    </div>
+                    <button
+                      onClick={() => signOut({ callbackUrl: "/" })}
+                      className="px-3 py-1.5 text-sm font-medium text-red-400 hover:text-red-300 transition-colors duration-200"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <Link
+                    href="/auth/signin"
+                    className="px-3 py-1.5 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth/register"
+                    className="px-4 py-1.5 text-sm font-medium bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200 shadow-lg"
+                  >
+                    Get Started
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -248,6 +302,63 @@ export default function Navigation() {
                 )}
               </div>
             ))}
+
+            {/* Mobile Auth Section */}
+            <div className="mt-4 pt-4 border-t border-gray-800">
+              {status === "loading" ? (
+                <div className="px-3 py-2 text-gray-400">Loading...</div>
+              ) : session ? (
+                <div className="space-y-1">
+                  <div className="px-3 py-2 text-sm text-gray-300">
+                    Welcome, {session.user?.name || session.user?.email}
+                  </div>
+                  {session.user?.role === "admin" && (
+                    <Link
+                      href="/admin/dashboard"
+                      className="block px-3 py-2 text-base font-medium text-purple-400 hover:text-purple-300 hover:bg-gray-800 rounded-lg transition-all duration-200"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Admin Dashboard
+                    </Link>
+                  )}
+                  {(session.user?.role === "client" || session.user?.role === "user") && (
+                    <Link
+                      href="/portal"
+                      className="block px-3 py-2 text-base font-medium text-blue-400 hover:text-blue-300 hover:bg-gray-800 rounded-lg transition-all duration-200"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      signOut({ callbackUrl: "/" });
+                      setIsOpen(false);
+                    }}
+                    className="w-full text-left px-3 py-2 text-base font-medium text-red-400 hover:text-red-300 hover:bg-gray-800 rounded-lg transition-all duration-200"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  <Link
+                    href="/auth/signin"
+                    className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth/register"
+                    className="block px-3 py-2 text-base font-medium bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:from-purple-700 hover:to-blue-700 rounded-lg transition-all duration-200"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Get Started
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

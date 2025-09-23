@@ -51,9 +51,13 @@ model User {
   role          String    @default("user")
   status        String    @default("active")
   twoFactorEnabled Boolean @default(false)
-  lastLoginAt   DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  twoFactorSecret  String?
+  backupCodes      String[] @default([])
+  lastLoginAt      DateTime?
+  loginAttempts    Int       @default(0)
+  lockedUntil      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 
   accounts Account[]
   sessions Session[]
