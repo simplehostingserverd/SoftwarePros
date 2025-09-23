@@ -41,7 +41,8 @@
       "Read(//c/Users/Shadow/Pictures/**)",
       "Bash(npx prisma generate:*)",
       "Bash(npx prisma:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm run start:*)"
     ],
     "deny": [],
     "ask": []

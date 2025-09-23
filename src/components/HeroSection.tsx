@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import OwlSpirit from "./OwlSpirit";
 
 export default function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -37,56 +36,48 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
-          {/* Left Column - Text Content */}
-          <div className="space-y-8 text-center lg:text-left">
-            {/* Logo and Main Heading */}
-            <div className="space-y-6">
-              <div className="flex justify-center lg:justify-start mb-8">
-                <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/30">
-                  <img
-                    src="/images/softwarepros-logo.png"
-                    alt="SoftwarePros Logo"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="space-y-8">
+          {/* Logo and Main Heading */}
+          <div className="space-y-6">
+            <div className="flex justify-center mb-8">
+              <div className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-2xl overflow-hidden shadow-2xl shadow-purple-500/30">
+                <img
+                  src="/images/softwarepros-logo.png"
+                  alt="SoftwarePros Logo"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent leading-tight">
-                SoftwarePros
-              </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light">
-                Custom Software Solutions & Tech Consulting
-              </p>
             </div>
-
-            {/* Description */}
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-              Professional software development, consulting, and digital solutions for startups and
-              enterprises. Built by experts. Trusted by businesses worldwide.
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-white via-purple-200 to-purple-400 bg-clip-text text-transparent leading-tight">
+              SoftwarePros
+            </h1>
+            <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light max-w-4xl mx-auto">
+              Custom Software Solutions & Tech Consulting
             </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center pt-8">
-              <Link
-                href="/contact"
-                className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
-              >
-                <span className="relative z-10">Get Started</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-75 group-hover:opacity-100 transition-opacity duration-300" />
-              </Link>
-              <Link
-                href="/portfolio"
-                className="px-8 py-4 border-2 border-purple-500/50 text-purple-300 font-semibold rounded-full hover:border-purple-400 hover:text-purple-200 hover:bg-purple-500/10 transition-all duration-300"
-              >
-                View Our Work
-              </Link>
-            </div>
           </div>
 
-          {/* Right Column - 3D Owl */}
-          <div className="flex justify-center lg:justify-end">
-            <OwlSpirit className="w-full max-w-lg h-96 lg:h-[500px]" />
+          {/* Description */}
+          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            Professional software development, consulting, and digital solutions for startups and
+            enterprises. Built by experts. Trusted by businesses worldwide.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+            <Link
+              href="/contact"
+              className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
+            >
+              <span className="relative z-10">Get Started</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-75 group-hover:opacity-100 transition-opacity duration-300" />
+            </Link>
+            <Link
+              href="/portfolio"
+              className="px-8 py-4 border-2 border-purple-500/50 text-purple-300 font-semibold rounded-full hover:border-purple-400 hover:text-purple-200 hover:bg-purple-500/10 transition-all duration-300"
+            >
+              View Our Work
+            </Link>
           </div>
         </div>
 
