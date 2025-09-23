@@ -10,14 +10,16 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
+RUN npm install -g npm@latest
 RUN npm ci --omit=dev
 
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
-# Copy package files and install ALL dependencies (including devDependencies for build)
+# Update to latest npm version and install dependencies
 COPY package.json package-lock.json* ./
+RUN npm install -g npm@latest
 RUN npm ci
 
 # Copy source code
