@@ -20,7 +20,28 @@ services:
       - SMTP_SECURE=${SMTP_SECURE:-true}
       # Application settings
       - CONTACT_EMAIL=${CONTACT_EMAIL}
-      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL}
+      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL:-noreply@softwarepros.org}
+      # Authentication settings
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      # Database and storage
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=${REDIS_URL}
+      # Cloudflare settings
+      - CLOUDFLARE_REALTIME_API_KEY=${CLOUDFLARE_REALTIME_API_KEY}
+      - CLOUDFLARE_REALTIME_API_URL=${CLOUDFLARE_REALTIME_API_URL}
+      - CLOUDFLARE_REALTIME_ORG_ID=${CLOUDFLARE_REALTIME_ORG_ID}
+      # Rate limiting
+      - RATE_LIMIT_MAX_REQUESTS=${RATE_LIMIT_MAX_REQUESTS:-100}
+      - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-90000}
+      # Session settings
+      - SESSION_SECRET=${SESSION_SECRET}
+      - SESSION_TIMEOUT=${SESSION_TIMEOUT:-7200000}
+      # Onboarding settings
+      - ONBOARDING_ADMIN_EMAIL=${ONBOARDING_ADMIN_EMAIL}
+      - ONBOARDING_PORTAL_URL=${ONBOARDING_PORTAL_URL}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]

@@ -84,32 +84,25 @@ public/              # Static assets and images
 - **Environment-based configuration**: All settings configurable via environment variables
 
 ### Email Configuration
-The contact form uses MailerSend API with SMTP fallback options:
+The contact form uses SMTP-only configuration for reliable email delivery:
 
-**Primary Configuration (MailerSend API):**
+**Required SMTP Configuration:**
 ```
-MAILERSEND_API_TOKEN=your-mailersend-api-token
+SMTP_HOST=aquareefdirect.com
+SMTP_PORT=465
+SMTP_USER=admin@aquareefdirect.com
+SMTP_PASS=your-password
+SMTP_SECURE=true
+CONTACT_EMAIL=admin@aquareefdirect.com
+CONTACT_FROM_EMAIL=noreply@softwarepros.org
 ```
-
-**Fallback SMTP Options (in priority order):**
-1. **Custom SMTP**:
-   ```
-   SMTP_HOST=mail.yourdomain.com
-   SMTP_PORT=587
-   SMTP_USER=contact@yourdomain.com
-   SMTP_PASS=your-password
-   ```
-2. **Gmail SMTP**:
-   ```
-   GMAIL_USER=your-gmail@gmail.com
-   GMAIL_APP_PASSWORD=your-16-char-app-password
-   ```
 
 **Environment Variables:**
 - Copy `.env.example` to `.env.local` for development
 - Set production variables in Coolify environment or hosting platform
-- Contact emails are sent to `simplehostingserverd@proton.me`
-- System automatically falls back from MailerSend to SMTP if API fails
+- Contact emails are sent to the address specified in `CONTACT_EMAIL`
+- Optimized timeout settings for cPanel hosting compatibility
+- TLS settings configured for shared hosting environments
 
 ### Video Meeting Configuration
 Cloudflare RealtimeKit integration for secure video calls:
