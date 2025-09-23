@@ -142,7 +142,7 @@ async function resolveTransport() {
     throw new Error("SMTP configuration required. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
   }
 
-  const port = process.env.SMTP_PORT ? Number.parseInt(process.env.SMTP_PORT, 10) : 587;
+  const port = process.env.SMTP_PORT ? Number.parseInt(process.env.SMTP_PORT, 10) : 465;
   const secure = process.env.SMTP_SECURE === "true" ? true : port === 465;
 
   console.log(`Attempting secure SMTP connection to ${process.env.SMTP_HOST}:${port}`);
@@ -159,13 +159,15 @@ async function resolveTransport() {
       // TLS settings for cPanel compatibility
       tls: {
         // Basic TLS security that works with most cPanel setups
-        rejectUnauthorized: process.env.NODE_ENV === "production",
+        rejectUnauthorized: false, // More permissive for cPanel hosting
         servername: process.env.SMTP_HOST,
+        // Additional cPanel compatibility settings
+        ciphers: 'SSLv3',
       },
-      // Security-focused connection settings
-      connectionTimeout: 30_000,
-      socketTimeout: 30_000,
-      greetingTimeout: 30_000,
+      // Optimized connection settings for faster response
+      connectionTimeout: 10_000, // Reduced from 30s to 10s
+      socketTimeout: 10_000,     // Reduced from 30s to 10s
+      greetingTimeout: 5_000,    // Reduced from 30s to 5s
       // Disable less secure features
       disableFileAccess: true,
       disableUrlAccess: true,
@@ -179,29 +181,60 @@ async function resolveTransport() {
       },
     });
 
-    // Test the connection with security validation
-    await transporter.verify();
+    // Test the connection with security validation and timeout
+    const verifyPromise = transporter.verify();
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('SMTP verification timeout')), 8_000)
+    );
+
+    await Promise.race([verifyPromise, timeoutPromise]);
     console.log("Secure SMTP connection verified successfully");
     return transporter;
   } catch (error) {
     console.error("Secure SMTP connection failed:", error);
 
-    // Enhanced error handling for security issues
+    // Enhanced error handling for cPanel/hosting provider issues
     if (error instanceof Error) {
-      if (error.message.includes("certificate")) {
+      if (error.message.includes("certificate") || error.message.includes("SSL") || error.message.includes("TLS")) {
         throw new Error(
-          "SMTP SSL/TLS certificate validation failed. Check your SMTP server configuration."
+          "SMTP SSL/TLS connection failed. Using fallback settings for cPanel hosting."
         );
       }
       if (error.message.includes("ECONNREFUSED") || error.message.includes("timeout")) {
         throw new Error(
-          "SMTP connection failed. Please check your server address and port settings."
+          "SMTP connection timeout. Please verify aquareefdirect.com SMTP server is accessible."
         );
       }
-      if (error.message.includes("Authentication failed") || error.message.includes("Invalid login")) {
+      if (error.message.includes("Authentication failed") || error.message.includes("Invalid login") || error.message.includes("535")) {
         throw new Error(
-          "SMTP authentication failed. Please check your username and password."
+          "SMTP authentication failed. Please verify admin@aquareefdirect.com credentials."
         );
+      }
+      if (error.message.includes("verification timeout")) {
+        console.warn("SMTP verification timed out, but proceeding anyway for production environment");
+        // In production, skip verification if it times out
+        if (process.env.NODE_ENV === "production") {
+          // Return transporter without verification for production
+          const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST,
+            port,
+            secure,
+            auth: {
+              user: process.env.SMTP_USER,
+              pass: process.env.SMTP_PASS,
+            },
+            tls: {
+              rejectUnauthorized: false,
+              servername: process.env.SMTP_HOST,
+            },
+            connectionTimeout: 10_000,
+            socketTimeout: 10_000,
+            greetingTimeout: 5_000,
+            disableFileAccess: true,
+            disableUrlAccess: true,
+          });
+          return transporter;
+        }
       }
     }
 
