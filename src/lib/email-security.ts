@@ -55,9 +55,7 @@ export const DEFAULT_EMAIL_SECURITY_CONFIG: EmailSecurityConfig = {
     enabled: true,
     allowedDomains: [
       'softwarepros.org',
-      'mailersend.net',
-      'gmail.com',
-      'google.com',
+      'aquareefdirect.com',
     ],
     allowedIPs: [], // Add specific IPs if needed
   },

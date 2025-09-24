@@ -62,10 +62,11 @@ MAILERSEND_ADMIN_EMAIL=admin@yourdomain.com
 CONTACT_FROM_EMAIL=noreply@yourdomain.com
 
 # SMTP Configuration
-SMTP_HOST=smtp.mailersend.net
-SMTP_PORT=587
-SMTP_USER=your-smtp-username
+SMTP_HOST=aquareefdirect.com
+SMTP_PORT=465
+SMTP_USER=admin@aquareefdirect.com
 SMTP_PASS=your-smtp-password
+SMTP_SECURE=true
 CONTACT_FROM_EMAIL=noreply@yourdomain.com
 
 # Security

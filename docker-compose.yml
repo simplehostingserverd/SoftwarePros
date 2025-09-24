@@ -12,10 +12,10 @@ services:
       - NEXT_TELEMETRY_DISABLED=1
       - PORT=3000
       - HOSTNAME=0.0.0.0
-      # SMTP Email configuration - set these in Coolify environment variables
-      - SMTP_HOST=${SMTP_HOST}
+      # SMTP Email configuration - aquareefdirect.com
+      - SMTP_HOST=${SMTP_HOST:-aquareefdirect.com}
       - SMTP_PORT=${SMTP_PORT:-465}
-      - SMTP_USER=${SMTP_USER}
+      - SMTP_USER=${SMTP_USER:-admin@aquareefdirect.com}
       - SMTP_PASS=${SMTP_PASS}
       - SMTP_SECURE=${SMTP_SECURE:-true}
       # Application settings

@@ -51,14 +51,17 @@ MAILERSEND_API_KEY=your_api_key
 MAILERSEND_ADMIN_EMAIL=admin@yourdomain.com
 
 # SMTP Configuration
-SMTP_HOST=smtp.mailersend.net
-SMTP_PORT=587
+SMTP_HOST=aquareefdirect.com
+SMTP_PORT=465
 SMTP_USER=your_username
 SMTP_PASS=your_password
 
-# Gmail (Development only)
-GMAIL_USER=your_gmail@gmail.com
-GMAIL_APP_PASSWORD=your_app_password
+# aquareefdirect.com SMTP Configuration
+SMTP_HOST=aquareefdirect.com
+SMTP_PORT=465
+SMTP_USER=admin@aquareefdirect.com
+SMTP_PASS=your_password
+SMTP_SECURE=true
 
 # Security Configuration
 CONTACT_FROM_EMAIL=noreply@yourdomain.com
