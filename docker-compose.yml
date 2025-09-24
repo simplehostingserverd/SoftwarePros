@@ -8,40 +8,37 @@ services:
     ports:
       - "3000:3000"
     environment:
+      # Core application settings
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
       - PORT=3000
       - HOSTNAME=0.0.0.0
-      # SMTP Email configuration - aquareefdirect.com
+
+      # SMTP Email configuration - aquareefdirect.com (Required)
       - SMTP_HOST=${SMTP_HOST:-aquareefdirect.com}
       - SMTP_PORT=${SMTP_PORT:-465}
       - SMTP_USER=${SMTP_USER:-admin@aquareefdirect.com}
       - SMTP_PASS=${SMTP_PASS}
       - SMTP_SECURE=${SMTP_SECURE:-true}
-      # Application settings
-      - CONTACT_EMAIL=${CONTACT_EMAIL}
-      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL}
-      # Authentication settings
-      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
-      - NEXTAUTH_URL=${NEXTAUTH_URL}
-      - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
-      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
-      # Database and storage
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
-      # Cloudflare settings
-      - CLOUDFLARE_REALTIME_API_KEY=${CLOUDFLARE_REALTIME_API_KEY}
-      - CLOUDFLARE_REALTIME_API_URL=${CLOUDFLARE_REALTIME_API_URL}
-      - CLOUDFLARE_REALTIME_ORG_ID=${CLOUDFLARE_REALTIME_ORG_ID}
-      # Rate limiting
-      - RATE_LIMIT_MAX_REQUESTS=${RATE_LIMIT_MAX_REQUESTS:-100}
-      - RATE_LIMIT_WINDOW_MS=${RATE_LIMIT_WINDOW_MS:-90000}
-      # Session settings
-      - SESSION_SECRET=${SESSION_SECRET}
-      - SESSION_TIMEOUT=${SESSION_TIMEOUT:-7200000}
-      # Onboarding settings
-      - ONBOARDING_ADMIN_EMAIL=${ONBOARDING_ADMIN_EMAIL}
-      - ONBOARDING_PORTAL_URL=${ONBOARDING_PORTAL_URL}
+      - CONTACT_EMAIL=${CONTACT_EMAIL:-admin@aquareefdirect.com}
+      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL:-noreply@softwarepros.org}
+
+      # Database (Optional - remove if not using Prisma)
+      # - DATABASE_URL=${DATABASE_URL}
+
+      # Redis cache (Optional - remove if not using rate limiting)
+      # - REDIS_URL=${REDIS_URL}
+
+      # Authentication (Optional - uncomment if using GitHub OAuth)
+      # - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      # - NEXTAUTH_URL=${NEXTAUTH_URL}
+      # - GITHUB_CLIENT_ID=${GITHUB_CLIENT_ID}
+      # - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+
+      # Video meetings (Optional - uncomment if using Cloudflare RealtimeKit)
+      # - CLOUDFLARE_REALTIME_API_KEY=${CLOUDFLARE_REALTIME_API_KEY}
+      # - CLOUDFLARE_REALTIME_API_URL=${CLOUDFLARE_REALTIME_API_URL:-https://api.realtime.cloudflare.com/v2}
+      # - CLOUDFLARE_REALTIME_ORG_ID=${CLOUDFLARE_REALTIME_ORG_ID}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
