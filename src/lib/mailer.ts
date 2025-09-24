@@ -170,10 +170,10 @@ async function resolveTransport() {
         // Additional cPanel compatibility settings
         ciphers: 'SSLv3',
       },
-      // Optimized connection settings for faster response
-      connectionTimeout: 10_000, // Reduced from 30s to 10s
-      socketTimeout: 10_000,     // Reduced from 30s to 10s
-      greetingTimeout: 5_000,    // Reduced from 30s to 5s
+      // Optimized connection settings for cPanel hosting compatibility
+      connectionTimeout: 45_000, // Extended for cPanel hosting
+      socketTimeout: 45_000,     // Extended for cPanel hosting
+      greetingTimeout: 30_000,   // Extended for cPanel hosting
       // Disable less secure features
       disableFileAccess: true,
       disableUrlAccess: true,
@@ -190,7 +190,7 @@ async function resolveTransport() {
     // Test the connection with security validation and timeout
     const verifyPromise = transporter.verify();
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('SMTP verification timeout')), 8_000)
+      setTimeout(() => reject(new Error('SMTP verification timeout')), 30_000)
     );
 
     await Promise.race([verifyPromise, timeoutPromise]);
@@ -233,9 +233,9 @@ async function resolveTransport() {
               rejectUnauthorized: false,
               servername: process.env.SMTP_HOST,
             },
-            connectionTimeout: 10_000,
-            socketTimeout: 10_000,
-            greetingTimeout: 5_000,
+            connectionTimeout: 45_000,
+            socketTimeout: 45_000,
+            greetingTimeout: 30_000,
             disableFileAccess: true,
             disableUrlAccess: true,
           });

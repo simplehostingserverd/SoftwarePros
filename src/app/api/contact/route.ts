@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 export const runtime = "nodejs";
+export const maxDuration = 60; // Set max duration to 60 seconds for email processing
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -32,7 +33,8 @@ export async function POST(request: NextRequest) {
     const payload = await request.json();
     const data = contactSchema.parse(payload);
 
-    await sendContactEmail({
+    // Add timeout wrapper for the entire email operation
+    const emailPromise = sendContactEmail({
       name: data.name,
       email: data.email,
       phone: data.phone,
@@ -47,6 +49,12 @@ export async function POST(request: NextRequest) {
       website: data.website,
       hearAboutUs: data.hearAboutUs,
     });
+
+    const timeoutPromise = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Email operation timeout')), 50_000)
+    );
+
+    await Promise.race([emailPromise, timeoutPromise]);
 
     return NextResponse.json({ success: true });
   } catch (error: unknown) {
@@ -78,6 +86,13 @@ export async function POST(request: NextRequest) {
         return NextResponse.json(
           { error: "Email service temporarily unavailable. Please try again later." },
           { status: 503 },
+        );
+      }
+
+      if (error.message.includes("Email operation timeout")) {
+        return NextResponse.json(
+          { error: "Request timeout. The email is likely being processed. Please wait a moment before trying again." },
+          { status: 408 },
         );
       }
 
