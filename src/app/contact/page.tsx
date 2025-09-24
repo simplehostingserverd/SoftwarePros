@@ -65,16 +65,83 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const serviceTypes = [
+  // Healthcare Solutions
   "Medical Clinic Software",
   "Dental Practice Management",
   "Hospital Management System",
   "HIPAA Compliance Solutions",
+  "Healthcare Practice Management",
+  "EHR/EMR Systems",
+  "Patient Portals",
+  "Telemedicine Solutions",
+  "Medical Billing Systems",
+
+  // AI & Machine Learning
+  "AI & Machine Learning",
+  "Custom ML Models",
+  "Natural Language Processing",
+  "Computer Vision",
+  "Intelligent Automation",
+  "Data Analytics & Insights",
+  "MLOps & Model Deployment",
+  "Predictive Analytics",
+  "Chatbot Development",
+
+  // Web Development
+  "Custom Web Applications",
+  "Responsive Web Design",
+  "E-commerce Solutions",
+  "Content Management Systems",
+  "Performance Optimization",
+  "SEO & Digital Marketing",
+  "Progressive Web Apps",
+
+  // Mobile Development
+  "Native iOS Development",
+  "Native Android Development",
+  "Cross-Platform Mobile Apps",
+  "React Native Development",
+  "Flutter Development",
+  "Mobile Backend Services",
+  "App Maintenance & Support",
+
+  // Enterprise Solutions
+  "Enterprise Software",
   "Cloud Infrastructure",
   "System Integration",
-  "Custom Software Development",
-  "Consultation & Assessment",
+  "API Development",
+  "Scalable Architecture",
+  "Cloud Migration",
+  "DevOps & Deployment",
+
+  // Security & Compliance
+  "Security Solutions",
+  "Cybersecurity Consulting",
+  "Compliance Assessment",
+  "Security Audits",
+  "Penetration Testing",
+
+  // Consulting & Support
+  "Technology Consulting",
+  "Architecture Review",
+  "Performance Audits",
+  "Digital Transformation",
+  "Project Management",
   "Support & Maintenance",
-  "Security & Compliance",
+
+  // Industry-Specific
+  "Real Estate Software",
+  "Government Solutions",
+  "Educational Software",
+  "Manufacturing Solutions",
+  "Financial Services",
+
+  // General
+  "Custom Software Development",
+  "Legacy System Modernization",
+  "Database Design & Optimization",
+  "Third-Party Integrations",
+  "Other",
 ];
 
 const budgets = [

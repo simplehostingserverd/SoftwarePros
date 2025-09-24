@@ -44,7 +44,8 @@
       "Bash(npx tsc:*)",
       "Bash(npm run start:*)",
       "Bash(timeout:*)",
-      "Bash(nslookup:*)"
+      "Bash(nslookup:*)",
+      "WebFetch(domain:softwarepros.org)"
     ],
     "deny": [],
     "ask": []
