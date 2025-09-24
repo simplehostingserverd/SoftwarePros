@@ -20,7 +20,7 @@ services:
       - SMTP_SECURE=${SMTP_SECURE:-true}
       # Application settings
       - CONTACT_EMAIL=${CONTACT_EMAIL}
-      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL:-noreply@softwarepros.org}
+      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL}
       # Authentication settings
       - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
       - NEXTAUTH_URL=${NEXTAUTH_URL}
