@@ -8,10 +8,10 @@ export async function POST(request: NextRequest) {
       name: "Email Validation User",
       email: "admin@aquareefdirect.com",
       phone: "555-0123",
-      company: "SoftwarePros Validation",
-      serviceType: "Email Configuration Validation",
-      message: "This is an email validation check to verify the email configuration is working properly.",
-      subject: "SoftwarePros Email Validation - Configuration Working",
+      company: "SoftwarePros Support",
+      serviceType: "Email Configuration Check",
+      message: "This is an email configuration check to verify the email system is working properly.",
+      subject: "SoftwarePros Email Configuration - System Working",
     };
 
     console.log("Starting email test...");

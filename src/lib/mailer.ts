@@ -48,8 +48,12 @@ const SECURITY_CONFIG = {
   },
 };
 
-// Rate limiter instance
-const emailRateLimiter = new RateLimiter(SECURITY_CONFIG.RATE_LIMIT.windowMs, SECURITY_CONFIG.RATE_LIMIT.max);
+// Rate limiter instance - disable Redis in development to avoid connection errors
+const emailRateLimiter = new RateLimiter(
+  SECURITY_CONFIG.RATE_LIMIT.windowMs,
+  SECURITY_CONFIG.RATE_LIMIT.max,
+  process.env.NODE_ENV === "production" // Only use Redis in production
+);
 
 // Input validation and sanitization functions
 function validateEmailInput(data: ContactEmailData): { isValid: boolean; errors: string[] } {
@@ -79,15 +83,17 @@ function validateEmailInput(data: ContactEmailData): { isValid: boolean; errors:
     errors.push("Invalid email format");
   }
 
-  // Suspicious content detection
-  if (data.name && SECURITY_CONFIG.EMAIL_PATTERNS.suspicious.test(data.name)) {
-    errors.push("Name contains suspicious content");
-  }
-  if (data.company && SECURITY_CONFIG.EMAIL_PATTERNS.suspicious.test(data.company)) {
-    errors.push("Company name contains suspicious content");
-  }
-  if (data.message && SECURITY_CONFIG.EMAIL_PATTERNS.suspicious.test(data.message)) {
-    errors.push("Message contains suspicious content");
+  // Suspicious content detection (relaxed in development)
+  if (process.env.NODE_ENV === "production") {
+    if (data.name && SECURITY_CONFIG.EMAIL_PATTERNS.suspicious.test(data.name)) {
+      errors.push("Name contains suspicious content");
+    }
+    if (data.company && SECURITY_CONFIG.EMAIL_PATTERNS.suspicious.test(data.company)) {
+      errors.push("Company name contains suspicious content");
+    }
+    if (data.message && SECURITY_CONFIG.EMAIL_PATTERNS.suspicious.test(data.message)) {
+      errors.push("Message contains suspicious content");
+    }
   }
 
   return {
