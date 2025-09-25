@@ -2,6 +2,8 @@ import CTASection from "@/components/CTASection";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import StatsSection from "@/components/StatsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import TrustSeals from "@/components/TrustSeals";
 import type { Metadata } from "next";
 
 // Force dynamic rendering to prevent framer-motion SSG issues
@@ -32,11 +34,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
-      <HeroSection />
-      <StatsSection />
-      <ServicesSection />
-      <CTASection />
-    </div>
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+        <HeroSection />
+        <StatsSection />
+        <ServicesSection />
+        <TestimonialsSection />
+        <CTASection />
+      </div>
+      <TrustSeals />
+    </>
   );
 }

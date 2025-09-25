@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Script from "next/script";
 
 // Force dynamic rendering to prevent framer-motion SSG issues
 export const dynamic = "force-dynamic";
@@ -145,8 +146,76 @@ const stats = [
 ];
 
 export default function PortfolioPage() {
+  // Generate structured data for case studies and testimonials
+  const caseStudiesStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "SoftwarePros Healthcare Software Case Studies",
+    "description": "Success stories and case studies of healthcare software development projects by SoftwarePros",
+    "itemListElement": caseStudies.map((study, index) => ({
+      "@type": "Case Study",
+      "position": index + 1,
+      "name": study.title,
+      "description": `${study.challenge} ${study.solution}`,
+      "provider": {
+        "@type": "Organization",
+        "name": "SoftwarePros",
+        "url": "https://softwarepros.org"
+      },
+      "client": {
+        "@type": "Organization",
+        "name": study.client,
+        "industry": study.industry
+      },
+      "result": study.results.join(", ")
+    }))
+  };
+
+  const testimonialsStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "SoftwarePros Client Testimonials",
+    "description": "Client testimonials and reviews for SoftwarePros healthcare software development services",
+    "itemListElement": testimonials.map((testimonial, index) => ({
+      "@type": "Review",
+      "position": index + 1,
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": testimonial.rating,
+        "bestRating": 5
+      },
+      "reviewBody": testimonial.testimonial,
+      "author": {
+        "@type": "Person",
+        "name": testimonial.name,
+        "jobTitle": testimonial.title,
+        "worksFor": {
+          "@type": "Organization",
+          "name": testimonial.company
+        }
+      },
+      "itemReviewed": {
+        "@type": "Service",
+        "name": "Healthcare Software Development Services",
+        "provider": {
+          "@type": "Organization",
+          "name": "SoftwarePros",
+          "url": "https://softwarepros.org"
+        }
+      }
+    }))
+  };
+
   return (
     <>
+      {/* Structured Data for SEO */}
+      <Script id="case-studies-schema" type="application/ld+json">
+        {JSON.stringify(caseStudiesStructuredData)}
+      </Script>
+      <Script id="testimonials-schema" type="application/ld+json">
+        {JSON.stringify(testimonialsStructuredData)}
+      </Script>
+
       {/* Hero Section */}
       <Box
         sx={{

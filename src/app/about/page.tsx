@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import TrustSeals from "@/components/TrustSeals";
 
 export const metadata: Metadata = {
   title: "About SoftwarePros — Healthcare Software Development Experts | 15+ Years Experience",
@@ -593,6 +594,7 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+      <TrustSeals />
     </>
   );
 }
