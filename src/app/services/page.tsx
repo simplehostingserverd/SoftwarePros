@@ -35,6 +35,7 @@ import {
   Typography,
 } from "@mui/joy";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const services = [
   {
@@ -42,6 +43,7 @@ const services = [
     icon: LocalHospital,
     title: "Medical Clinic Software",
     subtitle: "Comprehensive Practice Management Solutions",
+    url: "/services/healthcare-practice-management",
     description:
       "Complete software ecosystem designed specifically for medical clinics, from solo practitioners to multi-location practices. Our solutions streamline operations, improve patient care, and ensure regulatory compliance.",
     features: [
@@ -70,6 +72,7 @@ const services = [
     icon: Healing,
     title: "Dental Practice Management",
     subtitle: "Specialized Solutions for Dental Professionals",
+    url: "/services/healthcare-practice-management",
     description:
       "Tailored software solutions designed specifically for dental practices. Integrate digital imaging, treatment planning, and practice management into one seamless platform.",
     features: [
@@ -98,6 +101,7 @@ const services = [
     icon: MedicalServices,
     title: "Hospital Management Systems",
     subtitle: "Enterprise-Level Healthcare Solutions",
+    url: "/services/enterprise",
     description:
       "Comprehensive hospital management systems designed for large healthcare institutions. Manage patient flow, resources, and clinical operations across multiple departments.",
     features: [
@@ -126,6 +130,7 @@ const services = [
     icon: Security,
     title: "HIPAA Compliance Solutions",
     subtitle: "Comprehensive Security & Compliance Framework",
+    url: "/services/hipaa-compliant-software",
     description:
       "Complete HIPAA compliance solutions including security assessments, policy development, staff training, and ongoing monitoring to protect patient data.",
     features: [
@@ -154,6 +159,7 @@ const services = [
     icon: Cloud,
     title: "Cloud Infrastructure Solutions",
     subtitle: "Secure, Scalable Cloud Platforms",
+    url: "/services/consulting",
     description:
       "HIPAA-compliant cloud infrastructure solutions with 99.9% uptime guarantee. Secure data storage, automatic backups, and disaster recovery.",
     features: [
@@ -182,6 +188,7 @@ const services = [
     icon: Integration,
     title: "System Integration Services",
     subtitle: "Seamless Healthcare System Connectivity",
+    url: "/services/enterprise",
     description:
       "Expert system integration services to connect disparate healthcare systems, improve data flow, and optimize workflows across your organization.",
     features: [
@@ -357,6 +364,7 @@ const industries = [
 ];
 
 export default function ServicesPage() {
+  const router = useRouter();
   return (
     <>
       {/* Hero Section */}
@@ -469,6 +477,7 @@ export default function ServicesPage() {
                             <Button
                               variant="solid"
                               endDecorator={<ArrowForward />}
+                              onClick={() => router.push(service.url)}
                               sx={{
                                 backgroundColor: service.color,
                                 "&:hover": {
