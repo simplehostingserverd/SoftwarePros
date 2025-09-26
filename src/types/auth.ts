@@ -45,9 +45,19 @@ export interface PasswordReset {
 // Security event types
 export interface SecurityEvent {
   id: string;
-  type: "login_success" | "login_failed" | "logout" | "password_change" | "password_reset" |
-        "two_factor_enabled" | "two_factor_disabled" | "session_created" | "session_destroyed" |
-        "suspicious_activity" | "brute_force_attempt" | "account_locked";
+  type:
+    | "login_success"
+    | "login_failed"
+    | "logout"
+    | "password_change"
+    | "password_reset"
+    | "two_factor_enabled"
+    | "two_factor_disabled"
+    | "session_created"
+    | "session_destroyed"
+    | "suspicious_activity"
+    | "brute_force_attempt"
+    | "account_locked";
   userId?: string;
   email?: string;
   ipAddress: string;

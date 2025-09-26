@@ -10,16 +10,16 @@ import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "SoftwarePros | Custom Software Development & Healthcare IT Solutions",
+  title: "Rio Grande Valley Software Developers | Healthcare IT Solutions Harlingen TX",
   description:
-    "SoftwarePros - Custom software development, healthcare IT solutions, HIPAA-compliant systems, and enterprise consulting. Professional software development, tech consulting, and digital transformation for startups and enterprises.",
+    "SoftwarePros - Leading Rio Grande Valley software development company in Harlingen, TX. Custom healthcare IT solutions, HIPAA-compliant systems, and enterprise consulting for RGV businesses. Professional software developers serving South Texas since 2020.",
   alternates: {
     canonical: "https://softwarepros.org",
   },
   openGraph: {
-    title: "SoftwarePros | Custom Software Development & Healthcare IT Solutions",
+    title: "Rio Grande Valley Software Developers | Healthcare IT Solutions Harlingen TX",
     description:
-      "SoftwarePros - Custom software development, healthcare IT solutions, HIPAA-compliant systems, and enterprise consulting. Professional software development for startups and enterprises.",
+      "Leading Rio Grande Valley software development company in Harlingen, TX. Custom healthcare IT solutions, HIPAA-compliant systems, and enterprise consulting for RGV businesses.",
     url: "https://softwarepros.org",
     images: [
       {

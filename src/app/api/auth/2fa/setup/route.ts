@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { TWO_FACTOR_CONFIG } from "@/lib/auth/config";
 import { authOptions } from "@/lib/auth/nextauth";
+import { generateBackupCodes, hashBackupCodes } from "@/lib/auth/security";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { type NextRequest, NextResponse } from "next/server";
 import { authenticator } from "otplib";
 import QRCode from "qrcode";
-import { generateBackupCodes, hashBackupCodes } from "@/lib/auth/security";
-import { TWO_FACTOR_CONFIG } from "@/lib/auth/config";
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,11 +19,7 @@ export async function POST(request: NextRequest) {
     const secret = authenticator.generateSecret();
 
     // Create the key URI for QR code
-    const keyUri = authenticator.keyuri(
-      session.user.email!,
-      TWO_FACTOR_CONFIG.issuer,
-      secret
-    );
+    const keyUri = authenticator.keyuri(session.user.email!, TWO_FACTOR_CONFIG.issuer, secret);
 
     // Generate QR code
     const qrCodeDataURL = await QRCode.toDataURL(keyUri);
@@ -49,9 +45,6 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("2FA setup error:", error);
-    return NextResponse.json(
-      { error: "Failed to setup 2FA" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to setup 2FA" }, { status: 500 });
   }
 }

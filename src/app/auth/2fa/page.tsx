@@ -1,37 +1,37 @@
 "use client";
 
 import {
+  CheckCircle,
+  Download,
+  Key,
+  QrCode2,
+  Security,
+  Shield,
+  Warning,
+} from "@mui/icons-material";
+import {
+  Alert,
   Box,
   Button,
   Card,
   CardContent,
-  Typography,
-  Alert,
-  Input,
+  Chip,
+  Divider,
   FormControl,
   FormLabel,
   Grid,
-  Divider,
-  Chip,
-  Sheet,
+  Input,
   List,
   ListItem,
   ListItemContent,
   ListItemDecorator,
+  Sheet,
+  Typography,
 } from "@mui/joy";
-import {
-  Security,
-  QrCode2,
-  Key,
-  Warning,
-  CheckCircle,
-  Shield,
-  Download,
-} from "@mui/icons-material";
-import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface TwoFactorSetup {
   secret: string;
@@ -158,7 +158,7 @@ Account: ${session?.user?.email}
 
 IMPORTANT: Store these codes in a secure location. Each code can only be used once.
 
-${setupData.backupCodes.map((code, index) => `${index + 1}. ${code}`).join('\n')}
+${setupData.backupCodes.map((code, index) => `${index + 1}. ${code}`).join("\n")}
 
 These codes can be used to access your account if you lose access to your authenticator app.`;
 
@@ -226,10 +226,7 @@ These codes can be used to access your account if you lose access to your authen
               <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}>
                 <Shield color={session.user?.twoFactorEnabled ? "success" : "warning"} />
                 <Typography level="title-md">Current Status</Typography>
-                <Chip
-                  color={session.user?.twoFactorEnabled ? "success" : "warning"}
-                  variant="soft"
-                >
+                <Chip color={session.user?.twoFactorEnabled ? "success" : "warning"} variant="soft">
                   {session.user?.twoFactorEnabled ? "Enabled" : "Disabled"}
                 </Chip>
               </Box>
@@ -244,8 +241,8 @@ These codes can be used to access your account if you lose access to your authen
           {!session.user?.twoFactorEnabled && !setupData && (
             <Box sx={{ textAlign: "center" }}>
               <Typography level="body-md" sx={{ mb: 3 }}>
-                Two-factor authentication adds an extra layer of security to your account.
-                You'll need to provide a code from your authenticator app when signing in.
+                Two-factor authentication adds an extra layer of security to your account. You'll
+                need to provide a code from your authenticator app when signing in.
               </Typography>
               <Button
                 onClick={handleSetup2FA}
@@ -263,7 +260,10 @@ These codes can be used to access your account if you lose access to your authen
               <Grid xs={12} md={6}>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography level="title-md" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      level="title-md"
+                      sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+                    >
                       <QrCode2 />
                       Scan QR Code
                     </Typography>
@@ -275,7 +275,8 @@ These codes can be used to access your account if you lose access to your authen
                       />
                     </Box>
                     <Typography level="body-xs" sx={{ color: "text.secondary" }}>
-                      Scan this QR code with your authenticator app (Google Authenticator, Authy, etc.)
+                      Scan this QR code with your authenticator app (Google Authenticator, Authy,
+                      etc.)
                     </Typography>
                   </CardContent>
                 </Card>
@@ -284,7 +285,10 @@ These codes can be used to access your account if you lose access to your authen
               <Grid xs={12} md={6}>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography level="title-md" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography
+                      level="title-md"
+                      sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+                    >
                       <Key />
                       Manual Entry
                     </Typography>
@@ -292,12 +296,16 @@ These codes can be used to access your account if you lose access to your authen
                       If you can't scan the QR code, enter this secret manually:
                     </Typography>
                     <Sheet sx={{ p: 2, bgcolor: "neutral.100", borderRadius: "sm", mb: 2 }}>
-                      <Typography level="body-sm" sx={{ fontFamily: "monospace", wordBreak: "break-all" }}>
+                      <Typography
+                        level="body-sm"
+                        sx={{ fontFamily: "monospace", wordBreak: "break-all" }}
+                      >
                         {setupData.manualEntryKey}
                       </Typography>
                     </Sheet>
                     <Typography level="body-xs" sx={{ color: "text.secondary" }}>
-                      Account: {session.user?.email}<br />
+                      Account: {session.user?.email}
+                      <br />
                       Issuer: SoftwarePros
                     </Typography>
                   </CardContent>
@@ -319,11 +327,17 @@ These codes can be used to access your account if you lose access to your authen
                         <Input
                           placeholder="000000"
                           value={verificationCode}
-                          onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                          onChange={(e) =>
+                            setVerificationCode(e.target.value.replace(/\D/g, "").slice(0, 6))
+                          }
                           slotProps={{
                             input: {
-                              style: { textAlign: "center", fontSize: "1.5rem", letterSpacing: "0.5rem" }
-                            }
+                              style: {
+                                textAlign: "center",
+                                fontSize: "1.5rem",
+                                letterSpacing: "0.5rem",
+                              },
+                            },
                           }}
                         />
                       </FormControl>
@@ -350,13 +364,20 @@ These codes can be used to access your account if you lose access to your authen
                   <Typography level="title-md">Backup Codes</Typography>
                 </Box>
                 <Typography level="body-sm" sx={{ mb: 2, color: "warning.600" }}>
-                  Save these backup codes in a secure location. Each code can only be used once
-                  and will allow you to access your account if you lose your authenticator device.
+                  Save these backup codes in a secure location. Each code can only be used once and
+                  will allow you to access your account if you lose your authenticator device.
                 </Typography>
                 <Grid container spacing={1} sx={{ mb: 2 }}>
                   {setupData.backupCodes.map((code, index) => (
                     <Grid key={index} xs={6} sm={4}>
-                      <Sheet sx={{ p: 1, textAlign: "center", bgcolor: "neutral.100", borderRadius: "sm" }}>
+                      <Sheet
+                        sx={{
+                          p: 1,
+                          textAlign: "center",
+                          bgcolor: "neutral.100",
+                          borderRadius: "sm",
+                        }}
+                      >
                         <Typography level="body-sm" sx={{ fontFamily: "monospace" }}>
                           {code}
                         </Typography>

@@ -1,6 +1,6 @@
+import TrustSeals from "@/components/TrustSeals";
 import type { Metadata } from "next";
 import Script from "next/script";
-import TrustSeals from "@/components/TrustSeals";
 
 export const metadata: Metadata = {
   title: "About SoftwarePros — Healthcare Software Development Experts | 15+ Years Experience",
@@ -556,10 +556,11 @@ export default function AboutPage() {
               <div className="bg-white rounded-xl p-8 shadow-lg border-l-4 border-blue-500">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Important Notice</h3>
                 <p className="text-gray-700 leading-relaxed">
-                  SoftwarePros.org is not affiliated in any way with SoftwarePros.com or 'Software Pros'
-                  (or any similarly named entities in New York City or elsewhere). Any claims, complaints,
-                  or reviews pertaining to those organizations do not apply to us. We are an independent
-                  healthcare software development company with our own track record and client base.
+                  SoftwarePros.org is not affiliated in any way with SoftwarePros.com or 'Software
+                  Pros' (or any similarly named entities in New York City or elsewhere). Any claims,
+                  complaints, or reviews pertaining to those organizations do not apply to us. We
+                  are an independent healthcare software development company with our own track
+                  record and client base.
                 </p>
               </div>
             </div>

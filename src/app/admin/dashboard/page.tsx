@@ -1,45 +1,45 @@
 "use client";
 
+import type { ActivityItem, AdminDashboardData, Client } from "@/types/onboarding";
 import {
+  Add,
+  Assignment,
+  CheckCircle,
+  Edit,
+  Feedback,
+  People,
+  Schedule,
+  Search,
+  TrendingUp,
+  Visibility,
+  Warning,
+} from "@mui/icons-material";
+import {
+  Avatar,
   Box,
+  Button,
   Card,
   CardContent,
   Chip,
   Grid,
-  Typography,
-  Avatar,
-  Button,
-  Table,
-  Select,
-  Option,
-  Input,
   IconButton,
-  Sheet,
+  Input,
   List,
   ListItem,
   ListItemContent,
   ListItemDecorator,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanel,
+  Option,
+  Select,
+  Sheet,
   Stack,
+  Tab,
+  TabList,
+  TabPanel,
+  Table,
+  Tabs,
+  Typography,
 } from "@mui/joy";
-import {
-  TrendingUp,
-  People,
-  Assignment,
-  Schedule,
-  Feedback,
-  Search,
-  Add,
-  Edit,
-  Visibility,
-  Warning,
-  CheckCircle,
-} from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import type { AdminDashboardData, Client, ActivityItem } from "@/types/onboarding";
 
 export default function AdminDashboardPage() {
   const [dashboardData, setDashboardData] = useState<AdminDashboardData | null>(null);
@@ -238,7 +238,9 @@ export default function AdminDashboardPage() {
   if (loading || !dashboardData) {
     return (
       <Box sx={{ p: 3 }}>
-        <Typography level="h2" sx={{ mb: 3 }}>Loading admin dashboard...</Typography>
+        <Typography level="h2" sx={{ mb: 3 }}>
+          Loading admin dashboard...
+        </Typography>
       </Box>
     );
   }
@@ -247,22 +249,33 @@ export default function AdminDashboardPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "success";
-      case "active": return "primary";
-      case "onboarding": return "warning";
-      case "paused": return "neutral";
-      default: return "neutral";
+      case "completed":
+        return "success";
+      case "active":
+        return "primary";
+      case "onboarding":
+        return "warning";
+      case "paused":
+        return "neutral";
+      default:
+        return "neutral";
     }
   };
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case "client_added": return <People />;
-      case "project_started": return <Assignment />;
-      case "deliverable_completed": return <CheckCircle />;
-      case "feedback_received": return <Feedback />;
-      case "milestone_reached": return <TrendingUp />;
-      default: return <CheckCircle />;
+      case "client_added":
+        return <People />;
+      case "project_started":
+        return <Assignment />;
+      case "deliverable_completed":
+        return <CheckCircle />;
+      case "feedback_received":
+        return <Feedback />;
+      case "milestone_reached":
+        return <TrendingUp />;
+      default:
+        return <CheckCircle />;
     }
   };
 
@@ -364,7 +377,14 @@ export default function AdminDashboardPage() {
           {/* Clients Table */}
           <Card sx={{ mb: 3 }}>
             <CardContent>
-              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  mb: 2,
+                }}
+              >
                 <Typography level="title-lg">Clients</Typography>
                 <Box sx={{ display: "flex", gap: 2 }}>
                   <Input
@@ -446,7 +466,9 @@ export default function AdminDashboardPage() {
           {/* Upcoming Deadlines */}
           <Card>
             <CardContent>
-              <Typography level="title-lg" sx={{ mb: 2 }}>Upcoming Deadlines</Typography>
+              <Typography level="title-lg" sx={{ mb: 2 }}>
+                Upcoming Deadlines
+              </Typography>
 
               <Tabs value={activeTab} onChange={(_, value) => setActiveTab(value as number)}>
                 <TabList>
@@ -458,15 +480,30 @@ export default function AdminDashboardPage() {
                 <TabPanel value={0}>
                   <Stack spacing={2}>
                     {upcomingDeadlines.deliverables.map((deliverable) => (
-                      <Sheet key={deliverable.id} sx={{ p: 2, borderRadius: "sm", border: "1px solid", borderColor: "divider" }}>
-                        <Box sx={{ display: "flex", justifyContent: "between", alignItems: "flex-start" }}>
+                      <Sheet
+                        key={deliverable.id}
+                        sx={{
+                          p: 2,
+                          borderRadius: "sm",
+                          border: "1px solid",
+                          borderColor: "divider",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "between",
+                            alignItems: "flex-start",
+                          }}
+                        >
                           <Box sx={{ flex: 1 }}>
                             <Typography level="title-sm">{deliverable.name}</Typography>
                             <Typography level="body-xs" sx={{ color: "text.secondary", mb: 1 }}>
                               {deliverable.description}
                             </Typography>
                             <Typography level="body-xs">
-                              Due: {new Date(deliverable.dueDate).toLocaleDateString()} • Assignee: {deliverable.assignee}
+                              Due: {new Date(deliverable.dueDate).toLocaleDateString()} • Assignee:{" "}
+                              {deliverable.assignee}
                             </Typography>
                           </Box>
                           <Chip size="sm" color="warning" variant="soft">
@@ -481,8 +518,22 @@ export default function AdminDashboardPage() {
                 <TabPanel value={1}>
                   <Stack spacing={2}>
                     {upcomingDeadlines.milestones.map((milestone) => (
-                      <Sheet key={milestone.id} sx={{ p: 2, borderRadius: "sm", border: "1px solid", borderColor: "divider" }}>
-                        <Box sx={{ display: "flex", justifyContent: "between", alignItems: "flex-start" }}>
+                      <Sheet
+                        key={milestone.id}
+                        sx={{
+                          p: 2,
+                          borderRadius: "sm",
+                          border: "1px solid",
+                          borderColor: "divider",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "between",
+                            alignItems: "flex-start",
+                          }}
+                        >
                           <Box sx={{ flex: 1 }}>
                             <Typography level="title-sm">{milestone.name}</Typography>
                             <Typography level="body-xs" sx={{ color: "text.secondary", mb: 1 }}>
@@ -492,7 +543,10 @@ export default function AdminDashboardPage() {
                               Due: {new Date(milestone.dueDate).toLocaleDateString()}
                             </Typography>
                             {milestone.paymentAmount && (
-                              <Typography level="body-xs" sx={{ color: "success.500", fontWeight: 600 }}>
+                              <Typography
+                                level="body-xs"
+                                sx={{ color: "success.500", fontWeight: 600 }}
+                              >
                                 Payment: ${milestone.paymentAmount.toLocaleString()}
                               </Typography>
                             )}
@@ -509,18 +563,35 @@ export default function AdminDashboardPage() {
                 <TabPanel value={2}>
                   <Stack spacing={2}>
                     {upcomingDeadlines.communications.map((comm) => (
-                      <Sheet key={comm.id} sx={{ p: 2, borderRadius: "sm", border: "1px solid", borderColor: "divider" }}>
-                        <Box sx={{ display: "flex", justifyContent: "between", alignItems: "flex-start" }}>
+                      <Sheet
+                        key={comm.id}
+                        sx={{
+                          p: 2,
+                          borderRadius: "sm",
+                          border: "1px solid",
+                          borderColor: "divider",
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "between",
+                            alignItems: "flex-start",
+                          }}
+                        >
                           <Box sx={{ flex: 1 }}>
                             <Typography level="title-sm">
-                              {comm.type.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase())}
+                              {comm.type.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
                             </Typography>
                             <Typography level="body-xs" sx={{ color: "text.secondary", mb: 1 }}>
                               {comm.method.toUpperCase()}
                             </Typography>
                             <Typography level="body-xs">
                               {new Date(comm.scheduledDate).toLocaleDateString()} at{" "}
-                              {new Date(comm.scheduledDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                              {new Date(comm.scheduledDate).toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
                             </Typography>
                           </Box>
                           <Chip size="sm" color="primary" variant="soft">
@@ -541,13 +612,18 @@ export default function AdminDashboardPage() {
           {/* Pending Items */}
           <Card sx={{ mb: 3 }}>
             <CardContent>
-              <Typography level="title-lg" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                level="title-lg"
+                sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+              >
                 <Warning color="warning" />
                 Pending Items
               </Typography>
 
               {/* Access Requests */}
-              <Typography level="title-sm" sx={{ mb: 1 }}>Access Requests ({pendingItems.accessRequests.length})</Typography>
+              <Typography level="title-sm" sx={{ mb: 1 }}>
+                Access Requests ({pendingItems.accessRequests.length})
+              </Typography>
               <List size="sm" sx={{ mb: 2 }}>
                 {pendingItems.accessRequests.map((access) => (
                   <ListItem key={access.id}>
@@ -565,7 +641,9 @@ export default function AdminDashboardPage() {
               </List>
 
               {/* Feedback */}
-              <Typography level="title-sm" sx={{ mb: 1 }}>New Feedback ({pendingItems.feedback.length})</Typography>
+              <Typography level="title-sm" sx={{ mb: 1 }}>
+                New Feedback ({pendingItems.feedback.length})
+              </Typography>
               <List size="sm" sx={{ mb: 2 }}>
                 {pendingItems.feedback.map((feedback) => (
                   <ListItem key={feedback.id} sx={{ alignItems: "flex-start" }}>
@@ -583,7 +661,9 @@ export default function AdminDashboardPage() {
               </List>
 
               {/* Approvals */}
-              <Typography level="title-sm" sx={{ mb: 1 }}>Pending Approvals ({pendingItems.approvals.length})</Typography>
+              <Typography level="title-sm" sx={{ mb: 1 }}>
+                Pending Approvals ({pendingItems.approvals.length})
+              </Typography>
               <List size="sm">
                 {pendingItems.approvals.map((approval) => (
                   <ListItem key={approval.id}>
@@ -605,7 +685,9 @@ export default function AdminDashboardPage() {
           {/* Recent Activity */}
           <Card>
             <CardContent>
-              <Typography level="title-lg" sx={{ mb: 2 }}>Recent Activity</Typography>
+              <Typography level="title-lg" sx={{ mb: 2 }}>
+                Recent Activity
+              </Typography>
               <List>
                 {recentActivity.map((activity) => (
                   <ListItem key={activity.id}>
@@ -618,7 +700,10 @@ export default function AdminDashboardPage() {
                       <Typography level="body-sm">{activity.description}</Typography>
                       <Typography level="body-xs" sx={{ color: "text.secondary" }}>
                         {new Date(activity.timestamp).toLocaleDateString()} at{" "}
-                        {new Date(activity.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                        {new Date(activity.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
                       </Typography>
                     </ListItemContent>
                   </ListItem>

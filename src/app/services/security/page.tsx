@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Security Services - SoftwarePros | Cybersecurity & Data Protection",
   description:
     "Comprehensive security services including penetration testing, security audits, HIPAA compliance, and data protection for healthcare and enterprise applications.",
+  alternates: {
+    canonical: "https://softwarepros.org/services/security",
+  },
   openGraph: {
     title: "Security Services - SoftwarePros",
     description: "Professional cybersecurity services and data protection solutions.",

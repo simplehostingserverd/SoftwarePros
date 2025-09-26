@@ -20,7 +20,7 @@ export default function MeetingLayout({
         padding: 0,
         overflow: "hidden",
         backgroundColor: "#000",
-        zIndex: 9999
+        zIndex: 9999,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 "use client";
 
+import { Alert, Box, Button, Typography } from "@mui/joy";
 import { useRouter } from "next/navigation";
-import { Box, Typography, Button, Alert } from "@mui/joy";
 
 export default function VerifyRequestPage() {
   const router = useRouter();
@@ -37,8 +37,8 @@ export default function VerifyRequestPage() {
         </Alert>
 
         <Typography level="body-md" sx={{ mb: 4, color: "text.secondary" }}>
-          Please check your email and click the link to complete your sign in.
-          The link will expire in 24 hours.
+          Please check your email and click the link to complete your sign in. The link will expire
+          in 24 hours.
         </Typography>
 
         <Box sx={{ mb: 4, textAlign: "left" }}>
@@ -48,9 +48,7 @@ export default function VerifyRequestPage() {
           <Typography level="body-sm" sx={{ mb: 1 }}>
             • The email may take a few minutes to arrive
           </Typography>
-          <Typography level="body-sm">
-            • Make sure you entered the correct email address
-          </Typography>
+          <Typography level="body-sm">• Make sure you entered the correct email address</Typography>
         </Box>
 
         <Button

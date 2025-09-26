@@ -1,41 +1,46 @@
 "use client";
 
+import type {
+  Communication,
+  Deliverable,
+  OnboardingDashboardData,
+  OnboardingStep,
+} from "@/types/onboarding";
 import {
-  Box,
-  Card,
-  CardContent,
-  Chip,
-  Grid,
-  LinearProgress,
-  Typography,
-  Avatar,
-  Button,
-  IconButton,
+  Assignment,
+  CheckCircle,
+  CloudDownload,
+  Description,
+  Feedback,
+  Group,
+  KeyboardArrowDown,
+  Link as LinkIcon,
+  PlayArrow,
+  Schedule,
+  VideoCall,
+} from "@mui/icons-material";
+import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  Divider,
+  Grid,
+  IconButton,
+  LinearProgress,
   List,
   ListItem,
-  ListItemDecorator,
   ListItemContent,
+  ListItemDecorator,
   Sheet,
-  Divider,
+  Typography,
 } from "@mui/joy";
-import {
-  CheckCircle,
-  Schedule,
-  Assignment,
-  Group,
-  Feedback,
-  CloudDownload,
-  VideoCall,
-  KeyboardArrowDown,
-  PlayArrow,
-  Description,
-  Link as LinkIcon,
-} from "@mui/icons-material";
 import { useEffect, useState } from "react";
-import type { OnboardingDashboardData, OnboardingStep, Deliverable, Communication } from "@/types/onboarding";
 
 export default function ClientPortalPage() {
   const [dashboardData, setDashboardData] = useState<OnboardingDashboardData | null>(null);
@@ -66,7 +71,8 @@ export default function ClientPortalPage() {
           clientId: "client-1",
           step: "welcome",
           title: "Welcome & Project Kickoff",
-          description: "Initial meeting to confirm scope, deliverables, timelines, and responsibilities",
+          description:
+            "Initial meeting to confirm scope, deliverables, timelines, and responsibilities",
           status: "completed",
           completedDate: "2025-01-16T10:00:00Z",
           requirements: ["Signed contract", "Initial payment", "Project requirements document"],
@@ -84,7 +90,7 @@ export default function ClientPortalPage() {
             "Hosting credentials",
             "Email provider access",
             "Analytics accounts",
-            "Social media accounts"
+            "Social media accounts",
           ],
         },
         {
@@ -244,7 +250,9 @@ export default function ClientPortalPage() {
   if (loading) {
     return (
       <Box sx={{ p: 3 }}>
-        <Typography level="h2" sx={{ mb: 3 }}>Loading your project dashboard...</Typography>
+        <Typography level="h2" sx={{ mb: 3 }}>
+          Loading your project dashboard...
+        </Typography>
         <LinearProgress />
       </Box>
     );
@@ -252,7 +260,15 @@ export default function ClientPortalPage() {
 
   if (!dashboardData) return null;
 
-  const { client, onboardingSteps, upcomingTasks, recentDeliverables, communications, accessRequests, stats } = dashboardData;
+  const {
+    client,
+    onboardingSteps,
+    upcomingTasks,
+    recentDeliverables,
+    communications,
+    accessRequests,
+    stats,
+  } = dashboardData;
 
   return (
     <Box sx={{ p: 3, maxWidth: 1200, mx: "auto" }}>
@@ -268,7 +284,9 @@ export default function ClientPortalPage() {
         {/* Progress Overview */}
         <Card sx={{ mb: 3 }}>
           <CardContent>
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}
+            >
               <Typography level="title-lg">Project Progress</Typography>
               <Chip color="primary" variant="soft">
                 {stats.progressPercentage}% Complete
@@ -292,7 +310,10 @@ export default function ClientPortalPage() {
           {/* Onboarding Steps */}
           <Card sx={{ mb: 3 }}>
             <CardContent>
-              <Typography level="title-lg" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                level="title-lg"
+                sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+              >
                 <CheckCircle color="primary" />
                 Onboarding Steps
               </Typography>
@@ -304,8 +325,12 @@ export default function ClientPortalPage() {
                       <Avatar
                         size="sm"
                         sx={{
-                          bgcolor: step.status === "completed" ? "success.500" :
-                                  step.status === "in_progress" ? "warning.500" : "neutral.300"
+                          bgcolor:
+                            step.status === "completed"
+                              ? "success.500"
+                              : step.status === "in_progress"
+                                ? "warning.500"
+                                : "neutral.300",
                         }}
                       >
                         {step.status === "completed" ? <CheckCircle /> : index + 1}
@@ -319,8 +344,11 @@ export default function ClientPortalPage() {
                       <Chip
                         size="sm"
                         color={
-                          step.status === "completed" ? "success" :
-                          step.status === "in_progress" ? "warning" : "neutral"
+                          step.status === "completed"
+                            ? "success"
+                            : step.status === "in_progress"
+                              ? "warning"
+                              : "neutral"
                         }
                         variant="soft"
                       >
@@ -354,8 +382,13 @@ export default function ClientPortalPage() {
                           {step.resources.map((resource) => (
                             <ListItem key={resource.id} sx={{ alignItems: "flex-start" }}>
                               <ListItemDecorator>
-                                {resource.type === "video" ? <PlayArrow /> :
-                                 resource.type === "document" ? <Description /> : <LinkIcon />}
+                                {resource.type === "video" ? (
+                                  <PlayArrow />
+                                ) : resource.type === "document" ? (
+                                  <Description />
+                                ) : (
+                                  <LinkIcon />
+                                )}
                               </ListItemDecorator>
                               <ListItemContent>
                                 <Typography level="title-sm">{resource.title}</Typography>
@@ -385,14 +418,33 @@ export default function ClientPortalPage() {
           {/* Recent Deliverables */}
           <Card>
             <CardContent>
-              <Typography level="title-lg" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                level="title-lg"
+                sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+              >
                 <Assignment color="primary" />
                 Recent Deliverables
               </Typography>
 
               {recentDeliverables.map((deliverable) => (
-                <Sheet key={deliverable.id} sx={{ p: 2, mb: 2, borderRadius: "sm", border: "1px solid", borderColor: "divider" }}>
-                  <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", mb: 1 }}>
+                <Sheet
+                  key={deliverable.id}
+                  sx={{
+                    p: 2,
+                    mb: 2,
+                    borderRadius: "sm",
+                    border: "1px solid",
+                    borderColor: "divider",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "flex-start",
+                      mb: 1,
+                    }}
+                  >
                     <Box>
                       <Typography level="title-sm">{deliverable.name}</Typography>
                       <Typography level="body-xs" sx={{ color: "text.secondary" }}>
@@ -402,8 +454,11 @@ export default function ClientPortalPage() {
                     <Chip
                       size="sm"
                       color={
-                        deliverable.status === "delivered" ? "success" :
-                        deliverable.status === "review" ? "warning" : "neutral"
+                        deliverable.status === "delivered"
+                          ? "success"
+                          : deliverable.status === "review"
+                            ? "warning"
+                            : "neutral"
                       }
                       variant="soft"
                     >
@@ -413,9 +468,14 @@ export default function ClientPortalPage() {
 
                   {deliverable.files && deliverable.files.length > 0 && (
                     <Box sx={{ mt: 2 }}>
-                      <Typography level="body-sm" sx={{ fontWeight: 600, mb: 1 }}>Files:</Typography>
+                      <Typography level="body-sm" sx={{ fontWeight: 600, mb: 1 }}>
+                        Files:
+                      </Typography>
                       {deliverable.files.map((file) => (
-                        <Box key={file.id} sx={{ display: "flex", alignItems: "center", gap: 2, mb: 1 }}>
+                        <Box
+                          key={file.id}
+                          sx={{ display: "flex", alignItems: "center", gap: 2, mb: 1 }}
+                        >
                           <Description fontSize="small" />
                           <Box sx={{ flex: 1 }}>
                             <Typography level="body-sm">{file.name}</Typography>
@@ -453,7 +513,9 @@ export default function ClientPortalPage() {
           {stats.nextMilestone && (
             <Card sx={{ mb: 3 }}>
               <CardContent>
-                <Typography level="title-md" sx={{ mb: 2 }}>Next Milestone</Typography>
+                <Typography level="title-md" sx={{ mb: 2 }}>
+                  Next Milestone
+                </Typography>
                 <Typography level="title-sm" sx={{ mb: 1 }}>
                   {stats.nextMilestone.name}
                 </Typography>
@@ -480,13 +542,30 @@ export default function ClientPortalPage() {
           {/* Your Tasks */}
           <Card sx={{ mb: 3 }}>
             <CardContent>
-              <Typography level="title-md" sx={{ mb: 2 }}>Your Action Items</Typography>
+              <Typography level="title-md" sx={{ mb: 2 }}>
+                Your Action Items
+              </Typography>
               {upcomingTasks.map((task) => (
-                <Box key={task.id} sx={{ mb: 2, pb: 2, borderBottom: "1px solid", borderColor: "divider", "&:last-child": { border: "none", mb: 0, pb: 0 } }}>
+                <Box
+                  key={task.id}
+                  sx={{
+                    mb: 2,
+                    pb: 2,
+                    borderBottom: "1px solid",
+                    borderColor: "divider",
+                    "&:last-child": { border: "none", mb: 0, pb: 0 },
+                  }}
+                >
                   <Box sx={{ display: "flex", alignItems: "flex-start", gap: 2 }}>
                     <Chip
                       size="sm"
-                      color={task.priority === "high" ? "danger" : task.priority === "medium" ? "warning" : "neutral"}
+                      color={
+                        task.priority === "high"
+                          ? "danger"
+                          : task.priority === "medium"
+                            ? "warning"
+                            : "neutral"
+                      }
                       variant="soft"
                     >
                       {task.priority}
@@ -509,18 +588,24 @@ export default function ClientPortalPage() {
           {/* Upcoming Communications */}
           <Card sx={{ mb: 3 }}>
             <CardContent>
-              <Typography level="title-md" sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}>
+              <Typography
+                level="title-md"
+                sx={{ mb: 2, display: "flex", alignItems: "center", gap: 1 }}
+              >
                 <Schedule color="primary" />
                 Upcoming Meetings
               </Typography>
               {communications.map((comm) => (
                 <Box key={comm.id} sx={{ mb: 2, p: 2, bgcolor: "primary.50", borderRadius: "sm" }}>
                   <Typography level="title-sm" sx={{ mb: 1 }}>
-                    {comm.type.replace("_", " ").replace(/\b\w/g, l => l.toUpperCase())}
+                    {comm.type.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
                   </Typography>
                   <Typography level="body-sm" sx={{ mb: 1 }}>
                     {new Date(comm.scheduledDate).toLocaleDateString()} at{" "}
-                    {new Date(comm.scheduledDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                    {new Date(comm.scheduledDate).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   </Typography>
                   {comm.attendees && (
                     <Typography level="body-xs" sx={{ color: "text.secondary", mb: 2 }}>
@@ -539,7 +624,9 @@ export default function ClientPortalPage() {
           {accessRequests.length > 0 && (
             <Card>
               <CardContent>
-                <Typography level="title-md" sx={{ mb: 2 }}>Pending Access Requests</Typography>
+                <Typography level="title-md" sx={{ mb: 2 }}>
+                  Pending Access Requests
+                </Typography>
                 {accessRequests.map((access) => (
                   <Box key={access.id} sx={{ mb: 2 }}>
                     <Typography level="title-sm">{access.serviceName}</Typography>

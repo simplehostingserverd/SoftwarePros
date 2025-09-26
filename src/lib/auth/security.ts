@@ -3,25 +3,25 @@
  * Enterprise-grade security functions for authentication
  */
 
-import bcrypt from 'bcryptjs';
-import crypto from 'crypto';
-import { z } from 'zod';
+import crypto from "crypto";
 import type {
-  LoginCredentials,
-  RegisterData,
-  PasswordReset,
   AuthError,
   AuthErrorCode,
+  LoginAttempt,
+  LoginCredentials,
+  PasswordReset,
+  RegisterData,
   SecurityEvent,
-  LoginAttempt
-} from '@/types/auth';
+} from "@/types/auth";
+import bcrypt from "bcryptjs";
+import { z } from "zod";
 import {
   AUTH_CONFIG,
+  AUTH_ERROR_MESSAGES,
   COMMON_PASSWORDS,
   PASSWORD_REQUIREMENTS,
-  AUTH_ERROR_MESSAGES,
-  SECURITY_THRESHOLDS
-} from './config';
+  SECURITY_THRESHOLDS,
+} from "./config";
 
 // Password validation schema
 export const passwordSchema = z
@@ -33,15 +33,11 @@ export const passwordSchema = z
   .regex(PASSWORD_REQUIREMENTS.patterns.symbols, PASSWORD_REQUIREMENTS.messages.symbols)
   .refine(
     (password) => !COMMON_PASSWORDS.includes(password.toLowerCase()),
-    PASSWORD_REQUIREMENTS.messages.common
+    PASSWORD_REQUIREMENTS.messages.common,
   );
 
 // Email validation schema
-export const emailSchema = z
-  .string()
-  .email('Invalid email format')
-  .toLowerCase()
-  .trim();
+export const emailSchema = z.string().email("Invalid email format").toLowerCase().trim();
 
 // Registration validation schema
 export const registerSchema = z
@@ -49,23 +45,29 @@ export const registerSchema = z
     email: emailSchema,
     password: passwordSchema,
     confirmPassword: z.string(),
-    firstName: z.string().min(1, 'First name is required').max(50, 'First name too long'),
-    lastName: z.string().min(1, 'Last name is required').max(50, 'Last name too long'),
-    company: z.string().max(100, 'Company name too long').optional(),
-    acceptTerms: z.boolean().refine(val => val === true, 'You must accept the terms and conditions'),
-    acceptPrivacy: z.boolean().refine(val => val === true, 'You must accept the privacy policy'),
+    firstName: z.string().min(1, "First name is required").max(50, "First name too long"),
+    lastName: z.string().min(1, "Last name is required").max(50, "Last name too long"),
+    company: z.string().max(100, "Company name too long").optional(),
+    acceptTerms: z
+      .boolean()
+      .refine((val) => val === true, "You must accept the terms and conditions"),
+    acceptPrivacy: z.boolean().refine((val) => val === true, "You must accept the privacy policy"),
   })
-  .refine(data => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
   });
 
 // Login validation schema
 export const loginSchema = z.object({
   email: emailSchema,
-  password: z.string().min(1, 'Password is required'),
+  password: z.string().min(1, "Password is required"),
   rememberMe: z.boolean().optional(),
-  twoFactorCode: z.string().length(6).regex(/^\d{6}$/, 'Two-factor code must be 6 digits').optional(),
+  twoFactorCode: z
+    .string()
+    .length(6)
+    .regex(/^\d{6}$/, "Two-factor code must be 6 digits")
+    .optional(),
 });
 
 // Password reset request schema
@@ -76,13 +78,13 @@ export const passwordResetRequestSchema = z.object({
 // Password reset schema
 export const passwordResetSchema = z
   .object({
-    token: z.string().min(1, 'Reset token is required'),
+    token: z.string().min(1, "Reset token is required"),
     newPassword: passwordSchema,
     confirmPassword: z.string(),
   })
-  .refine(data => data.newPassword === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
   });
 
 /**
@@ -103,22 +105,22 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 /**
  * Generate a secure random token
  */
-export function generateSecureToken(length: number = 32): string {
-  return crypto.randomBytes(length).toString('hex');
+export function generateSecureToken(length = 32): string {
+  return crypto.randomBytes(length).toString("hex");
 }
 
 /**
  * Generate a cryptographically secure session token
  */
 export function generateSessionToken(): string {
-  return crypto.randomBytes(64).toString('hex');
+  return crypto.randomBytes(64).toString("hex");
 }
 
 /**
  * Generate a secure refresh token
  */
 export function generateRefreshToken(): string {
-  return crypto.randomBytes(64).toString('hex');
+  return crypto.randomBytes(64).toString("hex");
 }
 
 /**
@@ -171,9 +173,9 @@ export function isPasswordCompromised(password: string): boolean {
 export function sanitizeInput(input: string): string {
   return input
     .trim()
-    .replace(/[<>]/g, '') // Remove potential HTML tags
-    .replace(/javascript:/gi, '') // Remove javascript: URLs
-    .replace(/on\w+\s*=/gi, '') // Remove event handlers
+    .replace(/[<>]/g, "") // Remove potential HTML tags
+    .replace(/javascript:/gi, "") // Remove javascript: URLs
+    .replace(/on\w+\s*=/gi, "") // Remove event handlers
     .substring(0, 1000); // Limit length
 }
 
@@ -192,24 +194,24 @@ export function createAuthError(code: AuthErrorCode, details?: Record<string, an
  * Check if error is a rate limiting error
  */
 export function isRateLimitError(error: AuthError): boolean {
-  return error.code === 'RATE_LIMIT_EXCEEDED' || error.code === 'TOO_MANY_ATTEMPTS';
+  return error.code === "RATE_LIMIT_EXCEEDED" || error.code === "TOO_MANY_ATTEMPTS";
 }
 
 /**
  * Check if error requires two-factor authentication
  */
 export function requiresTwoFactor(error: AuthError): boolean {
-  return error.code === 'TWO_FACTOR_REQUIRED';
+  return error.code === "TWO_FACTOR_REQUIRED";
 }
 
 /**
  * Generate secure backup codes for 2FA
  */
-export function generateBackupCodes(count: number = 10): string[] {
+export function generateBackupCodes(count = 10): string[] {
   const codes: string[] = [];
 
   for (let i = 0; i < count; i++) {
-    const code = crypto.randomBytes(4).toString('hex').toUpperCase();
+    const code = crypto.randomBytes(4).toString("hex").toUpperCase();
     codes.push(code);
   }
 
@@ -220,7 +222,7 @@ export function generateBackupCodes(count: number = 10): string[] {
  * Hash backup codes for storage
  */
 export async function hashBackupCodes(codes: string[]): Promise<string[]> {
-  return Promise.all(codes.map(code => bcrypt.hash(code, 12)));
+  return Promise.all(codes.map((code) => bcrypt.hash(code, 12)));
 }
 
 /**
@@ -239,7 +241,7 @@ export async function verifyBackupCode(code: string, hashedCodes: string[]): Pro
  * Calculate password entropy (strength score)
  */
 export function calculatePasswordEntropy(password: string): number {
-  const charset = new Set(password.split(''));
+  const charset = new Set(password.split(""));
   const charsetSize = charset.size;
 
   // Basic entropy calculation: log2(charset_size ^ password_length)
@@ -249,11 +251,11 @@ export function calculatePasswordEntropy(password: string): number {
 /**
  * Get password strength level
  */
-export function getPasswordStrengthLevel(entropy: number): 'weak' | 'fair' | 'good' | 'strong' {
-  if (entropy < 40) return 'weak';
-  if (entropy < 60) return 'fair';
-  if (entropy < 80) return 'good';
-  return 'strong';
+export function getPasswordStrengthLevel(entropy: number): "weak" | "fair" | "good" | "strong" {
+  if (entropy < 40) return "weak";
+  if (entropy < 60) return "fair";
+  if (entropy < 80) return "good";
+  return "strong";
 }
 
 /**
@@ -263,14 +265,14 @@ export function detectSuspiciousLogin(
   email: string,
   ipAddress: string,
   userAgent: string,
-  previousAttempts: LoginAttempt[]
+  previousAttempts: LoginAttempt[],
 ): boolean {
   const recentAttempts = previousAttempts.filter(
-    attempt => Date.now() - new Date(attempt.timestamp).getTime() < 60 * 60 * 1000 // Last hour
+    (attempt) => Date.now() - new Date(attempt.timestamp).getTime() < 60 * 60 * 1000, // Last hour
   );
 
   // Check for rapid failed attempts
-  const failedAttempts = recentAttempts.filter(attempt => !attempt.success);
+  const failedAttempts = recentAttempts.filter((attempt) => !attempt.success);
   if (failedAttempts.length >= SECURITY_THRESHOLDS.SUSPICIOUS_LOGIN_ATTEMPTS) {
     return true;
   }
@@ -286,13 +288,13 @@ export function detectSuspiciousLogin(
  * Create security event log
  */
 export function createSecurityEvent(
-  type: SecurityEvent['type'],
+  type: SecurityEvent["type"],
   userId: string | undefined,
   email: string | undefined,
   ipAddress: string,
   userAgent: string,
   details: Record<string, any>,
-  severity: SecurityEvent['severity'] = 'medium'
+  severity: SecurityEvent["severity"] = "medium",
 ): SecurityEvent {
   return {
     id: generateSecureToken(16),
@@ -342,7 +344,7 @@ export function generateSecureRandomBytes(length: number): Buffer {
  * Create HMAC signature for data integrity
  */
 export function createHMAC(data: string, key: string): string {
-  return crypto.createHmac('sha256', key).update(data).digest('hex');
+  return crypto.createHmac("sha256", key).update(data).digest("hex");
 }
 
 /**
@@ -357,33 +359,33 @@ export function verifyHMAC(data: string, signature: string, key: string): boolea
  * Encrypt sensitive data
  */
 export function encryptSensitiveData(data: string, key: string): string {
-  const algorithm = 'aes-256-gcm';
+  const algorithm = "aes-256-gcm";
   const iv = crypto.randomBytes(16);
   const cipher = crypto.createCipher(algorithm, key);
 
-  let encrypted = cipher.update(data, 'utf8', 'hex');
-  encrypted += cipher.final('hex');
+  let encrypted = cipher.update(data, "utf8", "hex");
+  encrypted += cipher.final("hex");
 
   const authTag = cipher.getAuthTag();
 
-  return iv.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted;
+  return iv.toString("hex") + ":" + authTag.toString("hex") + ":" + encrypted;
 }
 
 /**
  * Decrypt sensitive data
  */
 export function decryptSensitiveData(encryptedData: string, key: string): string {
-  const algorithm = 'aes-256-gcm';
-  const parts = encryptedData.split(':');
-  const iv = Buffer.from(parts[0], 'hex');
-  const authTag = Buffer.from(parts[1], 'hex');
+  const algorithm = "aes-256-gcm";
+  const parts = encryptedData.split(":");
+  const iv = Buffer.from(parts[0], "hex");
+  const authTag = Buffer.from(parts[1], "hex");
   const encrypted = parts[2];
 
   const decipher = crypto.createDecipher(algorithm, key);
   decipher.setAuthTag(authTag);
 
-  let decrypted = decipher.update(encrypted, 'hex', 'utf8');
-  decrypted += decipher.final('utf8');
+  let decrypted = decipher.update(encrypted, "hex", "utf8");
+  decrypted += decipher.final("utf8");
 
   return decrypted;
 }
@@ -396,7 +398,7 @@ export class RateLimiter {
 
   constructor(
     private windowMs: number,
-    private maxAttempts: number
+    private maxAttempts: number,
   ) {}
 
   isAllowed(identifier: string): boolean {

@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Web Development Services - SoftwarePros | Custom Web Applications",
   description:
     "Professional web development services including responsive websites, e-commerce platforms, web applications, and progressive web apps using modern technologies.",
+  alternates: {
+    canonical: "https://softwarepros.org/services/web-development",
+  },
   openGraph: {
     title: "Web Development Services - SoftwarePros",
     description: "Custom web development solutions for businesses of all sizes.",

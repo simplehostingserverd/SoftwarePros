@@ -1,7 +1,7 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import { Box, Typography, Button, Alert } from "@mui/joy";
+import { Alert, Box, Button, Typography } from "@mui/joy";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const errorMessages = {
@@ -12,11 +12,12 @@ const errorMessages = {
   OAuthCreateAccount: "Could not create OAuth account. Please try again.",
   EmailCreateAccount: "Could not create account with email. Please try again.",
   Callback: "There was an error in the callback handler. Please try again.",
-  OAuthAccountNotLinked: "The OAuth account is not linked to an existing account. Please sign in with your original account first.",
+  OAuthAccountNotLinked:
+    "The OAuth account is not linked to an existing account. Please sign in with your original account first.",
   EmailSignin: "Check your email for a sign in link.",
   CredentialsSignin: "Invalid credentials. Please check your email and password.",
   SessionRequired: "Please sign in to access this page.",
-  Default: "An unexpected error occurred. Please try again."
+  Default: "An unexpected error occurred. Please try again.",
 };
 
 export default function AuthErrorPage() {
@@ -81,26 +82,14 @@ export default function AuthErrorPage() {
           <Typography level="body-sm" sx={{ mb: 1 }}>
             • Temporary service unavailability
           </Typography>
-          <Typography level="body-sm">
-            • Account configuration issues
-          </Typography>
+          <Typography level="body-sm">• Account configuration issues</Typography>
         </Box>
 
         <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
-          <Button
-            variant="solid"
-            color="primary"
-            onClick={handleRetry}
-            sx={{ minWidth: 120 }}
-          >
+          <Button variant="solid" color="primary" onClick={handleRetry} sx={{ minWidth: 120 }}>
             Try Again
           </Button>
-          <Button
-            variant="outlined"
-            color="neutral"
-            onClick={handleHome}
-            sx={{ minWidth: 120 }}
-          >
+          <Button variant="outlined" color="neutral" onClick={handleHome} sx={{ minWidth: 120 }}>
             Go Home
           </Button>
         </Box>

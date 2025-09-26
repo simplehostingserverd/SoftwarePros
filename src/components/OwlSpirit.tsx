@@ -30,7 +30,7 @@ export default function OwlSpirit({ className = "" }: OwlSpiritProps) {
             : "scale-95 opacity-0"
       }`}
       style={{
-        transformOrigin: "center center"
+        transformOrigin: "center center",
       }}
     >
       {/* Glowing background effect */}
@@ -58,7 +58,9 @@ export default function OwlSpirit({ className = "" }: OwlSpiritProps) {
       )}
 
       {/* Floating particles effect - enhanced when not flying */}
-      <div className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 ${isFlying ? "opacity-30" : "opacity-100"}`}>
+      <div
+        className={`absolute inset-0 pointer-events-none transition-opacity duration-1000 ${isFlying ? "opacity-30" : "opacity-100"}`}
+      >
         <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-75" />
         <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-blue-400 rounded-full animate-ping delay-300 opacity-75" />
         <div className="absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-pink-400 rounded-full animate-ping delay-700 opacity-75" />
@@ -67,7 +69,9 @@ export default function OwlSpirit({ className = "" }: OwlSpiritProps) {
       </div>
 
       {/* Mystical glow border - stronger when settled */}
-      <div className={`absolute inset-0 rounded-xl border transition-all duration-1000 ${isFlying ? "border-purple-500/10" : "border-purple-500/30"} animate-pulse`} />
+      <div
+        className={`absolute inset-0 rounded-xl border transition-all duration-1000 ${isFlying ? "border-purple-500/10" : "border-purple-500/30"} animate-pulse`}
+      />
 
       {/* Wing flap effect during flight */}
       {isFlying && (

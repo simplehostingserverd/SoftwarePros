@@ -1,4 +1,4 @@
-import { getRedisClient } from './redis';
+import { getRedisClient } from "./redis";
 
 /**
  * Redis-backed rate limiter with in-memory fallback
@@ -10,8 +10,8 @@ export class RateLimiter {
   private useRedis: boolean;
 
   constructor(windowMs?: number, maxRequests?: number, useRedis = true) {
-    this.windowMs = windowMs || parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'); // 15 minutes
-    this.maxRequests = maxRequests || parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100');
+    this.windowMs = windowMs || Number.parseInt(process.env.RATE_LIMIT_WINDOW_MS || "900000"); // 15 minutes
+    this.maxRequests = maxRequests || Number.parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || "100");
     this.useRedis = useRedis;
 
     // Clean up old entries every 5 minutes (only for in-memory fallback)
@@ -38,7 +38,7 @@ export class RateLimiter {
     try {
       const redis = await getRedisClient();
       if (!redis) {
-        console.warn('Redis not available, falling back to in-memory rate limiting');
+        console.warn("Redis not available, falling back to in-memory rate limiting");
         return this.canMakeRequestMemory(identifier);
       }
 
@@ -62,12 +62,12 @@ export class RateLimiter {
       multi.expire(key, Math.ceil(this.windowMs / 1000));
 
       const results = await multi.exec();
-      const currentCount = (results && results[1] && typeof results[1] === 'number') ? results[1] : 0;
+      const currentCount = results && results[1] && typeof results[1] === "number" ? results[1] : 0;
 
       // Check if under the limit (before adding current request)
       return currentCount < this.maxRequests;
     } catch (error) {
-      console.error('Redis rate limiting error, falling back to memory:', error);
+      console.error("Redis rate limiting error, falling back to memory:", error);
       return this.canMakeRequestMemory(identifier);
     }
   }
@@ -83,7 +83,7 @@ export class RateLimiter {
     const requests = this.requests.get(identifier) || [];
 
     // Filter out old requests outside the window
-    const recentRequests = requests.filter(timestamp => timestamp > windowStart);
+    const recentRequests = requests.filter((timestamp) => timestamp > windowStart);
 
     // Check if under the limit
     if (recentRequests.length < this.maxRequests) {
@@ -124,7 +124,7 @@ export class RateLimiter {
 
       return Math.max(0, this.maxRequests - currentCount);
     } catch (error) {
-      console.error('Redis rate limiting error, falling back to memory:', error);
+      console.error("Redis rate limiting error, falling back to memory:", error);
       return this.getRemainingRequestsMemory(identifier);
     }
   }
@@ -134,7 +134,7 @@ export class RateLimiter {
     const windowStart = now - this.windowMs;
 
     const requests = this.requests.get(identifier) || [];
-    const recentRequests = requests.filter(timestamp => timestamp > windowStart);
+    const recentRequests = requests.filter((timestamp) => timestamp > windowStart);
 
     return Math.max(0, this.maxRequests - recentRequests.length);
   }
@@ -162,14 +162,16 @@ export class RateLimiter {
       const windowStart = now - this.windowMs;
 
       // Get oldest entry in the current window
-      const oldestEntries = await redis.zRangeByScore(key, windowStart, '+inf', { LIMIT: { offset: 0, count: 1 } });
+      const oldestEntries = await redis.zRangeByScore(key, windowStart, "+inf", {
+        LIMIT: { offset: 0, count: 1 },
+      });
 
       if (oldestEntries.length === 0) return 0;
 
-      const oldestRequest = parseInt(oldestEntries[0]);
+      const oldestRequest = Number.parseInt(oldestEntries[0]);
       return Math.max(0, oldestRequest + this.windowMs - now);
     } catch (error) {
-      console.error('Redis rate limiting error, falling back to memory:', error);
+      console.error("Redis rate limiting error, falling back to memory:", error);
       return this.getTimeUntilNextRequestMemory(identifier);
     }
   }
@@ -194,7 +196,7 @@ export class RateLimiter {
     const windowStart = now - this.windowMs;
 
     for (const [identifier, requests] of this.requests.entries()) {
-      const recentRequests = requests.filter(timestamp => timestamp > windowStart);
+      const recentRequests = requests.filter((timestamp) => timestamp > windowStart);
 
       if (recentRequests.length === 0) {
         this.requests.delete(identifier);

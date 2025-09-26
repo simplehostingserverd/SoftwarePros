@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/nextauth";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { type NextRequest, NextResponse } from "next/server";
 import { authenticator } from "otplib";
 import { z } from "zod";
 
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     if (!user?.twoFactorSecret) {
       return NextResponse.json(
         { error: "No 2FA secret found. Please setup 2FA first." },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -43,10 +43,7 @@ export async function POST(request: NextRequest) {
     });
 
     if (!isValid) {
-      return NextResponse.json(
-        { error: "Invalid verification code" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid verification code" }, { status: 400 });
     }
 
     // Enable 2FA for the user
@@ -67,13 +64,10 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Invalid token format", details: error.errors },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    return NextResponse.json(
-      { error: "Failed to verify 2FA" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to verify 2FA" }, { status: 500 });
   }
 }

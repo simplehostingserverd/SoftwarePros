@@ -21,7 +21,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Portfolio & Case Studies - SoftwarePros | Healthcare Software Success Stories",
-    description: "Real success stories from healthcare software implementations. Client testimonials, case studies, and measurable results from our healthcare technology solutions.",
+    description:
+      "Real success stories from healthcare software implementations. Client testimonials, case studies, and measurable results from our healthcare technology solutions.",
     url: "https://softwarepros.org/portfolio",
     type: "website",
     images: [
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Healthcare Software Success Stories | SoftwarePros",
-    description: "Real client testimonials and case studies from successful healthcare software implementations.",
+    description:
+      "Real client testimonials and case studies from successful healthcare software implementations.",
     images: ["/images/softwarepros-logo.png"],
   },
 };

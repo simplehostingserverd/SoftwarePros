@@ -1,31 +1,31 @@
 "use client";
 
+import { emailAutomation } from "@/lib/email-automation";
+import type { Client } from "@/types/onboarding";
+import { Business, CheckCircle, Launch, Person, Settings } from "@mui/icons-material";
 import {
+  Alert,
   Box,
+  Button,
   Card,
   CardContent,
-  Button,
-  Modal,
-  Typography,
-  Input,
-  Select,
-  Option,
-  Textarea,
+  Chip,
+  CircularProgress,
   FormControl,
   FormLabel,
-  Stepper,
-  Step,
-  StepIndicator,
-  StepButton,
   Grid,
-  Chip,
-  Alert,
-  CircularProgress,
+  Input,
+  Modal,
+  Option,
+  Select,
+  Step,
+  StepButton,
+  StepIndicator,
+  Stepper,
+  Textarea,
+  Typography,
 } from "@mui/joy";
 import { useState } from "react";
-import { CheckCircle, Business, Person, Settings, Launch } from "@mui/icons-material";
-import type { Client } from "@/types/onboarding";
-import { emailAutomation } from "@/lib/email-automation";
 
 interface OnboardingWorkflowProps {
   isOpen: boolean;
@@ -33,7 +33,11 @@ interface OnboardingWorkflowProps {
   onComplete: (client: Client) => void;
 }
 
-export default function OnboardingWorkflow({ isOpen, onClose, onComplete }: OnboardingWorkflowProps) {
+export default function OnboardingWorkflow({
+  isOpen,
+  onClose,
+  onComplete,
+}: OnboardingWorkflowProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -93,9 +97,17 @@ export default function OnboardingWorkflow({ isOpen, onClose, onComplete }: Onbo
   ];
 
   const projectTypes = [
-    { value: "web", label: "Web Development", description: "Websites, web applications, e-commerce" },
+    {
+      value: "web",
+      label: "Web Development",
+      description: "Websites, web applications, e-commerce",
+    },
     { value: "mobile", label: "Mobile App", description: "iOS and Android applications" },
-    { value: "healthcare", label: "Healthcare Software", description: "HIPAA-compliant medical software" },
+    {
+      value: "healthcare",
+      label: "Healthcare Software",
+      description: "HIPAA-compliant medical software",
+    },
     { value: "consulting", label: "Consulting", description: "Technical consulting and strategy" },
     { value: "custom", label: "Custom Solution", description: "Specialized software development" },
   ];
@@ -127,23 +139,23 @@ export default function OnboardingWorkflow({ isOpen, onClose, onComplete }: Onbo
   ];
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleFeatureToggle = (feature: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       features: prev.features.includes(feature)
-        ? prev.features.filter(f => f !== feature)
+        ? prev.features.filter((f) => f !== feature)
         : [...prev.features, feature],
     }));
   };
 
   const handleIntegrationToggle = (integration: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       integrationsNeeded: prev.integrationsNeeded.includes(integration)
-        ? prev.integrationsNeeded.filter(i => i !== integration)
+        ? prev.integrationsNeeded.filter((i) => i !== integration)
         : [...prev.integrationsNeeded, integration],
     }));
   };
@@ -165,7 +177,7 @@ export default function OnboardingWorkflow({ isOpen, onClose, onComplete }: Onbo
 
   const handleNext = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, steps.length - 1));
+      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
       setError(null);
     } else {
       setError("Please fill in all required fields before continuing.");
@@ -173,7 +185,7 @@ export default function OnboardingWorkflow({ isOpen, onClose, onComplete }: Onbo
   };
 
   const handleBack = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 0));
+    setCurrentStep((prev) => Math.max(prev - 1, 0));
     setError(null);
   };
 
@@ -201,7 +213,7 @@ export default function OnboardingWorkflow({ isOpen, onClose, onComplete }: Onbo
           industry: formData.industry,
           companySize: formData.companySize,
           projectType: formData.projectType,
-          budget: formData.budget ? parseInt(formData.budget) : undefined,
+          budget: formData.budget ? Number.parseInt(formData.budget) : undefined,
           expectedLaunchDate: formData.expectedLaunchDate || undefined,
           notes: `
 Project Description: ${formData.projectDescription}
@@ -490,7 +502,9 @@ Special Requirements: ${formData.specialRequirements}
                 {integrationOptions.map((integration) => (
                   <Chip
                     key={integration}
-                    variant={formData.integrationsNeeded.includes(integration) ? "solid" : "outlined"}
+                    variant={
+                      formData.integrationsNeeded.includes(integration) ? "solid" : "outlined"
+                    }
                     onClick={() => handleIntegrationToggle(integration)}
                     sx={{ cursor: "pointer" }}
                   >
@@ -586,11 +600,7 @@ Special Requirements: ${formData.specialRequirements}
 
           {/* Navigation Buttons */}
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Button
-              variant="outlined"
-              onClick={handleBack}
-              disabled={currentStep === 0 || loading}
-            >
+            <Button variant="outlined" onClick={handleBack} disabled={currentStep === 0 || loading}>
               Back
             </Button>
 

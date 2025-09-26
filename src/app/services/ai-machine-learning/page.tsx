@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "AI & Machine Learning Services - SoftwarePros | Custom AI Solutions",
   description:
     "Professional AI and machine learning development services including custom ML models, natural language processing, computer vision, and intelligent automation solutions.",
+  alternates: {
+    canonical: "https://softwarepros.org/services/ai-machine-learning",
+  },
   openGraph: {
     title: "AI & Machine Learning Services - SoftwarePros",
     description: "Custom AI and machine learning solutions for businesses of all sizes.",

@@ -3,38 +3,38 @@
  * Enterprise-grade authentication with NextAuth.js v5
  */
 
-import { NextAuthOptions } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import GitHubProvider from "next-auth/providers/github"
-import bcrypt from "bcryptjs"
-import { prisma } from "../prisma"
-import { AUTH_CONFIG, AUTH_ERROR_MESSAGES } from "./config"
+import bcrypt from "bcryptjs";
+import type { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GitHubProvider from "next-auth/providers/github";
+import { prisma } from "../prisma";
+import { AUTH_CONFIG, AUTH_ERROR_MESSAGES } from "./config";
 
 declare module "next-auth" {
   interface Session {
     user: {
-      id: string
-      name?: string | null
-      email?: string | null
-      image?: string | null
-      role: string
-      status: string
-      twoFactorEnabled: boolean
-    }
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      role: string;
+      status: string;
+      twoFactorEnabled: boolean;
+    };
   }
 
   interface User {
-    role: string
-    status: string
-    twoFactorEnabled: boolean
+    role: string;
+    status: string;
+    twoFactorEnabled: boolean;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
-    role: string
-    status: string
-    twoFactorEnabled: boolean
+    role: string;
+    status: string;
+    twoFactorEnabled: boolean;
   }
 }
 
@@ -52,35 +52,32 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error(AUTH_ERROR_MESSAGES.INVALID_CREDENTIALS)
+          throw new Error(AUTH_ERROR_MESSAGES.INVALID_CREDENTIALS);
         }
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
-        })
+        });
 
         if (!user || !user.password) {
-          throw new Error(AUTH_ERROR_MESSAGES.INVALID_CREDENTIALS)
+          throw new Error(AUTH_ERROR_MESSAGES.INVALID_CREDENTIALS);
         }
 
         if (user.status !== "active") {
-          throw new Error(AUTH_ERROR_MESSAGES.ACCOUNT_SUSPENDED)
+          throw new Error(AUTH_ERROR_MESSAGES.ACCOUNT_SUSPENDED);
         }
 
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.password
-        )
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
 
         if (!isPasswordValid) {
-          throw new Error(AUTH_ERROR_MESSAGES.INVALID_CREDENTIALS)
+          throw new Error(AUTH_ERROR_MESSAGES.INVALID_CREDENTIALS);
         }
 
         // Update last login
         await prisma.user.update({
           where: { id: user.id },
           data: { lastLoginAt: new Date() },
-        })
+        });
 
         return {
           id: user.id,
@@ -89,7 +86,7 @@ export const authOptions: NextAuthOptions = {
           role: user.role,
           status: user.status,
           twoFactorEnabled: user.twoFactorEnabled,
-        }
+        };
       },
     }),
   ],
@@ -108,28 +105,28 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role
-        token.status = user.status
-        token.twoFactorEnabled = user.twoFactorEnabled
+        token.role = user.role;
+        token.status = user.status;
+        token.twoFactorEnabled = user.twoFactorEnabled;
       }
-      return token
+      return token;
     },
     async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.sub!
-        session.user.role = token.role
-        session.user.status = token.status
-        session.user.twoFactorEnabled = token.twoFactorEnabled
+        session.user.id = token.sub!;
+        session.user.role = token.role;
+        session.user.status = token.status;
+        session.user.twoFactorEnabled = token.twoFactorEnabled;
       }
-      return session
+      return session;
     },
     async signIn({ user, account, profile }) {
       if (account?.provider === "github") {
         try {
           // Check if user exists
           const existingUser = await prisma.user.findUnique({
-            where: { email: user.email! }
-          })
+            where: { email: user.email! },
+          });
 
           if (!existingUser) {
             // Create new user from GitHub
@@ -141,25 +138,25 @@ export const authOptions: NextAuthOptions = {
                 role: "user", // Default role for GitHub users
                 status: "active",
                 emailVerified: new Date(), // GitHub accounts are considered verified
-              }
-            })
+              },
+            });
           }
-          return true
+          return true;
         } catch (error) {
-          console.error("Error during GitHub sign-in:", error)
-          return false
+          console.error("Error during GitHub sign-in:", error);
+          return false;
         }
       }
-      return true
+      return true;
     },
   },
   events: {
     async signIn({ user, account, profile, isNewUser }) {
-      console.log(`User signed in: ${user.email}`)
+      console.log(`User signed in: ${user.email}`);
     },
     async signOut({ session, token }) {
-      console.log(`User signed out: ${session?.user?.email || token?.email}`)
+      console.log(`User signed out: ${session?.user?.email || token?.email}`);
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-}
+};

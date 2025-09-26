@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Mobile App Development - SoftwarePros | iOS & Android Apps",
   description:
     "Professional mobile app development services for iOS and Android. Native apps, cross-platform solutions, and progressive web apps for healthcare and enterprise.",
+  alternates: {
+    canonical: "https://softwarepros.org/services/mobile-apps",
+  },
   openGraph: {
     title: "Mobile App Development - SoftwarePros",
     description: "Custom mobile applications for iOS and Android platforms.",

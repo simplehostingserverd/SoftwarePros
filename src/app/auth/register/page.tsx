@@ -1,87 +1,94 @@
 "use client";
 
+import { PASSWORD_REQUIREMENTS } from "@/lib/auth/config";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  Business,
+  CheckCircle,
+  CreditCard,
+  GitHub,
+  Person,
+  PersonAdd,
+  Visibility,
+  VisibilityOff,
+} from "@mui/icons-material";
+import {
+  Alert,
   Box,
   Button,
   Card,
   CardContent,
+  Checkbox,
   Divider,
   FormControl,
   FormLabel,
+  Grid,
+  IconButton,
   Input,
-  Select,
+  Link,
   Option,
+  Select,
+  Step,
+  StepButton,
+  StepIndicator,
+  Stepper,
   Textarea,
   Typography,
-  Alert,
-  Link,
-  Checkbox,
-  IconButton,
-  Grid,
-  Stepper,
-  Step,
-  StepIndicator,
-  StepButton,
 } from "@mui/joy";
-import {
-  GitHub,
-  Visibility,
-  VisibilityOff,
-  PersonAdd,
-  Business,
-  Person,
-  CreditCard,
-  CheckCircle
-} from "@mui/icons-material";
-import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import NextLink from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { PASSWORD_REQUIREMENTS } from "@/lib/auth/config";
 
 // Enhanced validation schema for B2B registration
-const registrationSchema = z.object({
-  // Personal Information
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Invalid email address"),
-  password: z.string()
-    .min(PASSWORD_REQUIREMENTS.minLength, PASSWORD_REQUIREMENTS.messages.minLength)
-    .regex(PASSWORD_REQUIREMENTS.patterns.uppercase, PASSWORD_REQUIREMENTS.messages.uppercase)
-    .regex(PASSWORD_REQUIREMENTS.patterns.lowercase, PASSWORD_REQUIREMENTS.messages.lowercase)
-    .regex(PASSWORD_REQUIREMENTS.patterns.numbers, PASSWORD_REQUIREMENTS.messages.numbers)
-    .regex(PASSWORD_REQUIREMENTS.patterns.symbols, PASSWORD_REQUIREMENTS.messages.symbols),
-  confirmPassword: z.string(),
+const registrationSchema = z
+  .object({
+    // Personal Information
+    name: z.string().min(2, "Name must be at least 2 characters"),
+    email: z.string().email("Invalid email address"),
+    password: z
+      .string()
+      .min(PASSWORD_REQUIREMENTS.minLength, PASSWORD_REQUIREMENTS.messages.minLength)
+      .regex(PASSWORD_REQUIREMENTS.patterns.uppercase, PASSWORD_REQUIREMENTS.messages.uppercase)
+      .regex(PASSWORD_REQUIREMENTS.patterns.lowercase, PASSWORD_REQUIREMENTS.messages.lowercase)
+      .regex(PASSWORD_REQUIREMENTS.patterns.numbers, PASSWORD_REQUIREMENTS.messages.numbers)
+      .regex(PASSWORD_REQUIREMENTS.patterns.symbols, PASSWORD_REQUIREMENTS.messages.symbols),
+    confirmPassword: z.string(),
 
-  // Business Information
-  companyName: z.string().min(2, "Company name is required"),
-  companySize: z.enum(["startup", "small", "medium", "enterprise"]),
-  industry: z.string().min(2, "Industry is required"),
-  phone: z.string().optional(),
+    // Business Information
+    companyName: z.string().min(2, "Company name is required"),
+    companySize: z.enum(["startup", "small", "medium", "enterprise"]),
+    industry: z.string().min(2, "Industry is required"),
+    phone: z.string().optional(),
 
-  // Project Information
-  projectType: z.enum(["web", "mobile", "healthcare", "consulting", "custom"]),
-  projectDescription: z.string().min(10, "Please provide a brief project description"),
-  budget: z.string().min(1, "Budget range is required"),
-  timeline: z.string().min(1, "Timeline is required"),
+    // Project Information
+    projectType: z.enum(["web", "mobile", "healthcare", "consulting", "custom"]),
+    projectDescription: z.string().min(10, "Please provide a brief project description"),
+    budget: z.string().min(1, "Budget range is required"),
+    timeline: z.string().min(1, "Timeline is required"),
 
-  // Legal
-  termsAccepted: z.boolean().refine(val => val, "You must accept the terms and conditions"),
-  privacyAccepted: z.boolean().refine(val => val, "You must accept the privacy policy"),
-  marketingOptIn: z.boolean().optional(),
-}).refine(data => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
+    // Legal
+    termsAccepted: z.boolean().refine((val) => val, "You must accept the terms and conditions"),
+    privacyAccepted: z.boolean().refine((val) => val, "You must accept the privacy policy"),
+    marketingOptIn: z.boolean().optional(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 type RegistrationFormData = z.infer<typeof registrationSchema>;
 
 const projectTypes = [
   { value: "web", label: "Web Development", description: "Websites, web applications, e-commerce" },
   { value: "mobile", label: "Mobile App", description: "iOS and Android applications" },
-  { value: "healthcare", label: "Healthcare Software", description: "HIPAA-compliant medical software" },
+  {
+    value: "healthcare",
+    label: "Healthcare Software",
+    description: "HIPAA-compliant medical software",
+  },
   { value: "consulting", label: "Consulting", description: "Technical consulting and strategy" },
   { value: "custom", label: "Custom Solution", description: "Specialized software development" },
 ];
@@ -93,7 +100,7 @@ const budgetRanges = [
   "$100,000 - $250,000",
   "$250,000 - $500,000",
   "$500,000+",
-  "Let's discuss"
+  "Let's discuss",
 ];
 
 const timelineOptions = [
@@ -102,7 +109,7 @@ const timelineOptions = [
   "3-6 months",
   "6-12 months",
   "12+ months",
-  "Flexible timeline"
+  "Flexible timeline",
 ];
 
 export default function RegisterPage() {
@@ -137,7 +144,14 @@ export default function RegisterPage() {
     const fieldsToValidate = {
       0: ["name", "email", "password", "confirmPassword"],
       1: ["companyName", "companySize", "industry"],
-      2: ["projectType", "projectDescription", "budget", "timeline", "termsAccepted", "privacyAccepted"],
+      2: [
+        "projectType",
+        "projectDescription",
+        "budget",
+        "timeline",
+        "termsAccepted",
+        "privacyAccepted",
+      ],
     }[step] as (keyof RegistrationFormData)[];
 
     return await trigger(fieldsToValidate);
@@ -152,14 +166,14 @@ export default function RegisterPage() {
         setShowPassword(false);
         setShowConfirmPassword(false);
       }
-      setCurrentStep(prev => Math.min(prev + 1, steps.length - 1));
+      setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
       setError(null);
       setHasValidated(false); // Reset validation state for next step
     }
   };
 
   const handleBack = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 0));
+    setCurrentStep((prev) => Math.max(prev - 1, 0));
     setError(null);
     setHasValidated(false);
   };
@@ -209,7 +223,9 @@ export default function RegisterPage() {
           industry: data.industry,
           companySize: data.companySize,
           projectType: data.projectType,
-          budget: data.budget.includes("$") ? parseInt(data.budget.replace(/[^0-9]/g, "")) : undefined,
+          budget: data.budget.includes("$")
+            ? Number.parseInt(data.budget.replace(/[^0-9]/g, ""))
+            : undefined,
           notes: `
 Project Description: ${data.projectDescription}
 Timeline: ${data.timeline}
@@ -262,11 +278,7 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
             <Grid xs={12}>
               <FormControl error={!!errors.name}>
                 <FormLabel>Full Name *</FormLabel>
-                <Input
-                  placeholder="John Smith"
-                  {...register("name")}
-                  error={!!errors.name}
-                />
+                <Input placeholder="John Smith" {...register("name")} error={!!errors.name} />
                 {showError(errors.name) && (
                   <Typography level="body-xs" sx={{ color: "danger.500", mt: 0.5 }}>
                     {getErrorMessage(errors.name)}
@@ -371,7 +383,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                 <Select
                   placeholder="Select company size"
                   value={watch("companySize") || ""}
-                  onChange={(_, value) => setValue("companySize", value as "startup" | "small" | "medium" | "enterprise")}
+                  onChange={(_, value) =>
+                    setValue("companySize", value as "startup" | "small" | "medium" | "enterprise")
+                  }
                 >
                   <Option value="startup">Startup (1-10 employees)</Option>
                   <Option value="small">Small (11-50 employees)</Option>
@@ -405,10 +419,7 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
             <Grid xs={12}>
               <FormControl>
                 <FormLabel>Phone Number</FormLabel>
-                <Input
-                  placeholder="+1 (555) 123-4567"
-                  {...register("phone")}
-                />
+                <Input placeholder="+1 (555) 123-4567" {...register("phone")} />
               </FormControl>
             </Grid>
           </Grid>
@@ -423,7 +434,12 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                 <Select
                   placeholder="Select project type"
                   value={watch("projectType") || ""}
-                  onChange={(_, value) => setValue("projectType", value as "web" | "mobile" | "healthcare" | "consulting" | "custom")}
+                  onChange={(_, value) =>
+                    setValue(
+                      "projectType",
+                      value as "web" | "mobile" | "healthcare" | "consulting" | "custom",
+                    )
+                  }
                 >
                   {projectTypes.map((type) => (
                     <Option key={type.value} value={type.value}>
@@ -551,7 +567,8 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
                     {...register("marketingOptIn")}
                     label={
                       <Typography level="body-sm">
-                        I'd like to receive updates about SoftwarePros services and industry insights
+                        I'd like to receive updates about SoftwarePros services and industry
+                        insights
                       </Typography>
                     }
                   />
@@ -655,7 +672,9 @@ Marketing Opt-in: ${data.marketingOptIn ? "Yes" : "No"}
             </Card>
 
             {/* Navigation Buttons */}
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
+            <Box
+              sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}
+            >
               <Button
                 variant="outlined"
                 onClick={handleBack}

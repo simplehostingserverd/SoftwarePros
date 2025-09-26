@@ -49,7 +49,6 @@ export default function MeetingJoinPage() {
     };
   }, []);
 
-
   // Control functions
   const toggleVideo = async () => {
     setIsVideoOn(!isVideoOn);
@@ -155,9 +154,7 @@ export default function MeetingJoinPage() {
       >
         <Card sx={{ p: 4, textAlign: "center", backgroundColor: "rgba(0,0,0,0.8)" }}>
           <CircularProgress sx={{ mb: 2 }} />
-          <Typography sx={{ color: "white" }}>
-            Initializing consultation room...
-          </Typography>
+          <Typography sx={{ color: "white" }}>Initializing consultation room...</Typography>
         </Card>
       </Box>
     );
@@ -302,9 +299,7 @@ export default function MeetingJoinPage() {
               color: "white",
             }}
           >
-            <Typography level="body-sm">
-              You {isHost ? "(Host)" : "(Participant)"}
-            </Typography>
+            <Typography level="body-sm">You {isHost ? "(Host)" : "(Participant)"}</Typography>
           </Box>
         </Box>
         <Box
@@ -375,7 +370,8 @@ export default function MeetingJoinPage() {
               You {isHost ? "(Host)" : ""}
             </Typography>
             <Typography level="body-xs" sx={{ opacity: 0.7 }}>
-              {isAudioOn ? "🎤" : "🔇"} {isVideoOn ? "🎥" : "📵"} {isConnected ? "Connected" : "Connecting..."}
+              {isAudioOn ? "🎤" : "🔇"} {isVideoOn ? "🎥" : "📵"}{" "}
+              {isConnected ? "Connected" : "Connecting..."}
             </Typography>
           </Box>
         </Box>

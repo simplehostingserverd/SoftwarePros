@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Tech Consulting Services - SoftwarePros | Strategic Technology Guidance",
   description:
     "Expert technology consulting services including digital transformation, architecture design, technology strategy, and technical leadership for businesses of all sizes.",
+  alternates: {
+    canonical: "https://softwarepros.org/services/consulting",
+  },
   openGraph: {
     title: "Tech Consulting Services - SoftwarePros",
     description: "Strategic technology consulting and digital transformation services.",

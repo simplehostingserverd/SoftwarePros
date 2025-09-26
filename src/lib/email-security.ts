@@ -22,7 +22,7 @@ export interface EmailSecurityConfig {
   // DMARC configuration
   dmarc: {
     enabled: boolean;
-    policy: 'none' | 'quarantine' | 'reject';
+    policy: "none" | "quarantine" | "reject";
     rua?: string;
   };
 
@@ -47,33 +47,25 @@ export const DEFAULT_EMAIL_SECURITY_CONFIG: EmailSecurityConfig = {
   dkim: {
     enabled: false, // Set to true when DKIM keys are configured
     privateKey: process.env.DKIM_PRIVATE_KEY,
-    keySelector: process.env.DKIM_KEY_SELECTOR || 'default',
+    keySelector: process.env.DKIM_KEY_SELECTOR || "default",
     domainName: process.env.DKIM_DOMAIN,
   },
 
   spf: {
     enabled: true,
-    allowedDomains: [
-      'softwarepros.org',
-      'aquareefdirect.com',
-    ],
+    allowedDomains: ["softwarepros.org", "aquareefdirect.com"],
     allowedIPs: [], // Add specific IPs if needed
   },
 
   dmarc: {
     enabled: false, // Set to true when DMARC is configured
-    policy: 'none',
+    policy: "none",
     rua: process.env.DMARC_RUA,
   },
 
   content: {
     maxEmailSize: 10 * 1024 * 1024, // 10MB
-    allowedMimeTypes: [
-      'text/plain',
-      'text/html',
-      'multipart/alternative',
-      'multipart/mixed',
-    ],
+    allowedMimeTypes: ["text/plain", "text/html", "multipart/alternative", "multipart/mixed"],
     scanForMalware: true,
     blockExecutableContent: true,
   },
@@ -97,13 +89,13 @@ export function validateSPF(domain: string, clientIP: string): { valid: boolean;
   // Basic SPF validation - in production, use a proper SPF library
   const allowedDomains = DEFAULT_EMAIL_SECURITY_CONFIG.spf.allowedDomains;
 
-  if (allowedDomains.some(allowed => domain.endsWith(allowed))) {
+  if (allowedDomains.some((allowed) => domain.endsWith(allowed))) {
     return { valid: true };
   }
 
   return {
     valid: false,
-    reason: `Domain ${domain} not in allowed SPF domains: ${allowedDomains.join(', ')}`
+    reason: `Domain ${domain} not in allowed SPF domains: ${allowedDomains.join(", ")}`,
   };
 }
 
@@ -113,13 +105,13 @@ export function validateSPF(domain: string, clientIP: string): { valid: boolean;
 export function validateEmailContent(
   subject: string,
   html: string,
-  text: string
+  text: string,
 ): { valid: boolean; threats: string[] } {
   const threats: string[] = [];
   const config = DEFAULT_EMAIL_SECURITY_CONFIG.content;
 
   // Check email size
-  const totalSize = Buffer.byteLength(html || '', 'utf8') + Buffer.byteLength(text || '', 'utf8');
+  const totalSize = Buffer.byteLength(html || "", "utf8") + Buffer.byteLength(text || "", "utf8");
   if (totalSize > config.maxEmailSize) {
     threats.push(`Email size ${totalSize} bytes exceeds limit of ${config.maxEmailSize} bytes`);
   }
@@ -141,7 +133,7 @@ export function validateEmailContent(
   ];
 
   if (config.blockExecutableContent) {
-    suspiciousPatterns.forEach(pattern => {
+    suspiciousPatterns.forEach((pattern) => {
       if (pattern.test(html)) {
         threats.push(`Blocked potentially executable content: ${pattern}`);
       }
@@ -157,17 +149,17 @@ export function validateEmailContent(
   // Check for suspicious URLs
   const urlPattern = /https?:\/\/[^\s<>"']+/gi;
   const urls = html.match(urlPattern) || [];
-  const suspiciousDomains = ['fake', 'malware', 'phish', 'spam'];
+  const suspiciousDomains = ["fake", "malware", "phish", "spam"];
 
-  urls.forEach(url => {
-    if (suspiciousDomains.some(domain => url.toLowerCase().includes(domain))) {
+  urls.forEach((url) => {
+    if (suspiciousDomains.some((domain) => url.toLowerCase().includes(domain))) {
       threats.push(`Suspicious URL detected: ${url}`);
     }
   });
 
   return {
     valid: threats.length === 0,
-    threats
+    threats,
   };
 }
 
@@ -176,20 +168,20 @@ export function validateEmailContent(
  */
 export function generateSecurityHeaders(clientIP?: string): Record<string, string> {
   const headers: Record<string, string> = {
-    'X-Security-Scan': 'SoftwarePros Email Security v2.0',
-    'X-Content-Type-Options': 'nosniff',
-    'X-Frame-Options': 'DENY',
-    'X-XSS-Protection': '1; mode=block',
-    'X-Report-Abuse': 'Report abuse to: security@softwarepros.org',
+    "X-Security-Scan": "SoftwarePros Email Security v2.0",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block",
+    "X-Report-Abuse": "Report abuse to: security@softwarepros.org",
   };
 
   if (clientIP) {
-    headers['X-Client-IP'] = clientIP;
-    headers['X-Originating-IP'] = clientIP;
+    headers["X-Client-IP"] = clientIP;
+    headers["X-Originating-IP"] = clientIP;
   }
 
   // Add security timestamp
-  headers['X-Security-Timestamp'] = new Date().toISOString();
+  headers["X-Security-Timestamp"] = new Date().toISOString();
 
   return headers;
 }
@@ -198,17 +190,17 @@ export function generateSecurityHeaders(clientIP?: string): Record<string, strin
  * Log security events for monitoring
  */
 export function logSecurityEvent(
-  event: 'rate_limit' | 'validation_failed' | 'content_threat' | 'spf_failed',
-  details: Record<string, any>
+  event: "rate_limit" | "validation_failed" | "content_threat" | "spf_failed",
+  details: Record<string, any>,
 ): void {
   const securityLog = {
     timestamp: new Date().toISOString(),
     event,
     details,
-    severity: event === 'rate_limit' ? 'low' : event === 'validation_failed' ? 'medium' : 'high',
+    severity: event === "rate_limit" ? "low" : event === "validation_failed" ? "medium" : "high",
   };
 
-  console.warn('Email Security Event:', securityLog);
+  console.warn("Email Security Event:", securityLog);
 
   // In production, send to security monitoring system
   // Example: sendToSecurityMonitoring(securityLog);
@@ -225,18 +217,18 @@ export async function performSecurityCheck(
     html: string;
     text: string;
   },
-  clientIP?: string
+  clientIP?: string,
 ): Promise<{ passed: boolean; reason?: string; details: any }> {
   const details: any = {};
 
   try {
     // 1. SPF validation
-    const domain = emailData.from.split('@')[1];
-    const spfResult = validateSPF(domain, clientIP || '');
+    const domain = emailData.from.split("@")[1];
+    const spfResult = validateSPF(domain, clientIP || "");
     details.spf = spfResult;
 
     if (!spfResult.valid) {
-      logSecurityEvent('spf_failed', { domain, clientIP, reason: spfResult.reason });
+      logSecurityEvent("spf_failed", { domain, clientIP, reason: spfResult.reason });
       return { passed: false, reason: spfResult.reason, details };
     }
 
@@ -245,19 +237,25 @@ export async function performSecurityCheck(
     details.content = contentResult;
 
     if (!contentResult.valid) {
-      logSecurityEvent('content_threat', { threats: contentResult.threats, subject: emailData.subject });
-      return { passed: false, reason: `Content security threats: ${contentResult.threats.join(', ')}`, details };
+      logSecurityEvent("content_threat", {
+        threats: contentResult.threats,
+        subject: emailData.subject,
+      });
+      return {
+        passed: false,
+        reason: `Content security threats: ${contentResult.threats.join(", ")}`,
+        details,
+      };
     }
 
     // 3. Generate security headers
     details.securityHeaders = generateSecurityHeaders(clientIP);
 
-    console.log('Email security check passed:', { domain, clientIP });
+    console.log("Email security check passed:", { domain, clientIP });
     return { passed: true, details };
-
   } catch (error) {
-    const errorMsg = error instanceof Error ? error.message : 'Unknown security check error';
-    logSecurityEvent('validation_failed', { error: errorMsg, emailData });
+    const errorMsg = error instanceof Error ? error.message : "Unknown security check error";
+    logSecurityEvent("validation_failed", { error: errorMsg, emailData });
     return { passed: false, reason: errorMsg, details };
   }
 }

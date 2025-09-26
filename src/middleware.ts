@@ -9,14 +9,18 @@ export default withAuth(
     // Admin routes - require admin role
     if (pathname.startsWith("/admin")) {
       if (!token || token.role !== "admin") {
-        return NextResponse.redirect(new URL("/auth/signin?callbackUrl=" + encodeURIComponent(pathname), req.url));
+        return NextResponse.redirect(
+          new URL("/auth/signin?callbackUrl=" + encodeURIComponent(pathname), req.url),
+        );
       }
     }
 
     // Portal/Dashboard routes - require any authenticated user
     if (pathname.startsWith("/portal")) {
       if (!token) {
-        return NextResponse.redirect(new URL("/auth/signin?callbackUrl=" + encodeURIComponent(pathname), req.url));
+        return NextResponse.redirect(
+          new URL("/auth/signin?callbackUrl=" + encodeURIComponent(pathname), req.url),
+        );
       }
     }
 
@@ -64,7 +68,7 @@ export default withAuth(
     pages: {
       signIn: "/auth/signin",
     },
-  }
+  },
 );
 
 export const config = {

@@ -1,9 +1,9 @@
 "use client";
 
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 const navigationItems = [
   { name: "Home", href: "/" },

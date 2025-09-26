@@ -86,15 +86,13 @@ export default function TrustSeals() {
               className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-gray-300"
             >
               <div className="text-center">
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${seal.color} mb-4`}>
+                <div
+                  className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${seal.color} mb-4`}
+                >
                   {seal.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {seal.name}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {seal.description}
-                </p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{seal.name}</h3>
+                <p className="text-gray-600 text-sm">{seal.description}</p>
               </div>
             </div>
           ))}
@@ -129,8 +127,8 @@ export default function TrustSeals() {
           <div className="bg-blue-50 rounded-lg p-4 border-l-4 border-blue-500">
             <p className="text-sm text-gray-700">
               <strong>Important:</strong> SoftwarePros.org is not affiliated with SoftwarePros.com
-              or any similarly named entities. Our certifications, client testimonials, and
-              track record are specific to our organization.
+              or any similarly named entities. Our certifications, client testimonials, and track
+              record are specific to our organization.
             </p>
           </div>
         </div>

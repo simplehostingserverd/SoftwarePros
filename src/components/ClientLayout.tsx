@@ -1,9 +1,9 @@
 "use client";
 
-import { SessionProvider } from "next-auth/react";
 import FloatingChatButton from "@/components/FloatingChatButton";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import { SessionProvider } from "next-auth/react";
 
 interface ClientLayoutProps {
   children: React.ReactNode;

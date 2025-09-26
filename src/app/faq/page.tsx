@@ -161,9 +161,9 @@ export default function FAQPage() {
               <div className="bg-white rounded-xl p-6 shadow-lg border-l-4 border-blue-500">
                 <h2 className="text-lg font-semibold text-gray-900 mb-3">Important Notice</h2>
                 <p className="text-gray-700 leading-relaxed">
-                  SoftwarePros.org is not affiliated in any way with SoftwarePros.com or 'Software Pros'
-                  (or any similarly named entities in New York City or elsewhere). Any claims, complaints,
-                  or reviews pertaining to those organizations do not apply to us.
+                  SoftwarePros.org is not affiliated in any way with SoftwarePros.com or 'Software
+                  Pros' (or any similarly named entities in New York City or elsewhere). Any claims,
+                  complaints, or reviews pertaining to those organizations do not apply to us.
                 </p>
               </div>
             </div>
@@ -182,9 +182,7 @@ export default function FAQPage() {
                   <div className="space-y-6">
                     {category.questions.map((faq, index) => (
                       <div key={index} className="bg-gray-50 rounded-xl p-6">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                          {faq.question}
-                        </h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
                         <p className="text-gray-700 leading-7">{faq.answer}</p>
                       </div>
                     ))}
@@ -198,9 +196,7 @@ export default function FAQPage() {
         {/* Contact CTA */}
         <section className="bg-gradient-to-r from-blue-600 to-indigo-700 py-16">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Still Have Questions?
-            </h2>
+            <h2 className="text-3xl font-bold text-white mb-4">Still Have Questions?</h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               We're here to help! Contact us for a free consultation to discuss your specific
               healthcare software needs.

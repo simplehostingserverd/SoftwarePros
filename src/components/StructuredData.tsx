@@ -73,8 +73,8 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           serviceType: "Healthcare Software Development",
           provider: {
             "@type": "Organization",
-            name: "Software Pros",
-            url: "https://softwarepros.com",
+            name: "SoftwarePros",
+            url: "https://softwarepros.org",
           },
           areaServed: {
             "@type": "Country",
@@ -91,7 +91,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
           jobTitle: "CEO & Founder",
           worksFor: {
             "@type": "Organization",
-            name: "Software Pros",
+            name: "SoftwarePros",
           },
           address: {
             "@type": "PostalAddress",

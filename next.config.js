@@ -37,6 +37,21 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   generateEtags: false,
+  // SEO redirects for duplicate content issues
+  async redirects() {
+    return [
+      {
+        source: '/services/mobile',
+        destination: '/services/mobile-apps',
+        permanent: true,
+      },
+      {
+        source: '/services/web',
+        destination: '/services/web-development',
+        permanent: true,
+      },
+    ];
+  },
   // Static export configuration
   // Ensure static assets are served correctly
   async rewrites() {

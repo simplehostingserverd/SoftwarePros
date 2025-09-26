@@ -1,4 +1,10 @@
-import type { Client, OnboardingStep, EmailTemplate, Milestone, Deliverable } from "@/types/onboarding";
+import type {
+  Client,
+  Deliverable,
+  EmailTemplate,
+  Milestone,
+  OnboardingStep,
+} from "@/types/onboarding";
 
 // Email templates for automated onboarding communications
 export const emailTemplates: Record<string, EmailTemplate> = {
@@ -131,7 +137,14 @@ export const emailTemplates: Record<string, EmailTemplate> = {
 </body>
 </html>
     `,
-    variables: ["clientName", "companyName", "projectType", "expectedLaunchDate", "budget", "portalUrl"],
+    variables: [
+      "clientName",
+      "companyName",
+      "projectType",
+      "expectedLaunchDate",
+      "budget",
+      "portalUrl",
+    ],
   },
 
   kickoff_scheduled: {
@@ -222,7 +235,18 @@ export const emailTemplates: Record<string, EmailTemplate> = {
 </body>
 </html>
     `,
-    variables: ["clientName", "companyName", "projectType", "kickoffDate", "meetingUrl", "projectManager", "leadDeveloper", "designer", "projectManagerEmail", "projectManagerPhone"],
+    variables: [
+      "clientName",
+      "companyName",
+      "projectType",
+      "kickoffDate",
+      "meetingUrl",
+      "projectManager",
+      "leadDeveloper",
+      "designer",
+      "projectManagerEmail",
+      "projectManagerPhone",
+    ],
   },
 
   milestone_completed: {
@@ -322,7 +346,21 @@ export const emailTemplates: Record<string, EmailTemplate> = {
 </body>
 </html>
     `,
-    variables: ["clientName", "companyName", "projectType", "milestoneName", "completedDate", "paymentAmount", "progressPercentage", "deliverables", "nextStepsDescription", "nextMilestone", "portalUrl", "projectManager", "projectManagerEmail"],
+    variables: [
+      "clientName",
+      "companyName",
+      "projectType",
+      "milestoneName",
+      "completedDate",
+      "paymentAmount",
+      "progressPercentage",
+      "deliverables",
+      "nextStepsDescription",
+      "nextMilestone",
+      "portalUrl",
+      "projectManager",
+      "projectManagerEmail",
+    ],
   },
 
   feedback_request: {
@@ -410,7 +448,19 @@ export const emailTemplates: Record<string, EmailTemplate> = {
 </body>
 </html>
     `,
-    variables: ["clientName", "companyName", "deliverableName", "deliverableType", "deliverableDescription", "completedDate", "portalUrl", "feedbackDeadline", "projectManager", "projectManagerEmail", "projectManagerPhone"],
+    variables: [
+      "clientName",
+      "companyName",
+      "deliverableName",
+      "deliverableType",
+      "deliverableDescription",
+      "completedDate",
+      "portalUrl",
+      "feedbackDeadline",
+      "projectManager",
+      "projectManagerEmail",
+      "projectManagerPhone",
+    ],
   },
 
   project_completion: {
@@ -539,7 +589,19 @@ export const emailTemplates: Record<string, EmailTemplate> = {
 </body>
 </html>
     `,
-    variables: ["clientName", "companyName", "projectName", "projectType", "launchDate", "projectUrl", "projectDuration", "milestonesCompleted", "deliverablesCount", "deliverables", "testimonialUrl"],
+    variables: [
+      "clientName",
+      "companyName",
+      "projectName",
+      "projectType",
+      "launchDate",
+      "projectUrl",
+      "projectDuration",
+      "milestonesCompleted",
+      "deliverablesCount",
+      "deliverables",
+      "testimonialUrl",
+    ],
   },
 };
 
@@ -551,7 +613,7 @@ export class EmailAutomationService {
   async sendOnboardingEmail(
     type: keyof typeof emailTemplates,
     client: Client,
-    additionalData: Record<string, any> = {}
+    additionalData: Record<string, any> = {},
   ) {
     const template = this.templates[type];
     if (!template) {
@@ -562,7 +624,9 @@ export class EmailAutomationService {
       clientName: client.contactName,
       companyName: client.companyName,
       projectType: client.projectType,
-      expectedLaunchDate: client.expectedLaunchDate ? new Date(client.expectedLaunchDate).toLocaleDateString() : "TBD",
+      expectedLaunchDate: client.expectedLaunchDate
+        ? new Date(client.expectedLaunchDate).toLocaleDateString()
+        : "TBD",
       budget: client.budget?.toLocaleString() || "Contact us",
       portalUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/portal?clientId=${client.id}`,
       ...additionalData,
@@ -586,8 +650,8 @@ export class EmailAutomationService {
 
     // Simple template replacement (replace with proper template engine like Handlebars in production)
     Object.entries(data).forEach(([key, value]) => {
-      const regex = new RegExp(`{{${key}}}`, 'g');
-      rendered = rendered.replace(regex, String(value || ''));
+      const regex = new RegExp(`{{${key}}}`, "g");
+      rendered = rendered.replace(regex, String(value || ""));
     });
 
     return rendered;
@@ -597,7 +661,7 @@ export class EmailAutomationService {
   private async sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
     try {
       // Import the secure email function dynamically to avoid circular dependencies
-      const { sendContactEmail } = await import('./mailer');
+      const { sendContactEmail } = await import("./mailer");
 
       // Create a minimal contact data object for the email
       const emailData = {
@@ -616,7 +680,7 @@ export class EmailAutomationService {
       console.log(`Automated email sent successfully to ${to}:`, result.messageId);
       return result;
     } catch (error) {
-      console.error('Error sending automated email:', error);
+      console.error("Error sending automated email:", error);
 
       // Enhanced error handling for automation emails
       if (error instanceof Error) {
@@ -636,62 +700,67 @@ export class EmailAutomationService {
   // Trigger automated emails based on onboarding step completion
   async handleStepCompletion(step: OnboardingStep, client: Client) {
     switch (step.step) {
-      case 'welcome':
+      case "welcome":
         // Send kickoff scheduling email
-        await this.sendOnboardingEmail('kickoff_scheduled', client, {
-          kickoffDate: client.kickoffDate ? new Date(client.kickoffDate).toLocaleDateString() : 'TBD',
+        await this.sendOnboardingEmail("kickoff_scheduled", client, {
+          kickoffDate: client.kickoffDate
+            ? new Date(client.kickoffDate).toLocaleDateString()
+            : "TBD",
           meetingUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/join/${step.id}`,
-          projectManager: 'Sarah Johnson',
-          leadDeveloper: 'Mike Chen',
-          designer: 'Alex Rodriguez',
-          projectManagerEmail: 'sarah@softwarepros.org',
-          projectManagerPhone: '+1 (555) 123-4567',
+          projectManager: "Sarah Johnson",
+          leadDeveloper: "Mike Chen",
+          designer: "Alex Rodriguez",
+          projectManagerEmail: "sarah@softwarepros.org",
+          projectManagerPhone: "+1 (555) 123-4567",
         });
         break;
 
-      case 'access_setup':
+      case "access_setup":
         // Could trigger training material email
-        console.log('Access setup completed - training materials available');
+        console.log("Access setup completed - training materials available");
         break;
 
-      case 'training':
+      case "training":
         // Could trigger communication setup email
-        console.log('Training completed - setting up communication cadence');
+        console.log("Training completed - setting up communication cadence");
         break;
 
-      case 'communication':
+      case "communication":
         // Move to active project status
-        console.log('Onboarding complete - project now active');
+        console.log("Onboarding complete - project now active");
         break;
     }
   }
 
   // Trigger milestone completion email
   async handleMilestoneCompletion(milestone: Milestone, client: Client, additionalData: any = {}) {
-    await this.sendOnboardingEmail('milestone_completed', client, {
+    await this.sendOnboardingEmail("milestone_completed", client, {
       milestoneName: milestone.name,
       completedDate: new Date().toLocaleDateString(),
       paymentAmount: milestone.paymentAmount,
       progressPercentage: additionalData.progressPercentage || 50,
       deliverables: additionalData.deliverables || [],
-      nextStepsDescription: additionalData.nextStepsDescription || 'Continuing with next phase of development.',
+      nextStepsDescription:
+        additionalData.nextStepsDescription || "Continuing with next phase of development.",
       nextMilestone: additionalData.nextMilestone,
-      projectManager: 'Sarah Johnson',
-      projectManagerEmail: 'sarah@softwarepros.org',
+      projectManager: "Sarah Johnson",
+      projectManagerEmail: "sarah@softwarepros.org",
     });
   }
 
   // Trigger feedback request email
   async requestFeedback(deliverable: Deliverable, client: Client) {
-    await this.sendOnboardingEmail('feedback_request', client, {
+    await this.sendOnboardingEmail("feedback_request", client, {
       deliverableName: deliverable.name,
       deliverableType: deliverable.type,
       deliverableDescription: deliverable.description,
-      completedDate: deliverable.completedDate ? new Date(deliverable.completedDate).toLocaleDateString() : new Date().toLocaleDateString(),
-      feedbackDeadline: '3 business days',
-      projectManager: 'Sarah Johnson',
-      projectManagerEmail: 'sarah@softwarepros.org',
-      projectManagerPhone: '+1 (555) 123-4567',
+      completedDate: deliverable.completedDate
+        ? new Date(deliverable.completedDate).toLocaleDateString()
+        : new Date().toLocaleDateString(),
+      feedbackDeadline: "3 business days",
+      projectManager: "Sarah Johnson",
+      projectManagerEmail: "sarah@softwarepros.org",
+      projectManagerPhone: "+1 (555) 123-4567",
     });
   }
 }

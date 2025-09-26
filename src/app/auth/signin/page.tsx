@@ -1,6 +1,9 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { GitHub, Login, Visibility, VisibilityOff } from "@mui/icons-material";
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -8,20 +11,17 @@ import {
   Divider,
   FormControl,
   FormLabel,
+  IconButton,
   Input,
-  Typography,
-  Alert,
   Link,
   Sheet,
-  IconButton,
+  Typography,
 } from "@mui/joy";
-import { GitHub, Visibility, VisibilityOff, Login } from "@mui/icons-material";
-import { useState } from "react";
-import { signIn, getSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { getSession, signIn } from "next-auth/react";
 import NextLink from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 // Validation schema

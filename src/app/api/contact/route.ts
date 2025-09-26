@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     });
 
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Email operation timeout')), 50_000)
+      setTimeout(() => reject(new Error("Email operation timeout")), 50_000),
     );
 
     await Promise.race([emailPromise, timeoutPromise]);
@@ -91,7 +91,10 @@ export async function POST(request: NextRequest) {
 
       if (error.message.includes("Email operation timeout")) {
         return NextResponse.json(
-          { error: "Request timeout. The email is likely being processed. Please wait a moment before trying again." },
+          {
+            error:
+              "Request timeout. The email is likely being processed. Please wait a moment before trying again.",
+          },
           { status: 408 },
         );
       }

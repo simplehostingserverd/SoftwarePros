@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Enterprise Solutions - SoftwarePros | Custom Business Software",
   description:
     "Enterprise software development services including ERP systems, CRM solutions, business intelligence, and custom enterprise applications for large organizations.",
+  alternates: {
+    canonical: "https://softwarepros.org/services/enterprise",
+  },
   openGraph: {
     title: "Enterprise Solutions - SoftwarePros",
     description: "Scalable enterprise software solutions for large organizations.",

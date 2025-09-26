@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
+import { generateSecurityHeaders, performSecurityCheck } from "./email-security";
 import { RateLimiter } from "./rate-limiter";
-import { performSecurityCheck, generateSecurityHeaders } from "./email-security";
 
 export type ContactEmailData = {
   name: string;
@@ -52,7 +52,7 @@ const SECURITY_CONFIG = {
 const emailRateLimiter = new RateLimiter(
   SECURITY_CONFIG.RATE_LIMIT.windowMs,
   SECURITY_CONFIG.RATE_LIMIT.max,
-  process.env.NODE_ENV === "production" // Only use Redis in production
+  process.env.NODE_ENV === "production", // Only use Redis in production
 );
 
 // Input validation and sanitization functions
@@ -69,13 +69,19 @@ function validateEmailInput(data: ContactEmailData): { isValid: boolean; errors:
     errors.push(`Name too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxNameLength} characters)`);
   }
   if (data.company && data.company.length > SECURITY_CONFIG.CONTENT_LIMITS.maxCompanyLength) {
-    errors.push(`Company name too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxCompanyLength} characters)`);
+    errors.push(
+      `Company name too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxCompanyLength} characters)`,
+    );
   }
   if (data.subject && data.subject.length > SECURITY_CONFIG.CONTENT_LIMITS.maxSubjectLength) {
-    errors.push(`Subject too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxSubjectLength} characters)`);
+    errors.push(
+      `Subject too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxSubjectLength} characters)`,
+    );
   }
   if (data.message && data.message.length > SECURITY_CONFIG.CONTENT_LIMITS.maxMessageLength) {
-    errors.push(`Message too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxMessageLength} characters)`);
+    errors.push(
+      `Message too long (max ${SECURITY_CONFIG.CONTENT_LIMITS.maxMessageLength} characters)`,
+    );
   }
 
   // Email format validation
@@ -98,7 +104,7 @@ function validateEmailInput(data: ContactEmailData): { isValid: boolean; errors:
 
   return {
     isValid: errors.length === 0,
-    errors
+    errors,
   };
 }
 
@@ -106,27 +112,27 @@ function sanitizeEmailInput(data: ContactEmailData): ContactEmailData {
   const sanitizeString = (str: string): string => {
     return str
       .trim()
-      .replace(/[<>]/g, '') // Remove potential HTML tags
-      .replace(/javascript:/gi, '') // Remove javascript: URLs
-      .replace(/on\w+\s*=/gi, '') // Remove event handlers
+      .replace(/[<>]/g, "") // Remove potential HTML tags
+      .replace(/javascript:/gi, "") // Remove javascript: URLs
+      .replace(/on\w+\s*=/gi, "") // Remove event handlers
       .substring(0, 1000); // Limit length
   };
 
   return {
     ...data,
-    name: data.name ? sanitizeString(data.name) : '',
-    email: data.email ? data.email.toLowerCase().trim() : '',
-    phone: data.phone ? sanitizeString(data.phone) : '',
-    company: data.company ? sanitizeString(data.company) : '',
-    serviceType: data.serviceType ? sanitizeString(data.serviceType) : '',
-    message: data.message ? sanitizeString(data.message) : '',
-    subject: data.subject ? sanitizeString(data.subject) : '',
-    budget: data.budget ? sanitizeString(data.budget) : '',
-    timeline: data.timeline ? sanitizeString(data.timeline) : '',
-    contactMethod: data.contactMethod ? sanitizeString(data.contactMethod) : '',
-    bestTimeToReach: data.bestTimeToReach ? sanitizeString(data.bestTimeToReach) : '',
-    website: data.website ? sanitizeString(data.website) : '',
-    hearAboutUs: data.hearAboutUs ? sanitizeString(data.hearAboutUs) : '',
+    name: data.name ? sanitizeString(data.name) : "",
+    email: data.email ? data.email.toLowerCase().trim() : "",
+    phone: data.phone ? sanitizeString(data.phone) : "",
+    company: data.company ? sanitizeString(data.company) : "",
+    serviceType: data.serviceType ? sanitizeString(data.serviceType) : "",
+    message: data.message ? sanitizeString(data.message) : "",
+    subject: data.subject ? sanitizeString(data.subject) : "",
+    budget: data.budget ? sanitizeString(data.budget) : "",
+    timeline: data.timeline ? sanitizeString(data.timeline) : "",
+    contactMethod: data.contactMethod ? sanitizeString(data.contactMethod) : "",
+    bestTimeToReach: data.bestTimeToReach ? sanitizeString(data.bestTimeToReach) : "",
+    website: data.website ? sanitizeString(data.website) : "",
+    hearAboutUs: data.hearAboutUs ? sanitizeString(data.hearAboutUs) : "",
   };
 }
 
@@ -145,7 +151,9 @@ async function resolveTransport() {
 
   // Require SMTP configuration
   if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
-    throw new Error("SMTP configuration required. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
+    throw new Error(
+      "SMTP configuration required. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.",
+    );
   }
 
   const port = process.env.SMTP_PORT ? Number.parseInt(process.env.SMTP_PORT, 10) : 465;
@@ -168,12 +176,12 @@ async function resolveTransport() {
         rejectUnauthorized: false, // More permissive for cPanel hosting
         servername: process.env.SMTP_HOST,
         // Additional cPanel compatibility settings
-        ciphers: 'SSLv3',
+        ciphers: "SSLv3",
       },
       // Optimized connection settings for cPanel hosting compatibility
       connectionTimeout: 45_000, // Extended for cPanel hosting
-      socketTimeout: 45_000,     // Extended for cPanel hosting
-      greetingTimeout: 30_000,   // Extended for cPanel hosting
+      socketTimeout: 45_000, // Extended for cPanel hosting
+      greetingTimeout: 30_000, // Extended for cPanel hosting
       // Disable less secure features
       disableFileAccess: true,
       disableUrlAccess: true,
@@ -182,15 +190,15 @@ async function resolveTransport() {
       debug: process.env.NODE_ENV === "development" && process.env.DEBUG_EMAIL === "true",
       // Security headers
       headers: {
-        'X-Mailer': 'SoftwarePros Secure Email Service',
-        'X-Application': 'SoftwarePros Contact Form',
+        "X-Mailer": "SoftwarePros Secure Email Service",
+        "X-Application": "SoftwarePros Contact Form",
       },
     });
 
     // Test the connection with security validation and timeout
     const verifyPromise = transporter.verify();
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('SMTP verification timeout')), 30_000)
+      setTimeout(() => reject(new Error("SMTP verification timeout")), 30_000),
     );
 
     await Promise.race([verifyPromise, timeoutPromise]);
@@ -201,23 +209,33 @@ async function resolveTransport() {
 
     // Enhanced error handling for cPanel/hosting provider issues
     if (error instanceof Error) {
-      if (error.message.includes("certificate") || error.message.includes("SSL") || error.message.includes("TLS")) {
+      if (
+        error.message.includes("certificate") ||
+        error.message.includes("SSL") ||
+        error.message.includes("TLS")
+      ) {
         throw new Error(
-          "SMTP SSL/TLS connection failed. Using fallback settings for cPanel hosting."
+          "SMTP SSL/TLS connection failed. Using fallback settings for cPanel hosting.",
         );
       }
       if (error.message.includes("ECONNREFUSED") || error.message.includes("timeout")) {
         throw new Error(
-          "SMTP connection timeout. Please verify aquareefdirect.com SMTP server is accessible."
+          "SMTP connection timeout. Please verify aquareefdirect.com SMTP server is accessible.",
         );
       }
-      if (error.message.includes("Authentication failed") || error.message.includes("Invalid login") || error.message.includes("535")) {
+      if (
+        error.message.includes("Authentication failed") ||
+        error.message.includes("Invalid login") ||
+        error.message.includes("535")
+      ) {
         throw new Error(
-          "SMTP authentication failed. Please verify admin@aquareefdirect.com credentials."
+          "SMTP authentication failed. Please verify admin@aquareefdirect.com credentials.",
         );
       }
       if (error.message.includes("verification timeout")) {
-        console.warn("SMTP verification timed out, but proceeding anyway for production environment");
+        console.warn(
+          "SMTP verification timed out, but proceeding anyway for production environment",
+        );
         // In production, skip verification if it times out
         if (process.env.NODE_ENV === "production") {
           // Return transporter without verification for production
@@ -299,7 +317,6 @@ function buildTextEmail(data: ContactEmailData) {
     .join("\n");
 }
 
-
 export async function sendContactEmail(data: ContactEmailData, clientIP?: string) {
   try {
     console.log("Starting secure contact email process...");
@@ -320,10 +337,12 @@ export async function sendContactEmail(data: ContactEmailData, clientIP?: string
       const remainingTime = await emailRateLimiter.getTimeUntilNextRequest(identifier);
       const remainingRequests = await emailRateLimiter.getRemainingRequests(identifier);
 
-      console.error(`Rate limit exceeded for ${identifier}. Remaining requests: ${remainingRequests}, Time until reset: ${Math.ceil(remainingTime / 1000)}s`);
+      console.error(
+        `Rate limit exceeded for ${identifier}. Remaining requests: ${remainingRequests}, Time until reset: ${Math.ceil(remainingTime / 1000)}s`,
+      );
 
       throw new Error(
-        `Rate limit exceeded. You can send ${remainingRequests} more emails. Please try again later.`
+        `Rate limit exceeded. You can send ${remainingRequests} more emails. Please try again later.`,
       );
     }
 
@@ -333,13 +352,16 @@ export async function sendContactEmail(data: ContactEmailData, clientIP?: string
 
     // Step 4: Comprehensive security check
     console.log("Performing comprehensive security check...");
-    const securityCheck = await performSecurityCheck({
-      to: RECIPIENT_EMAIL,
-      from: FROM_EMAIL,
-      subject: `${sanitizedData.subject?.trim() || "New Contact Message"} - ${sanitizedData.name} (${sanitizedData.serviceType || "General"})`,
-      html: buildHtmlEmail(sanitizedData),
-      text: buildTextEmail(sanitizedData),
-    }, clientIP);
+    const securityCheck = await performSecurityCheck(
+      {
+        to: RECIPIENT_EMAIL,
+        from: FROM_EMAIL,
+        subject: `${sanitizedData.subject?.trim() || "New Contact Message"} - ${sanitizedData.name} (${sanitizedData.serviceType || "General"})`,
+        html: buildHtmlEmail(sanitizedData),
+        text: buildTextEmail(sanitizedData),
+      },
+      clientIP,
+    );
 
     if (!securityCheck.passed) {
       console.error("Security check failed:", securityCheck.reason);
@@ -364,11 +386,11 @@ export async function sendContactEmail(data: ContactEmailData, clientIP?: string
       // Comprehensive security headers
       headers: {
         ...generateSecurityHeaders(clientIP),
-        'X-Contact-Email': sanitizedData.email,
-        'X-Mailer': 'SoftwarePros Secure Email Service v2.0',
-        'X-Application': 'SoftwarePros Contact Form',
-        'X-Security-Level': 'High',
-        'X-Anti-Abuse': 'Report to: security@softwarepros.org',
+        "X-Contact-Email": sanitizedData.email,
+        "X-Mailer": "SoftwarePros Secure Email Service v2.0",
+        "X-Application": "SoftwarePros Contact Form",
+        "X-Security-Level": "High",
+        "X-Anti-Abuse": "Report to: security@softwarepros.org",
       },
     };
 
@@ -398,7 +420,7 @@ export async function sendContactEmail(data: ContactEmailData, clientIP?: string
         secureTransport: true,
         securityCheckPassed: securityCheck.passed,
         securityDetails: securityCheck.details,
-      }
+      },
     };
   } catch (error) {
     console.error("Secure email sending failed:", error);

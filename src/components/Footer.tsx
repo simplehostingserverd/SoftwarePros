@@ -227,9 +227,9 @@ export default function Footer() {
                 Professional Development • Enterprise Solutions • Trusted Worldwide
               </p>
               <p className="text-gray-500 text-xs mt-2 leading-relaxed">
-                SoftwarePros.org is not affiliated in any way with SoftwarePros.com or 'Software Pros'
-                (or any similarly named entities in New York City or elsewhere). Any claims, complaints,
-                or reviews pertaining to those organizations do not apply to us.
+                SoftwarePros.org is not affiliated in any way with SoftwarePros.com or 'Software
+                Pros' (or any similarly named entities in New York City or elsewhere). Any claims,
+                complaints, or reviews pertaining to those organizations do not apply to us.
               </p>
             </div>
           </div>

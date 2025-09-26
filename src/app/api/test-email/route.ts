@@ -10,7 +10,8 @@ export async function POST(request: NextRequest) {
       phone: "555-0123",
       company: "SoftwarePros Support",
       serviceType: "Email Configuration Check",
-      message: "This is an email configuration check to verify the email system is working properly.",
+      message:
+        "This is an email configuration check to verify the email system is working properly.",
       subject: "SoftwarePros Email Configuration - System Working",
     };
 
@@ -163,7 +164,8 @@ export async function GET() {
     issues.push("Missing CONTACT_FROM_EMAIL environment variable");
   }
 
-  const isConfigured = hasSmtpConfig && smtpStatus.hasContactEmail && smtpStatus.hasContactFromEmail;
+  const isConfigured =
+    hasSmtpConfig && smtpStatus.hasContactEmail && smtpStatus.hasContactFromEmail;
 
   return NextResponse.json({
     message: "Email test endpoint. Use POST to send a test email.",
