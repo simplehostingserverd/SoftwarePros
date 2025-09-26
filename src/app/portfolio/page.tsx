@@ -30,6 +30,7 @@ import {
 } from "@mui/joy";
 import { Rating } from "@mui/material";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const caseStudies = [
   {
@@ -146,6 +147,8 @@ const stats = [
 ];
 
 export default function PortfolioPage() {
+  const router = useRouter();
+
   // Generate structured data for case studies and testimonials
   const caseStudiesStructuredData = {
     "@context": "https://schema.org",
@@ -595,6 +598,7 @@ export default function PortfolioPage() {
                 <Button
                   size="lg"
                   variant="solid"
+                  onClick={() => router.push("/contact")}
                   sx={{
                     backgroundColor: "white",
                     color: "primary.600",
@@ -608,6 +612,7 @@ export default function PortfolioPage() {
                 <Button
                   size="lg"
                   variant="outlined"
+                  onClick={() => router.push("/contact")}
                   sx={{
                     borderColor: "white",
                     color: "white",
