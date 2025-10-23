@@ -5,33 +5,48 @@ import { useEffect, useRef, useState } from "react";
 const services = [
   {
     number: "01",
-    title: "Web Development",
+    title: "Financial Services & FinTech",
     description:
-      "Modern, scalable web applications built with cutting-edge technologies and best practices.",
-    features: ["React & Next.js", "TypeScript", "Responsive Design", "Performance Optimized"],
+      "Custom financial technology solutions including wealth management platforms, trading systems, and banking software.",
+    features: ["Trading Platforms", "Wealth Management", "Payment Systems", "Financial Analytics"],
     color: "from-purple-600 to-blue-600",
   },
   {
     number: "02",
-    title: "Mobile Apps",
-    description: "Native and cross-platform mobile applications for iOS and Android platforms.",
-    features: ["React Native", "Flutter", "Native iOS/Android", "App Store Deployment"],
+    title: "Cryptocurrency & Blockchain",
+    description: "End-to-end blockchain solutions from crypto exchanges to DeFi applications and smart contracts.",
+    features: ["Crypto Exchanges", "DeFi & Web3", "Smart Contracts", "Crypto Hardware Building"],
     color: "from-blue-600 to-cyan-600",
   },
   {
     number: "03",
-    title: "Enterprise Solutions",
-    description: "Custom enterprise software solutions designed to streamline business operations.",
-    features: ["Scalable Architecture", "Cloud Integration", "Security First", "API Development"],
+    title: "Real Estate Technology",
+    description: "Comprehensive real estate software solutions for property management, CRM, and investment platforms.",
+    features: ["Property Management", "Real Estate CRM", "MLS Integration", "Investment Platforms"],
     color: "from-cyan-600 to-teal-600",
   },
   {
     number: "04",
-    title: "Tech Consulting",
+    title: "Full-Stack Web & Mobile",
     description:
-      "Strategic technology consulting to help businesses make informed technology decisions.",
-    features: ["Architecture Review", "Technology Stack", "Performance Audit", "Best Practices"],
+      "Modern, scalable web and mobile applications built with cutting-edge technologies and best practices.",
+    features: ["React & Next.js", "React Native", "TypeScript", "Cloud Infrastructure"],
     color: "from-teal-600 to-green-600",
+  },
+  {
+    number: "05",
+    title: "AI & Machine Learning",
+    description:
+      "Advanced AI solutions for predictive analytics, financial forecasting, and intelligent automation.",
+    features: ["Predictive Analytics", "Financial Forecasting", "NLP & Computer Vision", "MLOps"],
+    color: "from-green-600 to-emerald-600",
+  },
+  {
+    number: "06",
+    title: "Enterprise & B2B Solutions",
+    description: "Scalable enterprise platforms and B2B systems designed to streamline business operations.",
+    features: ["Enterprise Platforms", "API Development", "Cloud Integration", "Security First"],
+    color: "from-emerald-600 to-purple-600",
   },
 ];
 

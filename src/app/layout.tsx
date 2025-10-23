@@ -11,11 +11,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "SoftwarePros | Custom Software Development & Healthcare IT Solutions",
+    default: "SoftwarePros | Financial Technology, Blockchain & Real Estate Software Development",
     template: "%s | SoftwarePros",
   },
   description:
-    "SoftwarePros - Leading Rio Grande Valley software development company in Harlingen, TX specializing in healthcare IT, HIPAA-compliant systems, enterprise solutions, and digital transformation. Professional software consulting for RGV startups and enterprises.",
+    "SoftwarePros - Leading Rio Grande Valley software development company in Harlingen, TX specializing in Financial Services, Wealth Management, Cryptocurrency & Blockchain, Real Estate Technology, and AI/ML Solutions. Professional B2B software consulting for RGV enterprises.",
   keywords: [
     "software development",
     "custom software solutions",
@@ -27,28 +27,68 @@ export const metadata: Metadata = {
     "Valley software development",
     "Brownsville software developers",
     "McAllen software development",
+
+    // Financial Services & FinTech
+    "financial services software",
+    "fintech development RGV",
+    "wealth management software Texas",
+    "portfolio management systems",
+    "trading platform development",
+    "banking software solutions",
+    "payment processing systems",
+    "financial analytics software",
+    "robo-advisor development",
+    "investment management software",
+    "financial compliance software",
+    "risk management systems",
+    "financial forecasting AI",
+
+    // Cryptocurrency & Blockchain
+    "blockchain development RGV",
+    "cryptocurrency software Texas",
+    "crypto exchange development",
+    "crypto wallet development",
+    "DeFi application development",
+    "smart contract development",
+    "NFT platform development",
+    "crypto hardware building",
+    "Web3 development Texas",
+    "blockchain consulting RGV",
+    "crypto trading bot development",
+    "tokenization platforms",
+
+    // Real Estate Technology
+    "real estate software development",
+    "property management software RGV",
+    "real estate CRM Texas",
+    "MLS integration systems",
+    "real estate analytics software",
+    "property listing platforms",
+    "real estate investment software",
+    "real estate transaction management",
+    "commercial real estate software",
+    "virtual tour solutions",
+
+    // AI & Machine Learning
+    "AI development RGV",
+    "machine learning Texas",
+    "predictive analytics",
+    "AI trading algorithms",
+    "natural language processing",
+    "computer vision development",
+    "MLOps consulting",
+
+    // Enterprise & B2B
+    "B2B software development",
+    "enterprise software",
     "web application development",
     "mobile app development",
-    "enterprise software",
     "startup technology solutions",
     "software architecture",
     "digital transformation",
     "technology consulting",
-    "healthcare software developers RGV",
-    "HIPAA compliance Texas",
-    "medical practice management RGV",
-    "dental software Valley",
-    "hospital management systems Texas",
-    "pharmacy software RGV",
-    "telemedicine solutions Valley",
-    "healthcare IT consulting Texas",
-    "medical billing software RGV",
-    "electronic health records Valley",
-    "EHR EMR systems Texas",
-    "practice management software RGV",
-    "healthcare technology Valley",
-    "medical software development Texas",
-    "healthcare consulting RGV",
+    "cloud infrastructure",
+    "API development",
     "software consulting services Valley",
     "enterprise software development RGV",
     "custom application development Texas",
@@ -68,21 +108,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://softwarepros.org",
     siteName: "SoftwarePros",
-    title: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
+    title: "SoftwarePros.org | FinTech, Blockchain & Real Estate Software Development",
     description:
-      "Professional software development, consulting, and digital solutions for startups and enterprises. Specializing in healthcare software, HIPAA compliance, and enterprise solutions.",
+      "Professional B2B software development for Financial Services, Wealth Management, Cryptocurrency & Blockchain, Real Estate Technology, AI/ML, and Full-Stack Web & Mobile Applications. Enterprise solutions for growing businesses.",
     images: [
       {
         url: "/images/softwarepros-logo.png",
         width: 512,
         height: 512,
-        alt: "SoftwarePros - Custom Software Solutions",
+        alt: "SoftwarePros - FinTech, Blockchain & Real Estate Software",
       },
       {
         url: "/images/softwarepros-logo.png",
         width: 1200,
         height: 630,
-        alt: "SoftwarePros Healthcare Software Solutions",
+        alt: "SoftwarePros Financial Technology & Blockchain Solutions",
       },
     ],
   },
@@ -90,9 +130,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@softwareprosdev",
     creator: "@softwareprosdev",
-    title: "SoftwarePros.org | Custom Software Solutions & Tech Consulting",
+    title: "SoftwarePros.org | FinTech, Blockchain & Real Estate Software",
     description:
-      "Professional software development, consulting, and digital solutions for startups and enterprises. Specializing in healthcare software and HIPAA compliance.",
+      "Professional B2B software development for Financial Services, Cryptocurrency, Real Estate Technology, AI/ML, and Full-Stack Web & Mobile Applications.",
     images: ["/images/softwarepros-logo.png"],
   },
   robots: {
@@ -141,7 +181,7 @@ export default function RootLayout({
       height: 512,
     },
     description:
-      "Leading Rio Grande Valley software development company in Harlingen, TX providing professional consulting and digital solutions for RGV startups and enterprises. Specializing in healthcare software, HIPAA compliance, and enterprise solutions throughout South Texas.",
+      "Leading Rio Grande Valley software development company in Harlingen, TX providing professional B2B solutions for Financial Services, Wealth Management, Cryptocurrency & Blockchain, Real Estate Technology, AI/ML, and Full-Stack Web & Mobile Applications. Enterprise software consulting throughout South Texas and beyond.",
     foundingDate: "2020",
     numberOfEmployees: "10-50",
     industry: "Software Development",
@@ -220,16 +260,48 @@ export default function RootLayout({
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Healthcare Software Development",
-            description: "HIPAA-compliant medical software solutions",
+            name: "Financial Services & FinTech Software",
+            description: "Custom financial technology, wealth management platforms, trading systems, and banking solutions",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Enterprise Software Development",
-            description: "Custom enterprise solutions for large organizations",
+            name: "Cryptocurrency & Blockchain Development",
+            description: "Crypto exchanges, DeFi applications, smart contracts, Web3 development, and crypto hardware building",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Real Estate Technology Solutions",
+            description: "Property management systems, real estate CRM, MLS integration, and investment platforms",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "AI & Machine Learning",
+            description: "Custom AI solutions, predictive analytics, financial forecasting, and intelligent automation",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Full-Stack Web & Mobile Development",
+            description: "Custom web applications, progressive web apps, native and cross-platform mobile applications",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Enterprise Software & B2B Solutions",
+            description: "Scalable enterprise platforms, cloud infrastructure, API development, and system integration",
           },
         },
         {
@@ -237,7 +309,7 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Technology Consulting",
-            description: "Strategic technology consulting services",
+            description: "Strategic technology consulting, digital transformation, and software architecture",
           },
         },
       ],
@@ -254,7 +326,7 @@ export default function RootLayout({
     name: "SoftwarePros - Rio Grande Valley Software Development",
     url: "https://softwarepros.org",
     description:
-      "Leading Rio Grande Valley software development company in Harlingen, TX providing professional consulting and digital solutions for RGV startups and enterprises. Specializing in healthcare software, HIPAA compliance, and enterprise solutions throughout South Texas.",
+      "Leading Rio Grande Valley software development company in Harlingen, TX providing professional B2B solutions for Financial Services, Wealth Management, Cryptocurrency & Blockchain, Real Estate Technology, AI/ML, and Full-Stack Web & Mobile Applications. Enterprise consulting throughout South Texas and beyond.",
     inLanguage: "en-US",
     potentialAction: {
       "@type": "SearchAction",

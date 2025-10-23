@@ -65,48 +65,56 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const serviceTypes = [
-  // Healthcare Solutions
-  "Medical Clinic Software",
-  "Dental Practice Management",
-  "Hospital Management System",
-  "HIPAA Compliance Solutions",
-  "Healthcare Practice Management",
-  "EHR/EMR Systems",
-  "Patient Portals",
-  "Telemedicine Solutions",
-  "Medical Billing Systems",
+  // Financial Services & Wealth Management
+  "Financial Services Software",
+  "Wealth Management Platforms",
+  "Portfolio Management Systems",
+  "Investment Analytics",
+  "Financial Trading Platforms",
+  "Risk Management Systems",
+  "Banking Solutions",
+  "Payment Processing Systems",
+  "Financial Compliance & Reporting",
+  "Robo-Advisory Platforms",
+
+  // Cryptocurrency & Blockchain
+  "Cryptocurrency Exchange Development",
+  "Blockchain Solutions",
+  "Crypto Wallet Development",
+  "DeFi Applications",
+  "Smart Contract Development",
+  "NFT Platforms",
+  "Crypto Hardware Building",
+  "Crypto Trading Bots",
+  "Tokenization Platforms",
+  "Web3 Development",
+
+  // Real Estate Technology
+  "Real Estate Management Software",
+  "Property Listing Platforms",
+  "Real Estate CRM",
+  "MLS Integration Systems",
+  "Property Analytics & Valuation",
+  "Real Estate Investment Platforms",
+  "Property Management Systems",
+  "Virtual Tour Solutions",
+  "Real Estate Transaction Management",
+  "Commercial Real Estate Software",
 
   // AI & Machine Learning
   "AI & Machine Learning",
-  "Custom ML Models",
+  "Predictive Analytics",
+  "Financial Forecasting AI",
   "Natural Language Processing",
   "Computer Vision",
   "Intelligent Automation",
   "Data Analytics & Insights",
   "MLOps & Model Deployment",
-  "Predictive Analytics",
-  "Chatbot Development",
-
-  // Web Development
-  "Custom Web Applications",
-  "Responsive Web Design",
-  "E-commerce Solutions",
-  "Content Management Systems",
-  "Performance Optimization",
-  "SEO & Digital Marketing",
-  "Progressive Web Apps",
-
-  // Mobile Development
-  "Native iOS Development",
-  "Native Android Development",
-  "Cross-Platform Mobile Apps",
-  "React Native Development",
-  "Flutter Development",
-  "Mobile Backend Services",
-  "App Maintenance & Support",
+  "AI Trading Algorithms",
 
   // Enterprise Solutions
   "Enterprise Software",
+  "B2B Platform Development",
   "Cloud Infrastructure",
   "System Integration",
   "API Development",
@@ -114,27 +122,37 @@ const serviceTypes = [
   "Cloud Migration",
   "DevOps & Deployment",
 
+  // Web & Mobile Development
+  "Custom Web Applications",
+  "Progressive Web Apps",
+  "E-commerce Solutions",
+  "Native iOS Development",
+  "Native Android Development",
+  "Cross-Platform Mobile Apps",
+  "React Native Development",
+  "Flutter Development",
+
   // Security & Compliance
   "Security Solutions",
   "Cybersecurity Consulting",
-  "Compliance Assessment",
+  "Financial Compliance Systems",
   "Security Audits",
   "Penetration Testing",
+  "Data Encryption Solutions",
 
   // Consulting & Support
   "Technology Consulting",
+  "Digital Transformation",
   "Architecture Review",
   "Performance Audits",
-  "Digital Transformation",
   "Project Management",
   "Support & Maintenance",
 
-  // Industry-Specific
-  "Real Estate Software",
-  "Government Solutions",
-  "Educational Software",
-  "Manufacturing Solutions",
-  "Financial Services",
+  // Medical/Healthcare (Secondary Focus)
+  "Healthcare Practice Management",
+  "Medical Clinic Software",
+  "HIPAA Compliance Solutions",
+  "Telemedicine Solutions",
 
   // General
   "Custom Software Development",
@@ -281,9 +299,12 @@ export default function ContactPage() {
     setSubmitError(null);
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://formspree.io/f/mvgwjbdz", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify(data),
       });
 
@@ -340,8 +361,8 @@ export default function ContactPage() {
                   lineHeight: 1.6,
                 }}
               >
-                Ready to transform your healthcare practice with professional software solutions?
-                Let's discuss your needs and create a custom solution that works for you.
+                Ready to transform your business with cutting-edge financial technology, blockchain solutions, or real estate software?
+                Let's discuss your needs and create a custom solution that drives growth.
               </Typography>
             </Box>
           </AnimatedDiv>
@@ -362,7 +383,7 @@ export default function ContactPage() {
                     </Typography>
                     <Typography level="body-lg" sx={{ color: "neutral.600", mb: 4 }}>
                       Fill out the form below and we'll get back to you within 24 hours to discuss
-                      your healthcare software needs and provide a customized solution.
+                      your B2B software needs and provide a customized solution for financial services, blockchain, or real estate.
                     </Typography>
 
                     {submitSuccess && (
@@ -434,10 +455,10 @@ export default function ContactPage() {
 
                         <Grid xs={12} sm={6}>
                           <FormControl error={!!errors.company}>
-                            <FormLabel>Company/Practice Name *</FormLabel>
+                            <FormLabel>Company Name *</FormLabel>
                             <Input
                               {...register("company")}
-                              placeholder="Enter your organization name"
+                              placeholder="Enter your company name"
                               disabled={isSubmitting}
                             />
                             {errors.company && (
@@ -480,7 +501,7 @@ export default function ContactPage() {
                             <FormLabel>Project Subject</FormLabel>
                             <Input
                               {...register("subject")}
-                              placeholder="e.g., New HIPAA-compliant portal"
+                              placeholder="e.g., Trading platform development"
                               disabled={isSubmitting}
                             />
                           </FormControl>

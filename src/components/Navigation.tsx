@@ -25,7 +25,6 @@ const navigationItems = [
   { name: "Case Studies", href: "/case-studies" },
   { name: "Resources", href: "/resources" },
   { name: "FAQ", href: "/faq" },
-  { name: "Investors", href: "/investors" },
   { name: "Contact", href: "/contact" },
 ];
 

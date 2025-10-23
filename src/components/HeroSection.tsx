@@ -53,14 +53,14 @@ export default function HeroSection() {
               SoftwarePros
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light max-w-4xl mx-auto">
-              Custom Software Solutions & Tech Consulting
+              FinTech, AI, Blockchain & Government Software Solutions
             </p>
           </div>
 
           {/* Description */}
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Professional software development, consulting, and digital solutions for startups and
-            enterprises. Built by experts. Trusted by businesses worldwide.
+            Specialized software development for Financial Services, Real Estate, Local Government, AI/ML, and Blockchain.
+            Empowering businesses with cutting-edge technology solutions.
           </p>
 
           {/* CTA Buttons */}
@@ -84,32 +84,38 @@ export default function HeroSection() {
         {/* Animated Code Blocks - Full Width Below */}
         <div className="pt-24 grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <AnimatedCodeBlock
-            title="Frontend"
-            code={`const App = () => {
-  return (
-    <div className="modern">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
-  );
-};`}
+            title="AI/ML"
+            code={`import tensorflow as tf
+
+model = tf.keras.Sequential([
+  tf.keras.layers.Dense(128),
+  tf.keras.layers.Dense(64),
+  tf.keras.layers.Dense(10)
+])
+model.compile(optimizer='adam')`}
             delay={800}
           />
           <AnimatedCodeBlock
-            title="Backend"
-            code={`app.post('/api/users', async (req, res) => {
-  const user = await User.create(req.body);
-  res.json({ success: true, user });
-});`}
+            title="Blockchain"
+            code={`contract Token {
+  mapping(address => uint) balances;
+
+  function transfer(address to, uint amount) {
+    require(balances[msg.sender] >= amount);
+    balances[to] += amount;
+  }
+}`}
             delay={1000}
           />
           <AnimatedCodeBlock
-            title="Database"
-            code={`SELECT u.name, p.title
-FROM users u
-JOIN projects p ON u.id = p.user_id
-WHERE p.status = 'active';`}
+            title="FinTech API"
+            code={`app.post('/api/payment', async (req) => {
+  const tx = await processPayment({
+    amount: req.amount,
+    currency: 'USD'
+  });
+  return { status: 'success', tx };
+});`}
             delay={1200}
           />
         </div>
