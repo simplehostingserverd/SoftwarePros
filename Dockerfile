@@ -11,7 +11,7 @@ WORKDIR /app
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json* ./
 RUN npm install -g npm@latest
-RUN npm ci --omit=dev
+RUN npm ci --omit=dev --legacy-peer-deps
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -20,7 +20,7 @@ WORKDIR /app
 # Update to latest npm version and install dependencies
 COPY package.json package-lock.json* ./
 RUN npm install -g npm@latest
-RUN npm ci
+RUN npm ci --legacy-peer-deps
 
 # Copy source code
 COPY . .
