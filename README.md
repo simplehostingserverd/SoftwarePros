@@ -144,7 +144,6 @@ This project is proprietary software owned by Software Pros. All rights reserved
 
 For support or questions about this website:
 - Email: info@softwarepros.com
-- Phone: (956) 357-5588
 - Website: https://softwarepros.com
 
 ---
