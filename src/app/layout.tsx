@@ -261,7 +261,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Financial Services & FinTech Software",
-            description: "Custom financial technology, wealth management platforms, trading systems, and banking solutions",
+            description:
+              "Custom financial technology, wealth management platforms, trading systems, and banking solutions",
           },
         },
         {
@@ -269,7 +270,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Cryptocurrency & Blockchain Development",
-            description: "Crypto exchanges, DeFi applications, smart contracts, Web3 development, and crypto hardware building",
+            description:
+              "Crypto exchanges, DeFi applications, smart contracts, Web3 development, and crypto hardware building",
           },
         },
         {
@@ -277,7 +279,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Real Estate Technology Solutions",
-            description: "Property management systems, real estate CRM, MLS integration, and investment platforms",
+            description:
+              "Property management systems, real estate CRM, MLS integration, and investment platforms",
           },
         },
         {
@@ -285,7 +288,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "AI & Machine Learning",
-            description: "Custom AI solutions, predictive analytics, financial forecasting, and intelligent automation",
+            description:
+              "Custom AI solutions, predictive analytics, financial forecasting, and intelligent automation",
           },
         },
         {
@@ -293,7 +297,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Full-Stack Web & Mobile Development",
-            description: "Custom web applications, progressive web apps, native and cross-platform mobile applications",
+            description:
+              "Custom web applications, progressive web apps, native and cross-platform mobile applications",
           },
         },
         {
@@ -301,7 +306,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Enterprise Software & B2B Solutions",
-            description: "Scalable enterprise platforms, cloud infrastructure, API development, and system integration",
+            description:
+              "Scalable enterprise platforms, cloud infrastructure, API development, and system integration",
           },
         },
         {
@@ -309,7 +315,8 @@ export default function RootLayout({
           itemOffered: {
             "@type": "Service",
             name: "Technology Consulting",
-            description: "Strategic technology consulting, digital transformation, and software architecture",
+            description:
+              "Strategic technology consulting, digital transformation, and software architecture",
           },
         },
       ],

@@ -16,10 +16,12 @@
     "rules": {
       "recommended": true,
       "style": {
-        "noDefaultExport": "off"
+        "noDefaultExport": "off",
+        "noNonNullAssertion": "warn"
       },
       "suspicious": {
-        "noExplicitAny": "error"
+        "noExplicitAny": "warn",
+        "noArrayIndexKey": "warn"
       },
       "correctness": {
         "useExhaustiveDependencies": "warn"

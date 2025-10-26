@@ -17,7 +17,8 @@ export const metadata: Metadata = {
     canonical: "https://softwarepros.org",
   },
   openGraph: {
-    title: "Rio Grande Valley Software Developers | FinTech, AI & Blockchain Solutions Harlingen TX",
+    title:
+      "Rio Grande Valley Software Developers | FinTech, AI & Blockchain Solutions Harlingen TX",
     description:
       "Leading Rio Grande Valley software development company in Harlingen, TX. Specialized in Financial Technology, Real Estate Software, Government Solutions, AI/ML, and Blockchain/Crypto for RGV businesses.",
     url: "https://softwarepros.org",

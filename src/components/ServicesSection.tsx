@@ -14,14 +14,16 @@ const services = [
   {
     number: "02",
     title: "Cryptocurrency & Blockchain",
-    description: "End-to-end blockchain solutions from crypto exchanges to DeFi applications and smart contracts.",
+    description:
+      "End-to-end blockchain solutions from crypto exchanges to DeFi applications and smart contracts.",
     features: ["Crypto Exchanges", "DeFi & Web3", "Smart Contracts", "Crypto Hardware Building"],
     color: "from-blue-600 to-cyan-600",
   },
   {
     number: "03",
     title: "Real Estate Technology",
-    description: "Comprehensive real estate software solutions for property management, CRM, and investment platforms.",
+    description:
+      "Comprehensive real estate software solutions for property management, CRM, and investment platforms.",
     features: ["Property Management", "Real Estate CRM", "MLS Integration", "Investment Platforms"],
     color: "from-cyan-600 to-teal-600",
   },
@@ -44,7 +46,8 @@ const services = [
   {
     number: "06",
     title: "Enterprise & B2B Solutions",
-    description: "Scalable enterprise platforms and B2B systems designed to streamline business operations.",
+    description:
+      "Scalable enterprise platforms and B2B systems designed to streamline business operations.",
     features: ["Enterprise Platforms", "API Development", "Cloud Integration", "Security First"],
     color: "from-emerald-600 to-purple-600",
   },

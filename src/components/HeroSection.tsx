@@ -59,8 +59,8 @@ export default function HeroSection() {
 
           {/* Description */}
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Specialized software development for Financial Services, Real Estate, Local Government, AI/ML, and Blockchain.
-            Empowering businesses with cutting-edge technology solutions.
+            Specialized software development for Financial Services, Real Estate, Local Government,
+            AI/ML, and Blockchain. Empowering businesses with cutting-edge technology solutions.
           </p>
 
           {/* CTA Buttons */}

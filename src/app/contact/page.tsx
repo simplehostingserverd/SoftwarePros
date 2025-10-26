@@ -303,7 +303,7 @@ export default function ContactPage() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          Accept: "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -361,8 +361,9 @@ export default function ContactPage() {
                   lineHeight: 1.6,
                 }}
               >
-                Ready to transform your business with cutting-edge financial technology, blockchain solutions, or real estate software?
-                Let's discuss your needs and create a custom solution that drives growth.
+                Ready to transform your business with cutting-edge financial technology, blockchain
+                solutions, or real estate software? Let's discuss your needs and create a custom
+                solution that drives growth.
               </Typography>
             </Box>
           </AnimatedDiv>
@@ -383,7 +384,8 @@ export default function ContactPage() {
                     </Typography>
                     <Typography level="body-lg" sx={{ color: "neutral.600", mb: 4 }}>
                       Fill out the form below and we'll get back to you within 24 hours to discuss
-                      your B2B software needs and provide a customized solution for financial services, blockchain, or real estate.
+                      your B2B software needs and provide a customized solution for financial
+                      services, blockchain, or real estate.
                     </Typography>
 
                     {submitSuccess && (
